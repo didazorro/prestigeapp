@@ -1,0 +1,178 @@
+{
+  "HorizonLayout": [
+    {
+      "layout": "logo",
+      "showMenu": true,
+      "showSearch": true,
+      "showLogo": true
+    },
+    {
+      "layout": "category",
+      "type": "icon",
+      "wrap": false,
+      "size": 1.0,
+      "radius": 50.0,
+      "items": [
+        {
+          "category": 18,
+          "image": "https://user-images.githubusercontent.com/1459805/62820029-2e679f00-bb88-11e9-80de-fdf115cfd942.png",
+          "colors": [
+            "#3CC2BF",
+            "#3CC2BF"
+          ],
+          "originalColor": false
+        },
+        {
+          "category": 24,
+          "image": "https://trello.com/1/cards/60a62a9bca5053572a669dee/attachments/60a62abccf14cb63646c1706/previews/60a62abdcf14cb63646c1728/download/ic_dress.png",
+          "colors": [
+            "#3E6AB5",
+            "#3E6AB5"
+          ]
+        },
+        {
+          "category": 25,
+          "image": "https://trello.com/1/cards/60a62a9bca5053572a669dee/attachments/60a62ac38749561a23fed73c/previews/60a62ac38749561a23fed76d/download/ic_shorts.png",
+          "colors": [
+            "#53A2CC",
+            "#53A2CC"
+          ]
+        },
+        {
+          "category": 28,
+          "label": "Shoes",
+          "image": "https://trello.com/1/cards/60a62a9bca5053572a669dee/attachments/60a62ac27eb3b0027e045f80/previews/60a62ac27eb3b0027e045fee/download/ic_shoes.png",
+          "colors": [
+            "#53688A",
+            "#53688A"
+          ]
+        },
+        {
+          "category": 29,
+          "image": "https://trello.com/1/cards/60a62a9bca5053572a669dee/attachments/60a62ac568d4170599acd4ca/previews/60a62ac568d4170599acd4dd/download/ic_tie.png",
+          "colors": [
+            "#43506A",
+            "#43506A"
+          ]
+        },
+        {
+          "category": 30,
+          "image": "https://trello.com/1/cards/60a62a9bca5053572a669dee/attachments/60a62ac048c3790a65a5f75f/previews/60a62ac048c3790a65a5f763/download/ic_panties.png",
+          "colors": [
+            "#12B58C",
+            "#12B58C"
+          ]
+        }
+      ]
+    },
+    {
+      "layout": "bannerImage",
+      "isSlider": true,
+      "autoPlay": false,
+      "showNumber": false,
+      "design": "default",
+      "showBackGround": true,
+      "radius": 2.0,
+      "items": [
+        {
+          "category": 29,
+          "image": "https://trello.com/1/cards/5f8fe6093cd3ef24d9ede5f5/attachments/5f8fe62076ec8884a587b043/previews/5f8fe62176ec8884a587b05c/download/Mobile_Template_1b.png",
+          "padding": 15.0
+        },
+        {
+          "category": 28,
+          "image": "https://user-images.githubusercontent.com/1459805/59846818-12672e80-938b-11e9-8184-5f7bfe66f1a2.png",
+          "padding": 15.0
+        },
+        {
+          "product": 30,
+          "image": "https://user-images.githubusercontent.com/1459805/60091808-a19b8a00-976f-11e9-9cc7-576ca05c2442.png",
+          "padding": 15.0
+        }
+      ]
+    },
+    {
+      "layout": "brand",
+      "name": "ตัวเลือกแบรนด์ยอดนิยม",
+      "isBrandNameShown": true,
+      "isLogoCornerRounded": true
+    },
+    {
+      "name": "แฮปปี้แฟลชเซลล์ 🎁",
+      "layout": "saleOff",
+      "category": 22,
+      "isSnapping": true
+    },
+    {
+      "name": "คอลเลคชั่นผู้ชาย",
+      "image": "",
+      "layout": "twoColumn",
+      "category": 21
+    },
+    {
+      "layout": "bannerImage",
+      "height": 0.15,
+      "items": [
+        {
+          "image": "https://trello.com/1/cards/5fb8de4a9ffe12204a2a3607/attachments/5fb8de57d9356e0af474cc94/previews/5fb8de58d9356e0af474cca0/download/image.png",
+          "coupon": "blackf",
+          "padding": 15.0,
+          "radius": 9.0
+        }
+      ]
+    },
+    {
+      "name": "มุมมองล่าสุด",
+      "layout": "recentView"
+    },
+    {
+      "name": "โพสต์บล็อกของเรา",
+      "layout": "blog"
+    },
+    {
+      "name": "คอลเลกชั่นใหม่",
+      "layout": "staggered",
+      "limit": 20,
+      "category": 29
+    }
+  ],
+  "Setting": {
+    "MainColor": "#3FC1BE",
+    "FontFamily": "Roboto",
+    "FontHeader": "Raleway",
+    "ProductListLayout": "list",
+    "StickyHeader": false,
+    "ShowChat": true
+  },
+  "TabBar": [
+    {
+      "layout": "home",
+      "icon": "assets/icons/tabs/icon-home.png"
+    },
+    {
+      "layout": "category",
+      "categoryLayout": "card",
+      "icon": "assets/icons/tabs/icon-category.png"
+    },
+    {
+      "layout": "search",
+      "icon": "assets/icons/tabs/icon-search.png"
+    },
+    {
+      "layout": "cart",
+      "icon": "assets/icons/tabs/icon-cart2.png"
+    },
+    {
+      "layout": "profile",
+      "icon": "assets/icons/tabs/icon-user.png",
+      "showChat": true
+    }
+  ],
+  "searchSuggestion": [
+    "Here are some suggestions:",
+    "Print",
+    "T-Shirt",
+    "Jersey",
+    "Hoodie"
+  ]
+}

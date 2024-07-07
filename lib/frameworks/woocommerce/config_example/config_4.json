@@ -1,0 +1,159 @@
+{
+  "HorizonLayout": [
+    {
+      "title": "Our Biggest Hits",
+      "showSearch": true,
+      "hideHeader": false,
+      "fontWeight": "400",
+      "height": 30.0,
+      "fontSize": 22.0,
+      "textOpacity": 1.0,
+      "marginLeft": 23.0,
+      "marginRight": 20.0,
+      "marginTop": 20,
+      "marginBottom": 0.0,
+      "layout": "header_text",
+      "textColor": null
+    },
+    {
+      "layout": "category",
+      "type": "icon",
+      "wrap": true,
+      "size": 1.0,
+      "radius": 50.0,
+      "items": [
+        {
+          "image": "https://trello.com/1/cards/60a62a9bca5053572a669dee/attachments/60a62abf1fd65281e2c23655/previews/60a62abf1fd65281e2c23657/download/ic_home.png",
+          "colors": [
+            "#12B58C",
+            "#12B58C"
+          ]
+        },
+        {
+          "image": "https://trello.com/1/cards/60a62a9bca5053572a669dee/attachments/60a62ac13afb0861693ae907/previews/60a62ac13afb0861693ae918/download/ic_picture.png",
+          "colors": [
+            "#53A2CC",
+            "#53A2CC"
+          ]
+        },
+        {
+          "image": "https://trello.com/1/cards/60a62a9bca5053572a669dee/attachments/60a62abe90c0ae5f16645cbe/previews/60a62abe90c0ae5f16645cc1/download/ic_glasses.png",
+          "colors": [
+            "#53688A",
+            "#53688A"
+          ]
+        },
+        {
+          "image": "https://trello.com/1/cards/60a62a9bca5053572a669dee/attachments/60a62abb0117fc38d569a7b3/previews/60a62abc0117fc38d569a7d2/download/ic_couch.png",
+          "colors": [
+            "#43506A",
+            "#43506A"
+          ]
+        },
+        {
+          "image": "https://trello.com/1/cards/60a62a9bca5053572a669dee/attachments/60a62abd87a66c4d87d14121/previews/60a62abd87a66c4d87d1412b/download/ic_flower.png",
+          "colors": [
+            "#53A2CC",
+            "#53A2CC"
+          ]
+        },
+        {
+          "image": "https://trello.com/1/cards/60a62a9bca5053572a669dee/attachments/60a62ab76ced6d0544c249ef/previews/60a62ab86ced6d0544c249fb/download/ic_ballon.png",
+          "colors": [
+            "#53688A",
+            "#53688A"
+          ]
+        },
+        {
+          "image": "https://trello.com/1/cards/60a62a9bca5053572a669dee/attachments/60a62ab818adee055c9ba86c/previews/60a62ab918adee055c9ba87f/download/ic_broom.png",
+          "colors": [
+            "#53A2CC",
+            "#53A2CC"
+          ]
+        },
+        {
+          "image": "https://trello.com/1/cards/60a62a9bca5053572a669dee/attachments/60a62abad8a79006ecd75d6b/previews/60a62abbd8a79006ecd75d79/download/ic_clock.png",
+          "colors": [
+            "#53A2CC",
+            "#53A2CC"
+          ]
+        }
+      ],
+      "line": false,
+      "columns": 4
+    },
+    {
+      "name": "New Collections",
+      "layout": "staggered",
+      "limit": 20
+    }
+  ],
+  "Setting": {
+    "StickyHeader": true,
+    "ProductListLayout": "list",
+    "MainColor": "#3FC1BE",
+    "TabBarConfig": null,
+    "ProductDetail": "simpleType"
+  },
+  "TabBar": [
+    {
+      "layout": "home",
+      "icon": "home",
+      "pos": 100,
+      "fontFamily": "CupertinoIcons",
+      "key": "sxnup2fgco"
+    },
+    {
+      "pos": 200,
+      "layout": "category",
+      "icon": "rectangle_grid_1x2",
+      "fontFamily": "CupertinoIcons",
+      "categoryLayout": "card",
+      "key": "cxpztrzuji"
+    },
+    {
+      "key": "lfb2jtu6pd",
+      "icon": "search",
+      "layout": "search",
+      "fontFamily": "CupertinoIcons",
+      "pos": 300,
+      "size": 24
+    },
+    {
+      "pos": 400,
+      "icon": "bag",
+      "layout": "cart",
+      "categoryLayout": "cart",
+      "key": "yv55obm6n9",
+      "fontFamily": "CupertinoIcons"
+    },
+    {
+      "layout": "profile",
+      "fontFamily": "CupertinoIcons",
+      "pos": 500,
+      "key": "yfjng42cl8",
+      "icon": "person"
+    }
+  ],
+  "Drawer": {
+    "logo": "assets/images/logo.png",
+    "items": [
+      {
+        "type": "home",
+        "show": true
+      },
+      {
+        "type": "blog",
+        "show": true
+      },
+      {
+        "type": "login",
+        "show": true
+      },
+      {
+        "type": "category",
+        "show": true
+      }
+    ]
+  }
+}

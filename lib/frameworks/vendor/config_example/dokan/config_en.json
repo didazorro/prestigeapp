@@ -1,0 +1,238 @@
+{
+    "Background": {
+        "height": 0.3,
+        "color": "#026DCD",
+        "image": "https://trello.com/1/cards/5dc3b80702a7994eec2ea5d0/attachments/5dc3b80802a7994eec2ea5d1/previews/5dc3b80902a7994eec2ea5fb/download/woman.jpg"
+    },
+    "HorizonLayout": [
+        {
+            "layout": "logo",
+            "showMenu": true,
+            "showSearch": true,
+            "showLogo": true
+        },
+        {
+            "layout": "header_text",
+            "fontSize": 23.0,
+            "height": 0.11,
+            "padding": 30.0,
+            "rotate": [
+                "FluxStore MV",
+                "New Arrival",
+                "Cyber Monday Sale"
+            ],
+            "type": "fade"
+        },
+        {
+            "layout": "header_search",
+            "text": "Search for a product"
+        },
+        {
+            "layout": "bannerImage",
+            "isSlider": true,
+            "autoPlay": false,
+            "showNumber": false,
+            "design": "default",
+            "showBackGround": true,
+            "radius": 2.0,
+            "height": 0.15,
+            "items": [
+                {
+                    "category": 313,
+                    "image": "https://trello.com/1/cards/5dc3cfb1d013e9228256a65f/attachments/5dc3d046ca1ad4183372d520/previews/5dc3d047ca1ad4183372d54e/download/background3.jpg",
+                    "padding": 15.0
+                },
+                {
+                    "category": 313,
+                    "image": "https://trello.com/1/cards/5dc3cfb1d013e9228256a65f/attachments/5dc3d05073f2f5131558ae6d/previews/5dc3d05173f2f5131558ae8a/download/background6.jpg",
+                    "padding": 15.0
+                },
+                {
+                    "category": 313,
+                    "image": "https://trello.com/1/cards/5dc3cfb1d013e9228256a65f/attachments/5dc3d04caab674522a525c2b/previews/5dc3d04daab674522a525c2f/download/background5.jpg",
+                    "padding": 15.0
+                }
+            ]
+        },
+        {
+            "layout": "category",
+            "type": "icon",
+            "wrap": true,
+            "size": 1.2,
+            "radius": 50.0,
+            "noBackground": true,
+            "columns": 4,
+            "padding": 10.0,
+            "items": [
+                {
+                    "category": 491,
+                    "image": "https://trello.com/1/cards/60a62a9bca5053572a669dee/attachments/60a62aa0148f573b89e42d54/previews/60a62aa1148f573b89e42d68/download/cate1.png",
+                    "colors": [
+                        "#3CC2BF",
+                        "#3CC2BF"
+                    ],
+                    "originalColor": true
+                },
+                {
+                    "category": 313,
+                    "image": "https://trello.com/1/cards/60a62a9bca5053572a669dee/attachments/60a62aa1871c140b2dc13cfe/previews/60a62aa2871c140b2dc13d03/download/cate2.png",
+                    "colors": [
+                        "#3E6AB5",
+                        "#3E6AB5"
+                    ],
+                    "originalColor": true
+                },
+                {
+                    "category": 500,
+                    "image": "https://trello.com/1/cards/60a62a9bca5053572a669dee/attachments/60a62aa203be281b8277bde7/previews/60a62aa303be281b8277bdf6/download/cate3.png",
+                    "colors": [
+                        "#53A2CC",
+                        "#53A2CC"
+                    ],
+                    "originalColor": true
+                },
+                {
+                    "category": 512,
+                    "image": "https://trello.com/1/cards/60a62a9bca5053572a669dee/attachments/60a62aa3d9e0a3169c62b1a3/previews/60a62aa4d9e0a3169c62b1af/download/cate4.png",
+                    "colors": [
+                        "#53688A",
+                        "#53688A"
+                    ],
+                    "originalColor": true
+                },
+                {
+                    "category": 501,
+                    "image": "https://trello.com/1/cards/60a62a9bca5053572a669dee/attachments/60a62aa470fef453ae5f9ca4/previews/60a62aa570fef453ae5f9cb1/download/cate5.png",
+                    "colors": [
+                        "#43506A",
+                        "#43506A"
+                    ],
+                    "originalColor": true
+                },
+                {
+                    "category": 276,
+                    "image": "https://trello.com/1/cards/60a62a9bca5053572a669dee/attachments/60a62aa56170ea86aa53b99c/previews/60a62aa66170ea86aa53b9a7/download/cate6.png",
+                    "colors": [
+                        "#12B58C",
+                        "#12B58C"
+                    ],
+                    "originalColor": true
+                },
+                {
+                    "category": 538,
+                    "image": "https://trello.com/1/cards/60a62a9bca5053572a669dee/attachments/60a62aa79078b63116d2a125/previews/60a62aa79078b63116d2a12d/download/cate7.png",
+                    "colors": [
+                        "#3CC2BF",
+                        "#3CC2BF"
+                    ],
+                    "originalColor": true
+                },
+                {
+                    "category": 536,
+                    "image": "https://trello.com/1/cards/60a62a9bca5053572a669dee/attachments/60a62aa80e1b62114801eaea/previews/60a62aa80e1b62114801eb11/download/cate8.png",
+                    "colors": [
+                        "#3E6AB5",
+                        "#3E6AB5"
+                    ],
+                    "originalColor": true
+                }
+            ]
+        },
+        {
+            "layout": "brand",
+            "name": "Top Brand Choices",
+            "isBrandNameShown": true,
+            "isLogoCornerRounded": true
+        },
+        {
+            "name": "Recent View",
+            "layout": "recentView"
+        },
+        {
+            "name": "Latest Products",
+            "image": "",
+            "layout": "twoColumn",
+            "isSnapping": true,
+            "category": 276
+        },
+        {
+            "layout": "bannerImage",
+            "items": [
+                {
+                    "category": 537,
+                    "image": "https://trello.com/1/cards/5dc3cfb1d013e9228256a65f/attachments/5dc3d0407d904b428e1fe3ed/previews/5dc3d0417d904b428e1fe3f8/download/background1.jpg",
+                    "padding": 5.0
+                },
+                {
+                    "category": 538,
+                    "image": "https://trello.com/1/cards/5dc3cfb1d013e9228256a65f/attachments/5dc3d0407d904b428e1fe3ed/previews/5dc3d0417d904b428e1fe3f8/download/background1.jpg",
+                    "padding": 5.0,
+                    "featured": true
+                }
+            ]
+        },
+        {
+            "name": "Our Blog Posts",
+            "layout": "blog"
+        },
+        {
+            "name": "New Collections",
+            "layout": "staggered",
+            "limit": 20,
+            "category": 473
+        }
+    ],
+    "Setting": {
+        "MainColor": "#7868D8",
+        "FontFamily": "Roboto",
+        "ProductListLayout": "list",
+        "StickyHeader": false
+    },
+    "TabBar": [
+        {
+            "layout": "home",
+            "icon": "home",
+            "pos": 100,
+            "fontFamily": "CupertinoIcons",
+            "key": "p1q235ba14"
+        },
+        {
+            "pos": 200,
+            "layout": "category",
+            "icon": "rectangle_grid_1x2",
+            "fontFamily": "CupertinoIcons",
+            "categoryLayout": "card",
+            "vendorLayout": "grid",
+            "key": "hwu0rkrizt"
+        },
+        {
+            "key": "2reihs4qzc",
+            "icon": "search",
+            "layout": "search",
+            "fontFamily": "CupertinoIcons",
+            "pos": 300,
+            "size": 24
+        },
+        {
+            "pos": 400,
+            "icon": "bag",
+            "layout": "cart",
+            "categoryLayout": "cart",
+            "key": "a2xts0oou6",
+            "fontFamily": "CupertinoIcons"
+        },
+        {
+            "layout": "profile",
+            "fontFamily": "CupertinoIcons",
+            "pos": 500,
+            "key": "69jw5yx12d",
+            "icon": "person"
+        }
+    ],
+    "searchSuggestion": [
+        "man",
+        "dress",
+        "Stitch",
+        "ma"
+    ]
+}

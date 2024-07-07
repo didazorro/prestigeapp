@@ -1,0 +1,168 @@
+{
+  "HorizonLayout": [
+    {
+      "layout": "logo",
+      "showMenu": true,
+      "showSearch": true,
+      "showLogo": true
+    },
+    {
+      "isSafeArea": false,
+      "showSearch": true,
+      "usePrimaryColor": true,
+      "borderInput": false,
+      "title": "What can we help you find?",
+      "alignment": "centerLeft",
+      "fontWeight": 0,
+      "radius": 30,
+      "fontSize": 15.0,
+      "textOpacity": 0.8,
+      "marginLeft": 18.0,
+      "marginRight": 18.0,
+      "marginBottom": 5.0,
+      "marginTop": 5.0,
+      "paddingLeft": 5.0,
+      "paddingRight": 15.0,
+      "paddingTop": 0.0,
+      "paddingBottom": 0.0,
+      "height": 45.0,
+      "rotate": [],
+      "layout": "header_search"
+    },
+    {
+      "layout": "category",
+      "type": "image",
+      "wrap": false,
+      "showShortDescription": true,
+      "paddingTop": 4.0,
+      "size": 1.0,
+      "radius": 2.0,
+      "items": [
+        {
+          "category": "64",
+          "showText": true,
+          "name": "Apartments",
+          "image": "https://trello.com/1/cards/5f819c1647913f104387c46c/attachments/5f819c300f90ce28dbda45b3/previews/5f819c300f90ce28dbda45b6/download/travel10.jpg"
+        },
+        {
+          "category": "68",
+          "showText": true,
+          "name": "Fitness",
+          "image": "https://trello.com/1/cards/5f819c1647913f104387c46c/attachments/5f819c3121a31867bc4b6aee/previews/5f819c3221a31867bc4b6af4/download/travel13.jpg"
+        },
+        {
+          "category": "66",
+          "showText": true,
+          "name": "Events",
+          "image": "https://trello.com/1/cards/5f819c1647913f104387c46c/attachments/5f819c3284e33702c816b9d3/previews/5f819c3384e33702c816b9d6/download/travel27.jpg"
+        },
+        {
+          "category": "63",
+          "showText": true,
+          "name": "Eat & Drink",
+          "image": "https://trello.com/1/cards/5f819c1647913f104387c46c/attachments/5f819c33acfd0d2344dfa5cf/previews/5f819c34acfd0d2344dfa5d8/download/travel30.jpg"
+        },
+        {
+          "category": "65",
+          "showText": true,
+          "name": "Services",
+          "image": "https://trello.com/1/cards/5f819c1647913f104387c46c/attachments/5f819c349d05e76783966c47/previews/5f819c369d05e76783966c4e/download/travel39.jpg"
+        },
+        {
+          "category": "67",
+          "showText": true,
+          "name": "Other",
+          "image": "https://trello.com/1/cards/5f819c1647913f104387c46c/attachments/5f819c37e346e88db94e202c/previews/5f819c37e346e88db94e202f/download/travel53.jpg"
+        }
+      ],
+      "line": false,
+      "marginLeft": 10.0,
+      "marginRight": 10.0,
+      "marginTop": 10.0,
+      "marginBottom": 10.0,
+      "pos": 300,
+      "paddingX": 0.0,
+      "paddingY": 6.0,
+      "marginX": 2.0,
+      "marginY": 2.0,
+      "hideTitle": false,
+      "noBackground": false,
+      "itemSize": {
+        "width": 157.0,
+        "height": 157.0
+      }
+    },
+    {
+      "name": "Coming Events",
+      "layout": "twoColumn"
+    },
+    {
+      "layout": "bannerImage",
+      "isSlider": true,
+      "autoPlay": true,
+      "showNumber": false,
+      "design": "default",
+      "showBackGround": true,
+      "radius": 10.0,
+      "height": 0.5,
+      "items": [
+        {
+          "category": 29,
+          "image": "https://trello.com/1/cards/5dd3a1ccf77d834e86dfd29a/attachments/5dd3a20d59e9221994fd0e7c/previews/5dd3a20e59e9221994fd0e8d/download/travel2.jpg",
+          "padding": 20.0
+        },
+        {
+          "category": 37,
+          "image": "https://trello.com/1/cards/5dd3a1ccf77d834e86dfd29a/attachments/5dd3a211b67f331982369be6/previews/5dd3a212b67f331982369c5e/download/travel3.jpg",
+          "padding": 20.0
+        },
+        {
+          "category": 34,
+          "image": "https://trello.com/1/cards/5dd3a1ccf77d834e86dfd29a/attachments/5dd3a3ba0fd3a383965fccb5/previews/5dd3a3bb0fd3a383965fcdae/download/travel5.jpg",
+          "padding": 20.0
+        }
+      ]
+    }
+  ],
+  "VerticalLayout": {
+    "name": "Explore more",
+    "layout": "menu"
+  },
+  "Setting": {
+    "MainColor": "#3FC1BE",
+    "FontFamily": "Roboto",
+    "ProductListLayout": "list"
+  },
+  "TabBar": [
+    {
+      "layout": "home",
+      "icon": "home",
+      "pos": 100,
+      "fontFamily": "CupertinoIcons",
+      "key": "p1q235ba14"
+    },
+    {
+      "pos": 200,
+      "layout": "vendors",
+      "icon": "rectangle_grid_1x2",
+      "fontFamily": "CupertinoIcons",
+      "categoryLayout": "card",
+      "key": "hwu0rkrizt"
+    },
+    {
+      "key": "2reihs4qzc",
+      "icon": "search",
+      "layout": "search",
+      "fontFamily": "CupertinoIcons",
+      "pos": 300,
+      "size": 24
+    },
+    {
+      "layout": "profile",
+      "fontFamily": "CupertinoIcons",
+      "pos": 500,
+      "key": "69jw5yx12d",
+      "icon": "person"
+    }
+  ]
+}
