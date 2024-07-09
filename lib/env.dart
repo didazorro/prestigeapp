@@ -6,7 +6,7 @@ Map<String, dynamic> environment = {
 
     /// 🌍 The register URL domain that matches with Envato Purchase Code
     /// 🔑 Also, make sure to update the envatoPurchaseCode from configs/env.properties
-    'url': 'https://wclovers.mstore.io',
+    'url': 'https://prestigeksa.net/',
 
     'consumerKey': 'ck_cf6b2a2966f2d908cc08ebaef1336b15f9a6697c',
     'consumerSecret': 'cs_9756800a6b17a6c76bcde454de61fd30ce389fad',
