@@ -35,6 +35,7 @@ mixin DetailProductMixin<T extends StatefulWidget> on State<T> {
           child: VendorChat(
             user: userModel.user,
             store: product.store,
+            product: product,
           ),
         )
       : null;

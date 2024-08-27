@@ -43,7 +43,14 @@ class Country {
     id = parsedJson['iso_code'];
     name = parsedJson['name'];
     code = parsedJson['iso_code'];
-    idCountry = parsedJson['id'].toString();
+    idCountry = parsedJson['id']?.toString();
+  }
+
+  Country.fromHaravan(Map parsedJson) {
+    id = parsedJson['id']?.toString();
+    name = parsedJson['name'];
+    code = parsedJson['code']?.toString().toCode();
+    idCountry = parsedJson['id']?.toString();
   }
 
   Country.fromWooJson(Map parsedJson) {
@@ -68,9 +75,9 @@ class Country {
 }
 
 class ListCountry {
-  List<Country>? list = [];
+  List<Country> list = [];
 
-  ListCountry({this.list});
+  ListCountry({this.list = const []});
 
   ListCountry.fromMagentoJson(List? json) {
     if (json != null) {
@@ -78,7 +85,7 @@ class ListCountry {
         if (item['full_name_locale'] != null &&
             item['full_name_english'] != null &&
             item['id'] != null) {
-          list!.add(Country.fromMagentoJson(item));
+          list.add(Country.fromMagentoJson(item));
         }
       }
     }
@@ -88,7 +95,7 @@ class ListCountry {
     if (json != null) {
       for (var item in json) {
         if (item['status'] == '1') {
-          list!.add(Country.fromOpencartJson(item));
+          list.add(Country.fromOpencartJson(item));
         }
       }
     }
@@ -96,7 +103,11 @@ class ListCountry {
 
   ListCountry.fromWooJson(List json) {
     for (var item in json) {
-      list!.add(Country.fromWooJson(item));
+      list.add(Country.fromWooJson(item));
     }
   }
+}
+
+extension _HandleCodeOfCountry on String {
+  String toCode() => replaceAll('USA', 'us');
 }

@@ -38,7 +38,7 @@ class _ProductListLargeCardState extends State<ProductListLargeCard> {
 
   Widget getProductListWidgets(List<Product> products, double maxWidth) {
     return Padding(
-      padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+      padding: const EdgeInsets.symmetric(vertical: 10),
       child: Column(
         children: [
           HeaderView(
@@ -50,6 +50,7 @@ class _ProductListLargeCardState extends State<ProductListLargeCard> {
                 config: config.toJson(),
                 data: null,
               ),
+              context: context,
             ),
           ),
           SingleChildScrollView(
@@ -82,7 +83,7 @@ class _ProductListLargeCardState extends State<ProductListLargeCard> {
     return ProductFutureBuilder(
       config: config,
       waiting: Padding(
-        padding: const EdgeInsets.only(left: 10.0, top: 10.0),
+        padding: const EdgeInsetsDirectional.only(start: 10.0, top: 10.0),
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           controller: scrollController,

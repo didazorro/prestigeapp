@@ -94,9 +94,9 @@ class _TopUpScreenState extends State<TopUpScreen> {
                         style: Theme.of(context).textTheme.headlineMedium,
                         textAlign: TextAlign.center,
                         controller: _textController,
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           border: InputBorder.none,
-                          counterText: '',
+                          hintText: S.of(context).enterAmount,
                         ),
                         inputFormatters: [_textFormat],
                         autofocus: true,

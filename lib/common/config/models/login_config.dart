@@ -1,3 +1,4 @@
+import '../../../services/service_config.dart';
 import 'apple_login_config.dart';
 
 class LoginConfig {
@@ -14,6 +15,12 @@ class LoginConfig {
   String facebookClientToken = '';
   bool smsLoginAsDefault = false;
   AppleLoginConfig? appleLoginSetting;
+  bool _enable = true;
+  bool enableRegister = true;
+  bool requireUsernameWhenRegister = false;
+
+  /// Login cannot be disabled on platforms without GuestCheckout support.
+  bool get enable => ServerConfig().isSupportHideAuthenticate ? _enable : true;
 
   LoginConfig(
       {this.isRequiredLogin = false,
@@ -27,8 +34,12 @@ class LoginConfig {
       this.facebookAppId = '',
       this.facebookLoginProtocolScheme = '',
       this.facebookClientToken = '',
+      bool? enable,
       this.smsLoginAsDefault = false,
-      this.appleLoginSetting});
+      this.appleLoginSetting,
+      this.enableRegister = true,
+      this.requireUsernameWhenRegister = false})
+      : _enable = enable ?? true;
 
   LoginConfig.fromJson(dynamic json) {
     isRequiredLogin = json['IsRequiredLogin'] ?? false;
@@ -47,6 +58,9 @@ class LoginConfig {
     appleLoginSetting = json['appleLoginSetting'] != null
         ? AppleLoginConfig.fromJson(json['appleLoginSetting'])
         : null;
+    _enable = json['enable'] ?? true;
+    enableRegister = json['enableRegister'] ?? true;
+    requireUsernameWhenRegister = json['requireUsernameWhenRegister'] ?? false;
   }
 
   LoginConfig copyWith(
@@ -62,7 +76,10 @@ class LoginConfig {
       String? facebookLoginProtocolScheme,
       String? facebookClientToken,
       bool? smsLoginAsDefault,
-      AppleLoginConfig? appleLoginSetting}) {
+      AppleLoginConfig? appleLoginSetting,
+      bool? enable,
+      bool? enableRegister,
+      bool? requireUsernameWhenRegister}) {
     return LoginConfig(
       isRequiredLogin: isRequiredLogin ?? this.isRequiredLogin,
       showAppleLogin: showAppleLogin ?? this.showAppleLogin,
@@ -81,6 +98,10 @@ class LoginConfig {
       facebookClientToken: facebookClientToken ?? this.facebookClientToken,
       smsLoginAsDefault: smsLoginAsDefault ?? this.smsLoginAsDefault,
       appleLoginSetting: appleLoginSetting ?? this.appleLoginSetting,
+      enable: enable ?? _enable,
+      enableRegister: enableRegister ?? this.enableRegister,
+      requireUsernameWhenRegister:
+          requireUsernameWhenRegister ?? this.requireUsernameWhenRegister,
     );
   }
 
@@ -99,6 +120,9 @@ class LoginConfig {
     map['facebookClientToken'] = facebookClientToken;
     map['smsLoginAsDefault'] = smsLoginAsDefault;
     map['appleLoginSetting'] = appleLoginSetting?.toJson();
+    map['enable'] = _enable;
+    map['enableRegister'] = enableRegister;
+    map['requireUsernameWhenRegister'] = requireUsernameWhenRegister;
     return map;
   }
 }

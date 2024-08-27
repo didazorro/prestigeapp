@@ -106,9 +106,9 @@ class _PostManagementScreenState extends BaseScreen<PostManagementScreen> {
                                   width: MediaQuery.of(context).size.width,
                                   height: 200,
                                 ),
-                                const Text(
-                                  'Error on getting post!',
-                                  style: TextStyle(color: Colors.black),
+                                Text(
+                                  S.of(context).errorOnGettingPost,
+                                  style: const TextStyle(color: Colors.black),
                                 ),
                                 TextButton(
                                   // color: Theme.of(context).buttonColor,
@@ -117,7 +117,7 @@ class _PostManagementScreenState extends BaseScreen<PostManagementScreen> {
                                         context, '/home');
                                   },
                                   child: Text(
-                                    'Go back to home page',
+                                    S.of(context).goBackHomePage,
                                     style:
                                         Theme.of(context).textTheme.titleSmall,
                                   ),
@@ -138,7 +138,7 @@ class _PostManagementScreenState extends BaseScreen<PostManagementScreen> {
                                   height: 200,
                                 ),
                                 Text(
-                                  'You have no posts',
+                                  S.of(context).youHaveNoPost,
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyMedium!
@@ -186,7 +186,7 @@ class _PostManagementScreenState extends BaseScreen<PostManagementScreen> {
                         height: 200,
                       ),
                       Text(
-                        "You don't have permission to create Post",
+                        S.of(context).youDontHavePermissionToCreatePost,
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               fontSize: 20.0,
                               height: 1.4,

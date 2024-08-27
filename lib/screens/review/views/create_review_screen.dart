@@ -45,7 +45,18 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
   Future<void> _pickImages() async {
     final permissionState = await ImagePicker.checkGrantedPermission();
     if (permissionState.isDenied) {
-      ImagePicker.showDialogRequestPermission(context);
+      final confirmed = await context.showFluxDialogText(
+        title: S.of(context).notice,
+        body: S.of(context).pleaseAllowAccessCameraGallery,
+        primaryAction: S.of(context).ok,
+        secondaryAction: S.of(context).cancel,
+        directionButton: Axis.horizontal,
+      );
+      if (confirmed) {
+        await Future.delayed(const Duration(milliseconds: 200));
+        await PhotoManager.openSetting();
+      }
+
       return;
     }
 
@@ -54,6 +65,7 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
       context,
       maxFiles: _maxPhoto,
       selectedAssets: selectedAssets,
+      requestType: RequestType.image,
     );
 
     await Future.delayed(const Duration(milliseconds: 500));

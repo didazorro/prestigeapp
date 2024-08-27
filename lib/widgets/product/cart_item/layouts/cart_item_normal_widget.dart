@@ -85,6 +85,7 @@ class CartItemNormalWidget extends StatelessWidget {
                             if (stateUI.cartItemMetaData?.variation != null)
                               Services().widget.renderVariantCartItem(
                                   context,
+                                  stateUI.product,
                                   stateUI.cartItemMetaData!.variation!,
                                   stateUI.cartItemMetaData?.options),
                             if (stateUI.cartItemMetaData?.addonsOptions

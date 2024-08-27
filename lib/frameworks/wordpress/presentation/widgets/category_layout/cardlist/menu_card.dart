@@ -180,8 +180,11 @@ class _StateMenuCard extends State<MenuCard> with BlogActionButtonMixin {
                               return BlogCard(
                                 item: value[index],
                                 width: productHeight * 0.8,
-                                onTap: () =>
-                                    onTapBlog(blog: value[index], blogs: value),
+                                onTap: () => onTapBlog(
+                                  blog: value[index],
+                                  blogs: value,
+                                  context: context,
+                                ),
                               );
                             },
                           ),

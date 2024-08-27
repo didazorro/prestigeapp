@@ -94,7 +94,7 @@ class _ProductImageSliderStyle02State extends State<ProductImageSliderStyle02>
   StreamSubscription? _subChangeSelectedVariation;
 
   void _updateVariationImages(List<String> newImages) {
-    if (!widget.product.isVariableProduct ||
+    if (!productData.isVariableProduct ||
         _variationImages.isNotEmpty ||
         newImages.isEmpty ||
         newImages.length == _variationImages.length) {
@@ -112,7 +112,7 @@ class _ProductImageSliderStyle02State extends State<ProductImageSliderStyle02>
   }
 
   @override
-  Product? get productData => widget.product;
+  Product get productData => widget.product;
 
   @override
   void initState() {
@@ -123,13 +123,9 @@ class _ProductImageSliderStyle02State extends State<ProductImageSliderStyle02>
       }
     });
 
-    final url = widget.product.videoUrl;
-    if (url != null && url.isNotEmpty) {
-      _videoUrl = url.replaceAll('http://', 'https://');
-      hasVideo = true;
-    }
+    hasVideo = productData.hasVideo && kProductDetail.showVideo;
 
-    _images.addAll(widget.product.images);
+    _images.addAll(productData.images);
 
     if (kProductDetail.showSelectedImageVariant) {
       _subChangeSelectedVariation =
@@ -187,7 +183,7 @@ class _ProductImageSliderStyle02State extends State<ProductImageSliderStyle02>
   }
 
   void afterFirstLayout(BuildContext context) {
-    if (widget.product.isVariableProduct) {
+    if (productData.isVariableProduct) {
       _updateVariationImages(
           context.read<ProductModel>().variationsFeatureImages);
     }

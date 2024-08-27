@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:inspireui/inspireui.dart';
 import 'package:provider/provider.dart';
 
 import '../../common/constants.dart';
+import '../../generated/l10n.dart';
 import '../../models/tera_wallet/wallet_model.dart';
 import '../../models/tera_wallet/wallet_transfer_model.dart';
 import 'views/index.dart';
@@ -44,7 +46,7 @@ class TeraWalletRoute {
             transaction: arguments.transaction,
           );
         }
-        return errorPage('Transaction Detail error arguments');
+        return const ErrorPage(message: 'Transaction Detail error arguments');
       },
       RouteList.teraWalletTransferSuccess: (context) =>
           const TransferSuccessScreen(),
@@ -55,8 +57,8 @@ class TeraWalletRoute {
             errorMessage: arguments.errorMessage,
           );
         }
-        return const TransferFailScreen(
-          errorMessage: 'Something went wrong!',
+        return TransferFailScreen(
+          errorMessage: S.of(context).somethingWrong,
         );
       },
       RouteList.teraWalletWithdrawal: (BuildContext context) =>
@@ -74,13 +76,4 @@ class TeraWalletRoute {
     };
     return routes;
   }
-
-  static Widget errorPage(String title) => Scaffold(
-        appBar: AppBar(
-          title: const Text('Error'),
-        ),
-        body: Center(
-          child: Text(title),
-        ),
-      );
 }

@@ -205,6 +205,11 @@ class _StateProductOrderItem extends BaseScreen<ProductOrderItem>
                             DownloadButton(widget.product.productId),
                       ],
                     ),
+                    if (widget.product.appointmentDate?.isNotEmpty ?? false)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: HtmlWidget('${widget.product.appointmentDate}'),
+                      ),
                     if (widget.product.addonsOptions.isNotEmpty)
                       Padding(
                         padding: const EdgeInsets.only(top: 8.0),

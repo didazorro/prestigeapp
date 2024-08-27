@@ -10,6 +10,7 @@ import '../../common/constants.dart';
 import '../../common/tools.dart';
 import '../../data/boxes.dart';
 import '../../modules/dynamic_layout/helper/helper.dart';
+import '../../services/outside/index.dart';
 import '../../services/service_config.dart';
 import '../../services/services.dart';
 import '../booking/booking_model.dart';
@@ -59,7 +60,7 @@ class Product {
   List<Attribute> defaultAttributes = <Attribute>[];
   List<ProductAttribute> infors = [];
   String? categoryId;
-  String? videoUrl;
+  String? _videoUrl;
   List<dynamic>? groupedProducts;
   List<String?>? fileNames;
   List<String?>? files;
@@ -94,10 +95,8 @@ class Product {
   String? affiliateUrl;
   List<ProductVariation>? variations;
 
-  /// only use with Woocomerce
-  bool get isVariableType => type == 'variable';
-  bool get isSimpleType => type == 'simple';
-  bool get isNofoundType => type == '';
+  /// for outside service
+  Map? outsideJson;
 
   List<Map>? options; //for opencart
 
@@ -110,6 +109,8 @@ class Product {
   String? vendorAdminImageFeature;
   List<String> categoryIds = [];
   List<ProductAttribute> vendorAdminProductAttributes = [];
+
+  List<String>? variationIds;
 
   ///----VENDOR ADMIN----///
 
@@ -157,104 +158,113 @@ class Product {
   List<String>? giftCardAmounts;
 
   bool get availableRating => averageRating != null && averageRating != 0.0;
+  String? get videoUrl => _videoUrl?.replaceAll('http://', 'https://');
+  bool get hasVideo => videoUrl?.isNotEmpty ?? false;
 
   //used for YITH Composite Products for WooCommerce Premium plugin
   List<ProductComponent>? components;
   bool? cpPerItemPricing;
 
+  /// used for Woocommerce Appointment
+  int? appointmentDuration;
+  String? appointmentDurationUnit;
+
   ///----FLUXSTORE LISTING----///
-  Product(
-      {this.id = _defaultId,
-      String? sku,
-      String? name,
-      String? status,
-      String? vendor,
-      String? description,
-      String? shortDescription,
-      String? permalink,
-      String? price,
-      String? regularPrice,
-      String? salePrice,
-      String? wholesalePrice,
-      String? maxPrice,
-      String? minPrice,
-      bool? onSale,
-      bool? inStock,
-      double? averageRating,
-      int? totalSales,
-      String? dateOnSaleFrom,
-      String? dateOnSaleTo,
-      int? ratingCount,
-      List<String>? images,
-      String? imageFeature,
-      List<ProductAttribute>? attributes,
-      List<Attribute>? defaultAttributes,
-      List<ProductAttribute>? infors,
-      String? categoryId,
-      String? videoUrl,
-      List<dynamic>? groupedProducts,
-      List<String>? fileNames,
-      List<String?>? files,
-      int? stockQuantity,
-      int? minQuantity,
-      int? maxQuantity,
-      int? quantityStep,
-      bool? manageStock,
-      bool? backOrdered,
-      String? relatedIds,
-      bool? backordersAllowed,
-      Store? store,
-      List<Tag>? tags,
-      List<Category>? categories,
-      List<Map>? metaData,
-      List<ProductAddons>? addOns,
-      List<AddonsOption>? selectedOptions,
-      List<ProductVariation>? variationProducts,
-      bool? isPurchased,
-      bool? isDownloadable,
-      String? type,
-      String? affiliateUrl,
-      List<ProductVariation>? variations,
-      List<Map>? options,
-      BookingModel? bookingInfo,
-      String? idShop,
-      bool? isFeatured,
-      String? vendorAdminImageFeature,
-      List<String>? categoryIds,
-      List<ProductAttribute>? vendorAdminProductAttributes,
-      String? distance,
-      Map? pureTaxonomies,
-      List? reviews,
-      String? featured,
-      bool? verified,
-      String? tagLine,
-      String? priceRange,
-      String? categoryName,
-      String? hours,
-      String? location,
-      String? phone,
-      String? facebook,
-      String? email,
-      String? website,
-      String? skype,
-      String? whatsapp,
-      String? youtube,
-      String? twitter,
-      String? instagram,
-      String? linkedin,
-      String? telegram,
-      String? eventDate,
-      ListingHour? listingHour,
-      String? rating,
-      int? totalReview,
-      double? lat,
-      double? long,
-      List<dynamic>? listingMenu,
-      ListingSlots? slots,
-      bool? isRestricted,
-      bool? listingBookingStatus,
-      List<String>? giftCardAmounts,
-      bool? cpPerItemPricing});
+  Product({
+    this.id = _defaultId,
+    String? sku,
+    String? name,
+    String? status,
+    String? vendor,
+    String? description,
+    String? shortDescription,
+    String? permalink,
+    String? price,
+    String? regularPrice,
+    String? salePrice,
+    String? wholesalePrice,
+    String? maxPrice,
+    String? minPrice,
+    bool? onSale,
+    bool? inStock,
+    double? averageRating,
+    int? totalSales,
+    String? dateOnSaleFrom,
+    String? dateOnSaleTo,
+    int? ratingCount,
+    List<String>? images,
+    String? imageFeature,
+    List<ProductAttribute>? attributes,
+    List<Attribute>? defaultAttributes,
+    List<ProductAttribute>? infors,
+    String? categoryId,
+    String? videoUrl,
+    List<dynamic>? groupedProducts,
+    List<String>? fileNames,
+    List<String?>? files,
+    int? stockQuantity,
+    int? minQuantity,
+    int? maxQuantity,
+    int? quantityStep,
+    bool? manageStock,
+    bool? backOrdered,
+    String? relatedIds,
+    bool? backordersAllowed,
+    Store? store,
+    List<Tag>? tags,
+    List<Category>? categories,
+    List<Map>? metaData,
+    List<ProductAddons>? addOns,
+    List<AddonsOption>? selectedOptions,
+    List<ProductVariation>? variationProducts,
+    bool? isPurchased,
+    bool? isDownloadable,
+    String? type,
+    String? affiliateUrl,
+    List<ProductVariation>? variations,
+    List<Map>? options,
+    BookingModel? bookingInfo,
+    String? idShop,
+    bool? isFeatured,
+    String? vendorAdminImageFeature,
+    List<String>? categoryIds,
+    List<ProductAttribute>? vendorAdminProductAttributes,
+    String? distance,
+    Map? pureTaxonomies,
+    List? reviews,
+    String? featured,
+    bool? verified,
+    String? tagLine,
+    String? priceRange,
+    String? categoryName,
+    String? hours,
+    String? location,
+    String? phone,
+    String? facebook,
+    String? email,
+    String? website,
+    String? skype,
+    String? whatsapp,
+    String? youtube,
+    String? twitter,
+    String? instagram,
+    String? linkedin,
+    String? telegram,
+    String? eventDate,
+    ListingHour? listingHour,
+    String? rating,
+    int? totalReview,
+    double? lat,
+    double? long,
+    List<dynamic>? listingMenu,
+    ListingSlots? slots,
+    bool? isRestricted,
+    bool? listingBookingStatus,
+    List<String>? giftCardAmounts,
+    bool? cpPerItemPricing,
+    this.appointmentDuration,
+    this.appointmentDurationUnit,
+  }) : _videoUrl = videoUrl;
 
   Product.empty(this.id) {
     name = '';
@@ -295,7 +305,8 @@ class Product {
   }
 
   // `configurable` type is used for magento only
-  bool get isVariableProduct => type == 'variable' || type == 'configurable';
+  bool get isVariableProduct =>
+      ['variable', 'configurable', 'pw-gift-card'].contains(type);
 
   bool get isSimpleProduct => type == 'simple';
 
@@ -305,8 +316,12 @@ class Product {
 
   bool get isCompositeProduct => type == 'yith-composite';
 
+  bool get isNofoundType => type == '';
+
   bool get isPWGiftCardProduct =>
       type == 'pw-gift-card' && kAdvanceConfig.enablePWGiftCard;
+
+  bool get isAppointment => type == 'appointment';
 
   String? get displayPrice {
     return onSale == true
@@ -319,6 +334,17 @@ class Product {
     return temp
         .map((e) => categories.firstWhere((element) => element.name == e))
         .toList();
+  }
+
+  String getNameAttribute(String key) {
+    if (ServerConfig().isWooType) {
+      return attributes
+              ?.firstWhereOrNull((element) => element.keyAtrr == key)
+              ?.name ??
+          key;
+    }
+
+    return key;
   }
 
   Product.cloneFrom(Product p) : id = p.id {
@@ -343,7 +369,7 @@ class Product {
     attributes = p.attributes?.toList();
     infors = p.infors.toList();
     categoryId = p.categoryId;
-    videoUrl = p.videoUrl;
+    _videoUrl = p.videoUrl;
     groupedProducts = p.groupedProducts?.toList();
     fileNames = p.fileNames?.toList();
     files = p.files?.toList();
@@ -377,6 +403,8 @@ class Product {
     giftCardAmounts = p.giftCardAmounts;
     components = p.components;
     cpPerItemPricing = p.cpPerItemPricing;
+    appointmentDuration = p.appointmentDuration;
+    appointmentDurationUnit = p.appointmentDurationUnit;
   }
 
   Map _getMetaData(String key) {
@@ -415,6 +443,11 @@ class Product {
       shortDescription = parsedJson['short_description'];
       permalink = parsedJson['permalink'];
       price = parsedJson['price'] != null ? parsedJson['price'].toString() : '';
+
+      variationIds = parsedJson['variations'] != null &&
+              parsedJson['variations'] is List
+          ? (parsedJson['variations'] as List).map((e) => e.toString()).toList()
+          : null;
 
       regularPrice = isNotBlank('${parsedJson['regular_price'] ?? ''}')
           ? parsedJson['regular_price'].toString()
@@ -686,6 +719,7 @@ class Product {
             if (wholesaleRegularPrice != null && wholesalePrice == null) {
               price = wholesaleRegularPrice;
               wholesalePrice = wholesaleRegularPrice;
+              salePrice = null;
               onSale = false;
             } else if (wholesaleRegularPrice != null &&
                 wholesalePrice != null) {
@@ -741,7 +775,7 @@ class Product {
         orElse: () => {},
       );
       if (video.isNotEmpty && video['value'] != null) {
-        videoUrl = video['value'] is String
+        _videoUrl = video['value'] is String
             ? video['value']
             : video['value']['url'] ?? '';
       }
@@ -803,7 +837,7 @@ class Product {
           try {
             if (item['key'] == '_wc_min_max_quantities_max_qty' ||
                 item['key'] == '_wcmmq_max_qty') {
-              var quantity = int.parse(item['value']);
+              var quantity = num.tryParse('${item['value']}')?.toInt() ?? 0;
               quantity == 0 ? maxQuantity = null : maxQuantity = quantity;
             }
           } catch (e) {
@@ -813,7 +847,7 @@ class Product {
           try {
             if (item['key'] == '_wc_min_max_quantities_min_qty' ||
                 item['key'] == '_wcmmq_min_qty') {
-              var quantity = int.parse(item['value']);
+              var quantity = num.tryParse('${item['value']}')?.toInt() ?? 0;
               quantity == 0 ? minQuantity = null : minQuantity = quantity;
             }
           } catch (e) {
@@ -823,7 +857,7 @@ class Product {
           try {
             if (item['key'] == '_wc_min_max_quantities_step' ||
                 item['key'] == '_wcmmq_step') {
-              var step = int.parse(item['value']);
+              var step = num.tryParse('${item['value']}')?.toInt() ?? 0;
               step == 0 ? quantityStep = null : quantityStep = step;
             }
           } catch (e) {
@@ -895,9 +929,12 @@ class Product {
           printLog('variation_products_error ${parsedJson['id']} $e');
         }
       }
+      outsideJson = OutsideService.productJson(parsedJson);
     } catch (e, trace) {
       printError(e, trace, '🔴 Get product $name :');
     }
+    appointmentDuration = int.tryParse('${parsedJson['appointment_duration']}');
+    appointmentDurationUnit = parsedJson['appointment_duration_unit'];
   }
 
   Product.fromOpencartJson(Map parsedJson)
@@ -1034,7 +1071,7 @@ class Product {
               mVideoUrl = mVideo['url'].toString();
               mVideoDesc = json['description'];
               mVideoTitle = name;
-              videoUrl = mVideoUrl;
+              _videoUrl = mVideoUrl;
               break;
             }
           }
@@ -1133,6 +1170,141 @@ class Product {
       }
       inStock ??= false;
       minQuantity = int.tryParse('${parsedJson['minimal_quantity']}');
+    } catch (e, trace) {
+      printLog(trace);
+      printLog(e.toString());
+    }
+  }
+
+  Product.fromHaravan(Map<String, dynamic> parsedJson)
+      : id = parsedJson['id'] != null
+            ? parsedJson['id'].toString()
+            : _defaultId {
+    try {
+      name = parsedJson['title']?.toString();
+      description = parsedJson['body_html']?.toString();
+      // shortDescription = parsedJson['description_short']?.toString();
+      // permalink = parsedJson['link_rewrite']?.toString();
+      // idShop = parsedJson['id_shop_default']?.toString();
+      // onSale = parsedJson['on_sale'] == true;
+
+      categoryId =
+          (parsedJson['collectionId'] ?? parsedJson['categoryId'])?.toString();
+
+      final optionsData = <String, List>{
+        'option1': [],
+        'option2': [],
+        'option3': [],
+      };
+      final variants = parsedJson['variants'];
+      if (variants != null && variants is List && variants.isNotEmpty) {
+        /// math options
+        stockQuantity = 0;
+        regularPrice = '';
+        price = '';
+        salePrice = '';
+
+        for (var variant in variants) {
+          final option1 = variant['option1'];
+          final option2 = variant['option2'];
+          final option3 = variant['option3'];
+          if (variant['inventory_management'] != null) {
+            stockQuantity = stockQuantity! +
+                (int.tryParse(
+                        '${variant?['inventory_advance']?['qty_available'] ?? '0'}') ??
+                    0);
+            inStock = stockQuantity! > 0;
+          } else {
+            inStock = true;
+          }
+
+          if (option1 != null &&
+              optionsData['option1']!.contains(option1) == false) {
+            optionsData['option1']!.add(option1);
+          }
+
+          if (option2 != null &&
+              optionsData['option2']!.contains(option2) == false) {
+            optionsData['option2']!.add(option2);
+          }
+
+          if (option3 != null &&
+              optionsData['option3']!.contains(option3) == false) {
+            optionsData['option3']!.add(option3);
+          }
+
+          if (price!.isEmpty) {
+            /// Math price
+            final priceVariant = (double.tryParse((variant['price'] != null
+                    ? variant['price'].toString()
+                    : '')) ??
+                0);
+
+            if (priceVariant > 0) {
+              price = priceVariant.toStringAsFixed(2);
+            }
+
+            final regularPriceVariant = (double.tryParse(
+                    isNotBlank('${variant['compare_at_price'] ?? ''}')
+                        ? variant['compare_at_price'].toString()
+                        : '') ??
+                0);
+
+            if (regularPriceVariant > 0) {
+              regularPrice = regularPriceVariant.toStringAsFixed(2);
+            }
+
+            if (regularPriceVariant > 0 &&
+                priceVariant > 0 &&
+                priceVariant != regularPriceVariant) {
+              salePrice = priceVariant.toStringAsFixed(2);
+            }
+          }
+        }
+
+        if (true == inStock && stockQuantity == 0) {
+          stockQuantity = null;
+        }
+      }
+
+      images = [];
+      var imagesRawData = parsedJson['images'];
+
+      if (imagesRawData != null && imagesRawData is List) {
+        for (var element in imagesRawData) {
+          if (element is String) {
+            images.add(element);
+          } else if (element is Map && element['src'] != null) {
+            images.add(element['src']);
+          }
+        }
+      }
+
+      if (images.isNotEmpty) {
+        imageFeature = images.first;
+      }
+
+      _prepareImage();
+
+      type = 'variable';
+
+      final options = parsedJson['options'];
+      final attrs = <ProductAttribute>[];
+
+      if (options != null && options is List && options.isNotEmpty) {
+        for (var item in options) {
+          final opt = optionsData['option${item['position']}'] ?? [];
+          attrs.add(ProductAttribute.fromJson({
+            'id': item['id'],
+            'name': item['name'],
+            'label': item['name'],
+            'slug': item['name'],
+            'options': opt,
+          }));
+        }
+      }
+
+      attributes = attrs;
     } catch (e, trace) {
       printLog(trace);
       printLog(e.toString());
@@ -1246,6 +1418,7 @@ class Product {
       'store': store?.toJson(),
       'variations': variations?.map((e) => e.toJson()).toList(),
       'infors': infors.map((e) => e.toJson()).toList(),
+      'variationIds': variationIds,
 
       ///----FluxStore Listing----///
       'distance': distance,
@@ -1308,6 +1481,7 @@ class Product {
       dateOnSaleFrom = json['date_on_sale_from'];
       dateOnSaleTo = json['date_on_sale_to'];
       idShop = json['idShop'];
+      variationIds = json['variationIds'];
       var imgs = <String>[];
 
       if (json['images'] != null) {
@@ -1810,94 +1984,97 @@ class Product {
 
   ///----FLUXSTORE LISTING----////
 
-  Product copyWith(
-      {String? id,
-      String? sku,
-      String? name,
-      String? status,
-      String? vendor,
-      String? description,
-      String? shortDescription,
-      String? permalink,
-      String? price,
-      String? regularPrice,
-      String? salePrice,
-      String? maxPrice,
-      String? minPrice,
-      bool? onSale,
-      bool? inStock,
-      double? averageRating,
-      int? totalSales,
-      String? dateOnSaleFrom,
-      String? dateOnSaleTo,
-      int? ratingCount,
-      List<String>? images,
-      String? imageFeature,
-      List<ProductAttribute>? attributes,
-      List<Attribute>? defaultAttributes,
-      List<ProductAttribute>? infors,
-      String? categoryId,
-      String? videoUrl,
-      List<dynamic>? groupedProducts,
-      List<String?>? files,
-      int? stockQuantity,
-      int? minQuantity,
-      int? maxQuantity,
-      int? quantityStep,
-      bool? manageStock,
-      bool? backOrdered,
-      String? relatedIds,
-      bool? backordersAllowed,
-      Store? store,
-      List<Tag>? tags,
-      List<Category>? categories,
-      List<Map>? metaData,
-      List<ProductAddons>? addOns,
-      List<AddonsOption>? selectedOptions,
-      List<ProductVariation>? variationProducts,
-      bool? isPurchased,
-      bool? isDownloadable,
-      String? type,
-      String? affiliateUrl,
-      List<ProductVariation>? variations,
-      List<Map>? options,
-      BookingModel? bookingInfo,
-      String? idShop,
-      bool? isFeatured,
-      String? vendorAdminImageFeature,
-      List<String>? categoryIds,
-      List<ProductAttribute>? vendorAdminProductAttributes,
-      String? distance,
-      Map? pureTaxonomies,
-      List? reviews,
-      String? featured,
-      bool? verified,
-      String? tagLine,
-      String? priceRange,
-      String? categoryName,
-      String? hours,
-      String? location,
-      String? phone,
-      String? facebook,
-      String? email,
-      String? website,
-      String? skype,
-      String? whatsapp,
-      String? youtube,
-      String? twitter,
-      String? instagram,
-      String? linkedin,
-      String? telegram,
-      String? eventDate,
-      ListingHour? listingHour,
-      int? totalReview,
-      double? lat,
-      double? long,
-      List<dynamic>? listingMenu,
-      ListingSlots? slots,
-      bool? isRestricted,
-      List<String>? giftCardAmounts,
-      bool? cpPerItemPricing}) {
+  Product copyWith({
+    String? id,
+    String? sku,
+    String? name,
+    String? status,
+    String? vendor,
+    String? description,
+    String? shortDescription,
+    String? permalink,
+    String? price,
+    String? regularPrice,
+    String? salePrice,
+    String? maxPrice,
+    String? minPrice,
+    bool? onSale,
+    bool? inStock,
+    double? averageRating,
+    int? totalSales,
+    String? dateOnSaleFrom,
+    String? dateOnSaleTo,
+    int? ratingCount,
+    List<String>? images,
+    String? imageFeature,
+    List<ProductAttribute>? attributes,
+    List<Attribute>? defaultAttributes,
+    List<ProductAttribute>? infors,
+    String? categoryId,
+    String? videoUrl,
+    List<dynamic>? groupedProducts,
+    List<String?>? files,
+    int? stockQuantity,
+    int? minQuantity,
+    int? maxQuantity,
+    int? quantityStep,
+    bool? manageStock,
+    bool? backOrdered,
+    String? relatedIds,
+    bool? backordersAllowed,
+    Store? store,
+    List<Tag>? tags,
+    List<Category>? categories,
+    List<Map>? metaData,
+    List<ProductAddons>? addOns,
+    List<AddonsOption>? selectedOptions,
+    List<ProductVariation>? variationProducts,
+    bool? isPurchased,
+    bool? isDownloadable,
+    String? type,
+    String? affiliateUrl,
+    List<ProductVariation>? variations,
+    List<Map>? options,
+    BookingModel? bookingInfo,
+    String? idShop,
+    bool? isFeatured,
+    String? vendorAdminImageFeature,
+    List<String>? categoryIds,
+    List<ProductAttribute>? vendorAdminProductAttributes,
+    String? distance,
+    Map? pureTaxonomies,
+    List? reviews,
+    String? featured,
+    bool? verified,
+    String? tagLine,
+    String? priceRange,
+    String? categoryName,
+    String? hours,
+    String? location,
+    String? phone,
+    String? facebook,
+    String? email,
+    String? website,
+    String? skype,
+    String? whatsapp,
+    String? youtube,
+    String? twitter,
+    String? instagram,
+    String? linkedin,
+    String? telegram,
+    String? eventDate,
+    ListingHour? listingHour,
+    int? totalReview,
+    double? lat,
+    double? long,
+    List<dynamic>? listingMenu,
+    ListingSlots? slots,
+    bool? isRestricted,
+    List<String>? giftCardAmounts,
+    bool? cpPerItemPricing,
+    int? appointmentDuration,
+    String? appointmentDurationUnit,
+  }) {
     return Product(
       id: id ?? this.id,
       sku: sku ?? this.sku,
@@ -1925,7 +2102,7 @@ class Product {
       defaultAttributes: defaultAttributes ?? this.defaultAttributes,
       infors: infors ?? this.infors,
       categoryId: categoryId ?? this.categoryId,
-      videoUrl: videoUrl ?? this.videoUrl,
+      videoUrl: videoUrl ?? _videoUrl,
       groupedProducts: groupedProducts ?? this.groupedProducts,
       files: files ?? this.files,
       stockQuantity: stockQuantity ?? this.stockQuantity,
@@ -1988,6 +2165,9 @@ class Product {
       isRestricted: isRestricted ?? this.isRestricted,
       giftCardAmounts: giftCardAmounts,
       cpPerItemPricing: cpPerItemPricing ?? this.cpPerItemPricing,
+      appointmentDuration: appointmentDuration ?? this.appointmentDuration,
+      appointmentDurationUnit:
+          appointmentDurationUnit ?? this.appointmentDurationUnit,
     );
   }
 
@@ -1999,5 +2179,58 @@ class Product {
       }
     }
     return product;
+  }
+
+  /// This method is used to check whether a variant is in stock.
+  /// In the case of Woo, it is necessary to check if the product Variation is null
+  /// determined to be out of stock
+  bool checkProductVariationInStock(ProductVariation? productVariation) {
+    var inStockProduct =
+        (productVariation != null ? productVariation.inStock : inStock) ??
+            false;
+
+    return inStockProduct;
+  }
+
+  /// This method is used to check whether this product is in stock.
+  /// In the Woo case, we need to check if the product has type Variation
+  /// but the list of variations is null or empty then product
+  /// is determined out of stock
+  bool? checkInStock() {
+    if (ServerConfig().isWooType) {
+      if (isVariableProduct) {
+        final hasVariation = (variations?.isNotEmpty ?? false) ||
+            (variationProducts?.isNotEmpty ?? false);
+
+        if (hasVariation == false) {
+          /// Because in some special cases, the api retrieves no list
+          /// of variations but only a list of variationIds,
+          /// so in this case, the priority will be given to checking the
+          /// inStock of the product.
+          ///
+          /// Conversely, if the list of variationIds is empty, the product
+          /// is "variable", then the inStock will be decided according
+          /// to the inStock of the variations
+          return (variationIds?.isNotEmpty ?? false) ? true == inStock : false;
+        }
+
+        var inStockVariant = false;
+
+        final listProductVaraint = (variations?.isNotEmpty ?? false)
+            ? variations
+            : variationProducts ?? [];
+
+        if (listProductVaraint?.isNotEmpty ?? false) {
+          inStockVariant =
+              listProductVaraint!.any((element) => element.inStock ?? true);
+        }
+
+        return inStockVariant;
+      }
+
+      return true == inStock;
+    }
+
+    return inStock;
   }
 }

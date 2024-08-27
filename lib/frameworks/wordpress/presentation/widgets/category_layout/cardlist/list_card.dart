@@ -24,7 +24,11 @@ class ListCard extends StatelessWidget with BlogActionButtonMixin {
               return BlogCard(
                 item: data[index],
                 width: constraints.maxWidth * 0.5,
-                onTap: () => onTapBlog(blog: data[index], blogs: data),
+                onTap: () => onTapBlog(
+                  blog: data[index],
+                  blogs: data,
+                  context: context,
+                ),
               );
             },
             itemCount: data.length,

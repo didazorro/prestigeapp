@@ -11,7 +11,7 @@ enum ChatProviders {
 
 /// Convert chat provider from string
 extension ChatProvidersExtension on String? {
-  ChatProviders? toChatProviders() {
+  ChatProviders? toChatProvider() {
     switch (this) {
       case 'chatGPT':
         return ChatProviders.chatGPT;

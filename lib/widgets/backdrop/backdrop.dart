@@ -387,7 +387,7 @@ class _BackdropState extends State<Backdrop>
               ),
               actions: <Widget>[
                 /// Share product category by dynamic link
-                if (firebaseDynamicLinkConfig['isEnabled'] &&
+                if (dynamicLinkConfig.enable &&
                     ServerConfig().isWooType &&
                     !ServerConfig().isListingType &&
                     !widget.isBlog)

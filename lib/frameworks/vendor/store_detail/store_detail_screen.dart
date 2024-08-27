@@ -1,18 +1,14 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../common/config.dart';
 import '../../../common/constants.dart';
 import '../../../common/tools.dart';
-import '../../../common/tools/flash.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/index.dart' show AppModel, Store, UserModel;
 import '../../../screens/chat/vendor_chat.dart';
 import '../../../screens/common/app_bar_mixin.dart';
 import '../../../services/service_config.dart';
-import '../../../services/services.dart';
 import '../../../widgets/common/flux_image.dart';
 import '../../../widgets/common/star_rating.dart';
 import '../../../widgets/vendor/store_item.dart';
@@ -162,8 +158,7 @@ class _StoreDetailState extends State<StoreDetailScreen>
                     },
                   ),
                   actions: [
-                    if (firebaseDynamicLinkConfig['isEnabled'] &&
-                        ServerConfig().isWooType)
+                    if (dynamicLinkConfig.enable && ServerConfig().isWooType)
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: IconButton(
@@ -171,28 +166,9 @@ class _StoreDetailState extends State<StoreDetailScreen>
                               Icons.share,
                               color: Colors.white,
                             ),
-                            onPressed: () async {
-                              var url = widget.store?.link;
-                              if (url?.isNotEmpty ?? false) {
-                                unawaited(
-                                  FlashHelper.message(
-                                    context,
-                                    message: S.of(context).generatingLink,
-                                    duration: const Duration(seconds: 1),
-                                  ),
-                                );
-                                Services().firebase.shareDynamicLinkProduct(
-                                      itemUrl: url,
-                                    );
-                              } else {
-                                unawaited(
-                                  FlashHelper.errorMessage(
-                                    context,
-                                    message: S.of(context).failedToGenerateLink,
-                                    duration: const Duration(seconds: 1),
-                                  ),
-                                );
-                              }
+                            onPressed: () {
+                              final url = widget.store?.link;
+                              context.shareLink(url);
                             }),
                       ),
                   ],

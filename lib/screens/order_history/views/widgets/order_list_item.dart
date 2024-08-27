@@ -20,6 +20,8 @@ class OrderListItem extends StatelessWidget {
     return Center(
       child: Consumer<OrderHistoryDetailModel>(builder: (_, model, __) {
         final order = model.order;
+        var fullInfo = order.billing?.toOrderHistoryAddress() ?? '';
+
         final currencyCode =
             order.currencyCode ?? Provider.of<AppModel>(context).currencyCode;
 
@@ -189,9 +191,9 @@ class OrderListItem extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 5),
                                 // Display empty box if Order Address is null
-                                order.billing != null
+                                order.billing != null && fullInfo.isNotEmpty
                                     ? Text(
-                                        '${order.billing?.firstName} | ${order.billing?.city}, ${order.billing?.country}',
+                                        fullInfo,
                                         style: const TextStyle(fontSize: 14.0),
                                       )
                                     : const SizedBox(),
@@ -217,6 +219,7 @@ class OrderListItem extends StatelessWidget {
                                             ),
                                       ),
                                     ),
+                                    const SizedBox(width: 5),
                                     Text(
                                       '${S.of(context).orderNo}: ${order.number}',
                                       style: Theme.of(context)
@@ -334,6 +337,12 @@ class OrderStatusWidget extends StatelessWidget {
         return S.of(context).orderStatusCancelled;
       case 'refunded':
         return S.of(context).orderStatusRefunded;
+      case 'readytopick':
+        return S.of(context).readyToPick;
+      case 'picking':
+        return S.of(context).picking;
+      case 'delivering':
+        return S.of(context).delivering;
       default:
         return status;
     }

@@ -6,6 +6,7 @@ import 'package:quiver/strings.dart';
 
 import '../../../common/config.dart';
 import '../../../common/constants.dart';
+import '../../../common/extensions/string_ext.dart';
 import '../../../models/entities/prediction.dart';
 import '../../../models/entities/vacation_settings.dart';
 import '../../../models/index.dart' show Category, Product, Review, User;
@@ -42,16 +43,11 @@ class WCFMService extends WooCommerceService {
       var endPoint =
           '$domain/wp-json/api/flutter_user/sign_up/?insecure=cool&$isSecure'
               .toUri()!;
-      if (kAdvanceConfig.enableNewSMSLogin) {
-        endPoint =
-            '$domain/wp-json/api/flutter_user/sign_up_2/?insecure=cool&$isSecure'
-                .toUri()!;
-      }
 
       var data = {
         'user_email': email ?? username,
-        'user_login': username,
-        'username': username,
+        'user_login': username ?? email,
+        'username': username ?? email,
         'first_name': firstName,
         'last_name': lastName,
         'user_pass': password,
@@ -103,6 +99,10 @@ class WCFMService extends WooCommerceService {
     try {
       var endpoint =
           '$domain/wp-json/api/flutter_multi_vendor/products/owner?id=$storeId';
+
+      endpoint = endpoint
+          .addUrlQuery('is_all_data=${kAdvanceConfig.enableIsAllData == true}');
+
       if (page == null || perPage == null) {
         page = 1;
         perPage = 10;
@@ -122,6 +122,12 @@ class WCFMService extends WooCommerceService {
       }
       if (kAdvanceConfig.isMultiLanguages) {
         endpoint += '&lang=$languageCode';
+      }
+      if (kAdvanceConfig.hideOutOfStock) {
+        endpoint += '&stock_status=instock';
+      }
+      if (kExcludedProductIDs?.isNotEmpty ?? false) {
+        endpoint += '&exclude=$kExcludedProductIDs';
       }
 
       final response = await httpGet(endpoint.toUri()!);
@@ -300,6 +306,9 @@ class WCFMService extends WooCommerceService {
       }
       if (kAdvanceConfig.hideEmptyCategories) {
         endpoint += '&hide_empty=true';
+      }
+      if (kExcludedCategoryIDs?.isNotEmpty ?? false) {
+        endpoint += '&exclude=$kExcludedCategoryIDs';
       }
       final response = await httpGet(endpoint.toUri()!);
       var result = convert.jsonDecode(response.body);

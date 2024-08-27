@@ -29,8 +29,17 @@ mixin ProductVariantMixin on BaseFrameworks {
     List<ProductVariation> variations,
     Map<String?, String?> mapAttribute,
   ) {
-    final templateVariation =
-        variations.isNotEmpty ? variations.first.attributes : null;
+    final templateVariation = variations.isNotEmpty
+        ? variations.firstWhereOrNull(
+              (element) {
+                if (element.attributes.length == mapAttribute.length) {
+                  return true;
+                }
+                return false;
+              },
+            )?.attributes ??
+            variations.first.attributes
+        : null;
     final listAttributes = variations.map((e) => e.attributes).toList();
 
     ProductVariation productVariation;
@@ -45,8 +54,25 @@ mixin ProductVariantMixin on BaseFrameworks {
       attributeString += value != null ? '$key$value' : '';
     });
 
+    /// Because there are some cases where the names of the variants
+    /// are the same, when selecting these variants, the logic will
+    /// incorrectly identify the object to be searched for.
+    /// Therefore, it is necessary to handle the case of completely
+    /// identical names first. If in this case, a suitable
+    /// variant cannot be found, it will search by contains.
+    var validAttribute = listAttributes.lastWhereOrNull(
+      (attributes) {
+        final valueCheck = attributes.map((e) => e.toStringCompare()).join();
+
+        return attributeString == valueCheck;
+      },
+    );
+
+    /// If the above case does not find a suitable variation,
+    /// it will switch to searching by contains.
+    /// This logic supports the case of setting any attribute on the server.
     /// Find attributeS contain attribute selected
-    final validAttribute = listAttributes.lastWhereOrNull(
+    validAttribute ??= listAttributes.lastWhereOrNull(
       (attributes) {
         final valueCheck = attributes.map((e) => e.toStringCompare()).join();
 
@@ -75,21 +101,16 @@ mixin ProductVariantMixin on BaseFrameworks {
     Map<String?, String?>? mapAttribute,
     bool isAvailable,
   ) {
-    var inStock;
-    if (productVariation != null) {
-      inStock = productVariation.inStock!;
-    } else {
-      inStock = product.inStock!;
-    }
-
-    var allowBackorder = productVariation != null
+    final inStock = product.checkProductVariationInStock(productVariation);
+    final allowBackorder = productVariation != null
         ? (productVariation.backordersAllowed ?? false)
         : product.backordersAllowed;
 
     var isValidAttribute = false;
     if (!product.isVariableProduct) {
       isValidAttribute = true;
-    } else if (product.attributes?.length == mapAttribute?.length) {
+    } else if ((mapAttribute?.isEmpty ?? true) ||
+        product.attributes?.length == mapAttribute?.length) {
       isValidAttribute = true;
     }
 
@@ -98,12 +119,8 @@ mixin ProductVariantMixin on BaseFrameworks {
 
   List<Widget> makeProductTitleWidget(BuildContext context,
       ProductVariation? productVariation, Product product, bool isAvailable) {
-    var listWidget = <Widget>[];
-
-    var inStock = (productVariation != null
-            ? productVariation.inStock
-            : product.inStock) ??
-        false;
+    final listWidget = <Widget>[];
+    final inStock = product.checkProductVariationInStock(productVariation);
 
     var stockQuantity = '';
     if (kProductDetail.showStockQuantity) {
@@ -221,10 +238,7 @@ mixin ProductVariantMixin on BaseFrameworks {
   }) {
     final theme = Theme.of(context);
 
-    final inStock = (productVariation != null
-            ? productVariation.inStock
-            : product.inStock) ??
-        false;
+    final inStock = product.checkProductVariationInStock(productVariation);
 
     final allowBackorder = productVariation != null
         ? (productVariation.backordersAllowed ?? false)
@@ -377,18 +391,18 @@ mixin ProductVariantMixin on BaseFrameworks {
       return;
     }
 
+    // Out of stock
+    if (!inStock) {
+      FlashHelper.errorMessage(context,
+          message: S.of(context).productOutOfStock);
+      return;
+    }
+
     // Variable product but not select all variants.
     if (product.isVariableProduct &&
         product.attributes?.length != args?.mapAttribute?.length) {
       FlashHelper.errorMessage(context,
           message: S.of(context).pleaseSelectAllAttributes);
-      return;
-    }
-
-    // Out of stock
-    if (!inStock) {
-      FlashHelper.errorMessage(context,
-          message: S.of(context).productOutOfStock);
       return;
     }
 
@@ -431,7 +445,7 @@ mixin ProductVariantMixin on BaseFrameworks {
         context,
         message: product.name != null
             ? S.of(context).productAddToCart(product.name!)
-            : S.of(context).addToCartSucessfully,
+            : S.of(context).addToCartSuccessfully,
         messageStyle: const TextStyle(
           color: Colors.white,
           fontSize: 18.0,

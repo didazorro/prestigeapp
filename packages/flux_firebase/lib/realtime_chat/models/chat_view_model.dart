@@ -1,8 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-
 import 'package:fstore/common/config.dart';
+import 'package:fstore/common/config/models/config_chat.dart';
+
 import '../constants/enums.dart';
 import '../repos/base/chat_repository.dart';
 import 'entities/chat_message.dart';
@@ -24,10 +25,8 @@ class ChatViewModel extends ChangeNotifier {
 
   late String _senderEmail;
 
-  bool get isAdminOrVendor =>
-      _senderEmail == Configurations.adminEmail ||
-      _type == RealtimeChatType.vendorToCustomers ||
-      _type == RealtimeChatType.adminToCustomers;
+  bool get isAdmin =>
+      _senderEmail == adminEmail || _type == RealtimeChatType.adminToCustomers;
 
   RealtimeChatType get type => _type;
 
@@ -56,12 +55,6 @@ class ChatViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  ChatRoom? _selectedChatRoom;
-
-  void setSelectedChatRoom(ChatRoom? value) {
-    _selectedChatRoom = value;
-  }
-
   Stream<ChatRoom> get selectedChatRoomStream => _selectedChatRoomId != null
       ? _repository!.getChatRoom(
           _selectedChatRoomId!,
@@ -74,8 +67,11 @@ class ChatViewModel extends ChangeNotifier {
     _senderEmail = _repository!.userEmail;
 
     if (_type == RealtimeChatType.adminToCustomers ||
-        _type == RealtimeChatType.vendorToCustomers) {
-      _chatRooms = getChatRoomsStream();
+        _type == RealtimeChatType.vendorToCustomers ||
+        _type == RealtimeChatType.userToUsers) {
+      final isAllowAdminGetAllChatRooms =
+          _senderEmail == adminEmail && adminCanAccessAllChatRooms;
+      _chatRooms = getChatRoomsStream(isAllowAdminGetAllChatRooms);
     } else {
       _selectedChatRoomId = await _repository?.getChatRoomId(
         _senderEmail,
@@ -98,10 +94,24 @@ class ChatViewModel extends ChangeNotifier {
     super.dispose();
   }
 
-  bool get enableRealtimeChat => kConfigChat.useRealtimeChat;
+  RealtimeChatConfig get realtimeChatConfig => kConfigChat.realtimeChatConfig;
 
-  Stream<List<ChatRoom>> getChatRoomsStream() {
-    return _repository!.getChatRooms(senderEmail);
+  String get adminName => realtimeChatConfig.adminName;
+
+  String get adminEmail => realtimeChatConfig.adminEmail;
+
+  bool get enableRealtimeChat => realtimeChatConfig.enable;
+
+  bool get userCanDeleteChat => realtimeChatConfig.userCanDeleteChat;
+
+  bool get userCanBlockAnotherUser =>
+      realtimeChatConfig.userCanBlockAnotherUser;
+
+  bool get adminCanAccessAllChatRooms =>
+      realtimeChatConfig.adminCanAccessAllChatRooms;
+
+  Stream<List<ChatRoom>> getChatRoomsStream(bool allowAdminGetAllChatRooms) {
+    return _repository!.getChatRooms(senderEmail, allowAdminGetAllChatRooms);
   }
 
   Stream<List<ChatMessage>> getChatConversation(String chatId) {
@@ -115,11 +125,9 @@ class ChatViewModel extends ChangeNotifier {
   ) async {
     final sender = _senderEmail;
     final msg = image.isNotEmpty ? '$sender has sent an image.' : message;
-    final receiver = _selectedChatRoom?.getOtherUser(sender)?.email ?? '';
     await _repository!.sendChatMessage(
       chatId,
       sender,
-      receiver,
       image,
       msg,
     );
@@ -128,9 +136,6 @@ class ChatViewModel extends ChangeNotifier {
       latestMessage: msg,
       receiverUnreadCountPlus: 1,
       sender: sender,
-      users: _selectedChatRoom?.users,
-      isAdminTyping: isAdminOrVendor ? false : null,
-      isUserTyping: isAdminOrVendor ? null : false,
     );
   }
 
@@ -138,24 +143,32 @@ class ChatViewModel extends ChangeNotifier {
     switch (_type) {
       case RealtimeChatType.adminToCustomers:
       case RealtimeChatType.vendorToCustomers:
-        await _repository!.updateTypingStatus(
-          chatId,
-          isTyping: status,
-          isAdmin: true,
-          senderEmail: _senderEmail,
-          users: _selectedChatRoom?.users,
-        );
-        break;
       case RealtimeChatType.customerToAdmin:
       case RealtimeChatType.customerToVendor:
+      case RealtimeChatType.userToUsers:
         await _repository!.updateTypingStatus(
           chatId,
           isTyping: status,
-          isAdmin: false,
           senderEmail: _senderEmail,
-          users: _selectedChatRoom?.users,
         );
         break;
     }
+  }
+
+  Future<void> deleteCurrentChatRoom() async {
+    final chatRoomId = _selectedChatRoomId;
+    if (chatRoomId != null) {
+      _selectedChatRoomId = null;
+      notifyListeners();
+      await _repository!.deleteChatRoom(chatRoomId);
+    }
+  }
+
+  Future<void> updateBlackList(String chatId, List<String> emails) async {
+    return _repository!.updateBlackList(
+      chatId,
+      blackList: emails,
+      senderEmail: _senderEmail,
+    );
   }
 }

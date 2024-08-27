@@ -57,7 +57,11 @@ class _BlogWishListScreenState extends State<BlogWishListScreen>
                 padding: const EdgeInsets.only(bottom: 12.0),
                 child: _BlogWishListItem(
                   blog: blog,
-                  onTap: () => onTapBlog(blog: blog, blogs: model.blogs),
+                  onTap: () => onTapBlog(
+                    blog: blog,
+                    blogs: model.blogs,
+                    context: context,
+                  ),
                   onRemove: () {
                     model.removeToWishlist(blog);
                   },

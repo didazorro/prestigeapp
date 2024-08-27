@@ -170,6 +170,7 @@ class Tools {
   static Future<void> launchURL(
     String? originUrl, {
     LaunchMode? mode,
+    Map<String, String> headers = const <String, String>{},
   }) async {
     var url = prepareURL(originUrl);
     final uri = Uri.tryParse(url ?? '');
@@ -185,7 +186,11 @@ class Tools {
 
     if (url == null ||
         uri == null ||
-        !(await launchUrl(uri, mode: mode ?? LaunchMode.platformDefault))) {
+        !(await launchUrl(uri,
+            mode: mode ?? LaunchMode.platformDefault,
+            webViewConfiguration: WebViewConfiguration(
+              headers: headers,
+            )))) {
       throw 'Could not launch $originUrl';
     }
   }

@@ -1,13 +1,10 @@
-import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../common/config.dart';
-import '../../../common/tools/flash.dart';
+import '../../../common/extensions/extensions.dart';
 import '../../../generated/l10n.dart';
 import '../../../modules/dynamic_layout/config/product_config.dart';
-import '../../../services/services.dart';
 import '../../../widgets/product/action_button_mixin.dart';
 import '../../../widgets/product/dialog_add_to_cart.dart';
 import '../models/video.dart';
@@ -20,6 +17,7 @@ class VideoButtons extends StatelessWidget with ActionButtonMixin {
     required this.video,
     this.config,
   });
+
   final Video video;
   final ProductConfig? config;
 
@@ -48,7 +46,7 @@ class VideoButtons extends StatelessWidget with ActionButtonMixin {
                 onTap: () => _buyNow(context, enableBottomSheet)),
             const SizedBox(height: 15),
           ],
-          if (firebaseDynamicLinkConfig['isEnabled']) ...[
+          if (dynamicLinkConfig.enable) ...[
             VideoButton(
               icon: const Icon(
                 Icons.share_sharp,
@@ -83,26 +81,7 @@ class VideoButtons extends StatelessWidget with ActionButtonMixin {
 
   void _share(BuildContext context) {
     var url = video.product?.permalink;
-    if (url?.isNotEmpty ?? false) {
-      unawaited(
-        FlashHelper.message(
-          context,
-          message: S.of(context).generatingLink,
-          duration: const Duration(seconds: 1),
-        ),
-      );
-      Services().firebase.shareDynamicLinkProduct(
-            itemUrl: url,
-          );
-    } else {
-      unawaited(
-        FlashHelper.errorMessage(
-          context,
-          message: S.of(context).failedToGenerateLink,
-          duration: const Duration(seconds: 1),
-        ),
-      );
-    }
+    context.shareLink(url);
   }
 
   void _buyNow(BuildContext context, enableBottomSheet) {
@@ -119,9 +98,11 @@ class VideoButtons extends StatelessWidget with ActionButtonMixin {
 
 class VideoButton extends StatelessWidget {
   const VideoButton({super.key, required this.icon, this.label, this.onTap});
+
   final Widget icon;
   final String? label;
   final VoidCallback? onTap;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/material.dart';
 
 import '../../common/config.dart';
@@ -341,31 +340,6 @@ class CartModelBigCommerce
             (cartItemMetaData?.options?.values.contains(null) ?? false)) {
           message = S.of(context).pleaseSelectAllAttributes;
           return message;
-        }
-      }
-
-      /// Product addons.
-      if (product.addOns?.isNotEmpty ?? false) {
-        for (var addOns in product.addOns!) {
-          if (addOns.required ?? false) {
-            /// For text type, label is entered by user.
-            /// So we need to check using addon name.
-            final requiredOptions = addOns.options!.map((e) {
-              if (e.isTextType) {
-                return e.parent;
-              }
-              return e.label;
-            }).toList();
-            final check = product.selectedOptions?.firstWhereOrNull(
-              (option) => requiredOptions.contains(
-                option.isTextType ? option.parent : option.label,
-              ),
-            );
-            if (check == null) {
-              message = S.of(context).pleaseSelectRequiredOptions;
-              return message;
-            }
-          }
         }
       }
 

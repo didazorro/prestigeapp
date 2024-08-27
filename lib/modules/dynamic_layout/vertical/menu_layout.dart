@@ -160,6 +160,7 @@ class _StateMenuLayout extends State<MenuLayout> {
                       showSeeAll: !ServerConfig().isListingType,
                       callback: () => ProductModel.showList(
                         config: widget.config.jsonData,
+                        context: context,
                       ),
                     ),
                   ),

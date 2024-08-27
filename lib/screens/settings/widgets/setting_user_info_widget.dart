@@ -1,17 +1,16 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../app.dart';
 import '../../../common/config.dart';
 import '../../../common/constants.dart';
+import '../../../common/extensions/extensions.dart';
 import '../../../common/tools/navigate_tools.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/user_model.dart';
 import '../../../modules/openai/model/openai_model.dart';
 import '../../../routes/flux_navigate.dart';
 import '../../../services/index.dart';
-import '../../app_coordinator_shared.dart';
 import 'setting_item/setting_item_user_info_widget.dart';
 import 'setting_item/setting_item_widget.dart';
 
@@ -34,6 +33,7 @@ class _SettingUserInfoWidgetState extends State<SettingUserInfoWidget> {
   void _handleUpdateProfile() async {
     final hasChangePassword = await FluxNavigate.pushNamed(
       RouteList.updateUser,
+      context: context,
     ) as bool?;
 
     /// If change password with Shopify
@@ -45,23 +45,15 @@ class _SettingUserInfoWidgetState extends State<SettingUserInfoWidget> {
 
   /// Need to force log out when change the password for Shopify
   Future<void> _showDialogLogout() async {
-    await showCupertinoDialog(
-      context: context,
-      builder: (ctx) => CupertinoAlertDialog(
-        title: Text(S.of(context).notice),
-        content: Text(S.of(context).needToLoginAgain),
-        actions: [
-          CupertinoDialogAction(
-            isDefaultAction: true,
-            onPressed: () {
-              Navigator.of(ctx).pop();
-              widget.onTapLogout?.call();
-            },
-            child: Text(S.of(context).ok),
-          )
-        ],
-      ),
+    final confirmed = await context.showFluxDialogText(
+      title: S.of(context).notice,
+      body: S.of(context).needToLoginAgain,
+      primaryAction: S.of(context).ok,
     );
+    if (confirmed) {
+      widget.onTapLogout?.call();
+    }
+    return;
   }
 
   @override
@@ -72,8 +64,10 @@ class _SettingUserInfoWidgetState extends State<SettingUserInfoWidget> {
       value: Provider.of<UserModel>(context),
       child: Consumer<UserModel>(
         builder: (context, model, child) {
-          final user = model.user;
           final loggedIn = model.loggedIn;
+          final user = (ServerConfig().isHaravan && loggedIn == false)
+              ? null
+              : model.user;
 
           return Padding(
             padding: widget.paddingContent,
@@ -85,20 +79,20 @@ class _SettingUserInfoWidgetState extends State<SettingUserInfoWidget> {
                     onTapUpdateProfile: _handleUpdateProfile,
                     user: user,
                   ),
-                if (user == null)
+                if (user == null && kLoginSetting.enable)
                   Container(
                     decoration: decoration,
                     child: SettingItemWidget(
                       showDivider: false,
                       icon: Icons.person,
-                      title:
-                          loggedIn ? S.of(context).logout : S.of(context).login,
+                      title: S.of(context).login,
                       cardStyle: widget.cartStyle,
                       onTap: () {
                         if (!loggedIn) {
                           NavigateTools.navigateToLogin(context);
                           return;
                         }
+
                         Provider.of<UserModel>(context, listen: false).logout();
                         if (kLoginSetting.isRequiredLogin) {
                           NavigateTools.navigateToLogin(

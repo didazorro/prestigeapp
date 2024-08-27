@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:inspireui/utils/logs.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
+import '../../../common/constants.dart';
 import '../../../common/tools/navigate_tools.dart';
 import '../../../common/tools/tools.dart';
 import '../../../generated/l10n.dart';
@@ -116,7 +116,7 @@ class _DigitsMobileVerifyScreenState extends State<DigitsMobileVerifyScreen>
     }
   }
 
-  void _failMessage(message, context) {
+  void _failMessage(String message, BuildContext context) {
     /// Showing Error messageSnackBarDemo
     /// Ability so close message
     // var _message = message;
@@ -125,7 +125,7 @@ class _DigitsMobileVerifyScreenState extends State<DigitsMobileVerifyScreen>
     // }
 
     final snackBar = SnackBar(
-      content: Text(message),
+      content: Text(message.clearExceptionKey()),
       duration: const Duration(seconds: 30),
       action: SnackBarAction(
         label: S.of(context).close,
@@ -201,7 +201,7 @@ class _DigitsMobileVerifyScreenState extends State<DigitsMobileVerifyScreen>
                 textDirection: TextDirection.rtl,
                 child: RichText(
                   text: TextSpan(
-                    text: S.of(context).enterSendedCode,
+                    text: S.of(context).enterSentCode,
                     children: [
                       TextSpan(
                         text: Tools.isRTL(context)
@@ -261,7 +261,7 @@ class _DigitsMobileVerifyScreenState extends State<DigitsMobileVerifyScreen>
               padding: const EdgeInsets.symmetric(horizontal: 30.0),
               // error showing widget
               child: Text(
-                hasError ? S.of(context).pleasefillUpAllCellsProperly : '',
+                hasError ? S.of(context).pleaseFillUpAllCellsProperly : '',
                 style: TextStyle(color: Colors.red.shade300, fontSize: 15),
               ),
             ),
@@ -270,12 +270,12 @@ class _DigitsMobileVerifyScreenState extends State<DigitsMobileVerifyScreen>
               textAlign: TextAlign.center,
               text: TextSpan(
                   text: S.of(context).didntReceiveCode,
-                  style: const TextStyle(fontSize: 15),
+                  style: textStyle?.copyWith(fontSize: 15),
                   children: [
                     TextSpan(
-                        text: S.of(context).resend,
+                        text: S.of(context).resend.toUpperCase(),
                         recognizer: onTapRecognizer,
-                        style: TextStyle(
+                        style: textStyle?.copyWith(
                           color: Theme.of(context).primaryColor,
                           fontWeight: FontWeight.bold,
                           fontSize: 16,

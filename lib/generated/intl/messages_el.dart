@@ -28,112 +28,131 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m3(state) => "Ο προσαρμογέας Bluetooth είναι ${state}";
 
-  static String m4(currency) => "Άλλαξε το νόμισμα σε ${currency}";
+  static String m4(author) => "Συγγραφέας: ${author}";
 
-  static String m5(number) => " Απομένουν${number} χαρακτήρες";
+  static String m5(currency) => "Άλλαξε το νόμισμα σε ${currency}";
 
-  static String m6(priceRate, pointRate) =>
+  static String m6(number) => " Απομένουν${number} χαρακτήρες";
+
+  static String m7(priceRate, pointRate) =>
       "${priceRate} = ${pointRate} βαθμοί";
 
-  static String m7(count) => "${count} στοιχείο";
+  static String m8(count) => "${count} στοιχείο";
 
-  static String m8(count) => "${count} στοιχεία";
+  static String m9(count) => "${count} στοιχεία";
 
-  static String m9(country) => "${country} χώρα δεν υποστηρίζεται";
+  static String m10(count) => "${count} στοιχείο";
 
-  static String m10(currency) => " Το${currency} δεν υποστηρίζεται";
+  static String m11(count) => "${count} στοιχεία";
 
-  static String m11(day) => " Πριν από${day} ημέρες";
+  static String m12(country) => "${country} χώρα δεν υποστηρίζεται";
 
-  static String m12(total) => "0${total} χλμ";
+  static String m13(currency) => " Το${currency} δεν υποστηρίζεται";
 
-  static String m13(timeLeft) => "Λήγει σε ${timeLeft}";
+  static String m14(day) => " Πριν από${day} ημέρες";
 
-  static String m14(captcha) => "Εισαγάγετε ${captcha} για επιβεβαίωση:";
+  static String m15(total) => "0${total} χλμ";
 
-  static String m15(message) => "Σφάλμα: ${message}";
+  static String m16(timeLeft) => "Λήγει σε ${timeLeft}";
 
-  static String m16(time) => "Λήγει σε ${time}";
+  static String m17(captcha) => "Εισαγάγετε ${captcha} για επιβεβαίωση:";
 
-  static String m17(total) => ">${total} χλμ";
+  static String m18(message) => "Σφάλμα: ${message}";
 
-  static String m18(hour) => " Πριν από${hour} ώρες";
+  static String m19(message) => "Σφάλμα: ${message}";
 
-  static String m19(count) =>
+  static String m20(time) => "Λήγει σε ${time}";
+
+  static String m21(total) => ">${total} χλμ";
+
+  static String m22(hour) => " Πριν από${hour} ώρες";
+
+  static String m23(currentBalance) =>
+      "Σας απομένουν μόνο ${currentBalance} στο πορτοφόλι σας";
+
+  static String m24(count) =>
       " ${Intl.plural(count, one: '${count} item', other: '${count} items')}";
 
-  static String m20(message) =>
+  static String m25(message) =>
       "Υπάρχει ένα πρόβλημα με την εφαρμογή κατά τη διάρκεια του αιτήματος για τα δεδομένα. Επικοινωνήστε με τον διαχειριστή για την επίλυση των προβλημάτων: ${message}";
 
-  static String m21(currency, amount) =>
+  static String m26(currency, amount) =>
       "Το μέγιστο ποσό για τη χρήση αυτής της πληρωμής είναι ${currency} ${amount}";
 
-  static String m22(size) => "Μέγιστο μέγεθος αρχείου: ${size} MB";
+  static String m27(size) => "Μέγιστο μέγεθος αρχείου: ${size} MB";
 
-  static String m23(currency, amount) =>
+  static String m28(currency, amount) =>
       "Το ελάχιστο ποσό για τη χρήση αυτής της πληρωμής είναι ${currency} ${amount}";
 
-  static String m24(minute) => " Πριν από${minute} λεπτά";
+  static String m29(minute) => " Πριν από${minute} λεπτά";
 
-  static String m25(month) => "${month} μήνες πριν";
+  static String m30(month) => "${month} μήνες πριν";
 
-  static String m26(store) => "Περισσότερα από ${store}";
+  static String m31(store) => "Περισσότερα από ${store}";
 
-  static String m27(number) => "πρέπει να αγοραστεί σε ομάδες των ${number}";
+  static String m32(number) => "πρέπει να αγοραστεί σε ομάδες των ${number}";
 
-  static String m28(itemCount) => "${itemCount} στοιχεία";
+  static String m33(itemCount) => "${itemCount} στοιχεία";
 
-  static String m29(price) => "Σύνολο επιλογών: ${price}";
+  static String m34(price) => "Σύνολο επιλογών: ${price}";
 
-  static String m30(amount) => "Πληρώστε ${amount}";
+  static String m35(amount) => "Πληρώστε ${amount}";
 
-  static String m31(name) => "${name} προστέθηκαν με επιτυχία στο καλάθι";
+  static String m36(name) => "${name} προστέθηκαν με επιτυχία στο καλάθι";
 
-  static String m32(total) => "Ποσότητα: ${total}";
+  static String m37(total) => "Ποσότητα: ${total}";
 
-  static String m33(percent) => "Πώληση ${percent}%";
+  static String m38(name) => "Έλαβε χρήματα από ${name}";
 
-  static String m34(keyword) => "Αποτελέσματα αναζήτησης για: \'${keyword}\'";
+  static String m39(percent) => "Πώληση ${percent}%";
 
-  static String m35(keyword, count) => "${keyword} (${count} στοιχείο)";
+  static String m40(keyword) => "Αποτελέσματα αναζήτησης για: \'${keyword}\'";
 
-  static String m36(keyword, count) => "${keyword} (${count} στοιχεία)";
+  static String m41(keyword, count) => "${keyword} (${count} στοιχείο)";
 
-  static String m37(second) => " Πριν από${second} δευτερόλεπτα";
+  static String m42(keyword, count) => "${keyword} (${count} στοιχεία)";
 
-  static String m38(totalCartQuantity) =>
+  static String m43(second) => " Πριν από${second} δευτερόλεπτα";
+
+  static String m44(totalCartQuantity) =>
       "Καλάθι αγορών, ${totalCartQuantity} αντικείμενα";
 
-  static String m39(numberOfUnitsSold) => "Πωλήθηκε: ${numberOfUnitsSold}";
+  static String m45(numberOfUnitsSold) => "Πωλήθηκε: ${numberOfUnitsSold}";
 
-  static String m40(fieldName) => "Το πεδίο ${fieldName} είναι υποχρεωτικό";
+  static String m46(fieldName) => "Το πεδίο ${fieldName} είναι υποχρεωτικό";
 
-  static String m41(total) => "${total} προϊόντα";
+  static String m47(total) => "${total} προϊόντα";
 
-  static String m42(maxPointDiscount, maxPriceDiscount) =>
+  static String m48(name) => "Μεταφορά χρημάτων στο ${name}";
+
+  static String m49(maxPointDiscount, maxPriceDiscount) =>
       "Χρησιμοποιήστε το μέγιστο ${maxPointDiscount} πόντους για έκπτωση ${maxPriceDiscount} σε αυτήν την παραγγελία!";
 
-  static String m43(date) => "Ισχύει έως ${date}";
+  static String m50(date) => "Ισχύει έως ${date}";
 
-  static String m44(message) => "Προειδοποίηση: ${message}";
+  static String m51(balance) => "Υπόλοιπο πορτοφολιού: ${balance}";
 
-  static String m45(defaultCurrency) =>
+  static String m52(message) => "Προειδοποίηση: ${message}";
+
+  static String m53(defaultCurrency) =>
       "Το τρέχον επιλεγμένο νόμισμα δεν είναι διαθέσιμο για τη λειτουργία Πορτοφόλι, αλλάξτε το σε ${defaultCurrency}";
 
-  static String m46(length) => "Βρήκαμε ${length} προϊόντα";
+  static String m54(length) => "Βρήκαμε ${length} προϊόντα";
 
-  static String m47(week) => "Εβδομάδα ${week}";
+  static String m55(week) => "Εβδομάδα ${week}";
 
-  static String m48(name) => "Καλώς ορίσατε ${name}";
+  static String m56(name) => "Καλώς ορίσατε ${name}";
 
-  static String m49(year) => "${year} χρόνια πριν";
+  static String m57(year) => "${year} χρόνια πριν";
 
-  static String m50(total) => "Έχετε εκχωρήσει την παραγγελία #${total}";
+  static String m58(total) => "Έχετε εκχωρήσει την παραγγελία #${total}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "aboutUs": MessageLookupByLibrary.simpleMessage("Σχετικά με εμάς"),
         "account": MessageLookupByLibrary.simpleMessage("λογαριασμός"),
+        "accountApprovalTitle":
+            MessageLookupByLibrary.simpleMessage("Υπό Έγκριση"),
         "accountDeleteDescription": MessageLookupByLibrary.simpleMessage(
             "Η διαγραφή του λογαριασμού σας αφαιρεί προσωπικές πληροφορίες από τη βάση δεδομένων μας. Το email σας γίνεται μόνιμα δεσμευμένο και το ίδιο email δεν μπορεί να χρησιμοποιηθεί ξανά για την εγγραφή νέου λογαριασμού."),
         "accountIsPendingApproval": MessageLookupByLibrary.simpleMessage(
@@ -171,7 +190,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ΠΡΟΣΘΗΚΗ ΣΤΟ ΚΑΛΑΘΙ"),
         "addToCartMaximum": MessageLookupByLibrary.simpleMessage(
             "Η μέγιστη ποσότητα έχει ξεπεραστεί"),
-        "addToCartSucessfully": MessageLookupByLibrary.simpleMessage(
+        "addToCartSuccessfully": MessageLookupByLibrary.simpleMessage(
             "Προστέθηκε στο καλάθι με επιτυχία"),
         "addToOrder":
             MessageLookupByLibrary.simpleMessage("Προσθήκη στην παραγγελία"),
@@ -234,6 +253,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "audioDetected": MessageLookupByLibrary.simpleMessage(
             "Εντοπίστηκαν στοιχεία ήχου. Θέλετε να προσθέσετε στο Audio Player;"),
         "availability": MessageLookupByLibrary.simpleMessage("Διαθεσιμότητα"),
+        "availabilityProduct":
+            MessageLookupByLibrary.simpleMessage("Διαθεσιμότητα: "),
         "availablePoints": m2,
         "averageRating":
             MessageLookupByLibrary.simpleMessage("Μέση Βαθμολογία"),
@@ -261,6 +282,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "bleHasNotBeenEnabled": MessageLookupByLibrary.simpleMessage(
             "Το Bluetooth δεν έχει ενεργοποιηθεί"),
         "bleState": m3,
+        "block": MessageLookupByLibrary.simpleMessage("Φραγμός"),
+        "blockUser": MessageLookupByLibrary.simpleMessage("Αποκλεισμός χρήστη"),
         "blog": MessageLookupByLibrary.simpleMessage("Blog"),
         "booked":
             MessageLookupByLibrary.simpleMessage("Έχει ήδη γίνει κράτηση"),
@@ -293,6 +316,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "by": MessageLookupByLibrary.simpleMessage("Με"),
         "byAppointmentOnly":
             MessageLookupByLibrary.simpleMessage("Μόνο με ραντεβού"),
+        "byAuthor": m4,
         "byBrand": MessageLookupByLibrary.simpleMessage("Από το εμπορικό σήμα"),
         "byCategory": MessageLookupByLibrary.simpleMessage("Ανά κατηγορία"),
         "byPrice": MessageLookupByLibrary.simpleMessage("Ανά τιμή"),
@@ -325,9 +349,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "canNotUpdateInfo": MessageLookupByLibrary.simpleMessage(
             "Δεν είναι δυνατή η ενημέρωση των στοιχείων χρήστη."),
         "cancel": MessageLookupByLibrary.simpleMessage("Ματαίωση"),
+        "cancelOrder": MessageLookupByLibrary.simpleMessage("Ματαίωση"),
         "cancelled": MessageLookupByLibrary.simpleMessage("Ακυρώθηκε"),
         "cancelledRequests":
             MessageLookupByLibrary.simpleMessage("Ακυρωμένες αιτήσεις"),
+        "cannotDeleteAccount": MessageLookupByLibrary.simpleMessage(
+            "Δεν είναι δυνατή η διαγραφή αυτού του λογαριασμού"),
+        "cannotSendMessage": MessageLookupByLibrary.simpleMessage(
+            "Δεν μπορείτε να στείλετε μηνύματα σε αυτόν τον χρήστη"),
         "cantFindThisOrderId": MessageLookupByLibrary.simpleMessage(
             "Δεν είναι δυνατή η εύρεση αυτού του αναγνωριστικού παραγγελίας"),
         "cantPickDateInThePast": MessageLookupByLibrary.simpleMessage(
@@ -344,8 +373,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeLanguage": MessageLookupByLibrary.simpleMessage("Αλλαξε γλώσσα"),
         "changePrinter":
             MessageLookupByLibrary.simpleMessage("Αλλαγή εκτυπωτή"),
-        "changedCurrencyTo": m4,
-        "characterRemain": m5,
+        "changedCurrencyTo": m5,
+        "characterRemain": m6,
         "chat": MessageLookupByLibrary.simpleMessage("Κουβέντα"),
         "chatGPT": MessageLookupByLibrary.simpleMessage("Συνομιλία GPT"),
         "chatListScreen": MessageLookupByLibrary.simpleMessage("Μηνύματα"),
@@ -428,15 +457,19 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Συνεχίστε στην Αποστολή"),
         "continues": MessageLookupByLibrary.simpleMessage("Να συνεχίσει"),
         "conversations": MessageLookupByLibrary.simpleMessage("Συνομιλίες"),
-        "convertPoint": m6,
+        "convertPoint": m7,
         "copied": MessageLookupByLibrary.simpleMessage("Αντιγράφηκε"),
         "copy": MessageLookupByLibrary.simpleMessage("αντίγραφο"),
         "copyright": MessageLookupByLibrary.simpleMessage(
             "© 2024 InspireUI Με την επιφύλαξη παντός δικαιώματος."),
-        "countItem": m7,
-        "countItems": m8,
+        "countItem": m8,
+        "countItems": m9,
+        "countProduct": m10,
+        "countProducts": m11,
         "country": MessageLookupByLibrary.simpleMessage("Χώρα"),
-        "countryIsNotSupported": m9,
+        "countryCodeIsRequired":
+            MessageLookupByLibrary.simpleMessage("Απαιτείται κωδικός χώρας"),
+        "countryIsNotSupported": m12,
         "countryIsRequired": MessageLookupByLibrary.simpleMessage(
             "Το πεδίο χώρας είναι υποχρεωτικό"),
         "couponCode": MessageLookupByLibrary.simpleMessage("Κωδικός κουπονιού"),
@@ -462,7 +495,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Δημιουργήστε όλες τις παραλλαγές"),
         "createdOn": MessageLookupByLibrary.simpleMessage("Δημιουργήθηκε στο:"),
         "currencies": MessageLookupByLibrary.simpleMessage("Νομίσματα"),
-        "currencyIsNotSupported": m10,
+        "currencyIsNotSupported": m13,
         "currentPassword":
             MessageLookupByLibrary.simpleMessage("Ο τρέχων κωδικός πρόσβασης"),
         "currentlyWeOnlyHave":
@@ -491,7 +524,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "dateTime": MessageLookupByLibrary.simpleMessage("Ημερομηνία Ώρα"),
         "dateWiseClose":
             MessageLookupByLibrary.simpleMessage("Κλείσιμο ραντεβού"),
-        "daysAgo": m11,
+        "daysAgo": m14,
         "debit": MessageLookupByLibrary.simpleMessage("Χρέωση"),
         "decline": MessageLookupByLibrary.simpleMessage("Πτώση"),
         "delete": MessageLookupByLibrary.simpleMessage("Διαγράφω"),
@@ -502,8 +535,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteAccountSuccess": MessageLookupByLibrary.simpleMessage(
             "Ο λογαριασμός διαγράφηκε με επιτυχία. Η συνεδρία σας έχει λήξει."),
         "deleteAll": MessageLookupByLibrary.simpleMessage("Διαγραφή όλων"),
+        "deleteConversation":
+            MessageLookupByLibrary.simpleMessage("Διαγραφή συνομιλίας"),
         "delivered": MessageLookupByLibrary.simpleMessage("Παραδόθηκε"),
         "deliveredTo": MessageLookupByLibrary.simpleMessage("Παραδόθηκε σε"),
+        "delivering": MessageLookupByLibrary.simpleMessage("Παράδοση"),
         "deliveryBoy": MessageLookupByLibrary.simpleMessage("Ντελιβεράς:"),
         "deliveryDate":
             MessageLookupByLibrary.simpleMessage("Ημερομηνία παράδοσης"),
@@ -523,7 +559,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "discount": MessageLookupByLibrary.simpleMessage("Εκπτωση"),
         "displayName":
             MessageLookupByLibrary.simpleMessage("Εμφανιζόμενο όνομα"),
-        "distance": m12,
+        "distance": m15,
         "doNotAnyTransactions":
             MessageLookupByLibrary.simpleMessage("Δεν έχετε ακόμη συναλλαγές"),
         "doYouWantToExitApp": MessageLookupByLibrary.simpleMessage(
@@ -532,6 +568,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Θέλετε να φύγετε χωρίς να υποβάλετε την κριτική σας;"),
         "doYouWantToLogout":
             MessageLookupByLibrary.simpleMessage("Θέλετε να αποσυνδεθείτε;"),
+        "doYouWantToUnblock": MessageLookupByLibrary.simpleMessage(
+            "Θέλετε να καταργήσετε τον αποκλεισμό αυτού του χρήστη;"),
         "doesNotSupportApplePay": MessageLookupByLibrary.simpleMessage(
             "Το ApplePay δεν υποστηρίζεται. Ελέγξτε το πορτοφόλι και την κάρτα σας"),
         "done": MessageLookupByLibrary.simpleMessage("Εγινε"),
@@ -551,6 +589,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "editWithoutColon": MessageLookupByLibrary.simpleMessage("Επεξεργασία"),
         "egypt": MessageLookupByLibrary.simpleMessage("Αίγυπτος"),
         "email": MessageLookupByLibrary.simpleMessage("ΗΛΕΚΤΡΟΝΙΚΗ ΔΙΕΥΘΥΝΣΗ"),
+        "emailAddressInvalid": MessageLookupByLibrary.simpleMessage(
+            "Η διεύθυνση e-mail δεν είναι έγκυρη"),
+        "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(
+            "Το email χρησιμοποιείται ήδη!"),
         "emailDeleteDescription": MessageLookupByLibrary.simpleMessage(
             "Η διαγραφή του λογαριασμού σας θα καταργήσει την εγγραφή σας από όλες τις λίστες αλληλογραφίας."),
         "emailDoesNotExist": MessageLookupByLibrary.simpleMessage(
@@ -590,12 +632,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ενεργοποίηση λειτουργίας διακοπών"),
         "endDateCantBeAfterFirstDate": MessageLookupByLibrary.simpleMessage(
             "Επιλέξτε μια ημερομηνία μετά την πρώτη ημερομηνία"),
-        "endsIn": m13,
+        "endsIn": m16,
         "english": MessageLookupByLibrary.simpleMessage("Αγγλικά"),
-        "enterCaptcha": m14,
+        "enterAmount":
+            MessageLookupByLibrary.simpleMessage("Εισαγάγετε το ποσό"),
+        "enterCaptcha": m17,
         "enterEmailEachRecipient": MessageLookupByLibrary.simpleMessage(
             "Εισαγάγετε μια διεύθυνση email για κάθε παραλήπτη"),
-        "enterSendedCode": MessageLookupByLibrary.simpleMessage(
+        "enterSentCode": MessageLookupByLibrary.simpleMessage(
             "Εισαγάγετε τον κωδικό στον οποίο στάλθηκε"),
         "enterVoucherCode": MessageLookupByLibrary.simpleMessage(
             "Εισαγάγετε τον κωδικό κουπονιού"),
@@ -615,13 +659,19 @@ class MessageLookup extends MessageLookupByLibrary {
             "Εισαγάγετε τον αριθμό τηλεφώνου σας για να ξεκινήσετε."),
         "enterYourPhoneNumber": MessageLookupByLibrary.simpleMessage(
             "Πληκτρολόγησε τον αριθμό του τηλεφώνου σου"),
-        "error": m15,
+        "enterYourUsername": MessageLookupByLibrary.simpleMessage(
+            "Εισαγάγετε το όνομα χρήστη σας"),
+        "error": m18,
         "errorAmountTransfer": MessageLookupByLibrary.simpleMessage(
             "Το εισαγόμενο ποσό είναι μεγαλύτερο από το τρέχον ποσό του πορτοφολιού. ΠΑΡΑΚΑΛΩ προσπαθησε ξανα!"),
         "errorEmailFormat": MessageLookupByLibrary.simpleMessage(
             "Παρακαλώ εισάγετε μια έγκυρη διεύθυνση ηλεκτρονικού ταχυδρομείου."),
+        "errorMsg": m19,
+        "errorOnGettingPost": MessageLookupByLibrary.simpleMessage(
+            "Σφάλμα κατά τη λήψη της ανάρτησης!"),
         "errorPasswordFormat": MessageLookupByLibrary.simpleMessage(
             "Εισαγάγετε έναν κωδικό πρόσβασης τουλάχιστον 8 χαρακτήρων"),
+        "errorTitle": MessageLookupByLibrary.simpleMessage("Λάθος"),
         "evening": MessageLookupByLibrary.simpleMessage("Απόγευμα"),
         "events": MessageLookupByLibrary.simpleMessage("Εκδηλώσεις"),
         "expectedDeliveryDate": MessageLookupByLibrary.simpleMessage(
@@ -630,7 +680,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "expiredDate":
             MessageLookupByLibrary.simpleMessage("Ημερομηνία λήξεως"),
         "expiredDateHint": MessageLookupByLibrary.simpleMessage("ΜΜ / ΕΕ"),
-        "expiringInTime": m16,
+        "expiringInTime": m20,
         "exploreNow": MessageLookupByLibrary.simpleMessage("Εξερευνήστε τώρα"),
         "external": MessageLookupByLibrary.simpleMessage("Εξωτερικός"),
         "extraServices":
@@ -674,6 +724,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Σταθερή έκπτωση προϊόντος"),
         "forThisProduct":
             MessageLookupByLibrary.simpleMessage("για αυτό το προϊόν"),
+        "free": MessageLookupByLibrary.simpleMessage("Ελεύθερος"),
         "freeOfCharge": MessageLookupByLibrary.simpleMessage("δωρεάν"),
         "french": MessageLookupByLibrary.simpleMessage("γαλλική γλώσσα"),
         "friday": MessageLookupByLibrary.simpleMessage("Παρασκευή"),
@@ -702,7 +753,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "goBackToShipping":
             MessageLookupByLibrary.simpleMessage("Επιστρέψτε στην αποστολή"),
         "good": MessageLookupByLibrary.simpleMessage("Καλός"),
-        "greaterDistance": m17,
+        "greaterDistance": m21,
         "greek": MessageLookupByLibrary.simpleMessage("Ελληνικά"),
         "grossSales":
             MessageLookupByLibrary.simpleMessage("Ακαθάριστες πωλήσεις"),
@@ -724,7 +775,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "historyTransaction": MessageLookupByLibrary.simpleMessage("Ιστορία"),
         "home": MessageLookupByLibrary.simpleMessage("Σπίτι"),
         "hour": MessageLookupByLibrary.simpleMessage("ώρα"),
-        "hoursAgo": m18,
+        "hoursAgo": m22,
         "hungarian": MessageLookupByLibrary.simpleMessage("ουγγρικός"),
         "hungary": MessageLookupByLibrary.simpleMessage("ουγγρικός"),
         "iAgree": MessageLookupByLibrary.simpleMessage("συμφωνώ με"),
@@ -742,8 +793,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "indonesian": MessageLookupByLibrary.simpleMessage("Ινδονησιακά"),
         "informationTable":
             MessageLookupByLibrary.simpleMessage("Πίνακας πληροφοριών"),
+        "installDigitsPlugin": MessageLookupByLibrary.simpleMessage(
+            "Εγκαταστήστε το πρόσθετο DIGITS: Wordpress Mobile Number Signup and Login"),
         "instantlyClose":
             MessageLookupByLibrary.simpleMessage("Κλείσιμο αμέσως"),
+        "insufficientBalanceMessage": m23,
         "invalidPhoneNumber": MessageLookupByLibrary.simpleMessage(
             "Μη έγκυρος αριθμός τηλεφώνου"),
         "invalidSMSCode": MessageLookupByLibrary.simpleMessage(
@@ -756,7 +810,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "isTyping": MessageLookupByLibrary.simpleMessage("πληκτρολογεί..."),
         "italian": MessageLookupByLibrary.simpleMessage("ιταλικός"),
         "item": MessageLookupByLibrary.simpleMessage("είδος"),
-        "itemQuantity": m19,
+        "itemQuantity": m24,
         "itemTotal":
             MessageLookupByLibrary.simpleMessage("Σύνολο αντικειμένου:"),
         "items": MessageLookupByLibrary.simpleMessage("στοιχεία"),
@@ -800,7 +854,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("Σύνδεση"),
         "loginCanceled":
             MessageLookupByLibrary.simpleMessage("Η σύνδεση ακυρώνεται"),
-        "loginErrorServiceProvider": m20,
+        "loginErrorServiceProvider": m25,
         "loginFailed":
             MessageLookupByLibrary.simpleMessage("Η σύνδεση απέτυχε!"),
         "loginInvalid": MessageLookupByLibrary.simpleMessage(
@@ -831,30 +885,34 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Επισήμανση ως αποσταλεί"),
         "markAsUnread": MessageLookupByLibrary.simpleMessage(
             "Επισήμανση ως μη αναγνωσμένα"),
-        "maxAmountForPayment": m21,
-        "maximumFileSizeMb": m22,
+        "maxAmountForPayment": m26,
+        "maximumFileSizeMb": m27,
         "maybeLater": MessageLookupByLibrary.simpleMessage("Ισως αργότερα"),
         "menuOrder": MessageLookupByLibrary.simpleMessage("Σειρά μενού"),
         "menus": MessageLookupByLibrary.simpleMessage("Μενού"),
         "message": MessageLookupByLibrary.simpleMessage("Μήνυμα"),
         "messageTo":
             MessageLookupByLibrary.simpleMessage("Αποστολή μηνύματος σε"),
-        "minAmountForPayment": m23,
+        "minAmountForPayment": m28,
         "minimumQuantityIs":
             MessageLookupByLibrary.simpleMessage("Η ελάχιστη ποσότητα είναι"),
-        "minutesAgo": m24,
+        "minutesAgo": m29,
         "mobile": MessageLookupByLibrary.simpleMessage("Κινητό"),
+        "mobileIsRequired":
+            MessageLookupByLibrary.simpleMessage("Απαιτείται κινητό"),
+        "mobileNumberInUse": MessageLookupByLibrary.simpleMessage(
+            "Ο αριθμός κινητού είναι ήδη σε χρήση!"),
         "mobileVerification": MessageLookupByLibrary.simpleMessage(
             "Επαλήθευση μέσω κινητού τηλεφώνου"),
         "momentAgo": MessageLookupByLibrary.simpleMessage("πριν λίγο"),
         "monday": MessageLookupByLibrary.simpleMessage("Δευτέρα"),
-        "monthsAgo": m25,
+        "monthsAgo": m30,
         "more": MessageLookupByLibrary.simpleMessage("...περισσότερο"),
-        "moreFromStore": m26,
+        "moreFromStore": m31,
         "moreInformation":
             MessageLookupByLibrary.simpleMessage("Περισσότερες πληροφορίες"),
         "morning": MessageLookupByLibrary.simpleMessage("Πρωί"),
-        "mustBeBoughtInGroupsOf": m27,
+        "mustBeBoughtInGroupsOf": m32,
         "mustSelectOneItem": MessageLookupByLibrary.simpleMessage(
             "Πρέπει να επιλέξετε 1 στοιχείο"),
         "myCart": MessageLookupByLibrary.simpleMessage("Καλάθι μου"),
@@ -866,10 +924,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "myWallet": MessageLookupByLibrary.simpleMessage("Το πορτοφόλι μου"),
         "myWishList":
             MessageLookupByLibrary.simpleMessage("Η λίστα επιθυμιών μου"),
-        "nItems": m28,
+        "nItems": m33,
         "name": MessageLookupByLibrary.simpleMessage("Ονομα"),
         "nameOnCard": MessageLookupByLibrary.simpleMessage("Ονομα στην κάρτα"),
         "nearbyPlaces": MessageLookupByLibrary.simpleMessage("Κοντινά μέρη"),
+        "needHelp": MessageLookupByLibrary.simpleMessage("Χρειάζεστε βοήθεια;"),
         "needToLoginAgain": MessageLookupByLibrary.simpleMessage(
             "Πρέπει να συνδεθείτε ξανά για να πραγματοποιήσετε την ενημέρωση"),
         "netherlands": MessageLookupByLibrary.simpleMessage("Ολλανδός"),
@@ -889,10 +948,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ωχ, το blog φαίνεται να μην υπάρχει πλέον"),
         "noCameraPermissionIsGranted": MessageLookupByLibrary.simpleMessage(
             "Δεν χορηγείται άδεια κάμερας. Παρακαλώ χορηγήστε το στις Ρυθμίσεις της συσκευής σας."),
+        "noComments":
+            MessageLookupByLibrary.simpleMessage("Δεν υπάρχουν σχόλια"),
         "noConversation":
             MessageLookupByLibrary.simpleMessage("Καμία συνομιλία ακόμα"),
         "noConversationDescription": MessageLookupByLibrary.simpleMessage(
-            "Θα εμφανιστεί μόλις οι πελάτες σας αρχίσουν να συνομιλούν μαζί σας"),
+            "Θα εμφανιστεί όταν κάποιος αρχίσει να συνομιλεί μαζί σας"),
         "noData":
             MessageLookupByLibrary.simpleMessage("Όχι περισσότερα δεδομένα"),
         "noFavoritesYet": MessageLookupByLibrary.simpleMessage(
@@ -906,6 +967,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "noListingNearby":
             MessageLookupByLibrary.simpleMessage("Δεν υπάρχει λίστα κοντά!"),
         "noOrders": MessageLookupByLibrary.simpleMessage("Χωρίς παραγγελίες"),
+        "noPaymentMethodsAvailable": MessageLookupByLibrary.simpleMessage(
+            "Δεν υπάρχουν διαθέσιμοι τρόποι πληρωμής."),
         "noPermissionForCurrentRole": MessageLookupByLibrary.simpleMessage(
             "Λυπούμαστε, αυτό το προϊόν δεν είναι προσβάσιμο για τον τρέχοντα ρόλο σας."),
         "noPermissionToViewProduct": MessageLookupByLibrary.simpleMessage(
@@ -961,7 +1024,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ωρες λειτουργίας"),
         "optional": MessageLookupByLibrary.simpleMessage("προαιρετικός"),
         "options": MessageLookupByLibrary.simpleMessage("Επιλογές"),
-        "optionsTotal": m29,
+        "optionsTotal": m34,
         "or": MessageLookupByLibrary.simpleMessage("ή"),
         "orLoginWith": MessageLookupByLibrary.simpleMessage("Ή συνδεθείτε με"),
         "orderConfirmation":
@@ -1044,7 +1107,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "payByWallet":
             MessageLookupByLibrary.simpleMessage("Πληρωμή με πορτοφόλι"),
         "payNow": MessageLookupByLibrary.simpleMessage("Πλήρωσε τώρα"),
-        "payWithAmount": m30,
+        "payWithAmount": m35,
         "payment": MessageLookupByLibrary.simpleMessage("Πληρωμή"),
         "paymentDetailsChangedSuccessfully":
             MessageLookupByLibrary.simpleMessage(
@@ -1074,6 +1137,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Επαλήθευση αριθμού τηλεφώνου"),
         "pickADate":
             MessageLookupByLibrary.simpleMessage("Επιλέξτε Ημερομηνία & Ώρα"),
+        "picking": MessageLookupByLibrary.simpleMessage("Αναμονή για παράδοση"),
         "placeMyOrder":
             MessageLookupByLibrary.simpleMessage("Κάντε την παραγγελία μου"),
         "playAll": MessageLookupByLibrary.simpleMessage("Παίξε τα όλα"),
@@ -1093,6 +1157,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Παρακαλώ εισάγετε το όνομα του προϊόντος"),
         "pleaseFillCode":
             MessageLookupByLibrary.simpleMessage("Συμπληρώστε τον κωδικό σας"),
+        "pleaseFillUpAllCellsProperly": MessageLookupByLibrary.simpleMessage(
+            "* Συμπληρώστε σωστά όλα τα κελιά"),
         "pleaseIncreaseOrDecreaseTheQuantity":
             MessageLookupByLibrary.simpleMessage(
                 "Αυξήστε ή μειώστε την ποσότητα για να συνεχίσετε."),
@@ -1114,8 +1180,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Επιλέξτε τις απαιτούμενες επιλογές!"),
         "pleaseSignInBeforeUploading": MessageLookupByLibrary.simpleMessage(
             "Συνδεθείτε στον λογαριασμό σας πριν ανεβάσετε αρχεία."),
-        "pleasefillUpAllCellsProperly": MessageLookupByLibrary.simpleMessage(
-            "* Συμπληρώστε σωστά όλα τα κελιά"),
         "point": MessageLookupByLibrary.simpleMessage("σημείο"),
         "pointMsgConfigNotFound": MessageLookupByLibrary.simpleMessage(
             "Δεν βρέθηκε διαμόρφωση σημείου έκπτωσης στο διακομιστή"),
@@ -1178,8 +1242,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "privacyTerms":
             MessageLookupByLibrary.simpleMessage("Απόρρητο και Όροι"),
         "private": MessageLookupByLibrary.simpleMessage("Ιδιωτικός"),
+        "processing": MessageLookupByLibrary.simpleMessage("Επεξεργασία..."),
         "product": MessageLookupByLibrary.simpleMessage("Προϊόν"),
-        "productAddToCart": m31,
+        "productAddToCart": m36,
         "productAdded":
             MessageLookupByLibrary.simpleMessage("Το προϊόν προστίθεται"),
         "productCreateReview": MessageLookupByLibrary.simpleMessage(
@@ -1217,10 +1282,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "qRCodeSaveFailure": MessageLookupByLibrary.simpleMessage(
             "Αποτυχία αποθήκευσης κωδικού QR"),
         "qty": MessageLookupByLibrary.simpleMessage("Ποσότητα"),
-        "qtyTotal": m32,
+        "qtyTotal": m37,
         "quantity": MessageLookupByLibrary.simpleMessage("Ποσότητα"),
         "quantityProductExceedInStock": MessageLookupByLibrary.simpleMessage(
             "Η τρέχουσα ποσότητα είναι μεγαλύτερη από την ποσότητα στο απόθεμα"),
+        "random": MessageLookupByLibrary.simpleMessage("Τυχαίος"),
         "rate": MessageLookupByLibrary.simpleMessage("Τιμή"),
         "rateProduct":
             MessageLookupByLibrary.simpleMessage("Βαθμολογήστε το προϊόν"),
@@ -1235,14 +1301,17 @@ class MessageLookup extends MessageLookupByLibrary {
             "Αξιολογήστε πριν στείλετε το σχόλιό σας"),
         "reOrder": MessageLookupByLibrary.simpleMessage("Παραγγέλλω πάλι"),
         "readReviews": MessageLookupByLibrary.simpleMessage("Κριτικές"),
+        "readyToPick":
+            MessageLookupByLibrary.simpleMessage("Αναμονή για παράδοση"),
         "receivedMoney": MessageLookupByLibrary.simpleMessage("Έλαβε χρήματα"),
+        "receivedMoneyFrom": m38,
         "receiver": MessageLookupByLibrary.simpleMessage("δέκτης"),
+        "recent": MessageLookupByLibrary.simpleMessage("ΠΡΟΣΦΑΤΟΣ"),
         "recentSearches": MessageLookupByLibrary.simpleMessage("Ιστορία"),
         "recentView":
             MessageLookupByLibrary.simpleMessage("Η πρόσφατη προβολή σας"),
         "recentlyViewed":
             MessageLookupByLibrary.simpleMessage("Πρόσφατα προβεβλημένα"),
-        "recents": MessageLookupByLibrary.simpleMessage("ΠΡΟΣΦΑΤΟΣ"),
         "recommended": MessageLookupByLibrary.simpleMessage("Συνιστάται"),
         "recurringTotals":
             MessageLookupByLibrary.simpleMessage("Επαναλαμβανόμενα σύνολα"),
@@ -1262,8 +1331,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "registerAs": MessageLookupByLibrary.simpleMessage("Εγγραφείτε ως"),
         "registerAsVendor": MessageLookupByLibrary.simpleMessage(
             "Εγγραφείτε ως χρήστης προμηθευτή"),
+        "registerErrorSyncAccount": MessageLookupByLibrary.simpleMessage(
+            "Δεν είναι δυνατός ο συγχρονισμός του λογαριασμού. Παρακαλώ συνδεθείτε για να συνεχίσετε."),
         "registerFailed":
             MessageLookupByLibrary.simpleMessage("Η εγγραφή απέτυχε"),
+        "registerInvalid": MessageLookupByLibrary.simpleMessage(
+            "Το αίτημα είναι άκυρο ή έχει λήξει. Δοκιμάστε ξανά"),
         "registerSuccess":
             MessageLookupByLibrary.simpleMessage("Εγγραφή με επιτυχία"),
         "regularPrice": MessageLookupByLibrary.simpleMessage("Κανονική τιμή"),
@@ -1296,7 +1369,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reviews": MessageLookupByLibrary.simpleMessage("Κριτικές"),
         "romanian": MessageLookupByLibrary.simpleMessage("ρουμανικός"),
         "russian": MessageLookupByLibrary.simpleMessage("Ρωσική"),
-        "sale": m33,
+        "sale": m39,
         "salePrice": MessageLookupByLibrary.simpleMessage("Τιμή πώλησης"),
         "saturday": MessageLookupByLibrary.simpleMessage("Σάββατο"),
         "save": MessageLookupByLibrary.simpleMessage("Αποθηκεύσετε"),
@@ -1331,12 +1404,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Αναγνωριστικό παραγγελίας αναζήτησης ..."),
         "searchPlace":
             MessageLookupByLibrary.simpleMessage("Αναζήτηση στο Μέρος"),
-        "searchResultFor": m34,
-        "searchResultItem": m35,
-        "searchResultItems": m36,
+        "searchResultFor": m40,
+        "searchResultItem": m41,
+        "searchResultItems": m42,
         "searchingAddress":
             MessageLookupByLibrary.simpleMessage("Αναζήτηση διεύθυνσης"),
-        "secondsAgo": m37,
+        "secondsAgo": m43,
         "seeAll": MessageLookupByLibrary.simpleMessage("Προβολή όλων"),
         "seeNewAppConfig": MessageLookupByLibrary.simpleMessage(
             "Συνεχίστε να βλέπετε νέο περιεχόμενο στην εφαρμογή σας."),
@@ -1375,6 +1448,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Πάρετε τον κωδικό"),
         "sendSMStoVendor": MessageLookupByLibrary.simpleMessage(
             "Στείλτε SMS στον ιδιοκτήτη του καταστήματος"),
+        "sendTo": MessageLookupByLibrary.simpleMessage(
+            "Ο λογαριασμός στον οποίο θέλετε να μεταφέρετε (email)"),
         "separateMultipleEmailWithComma": MessageLookupByLibrary.simpleMessage(
             "Διαχωρίστε πολλές διευθύνσεις email με κόμμα."),
         "serbian": MessageLookupByLibrary.simpleMessage("Σέρβος"),
@@ -1389,6 +1464,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shipping": MessageLookupByLibrary.simpleMessage("Αποστολή"),
         "shippingAddress":
             MessageLookupByLibrary.simpleMessage("Διεύθυνση αποστολής"),
+        "shippingFee": MessageLookupByLibrary.simpleMessage("Τέλος αποστολής"),
         "shippingMethod":
             MessageLookupByLibrary.simpleMessage("Μέθοδος αποστολής"),
         "shop": MessageLookupByLibrary.simpleMessage("Κατάστημα"),
@@ -1398,7 +1474,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shopPhone": MessageLookupByLibrary.simpleMessage("Αγοράστε τηλέφωνο"),
         "shopSlug":
             MessageLookupByLibrary.simpleMessage("Κατάστημα γυμνοσάλιαγκας"),
-        "shoppingCartItems": m38,
+        "shoppingCartItems": m44,
         "shortDescription":
             MessageLookupByLibrary.simpleMessage("Σύντομη περιγραφή"),
         "showAllMyOrdered": MessageLookupByLibrary.simpleMessage(
@@ -1421,7 +1497,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "slovak": MessageLookupByLibrary.simpleMessage("Σλοβάκος"),
         "smsCodeExpired": MessageLookupByLibrary.simpleMessage(
             "Ο κωδικός SMS έχει λήξει. Στείλτε ξανά τον κωδικό επαλήθευσης για να προσπαθήσετε ξανά."),
-        "sold": m39,
+        "sold": m45,
         "soldBy": MessageLookupByLibrary.simpleMessage("Πουλήθηκε από"),
         "somethingWrong": MessageLookupByLibrary.simpleMessage(
             "Κάτι πήγε στραβά. Παρακαλώ δοκιμάστε ξανά αργότερα."),
@@ -1505,9 +1581,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "tapTheMicToTalk": MessageLookupByLibrary.simpleMessage(
             "Πατήστε το μικρόφωνο για να μιλήσετε"),
         "tax": MessageLookupByLibrary.simpleMessage("Φόρος"),
+        "teraWallet": MessageLookupByLibrary.simpleMessage("TeraWallet"),
         "terrible": MessageLookupByLibrary.simpleMessage("Τρομερός"),
         "thailand": MessageLookupByLibrary.simpleMessage("Ταϊλάνδη"),
-        "theFieldIsRequired": m40,
+        "theFieldIsRequired": m46,
         "thisDateIsNotAvailable": MessageLookupByLibrary.simpleMessage(
             "Αυτή η ημερομηνία δεν είναι διαθέσιμη"),
         "thisFeatureDoesNotSupportTheCurrentLanguage":
@@ -1528,7 +1605,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "titleAToZ": MessageLookupByLibrary.simpleMessage("Τίτλος: Α έως Ω"),
         "titleZToA": MessageLookupByLibrary.simpleMessage("Τίτλος: Ω έως Α"),
         "to": MessageLookupByLibrary.simpleMessage("Προς το"),
-        "tooManyFaildedLogin": MessageLookupByLibrary.simpleMessage(
+        "tooManyFailedLogin": MessageLookupByLibrary.simpleMessage(
             "Πάρα πολλές αποτυχημένες προσπάθειες σύνδεσης. Παρακαλώ προσπαθήστε ξανά αργότερα."),
         "topUp": MessageLookupByLibrary.simpleMessage("Ξεχειλίζω"),
         "topUpProductNotFound": MessageLookupByLibrary.simpleMessage(
@@ -1537,7 +1614,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "totalCartValue": MessageLookupByLibrary.simpleMessage(
             "Η συνολική αξία της παραγγελίας πρέπει να είναι τουλάχιστον"),
         "totalPrice": MessageLookupByLibrary.simpleMessage("Συνολικό ποσό"),
-        "totalProducts": m41,
+        "totalProducts": m47,
         "totalTax": MessageLookupByLibrary.simpleMessage("Συνολικός φόρος"),
         "trackingNumberIs": MessageLookupByLibrary.simpleMessage(
             "Ο αριθμός παρακολούθησης είναι"),
@@ -1548,6 +1625,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "transactionDetail":
             MessageLookupByLibrary.simpleMessage("Λεπτομέρεια συναλλαγής"),
         "transactionFailded":
+            MessageLookupByLibrary.simpleMessage("Η συναλλαγή απέτυχε"),
+        "transactionFailed":
             MessageLookupByLibrary.simpleMessage("η συναλλαγή απέτυχε"),
         "transactionFee":
             MessageLookupByLibrary.simpleMessage("Αμοιβή συναλλαγής"),
@@ -1560,6 +1639,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Δεν μπορείτε να κάνετε μεταφορά σε αυτόν τον χρήστη"),
         "transferFailed":
             MessageLookupByLibrary.simpleMessage("Η μεταφορά απέτυχε"),
+        "transferMoneyTo": m48,
         "transferSuccess":
             MessageLookupByLibrary.simpleMessage("Επιτυχία μεταφοράς"),
         "tuesday": MessageLookupByLibrary.simpleMessage("Τρίτη"),
@@ -1573,6 +1653,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "typing": MessageLookupByLibrary.simpleMessage("Πληκτρολόγηση..."),
         "ukrainian": MessageLookupByLibrary.simpleMessage("Ουκρανός"),
         "unavailable": MessageLookupByLibrary.simpleMessage("Μη διαθέσιμο"),
+        "unblock": MessageLookupByLibrary.simpleMessage("Ξεβουλώνω"),
+        "unblockUser": MessageLookupByLibrary.simpleMessage(
+            "Κατάργηση αποκλεισμού χρήστη"),
         "undo": MessageLookupByLibrary.simpleMessage("Ξεκάνω"),
         "unpaid": MessageLookupByLibrary.simpleMessage("ΑΠΛΗΡΩΤΟΣ"),
         "update": MessageLookupByLibrary.simpleMessage("Εκσυγχρονίζω"),
@@ -1595,21 +1678,31 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Μεταφόρτωση προϊόντος"),
         "uploading": MessageLookupByLibrary.simpleMessage("Μεταφόρτωση"),
         "url": MessageLookupByLibrary.simpleMessage("Url"),
-        "useMaximumPointDiscount": m42,
+        "useMaximumPointDiscount": m49,
         "useNow": MessageLookupByLibrary.simpleMessage("Χρησιμοποίησε τώρα"),
         "useThisImage": MessageLookupByLibrary.simpleMessage(
             "Χρησιμοποιήστε αυτήν την εικόνα"),
         "userExists": MessageLookupByLibrary.simpleMessage(
             "Αυτό το όνομα χρήστη/email δεν είναι διαθέσιμο."),
+        "userHasBeenBlocked":
+            MessageLookupByLibrary.simpleMessage("Ο χρήστης έχει αποκλειστεί"),
         "userNameInCorrect": MessageLookupByLibrary.simpleMessage(
             "Το όνομα χρήστη ή ο κωδικός πρόσβασης είναι λανθασμένο."),
+        "userNotFound":
+            MessageLookupByLibrary.simpleMessage("Ο χρήστης δεν βρέθηκε"),
         "username": MessageLookupByLibrary.simpleMessage("όνομα χρήστη"),
+        "usernameAlreadyInUse": MessageLookupByLibrary.simpleMessage(
+            "Όνομα χρήστη χρησιμοποιείται ήδη!"),
         "usernameAndPasswordRequired": MessageLookupByLibrary.simpleMessage(
             "Απαιτούνται όνομα χρήστη και κωδικός πρόσβασης"),
+        "usernameInvalid": MessageLookupByLibrary.simpleMessage(
+            "Το όνομα χρήστη δεν είναι έγκυρο"),
+        "usernameIsRequired":
+            MessageLookupByLibrary.simpleMessage("Απαιτείται όνομα χρήστη"),
         "vacationMessage":
             MessageLookupByLibrary.simpleMessage("Μήνυμα διακοπών"),
         "vacationType": MessageLookupByLibrary.simpleMessage("Τύπος διακοπών"),
-        "validUntilDate": m43,
+        "validUntilDate": m50,
         "variable": MessageLookupByLibrary.simpleMessage("Μεταβλητός"),
         "variation": MessageLookupByLibrary.simpleMessage("Παραλλαγή"),
         "vendor": MessageLookupByLibrary.simpleMessage("Προμηθευτή"),
@@ -1645,12 +1738,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Αναμονή επιβεβαίωσης"),
         "walletBalance":
             MessageLookupByLibrary.simpleMessage("Υπόλοιπο πορτοφολιού"),
+        "walletBalanceWithValue": m51,
         "walletName": MessageLookupByLibrary.simpleMessage("Όνομα πορτοφολιού"),
-        "warning": m44,
-        "warningCurrencyMessageForWallet": m45,
+        "warning": m52,
+        "warningCurrencyMessageForWallet": m53,
         "weFoundBlogs":
             MessageLookupByLibrary.simpleMessage("Βρήκαμε Blog (ες)"),
-        "weFoundProducts": m46,
+        "weFoundProducts": m54,
         "weNeedCameraAccessTo": MessageLookupByLibrary.simpleMessage(
             "Χρειαζόμαστε πρόσβαση στην κάμερα για σάρωση για κωδικό QR ή Bar code."),
         "weSentAnOTPTo": MessageLookupByLibrary.simpleMessage(
@@ -1660,17 +1754,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "webView": MessageLookupByLibrary.simpleMessage("Προβολή ιστού"),
         "website": MessageLookupByLibrary.simpleMessage("Δικτυακός τόπος"),
         "wednesday": MessageLookupByLibrary.simpleMessage("Τετάρτη"),
-        "week": m47,
+        "week": m55,
         "welcome": MessageLookupByLibrary.simpleMessage("καλως ΗΡΘΑΤΕ"),
         "welcomeBack":
             MessageLookupByLibrary.simpleMessage("Καλως ορισες πισω"),
         "welcomeRegister": MessageLookupByLibrary.simpleMessage(
             "Ξεκινήστε το ταξίδι σας για τα ψώνια μαζί μας τώρα"),
-        "welcomeUser": m48,
+        "welcomeUser": m56,
         "whichLanguageDoYouPrefer":
             MessageLookupByLibrary.simpleMessage("Ποια γλώσσα προτιμάτε;"),
         "wholesaleRegisterMsg": MessageLookupByLibrary.simpleMessage(
             "Επικοινωνήστε με τον διαχειριστή για να εγκρίνει την εγγραφή σας."),
+        "willNotSendAndReceiveMessage": MessageLookupByLibrary.simpleMessage(
+            "Δεν θα μπορείτε να στέλνετε και να λαμβάνετε μηνύματα από αυτόν τον χρήστη."),
         "withdrawAmount": MessageLookupByLibrary.simpleMessage("ποσό ανάληψης"),
         "withdrawRequest":
             MessageLookupByLibrary.simpleMessage("Αίτημα απόσυρσης"),
@@ -1681,15 +1777,20 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Γράψτε το σχόλιό σας"),
         "writeYourNote":
             MessageLookupByLibrary.simpleMessage("Γράψτε τη σημείωσή σας"),
-        "yearsAgo": m49,
+        "yearsAgo": m57,
         "yes": MessageLookupByLibrary.simpleMessage("Ναί"),
         "youCanOnlyOrderSingleStore": MessageLookupByLibrary.simpleMessage(
             "Μπορείτε να αγοράσετε μόνο από ένα κατάστημα."),
         "youCanOnlyPurchase":
             MessageLookupByLibrary.simpleMessage("Μπορείτε να αγοράσετε μόνο"),
-        "youHaveAssignedToOrder": m50,
+        "youDontHavePermissionToCreatePost":
+            MessageLookupByLibrary.simpleMessage(
+                "Δεν έχετε άδεια δημιουργίας Ανάρτησης"),
+        "youHaveAssignedToOrder": m58,
         "youHaveBeenSaveAddressYourLocal": MessageLookupByLibrary.simpleMessage(
             "Έχετε αποθηκεύσει τη διεύθυνση στο τοπικό σας"),
+        "youHaveNoPost":
+            MessageLookupByLibrary.simpleMessage("Δεν έχετε δημοσιεύσεις"),
         "youHavePoints":
             MessageLookupByLibrary.simpleMessage("Έχετε πόντους \$"),
         "youMightAlsoLike":

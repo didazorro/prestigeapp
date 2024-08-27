@@ -100,6 +100,7 @@ class WishlistItem extends StatelessWidget with ActionButtonMixin {
                                                   : S.of(context).addToCart)
                                               .toUpperCase(),
                                           textAlign: TextAlign.center,
+                                          style: const TextStyle(fontSize: 14),
                                         ),
                                       ),
                                     ),

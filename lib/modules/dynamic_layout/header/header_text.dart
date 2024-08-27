@@ -58,7 +58,10 @@ class HeaderText extends StatelessWidget {
                 onPressed: onSearch != null
                     ? () => onSearch?.call()
                     : () {
-                        FluxNavigate.pushNamed(RouteList.homeSearch);
+                        FluxNavigate.pushNamed(
+                          RouteList.homeSearch,
+                          context: context,
+                        );
                       },
               )
           ],

@@ -11,7 +11,7 @@ class ChatServiceImpl implements ChatService {
   void dispose() {}
 
   @override
-  Future<void> showChatScreen() async {}
+  Future<void> showChatScreen(context) async {}
 
   @override
   Future<void> changeLanguage(String? langCode) async {}

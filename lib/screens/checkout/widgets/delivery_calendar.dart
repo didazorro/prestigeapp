@@ -68,7 +68,7 @@ class _DeliveryCalendarState extends State<DeliveryCalendar> {
               style: Theme.of(context)
                   .textTheme
                   .headlineSmall!
-                  .copyWith(fontWeight: FontWeight.w700, fontFamily: 'Roboto'),
+                  .copyWith(fontWeight: FontWeight.w700),
             ),
             const Spacer(),
             InkWell(

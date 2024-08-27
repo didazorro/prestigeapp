@@ -1,3 +1,9 @@
 <resources>
     <string name="default_notification_channel_id">high_importance_channel</string>
+
+    <!-- Set default color for all OneSignal notification's accent color -->
+    <!-- Color format is in ARGB. -->
+
+    <!-- Use from `env.props` file instead -->
+    <!-- <string name="onesignal_notification_accent_color">FF2EB0FE</string> -->
 </resources>

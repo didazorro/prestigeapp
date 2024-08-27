@@ -366,7 +366,7 @@ class _ReOrderItemListState extends State<ReOrderItemList> {
                 if (addon.name != null && option.contains(addon.name!)) {
                   // Handle in case addon do not have any options. Eg: Customer Defined Price (custom_price) doesn't have any options.
                   if ((addon.options == null || addon.options!.isEmpty) &&
-                      addon.isCustomPriceType) {
+                      addon.type == AddonsType.custom_price) {
                     final addonsOption = AddonsOption.fromJson({
                       'parent': addon.name,
                       'label': addonsOptions[option].toString(),

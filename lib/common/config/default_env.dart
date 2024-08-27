@@ -256,6 +256,9 @@ class DefaultConfig {
     /// Default is false because it causes some performance issues when call
     /// many APIs at the same time
     'allowGetDatasByCategoryFilter': false,
+
+    //set param is_all_data=true to get full product data for WooCommerce
+    'EnableIsAllData': false,
   };
   static Map appRatingConfig = {};
   static Map defaultDrawer = {};
@@ -579,31 +582,17 @@ class DefaultConfig {
   static Map productAddons = {};
   static Map cartDetail = {};
   static Map productVariantLanguage = {};
-  static String? excludedCategory;
+  static String? excludedCategoryIDs;
+  static String? excludedProductIDs;
   static Map saleOffProduct = {};
   static bool notStrictVisibleVariant = true;
   static Map configChat = {};
   static List<Map> smartChat = [];
-  static String adminEmail = '';
-  static String adminName = '';
   static Map vendorConfig = {};
   static Map? loadingIcon;
   static Map productCard = {};
   static String? cardFit;
-  static List defaultCountryShipping = [
-    {
-      'name': 'Vietnam',
-      'iosCode': 'VN',
-      'icon': 'https://cdn.britannica.com/41/4041-004-A06CBD63/Flag-Vietnam.jpg'
-    },
-    {
-      'name': 'India',
-      'iosCode': 'IN',
-      'icon':
-          'https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1200px-Flag_of_India.svg.png'
-    },
-    {'name': 'Austria', 'iosCode': 'AT', 'icon': ''}
-  ];
+  static List defaultCountryShipping = [];
   static Map loginSMSConstants = {};
   static Map darkConfig = {};
   static Map lightConfig = {};
@@ -633,5 +622,14 @@ class DefaultConfig {
       'ios': 'AIzaSyDW3uXzZepWBPi-69BIYKyS-xo9NjFSFhQ',
       'web': 'AIzaSyDW3uXzZepWBPi-69BIYKyS-xo9NjFSFhQ'
     },
+  );
+
+  static DynamicLinkConfig dynamicLinkConfig = DynamicLinkConfig(
+    enable: false,
+    type: DynamicLinkType.firebase,
+    firebaseDynamicLinkConfig: firebaseDynamicLinkConfig,
+    branchIOConfig: BranchIOConfig(
+      liveMode: false,
+    ),
   );
 }

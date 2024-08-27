@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../common/config.dart' as config;
 import '../../common/config.dart';
 import '../../common/constants.dart';
 import '../../common/tools/navigate_tools.dart';
 import '../../data/boxes.dart';
 import '../../models/notification_model.dart';
-import '../../services/services.dart';
 
 mixin OnBoardingMixin<T extends StatefulWidget> on State<T> {
-  final isRequiredLogin = config.kLoginSetting.isRequiredLogin;
+  final isRequiredLogin = kLoginSetting.isRequiredLogin;
+  final isEnableRegister = kLoginSetting.enableRegister;
+
+  final isEnable = kLoginSetting.enable;
+
   int page = 0;
 
   NotificationModel get _notificationModel =>
       Provider.of<NotificationModel>(context, listen: false);
 
-  bool get enableAuth => Configurations.multiSiteConfigs?.isEmpty ?? true;
+  bool get enableAuth =>
+      Configurations.multiSiteConfigs?.isEmpty ?? true && isEnable;
 
   void setHasSeen() {
     SettingsBox().hasFinishedOnboarding = true;
@@ -30,7 +33,13 @@ mixin OnBoardingMixin<T extends StatefulWidget> on State<T> {
   void onTapDone() async {
     final isLoggedIn = UserBox().isLoggedIn;
 
-    if (Services().widget.isRequiredLogin && !isLoggedIn) {
+    if (kAdvanceConfig.showRequestNotification) {
+      await Navigator.of(context)
+          .pushReplacementNamed(RouteList.notificationRequest);
+      return;
+    }
+
+    if (isRequiredLogin && !isLoggedIn && isEnable) {
       await NavigateTools.navigateToLogin(
         context,
         replacement: true,
@@ -48,11 +57,6 @@ mixin OnBoardingMixin<T extends StatefulWidget> on State<T> {
     }
     setHasSeen();
 
-    if (kAdvanceConfig.showRequestNotification) {
-      await Navigator.of(context)
-          .pushReplacementNamed(RouteList.notificationRequest);
-      return;
-    }
     await _notificationModel.enableNotification();
     if (kAdvanceConfig.gdprConfig.showPrivacyPolicyFirstTime) {
       await Navigator.of(context).pushReplacementNamed(

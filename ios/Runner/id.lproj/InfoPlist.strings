@@ -1,7 +1,7 @@
 NSCameraUsageDescription = "Aplikasi ini membutuhkan akses ke kamera untuk fitur QR Code atau Barcode scanner yang dapat diakses dari bilah pencarian";
-NSLocationAlwaysAndWhenInUseUsageDescription = "Dapatkan lokasi Anda saat ini untuk pengiriman";
-NSLocationAlwaysUsageDescription = "Perlu akses lokasi saat ini";
-NSLocationWhenInUseUsageDescription = "Dapatkan lokasi Anda saat ini untuk pengiriman";
+NSLocationAlwaysAndWhenInUseUsageDescription = "Aplikasi ini membutuhkan akses ke lokasi Anda untuk menampilkannya pada layar peta dan menyediakan layanan berbasis lokasi";
+NSLocationAlwaysUsageDescription = "Aplikasi ini membutuhkan akses ke lokasi Anda untuk menampilkannya pada layar peta dan menyediakan layanan berbasis lokasi";
+NSLocationWhenInUseUsageDescription = "Aplikasi ini membutuhkan akses ke lokasi Anda untuk menampilkannya pada layar peta dan menyediakan layanan berbasis lokasi";
 NSMicrophoneUsageDescription = "Kami menginginkan akses ke mikrofon untuk mengizinkan perekaman pesan suara";
 NSPhotoLibraryAddUsageDescription = "Kami menginginkan akses untuk menyimpan Gambar/Video di Perpustakaan Foto Anda";
 NSPhotoLibraryUsageDescription = "Aplikasi ini memerlukan akses ke pustaka foto untuk memilih foto profil yang akan digunakan sebagai gambar obrolan untuk Fitur Obrolan.";

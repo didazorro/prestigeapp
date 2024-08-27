@@ -73,22 +73,18 @@ class DetailProductSliverAppBar extends StatelessWidget {
       ],
       flexibleSpace: Builder(
         builder: (context) {
-          var item = Product.cloneFrom(product);
-          if (!kProductDetail.showVideo && item.videoUrl != null) {
-            item.videoUrl = null;
-          }
           return kIsWeb
               ? const SizedBox()
               : kProductDetail.productImageLayout.isList
                   ? ProductImageList(
-                      product: item,
+                      product: product,
                       onChange: (index) {
                         onChangeImage(index);
                       },
                       height: height * kProductDetail.height * 0.8,
                     )
                   : ProductImageSlider(
-                      product: item,
+                      product: product,
                       onChange: (index) {
                         onChangeImage(index);
                       },

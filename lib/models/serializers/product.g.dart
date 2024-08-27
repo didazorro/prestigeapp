@@ -8,10 +8,10 @@ part of 'product.dart';
 
 SerializerProduct _$SerializerProductFromJson(Map<String, dynamic> json) =>
     SerializerProduct(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       title: json['title'] as String?,
       isOutOfStock: json['is_out_of_stock'] as bool?,
-      inventory: json['inventory'] as int?,
+      inventory: (json['inventory'] as num?)?.toInt(),
       price: (json['price'] as num?)?.toDouble() ?? 0,
       salePrice: (json['sale_price'] as num?)?.toDouble() ?? 0,
       images: (json['images'] as List<dynamic>?)
@@ -24,7 +24,7 @@ SerializerProduct _$SerializerProductFromJson(Map<String, dynamic> json) =>
           ?.map((e) =>
               SerializerProductCategory.fromJson(e as Map<String, dynamic>))
           .toList(),
-      review: json['review'] as int?,
+      review: (json['review'] as num?)?.toInt(),
       isSale: json['is_sale'] as bool? ?? false,
     );
 

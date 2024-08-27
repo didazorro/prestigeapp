@@ -33,7 +33,7 @@ class FilterWidget extends StatefulWidget {
     FilterSortBy? sortBy,
     bool? isSearch,
     List<String>? brandIds,
-    dynamic attributes,
+    Map<FilterAttribute, List<SubAttribute>>? attributes,
   })? onFilter;
   final List<String>? categoryId;
   final List<String>? tagId;
@@ -55,7 +55,7 @@ class FilterWidget extends StatefulWidget {
   final bool showTag;
   final bool showBrand;
   final bool showCategory;
-  final bool showPrice;
+  final bool showPriceSlider;
   final bool showAttribute;
   final bool allowMultipleCategory;
   final bool allowMultipleTag;
@@ -82,7 +82,7 @@ class FilterWidget extends StatefulWidget {
     this.showTag = true,
     this.showBrand = true,
     this.showCategory = true,
-    this.showPrice = true,
+    this.showPriceSlider = true,
     this.showAttribute = true,
     this.allowMultipleCategory = false,
     this.allowMultipleTag = false,
@@ -161,7 +161,9 @@ class _FilterWidgetState extends State<FilterWidget> {
         tagId: tagId,
         brandIds: brandIds,
         isSearch: isSearch,
-        listingLocationId: listingLocationId ?? productModel.listingLocationId,
+        listingLocationId: (listingLocationId?.isEmpty ?? false)
+            ? null
+            : listingLocationId ?? productModel.listingLocationId,
         attributes: _selectedAttributes,
       );
 
@@ -310,6 +312,18 @@ class _FilterWidgetState extends State<FilterWidget> {
     super.didUpdateWidget(oldWidget);
   }
 
+  /// Filter support
+  ServerConfig get _svConfig => ServerConfig();
+  bool get _supportSort => !_svConfig.isHaravan;
+  bool get _supportBrand => !_svConfig.isHaravan;
+  bool get _supportPriceSlider =>
+      !_svConfig.isHaravan && !_svConfig.isListingType && !_svConfig.isShopify;
+  bool get _supportAttribute =>
+      !_svConfig.isHaravan && !_svConfig.isListingType && !_svConfig.isShopify;
+  bool get _supportTag => _svConfig.isHaravan == false;
+  bool get _supportProductBackdrop =>
+      !_svConfig.isListingType && !_svConfig.isHaravan;
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -353,7 +367,7 @@ class _FilterWidgetState extends State<FilterWidget> {
 
           if (widget.showLayout) ...renderLayout(),
 
-          if (widget.showSort)
+          if (widget.showSort && _supportSort)
             Services().widget.renderFilterSortBy(
               context,
               filterSortBy: _currentSortBy,
@@ -371,12 +385,10 @@ class _FilterWidgetState extends State<FilterWidget> {
             ListingLocationFilterWidget(
               listingLocationId: widget.listingLocationId,
               onFilter: (listingLocationId) =>
-                  _onFilter(listingLocationId: listingLocationId),
+                  _onFilter(listingLocationId: listingLocationId ?? ''),
             ),
 
-          if (!ServerConfig().isListingType &&
-              ServerConfig().type != ConfigType.shopify &&
-              widget.showPrice)
+          if (_supportPriceSlider && widget.showPriceSlider)
             renderPriceSlider(),
 
           if (widget.showCategory)
@@ -392,7 +404,7 @@ class _FilterWidgetState extends State<FilterWidget> {
               ),
             ),
 
-          if (widget.showBrand)
+          if (widget.showBrand && _supportBrand)
             BrandFilterWidget(
               brandId: _brandId,
               onChanged: (p0) {
@@ -401,9 +413,7 @@ class _FilterWidgetState extends State<FilterWidget> {
               },
             ),
 
-          if (!ServerConfig().isListingType &&
-              ServerConfig().type != ConfigType.shopify &&
-              widget.showAttribute)
+          if (_supportAttribute && widget.showAttribute)
             if (widget.allowMultiAttribute)
               MultiAttributeFilterWidget(
                 selectedAttribute: _selectedAttributes,
@@ -426,7 +436,7 @@ class _FilterWidgetState extends State<FilterWidget> {
               ),
 
           /// filter by tags
-          if (widget.showTag)
+          if (widget.showTag && _supportTag)
             TagFilterWidget(
               tagId: _tagId,
               isUseBlog: widget.isUseBlog,
@@ -436,7 +446,7 @@ class _FilterWidgetState extends State<FilterWidget> {
             ),
 
           /// render Apply button
-          if (!ServerConfig().isListingType &&
+          if (_supportProductBackdrop &&
               Services().widget.enableProductBackdrop)
             Padding(
               padding: const EdgeInsets.only(

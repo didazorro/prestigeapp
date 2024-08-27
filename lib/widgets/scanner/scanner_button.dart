@@ -19,7 +19,7 @@ class ScannerButton extends StatelessWidget {
 
   const ScannerButton({super.key, this.user, this.customIcon});
 
-  Future navigateToScanner() {
+  Future navigateToScanner(BuildContext context) {
     return FluxNavigate.push(
       MaterialPageRoute(
         builder: (_) => Scanner(
@@ -27,6 +27,7 @@ class ScannerButton extends StatelessWidget {
           user: user,
         ),
       ),
+      context: context,
     );
   }
 
@@ -38,9 +39,11 @@ class ScannerButton extends StatelessWidget {
     return IconButton(
         onPressed: () async {
           if (!isIos && !isAndroid) {
-            return FluxNavigate.push(
+            unawaited(FluxNavigate.push(
               MaterialPageRoute(builder: (_) => const FakeBarcodeScreen()),
-            );
+              context: context,
+            ));
+            return;
           }
           final hasPermission =
               await Permission.camera.status == PermissionStatus.granted;
@@ -61,13 +64,14 @@ class ScannerButton extends StatelessWidget {
                   },
                 ),
               ),
+              context: context,
             );
             if (result != true) {
               /// User pressed back or denied.
               return;
             }
           }
-          return navigateToScanner();
+          return navigateToScanner(context);
         },
         icon: Icon(customIcon ?? CupertinoIcons.barcode_viewfinder));
   }

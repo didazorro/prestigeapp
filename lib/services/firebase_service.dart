@@ -7,6 +7,7 @@ import '../common/config.dart';
 import '../common/constants.dart';
 import '../common/tools.dart';
 import '../models/entities/firebase_error_exception.dart';
+import '../models/entities/product.dart';
 import '../models/entities/user.dart';
 import 'firebase/index.dart';
 import 'index.dart';
@@ -50,7 +51,6 @@ class FirebaseServices extends BaseFirebaseServices {
     const message = '[FirebaseServices] Init successfully';
     if (GmsCheck().isGmsAvailable) {
       _messaging = FirebaseMessaging.instance;
-      _dynamicLinks = FirebaseServiceFactory.create<DynamicLinkService>();
       printLog(message, startTime);
     } else {
       printLog('$message (without Google Play Services)', startTime);
@@ -66,11 +66,6 @@ class FirebaseServices extends BaseFirebaseServices {
   FirebaseFirestore? _firestore;
 
   FirebaseFirestore? get firestore => _firestore;
-
-  /// Firebase Dynamic Links
-  DynamicLinkService? _dynamicLinks;
-
-  DynamicLinkService? get dynamicLinks => _dynamicLinks;
 
   /// Firebase Remote Config
   FirebaseRemoteServices? _remoteConfig;
@@ -128,14 +123,11 @@ class FirebaseServices extends BaseFirebaseServices {
   }
 
   @override
-  void saveUserToFirestore({user}) async {
-    final token = await FirebaseServices().messaging!.getToken();
+  void saveUserToFirestore({User? user}) async {
+    final token = await FirebaseServices().messaging?.getToken();
     printLog('token: $token');
-    await FirebaseServices()
-        .firestore!
-        .collection('users')
-        .doc(user!.email)
-        .set(
+    final docPath = (user?.email?.isNotEmpty ?? false) ? user?.email : user?.id;
+    await FirebaseServices().firestore?.collection('users').doc(docPath).set(
       {'deviceToken': token, 'isOnline': true},
       SetOptions(merge: true),
     );
@@ -190,26 +182,33 @@ class FirebaseServices extends BaseFirebaseServices {
   }
 
   @override
-  Widget renderListChatScreen() {
-    return RealtimeChat(
-      userEmail: Configurations.adminEmail,
-      type: RealtimeChatType.adminToCustomers,
-    );
-  }
-
-  @override
-  Widget renderVendorListChatScreen({String? email}) {
+  Widget renderListChatScreen({String? email}) {
     if (email == null) {
       return const ChatAuth();
     }
+
+    final isMvApp =
+        ServerConfig().isVendorType() || ServerConfig().isVendorManagerType();
+    if (isMvApp) {
+      return RealtimeChat(
+        userEmail: email,
+        type: RealtimeChatType.userToUsers,
+      );
+    }
+
     return RealtimeChat(
       userEmail: email,
-      type: RealtimeChatType.vendorToCustomers,
+      type: RealtimeChatType.customerToAdmin,
     );
   }
 
   @override
-  Widget renderChatScreen({User? senderUser, receiverEmail, receiverName}) {
+  Widget renderChatScreen({
+    User? senderUser,
+    String? receiverEmail,
+    String? receiverName,
+    Product? product,
+  }) {
     final isMvApp =
         ServerConfig().isVendorType() || ServerConfig().isVendorManagerType();
 
@@ -220,22 +219,29 @@ class FirebaseServices extends BaseFirebaseServices {
 
     /// MV: Customer to Vendor.
     if (isMvApp &&
-        senderUser.email != receiverEmail &&
+        email != receiverEmail &&
         receiverEmail != null &&
         receiverName != null) {
+      var initMessage;
+      if (product != null) {
+        initMessage = product.name ?? '';
+        initMessage += '\n';
+        initMessage += product.permalink ?? '';
+      }
       return RealtimeChat(
         type: RealtimeChatType.customerToVendor,
         vendorName: receiverName,
         vendorEmail: receiverEmail,
         userEmail: email,
+        initMessage: initMessage,
       );
     }
 
     /// MV: Vendor to self or Vendor to Customer.
-    final isVendorChatToSelf = senderUser.email == receiverEmail;
+    final isVendorChatToSelf = email == receiverEmail;
     if (isMvApp &&
         senderUser.isVender &&
-        (isVendorChatToSelf || senderUser.email != receiverEmail)) {
+        (isVendorChatToSelf || email != receiverEmail)) {
       return RealtimeChat(
         userEmail: email,
         type: RealtimeChatType.vendorToCustomers,
@@ -243,17 +249,25 @@ class FirebaseServices extends BaseFirebaseServices {
     }
 
     /// Admin to Customers.
-    if (!isMvApp && senderUser.email == Configurations.adminEmail) {
+    if (!isMvApp && email == kConfigChat.realtimeChatConfig.adminEmail) {
       return RealtimeChat(
         userEmail: email,
         type: RealtimeChatType.adminToCustomers,
       );
     }
 
-    /// Default: Customer to Admin.
+    /// Customer to Admin.
+    if (receiverEmail == kConfigChat.realtimeChatConfig.adminEmail) {
+      return RealtimeChat(
+        userEmail: email,
+        type: RealtimeChatType.customerToAdmin,
+      );
+    }
+
+    /// Default: User to Users.
     return RealtimeChat(
       userEmail: email,
-      type: RealtimeChatType.customerToAdmin,
+      type: RealtimeChatType.userToUsers,
     );
   }
 
@@ -282,11 +296,6 @@ class FirebaseServices extends BaseFirebaseServices {
   }
 
   @override
-  void initDynamicLinkService(context) {
-    _dynamicLinks?.initDynamicLinks(context);
-  }
-
-  @override
   Future<bool> loadRemoteConfig() {
     return _remoteConfig?.loadRemoteConfig() ?? Future.value(false);
   }
@@ -302,13 +311,6 @@ class FirebaseServices extends BaseFirebaseServices {
   }
 
   @override
-  void shareDynamicLinkProduct({itemUrl}) {
-    _dynamicLinks?.shareProductLink(
-      productUrl: itemUrl,
-    );
-  }
-
-  @override
   Future<void> signOut() async {
     if (isEnabled) {
       _auth?.signOut();
@@ -318,5 +320,10 @@ class FirebaseServices extends BaseFirebaseServices {
   @override
   List<NavigatorObserver> getMNavigatorObservers() {
     return firebaseAnalytics?.getMNavigatorObservers() ?? <NavigatorObserver>[];
+  }
+
+  @override
+  Future<String?>? getIdToken() {
+    return _auth?.getIdToken();
   }
 }

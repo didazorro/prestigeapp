@@ -1,7 +1,7 @@
 NSCameraUsageDescription = "Ez az alkalmazás hozzáférést igényel a kamerához a QR-kód vagy vonalkód-leolvasó funkcióhoz, amely a keresősávból érhető el";
-NSLocationAlwaysAndWhenInUseUsageDescription = "Kézbesítéshez kapja meg jelenlegi helyét";
-NSLocationAlwaysUsageDescription = "A jelenlegi helyhez való hozzáférés szükséges";
-NSLocationWhenInUseUsageDescription = "Kézbesítéshez kapja meg jelenlegi helyét";
+NSLocationAlwaysAndWhenInUseUsageDescription = "Ez az alkalmazás hozzáférést igényel az Ön helyzetéhez annak megjelenítéséhez a térkép képernyőjén és helyszíni szolgáltatások nyújtásához";
+NSLocationAlwaysUsageDescription = "Ez az alkalmazás hozzáférést igényel az Ön helyzetéhez annak megjelenítéséhez a térkép képernyőjén és helyszíni szolgáltatások nyújtásához";
+NSLocationWhenInUseUsageDescription = "Ez az alkalmazás hozzáférést igényel az Ön helyzetéhez annak megjelenítéséhez a térkép képernyőjén és helyszíni szolgáltatások nyújtásához";
 NSMicrophoneUsageDescription = "Szeretnénk hozzáférni a mikrofonhoz, hogy lehetővé tegyük a hangüzenetek rögzítését";
 NSPhotoLibraryAddUsageDescription = "Szeretnénk hozzáférni a képek/videók tárolásához a fotókönyvtárában";
 NSPhotoLibraryUsageDescription = "Ennek az alkalmazásnak hozzáférésre van szüksége a fotókönyvtárhoz, hogy kiválaszthasson egy profilfotót, amelyet csevegési képként használunk a csevegési funkcióhoz.";

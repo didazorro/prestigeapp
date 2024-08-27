@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
 import '../../common/config.dart';
@@ -35,12 +36,27 @@ mixin WooVariantMixin on ProductVariantMixin {
         }
       }
     } else {
+      /// If [autoSelectFirstAttribute] is true then check
+      /// if defaultAttributes exists?
+      /// --> If it exists then use defaultAttributes to set the initial value.
+      /// --> If it does not exist then automatically search for a suitable
+      /// variant to set the initial value.
+      ///
+      /// If [autoSelectFirstAttribute] is false then there are 2 cases:
+      /// 1. defaultAttributes has value --> take defaultAttributes as initial value
+      /// 2. defaultAttributes has no value --> do not set initial value.
       final autoSelectFirstAttribute = productInfo.defaultAttributes.isEmpty &&
           kProductDetail.autoSelectFirstAttribute;
 
       if (autoSelectFirstAttribute) {
         for (var variant in variations) {
-          if (variant.price == product.price) {
+          // Let's return it to double so we can compare accurately.
+          // There was a case of wrong comparison due to
+          // different String: "6530" vs "6530.0"
+          final priceProduct = num.tryParse(product.price ?? '0')?.toDouble();
+          final priceVariant = num.tryParse(variant.price ?? '0')?.toDouble();
+
+          if (priceVariant == priceProduct) {
             for (var attribute in variant.attributes) {
               for (var attr in product.attributes!) {
                 if (attr.keyAtrr == attribute.keyAtrr) {
@@ -49,19 +65,35 @@ mixin WooVariantMixin on ProductVariantMixin {
                       ifAbsent: () => attr.options![0]['name']);
                 }
               }
+
               mapAttribute.update(
                   attribute.keyAtrr, (value) => attribute.option,
                   ifAbsent: () => attribute.option);
             }
-            break;
+
+            /// Although this variant has the same price as the product,
+            /// no attribute was found. So this object will be ignored
+            /// and the search for a suitable variant will continue.
+            if (mapAttribute.isNotEmpty) {
+              break;
+            }
           }
+
+          /// If after find there is still no suitable variant,
+          /// select the first variant to set.
           if (mapAttribute.isEmpty) {
-            var firstItem = variations[0];
-            for (var attribute in firstItem.attributes) {
-              mapAttribute.update(attribute.keyAtrr, (value) => value,
-                  ifAbsent: () {
-                return attribute.option;
-              });
+            /// Requires variant to have attribute
+            var firstItem = variations.firstWhereOrNull((e) {
+              return e.attributes.isNotEmpty;
+            });
+
+            if (firstItem != null) {
+              for (var attribute in firstItem.attributes) {
+                mapAttribute.update(attribute.keyAtrr, (value) => value,
+                    ifAbsent: () {
+                  return attribute.option;
+                });
+              }
             }
           }
         }
@@ -157,9 +189,9 @@ mixin WooVariantMixin on ProductVariantMixin {
         mapAttribute.isNotEmpty &&
         productInfo.attributes!.length > mapAttribute.keys.length) {
       for (var attr in productInfo.attributes!) {
-        if (mapAttribute[attr.label] == null &&
+        if (mapAttribute[attr.keyAtrr] == null &&
             (attr.options?.isNotEmpty ?? false)) {
-          mapAttribute[attr.label] = attr.options![0]['name'];
+          mapAttribute[attr.keyAtrr] = attr.options![0]['name'];
         }
       }
     }
@@ -268,9 +300,8 @@ mixin WooVariantMixin on ProductVariantMixin {
       optionsName = getPWOptionsName(variations);
     }
     final checkProductAttribute = product.attributes?.isNotEmpty ?? false;
-    final hadAtrribute = mapAttribute != null && mapAttribute.isNotEmpty;
 
-    if (checkProductAttribute && hadAtrribute) {
+    if (checkProductAttribute) {
       for (var attr in product.attributes!) {
         ///  - Use `attrClone` clone because there are cases where it is necessary
         /// to update the name of `attr` to identify the product variant.
@@ -284,13 +315,12 @@ mixin WooVariantMixin on ProductVariantMixin {
 
           /// Deselect invalid option.
           if (options.isEmpty) {
-            mapAttribute[attrClone.keyAtrr] = null;
+            mapAttribute?[attrClone.keyAtrr] = null;
             options =
                 _getValidAttributeOptions(attrClone, mapAttribute, variations);
           }
 
-          var selectedValue = mapAttribute[attrClone.keyAtrr] ?? '';
-
+          var selectedValue = mapAttribute?[attrClone.keyAtrr] ?? '';
           var attrType = kProductVariantLayout[attr.cleanSlug ?? attr.name] ??
               kProductVariantLayout[attr.name?.toLowerCase()] ??
               'box';
@@ -313,26 +343,30 @@ mixin WooVariantMixin on ProductVariantMixin {
             }
           }
 
-          listWidget.addAll([
-            BasicSelection(
-              imageUrls: imageUrls,
-              options: options,
-              optionsName: optionsName,
-              title: kProductVariantLanguage[lang] != null
-                  ? kProductVariantLanguage[lang]
-                          [attr.cleanSlug ?? attr.name] ??
-                      kProductVariantLanguage[lang][attr.name?.toLowerCase()] ??
-                      attr.label?.toLowerCase()
-                  : attr.label?.toLowerCase(),
-              type: attrType,
-              value: selectedValue,
-              onChanged: (val) => onSelectProductVariant(
-                  attr: attrClone,
-                  val: val,
-                  mapAttribute: mapAttribute,
-                  variations: variations),
-            ),
-          ]);
+          /// Only products that are "Variable" can select the attribute.
+          if (product.isVariableProduct) {
+            listWidget.addAll([
+              BasicSelection(
+                imageUrls: imageUrls,
+                options: options,
+                optionsName: optionsName,
+                title: kProductVariantLanguage[lang] != null
+                    ? kProductVariantLanguage[lang]
+                            [attr.cleanSlug ?? attr.name] ??
+                        kProductVariantLanguage[lang]
+                            [attr.name?.toLowerCase()] ??
+                        attr.label?.toLowerCase()
+                    : attr.label?.toLowerCase(),
+                type: attrType,
+                value: selectedValue,
+                onChanged: (val) => onSelectProductVariant(
+                    attr: attrClone,
+                    val: val,
+                    mapAttribute: mapAttribute,
+                    variations: variations),
+              ),
+            ]);
+          }
         }
       }
     }
@@ -385,11 +419,11 @@ mixin WooVariantMixin on ProductVariantMixin {
   }
 
   List<String> _getValidAttributeOptions(ProductAttribute attr,
-      Map<String?, String?> mapAttribute, List<ProductVariation> variations) {
+      Map<String?, String?>? mapAttribute, List<ProductVariation> variations) {
     return List<String>.from(
       attr.options!
           .map((e) {
-            var copy = Map<String?, String?>.from(mapAttribute);
+            var copy = Map<String?, String?>.from(mapAttribute ?? {});
             copy[attr.keyAtrr] = e['name'];
             if (kProductDetail.hideInvalidAttributes) {
               if (isValidProductVariation(variations, copy)) {

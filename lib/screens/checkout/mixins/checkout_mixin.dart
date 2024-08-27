@@ -3,6 +3,11 @@ import 'dart:convert';
 
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flux_extended/index.dart';
+import 'package:flux_extended/native_payment/first_iraqi_bank/services.dart';
+import 'package:flux_extended/native_payment/thawani/index.dart';
+import 'package:flux_extended/native_payment/xendit/services.dart';
 import 'package:inspireui/utils/logs.dart';
 import 'package:provider/provider.dart';
 import 'package:quiver/strings.dart';
@@ -10,6 +15,7 @@ import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 import '../../../common/config.dart';
 import '../../../common/tools.dart';
+import '../../../common/tools/flash.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/app_model.dart';
 import '../../../models/booking/booking_model.dart';
@@ -23,9 +29,11 @@ import '../../../modules/analytics/analytics.dart';
 import '../../../modules/dynamic_layout/helper/helper.dart';
 import '../../../modules/native_payment/flutterwave/services.dart';
 import '../../../modules/native_payment/mercado_pago/index.dart';
+import '../../../modules/native_payment/paypal/index.dart';
 import '../../../modules/native_payment/paystack/services.dart';
 import '../../../modules/native_payment/paytm/services.dart';
 import '../../../modules/native_payment/razorpay/services.dart';
+import '../../../services/service_config.dart';
 import '../../../services/services.dart';
 import '../../../widgets/html/index.dart';
 
@@ -36,6 +44,9 @@ mixin CheckoutMixin<T extends StatefulWidget> on State<T>, RazorDelegate {
   Function? get onBack;
   Function? get onFinish;
   Function(bool)? get onLoading;
+
+  late final AppLifecycleListener _listener;
+  final FIBServices _fibServices = FIBServices();
 
   @override
   void handlePaymentSuccess(PaymentSuccessResponse response) {
@@ -86,7 +97,31 @@ mixin CheckoutMixin<T extends StatefulWidget> on State<T>, RazorDelegate {
           setState(() {});
         });
       }
+
+      _listener = AppLifecycleListener(
+        onResume: () {
+          _fibServices.checkPaymentStatus(
+              onComplete: (bool success, Order order) {
+            isPaying = false;
+            onLoading?.call(false);
+            if (success) {
+              onFinish!(order);
+            } else {
+              unawaited(_deletePendingOrder(order.id));
+            }
+          }, onLoading: (bool loading) {
+            isPaying = false;
+            onLoading?.call(loading);
+          });
+        },
+      );
     });
+  }
+
+  @override
+  void dispose() {
+    _listener.dispose();
+    super.dispose();
   }
 
   void showSnackbar() {
@@ -287,6 +322,108 @@ mixin CheckoutMixin<T extends StatefulWidget> on State<T>, RazorDelegate {
         return;
       }
 
+      /// PayPal Payment
+      if (!isSubscriptionProduct &&
+          isNotBlank(kPaypalExpressConfig['paymentMethodId']) &&
+          paymentMethod.id!.contains(kPaypalExpressConfig['paymentMethodId']) &&
+          kPaypalExpressConfig['enabled'] == true) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PaypalPayment(
+              isExpressCheckout: true,
+              onFinish: (payerID, paymentToken, paymentId) {
+                if (payerID == null) {
+                  onLoading?.call(false);
+                  isPaying = false;
+                  return;
+                } else {
+                  createOrder(
+                    paid: true,
+                    additionalPaymentInfo: AdditionalPaymentInfo(
+                      ppPayerId: payerID,
+                      ppPaymentToken: paymentToken,
+                      ppPaymentId: paymentId,
+                    ),
+                  ).then((value) {
+                    onLoading?.call(false);
+                    isPaying = false;
+                  });
+                }
+              },
+            ),
+          ),
+        );
+        return;
+      }
+      if (!isSubscriptionProduct &&
+          isNotBlank(kPaypalConfig['paymentMethodId']) &&
+          paymentMethod.id!.contains(kPaypalConfig['paymentMethodId']) &&
+          kPaypalConfig['enabled'] == true) {
+        if (kPaypalConfig['nativeMode'] ?? false) {
+          PayPalNative().checkout(
+            cartModel: cartModel,
+            currency: context.read<AppModel>().currency,
+            currencyRate: currencyRate,
+            callback: PPCheckoutCallback(
+              onApprove: (approveData) async {
+                try {
+                  await createOrder(
+                          paid: true,
+                          additionalPaymentInfo: AdditionalPaymentInfo(
+                              ppPayerId: approveData.payerId,
+                              ppPaymentId: approveData.paymentId))
+                      .then((value) {
+                    onLoading?.call(false);
+                    isPaying = false;
+                  });
+                } catch (e) {
+                  isPaying = false;
+                  onLoading?.call(false);
+                }
+              },
+              onCancel: () {
+                onLoading?.call(false);
+                isPaying = false;
+              },
+              onError: (error) {
+                onLoading?.call(false);
+                isPaying = false;
+              },
+            ),
+          );
+          return;
+        }
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PaypalPayment(
+              isExpressCheckout: false,
+              onFinish: (payerID, paymentToken, paymentId) {
+                if (payerID == null) {
+                  onLoading?.call(false);
+                  isPaying = false;
+                  return;
+                } else {
+                  createOrder(
+                    paid: true,
+                    additionalPaymentInfo: AdditionalPaymentInfo(
+                      ppPayerId: payerID,
+                      ppPaymentToken: paymentToken,
+                      ppPaymentId: paymentId,
+                    ),
+                  ).then((value) {
+                    onLoading?.call(false);
+                    isPaying = false;
+                  });
+                }
+              },
+            ),
+          ),
+        );
+        return;
+      }
+
       /// MercadoPago payment
       if (!isSubscriptionProduct &&
           isNotBlank(kMercadoPagoConfig['paymentMethodId']) &&
@@ -310,6 +447,184 @@ mixin CheckoutMixin<T extends StatefulWidget> on State<T>, RazorDelegate {
               },
             ),
           ),
+        );
+        return;
+      }
+
+      /// Tap Payment
+      if (!isSubscriptionProduct &&
+          isNotBlank(kTapConfig['paymentMethodId']) &&
+          paymentMethod.id!.contains(kTapConfig['paymentMethodId']) &&
+          kTapConfig['enabled'] == true) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => TapPayment(
+                    amount: PriceTools.getPriceByRate(
+                        cartModel.getTotal(), currencyRate,
+                        currency: cartModel.currencyCode)!,
+                    currency: cartModel.currencyCode,
+                    address: cartModel.address,
+                    onSuccess: (String number) {
+                      createOrder(
+                              paid: true,
+                              additionalPaymentInfo:
+                                  AdditionalPaymentInfo(transactionId: number))
+                          .then((value) {
+                        onLoading?.call(false);
+                        isPaying = false;
+                      });
+                    },
+                    onError: (String? errMsg) {
+                      isPaying = false;
+                      onLoading?.call(false);
+                      if (errMsg?.isNotEmpty ?? false) {
+                        FlashHelper.errorMessage(
+                          context,
+                          message: errMsg ?? '',
+                        );
+                      }
+                    },
+                  )),
+        );
+        return;
+      }
+
+      /// Stripe payment
+      if (!isSubscriptionProduct &&
+          [
+            ...(kStripeConfig['paymentMethodIds'] ?? []),
+            kStripeApplePayMethod,
+            kStripeGooglePayMethod,
+          ].contains(paymentMethod.id) &&
+          kStripeConfig['enabled'] == true) {
+        Future<void> makePayment(
+            {required Function(String?) onSuccess, orderId}) async {
+          try {
+            final totalPrice = PriceTools.getPriceByRate(
+                cartModel.getTotal(), currencyRate,
+                currency: cartModel.currencyCode)!;
+            final appModel = Provider.of<AppModel>(context, listen: false);
+            final currencyCode = appModel.currencyCode!;
+            final finalPrice =
+                (totalPrice * PriceTools.getStripeSmallestUnit(currencyCode))
+                    .round()
+                    .toStringAsFixed(0);
+            final success = await StripeServicesV2().handlePayment(
+              context,
+              orderId: orderId,
+              totalPrice: finalPrice,
+              applePayPrice: totalPrice.toStringAsFixed(2),
+              useApplePay: paymentMethod.id == kStripeApplePayMethod,
+              useGooglePay: paymentMethod.id == kStripeGooglePayMethod,
+              currencyCode: currencyCode,
+              emailAddress: cartModel.address?.email ?? '',
+              name:
+                  '${cartModel.address?.firstName} ${cartModel.address?.lastName}'
+                      .trim(),
+              color: Theme.of(context).primaryColor,
+              darkMode: Provider.of<AppModel>(context, listen: false).darkTheme,
+              address: cartModel.address,
+              cookie: ServerConfig().isWooType &&
+                      (kStripeConfig['saveCardAfterCheckout'] ?? false)
+                  ? cartModel.user?.cookie
+                  : null,
+            );
+
+            if (!success) {
+              unawaited(
+                FlashHelper.errorMessage(
+                  context,
+                  message: S.of(context).transactionFailed,
+                ),
+              );
+              isPaying = false;
+              onLoading?.call(false);
+              unawaited(_deletePendingOrder(orderId));
+              return;
+            }
+
+            onSuccess.call(null);
+          } on StripeException catch (e) {
+            unawaited(
+              FlashHelper.errorMessage(
+                context,
+                message:
+                    e.error.localizedMessage ?? S.of(context).transactionFailed,
+              ),
+            );
+            isPaying = false;
+            onLoading?.call(false);
+            unawaited(_deletePendingOrder(orderId));
+          } on PlatformException catch (e) {
+            unawaited(
+              FlashHelper.errorMessage(
+                context,
+                message: e.message ?? S.of(context).transactionCancelled,
+              ),
+            );
+            isPaying = false;
+            onLoading?.call(false);
+            unawaited(_deletePendingOrder(orderId));
+          } catch (e) {
+            unawaited(
+              FlashHelper.errorMessage(
+                context,
+                message: e.toString(),
+              ),
+            );
+            isPaying = false;
+            onLoading?.call(false);
+            unawaited(_deletePendingOrder(orderId));
+          }
+        }
+
+        // It will need to make payment before creating an order on your website
+        final cannotUpdateOrderStatusList = ['magento'];
+
+        if (cannotUpdateOrderStatusList.contains(serverConfig['type'])) {
+          Future.microtask(() async {
+            await makePayment(
+              onSuccess: (transactionId) async {
+                await createOrder(
+                        paid: true,
+                        additionalPaymentInfo:
+                            AdditionalPaymentInfo(transactionId: transactionId))
+                    .then((value) {
+                  onLoading?.call(false);
+                  isPaying = false;
+                });
+              },
+            );
+          });
+          return;
+        }
+
+        // Firstly, create an order for the stripe webhook.
+        // Then try to update order status after successful payment in case webhook doesn't work
+        createOrderOnWebsite(
+          paid: false,
+          onFinish: (Order? order) async {
+            final orderId = order?.id;
+            if (orderId != null) {
+              await makePayment(
+                orderId: orderId,
+                onSuccess: (transactionId) async {
+                  final token = context.read<UserModel>().user?.cookie;
+                  try {
+                    await Services().api.updateOrder(orderId,
+                        status: 'processing', token: token);
+                  } catch (e, trace) {
+                    printError('updateOrder: $e', trace);
+                  }
+
+                  onLoading?.call(false);
+                  isPaying = false;
+                  onFinish?.call(order);
+                },
+              );
+            }
+          },
         );
         return;
       }
@@ -373,6 +688,44 @@ mixin CheckoutMixin<T extends StatefulWidget> on State<T>, RazorDelegate {
                 try {
                   await paytmServices.openPayment();
                   onFinish!(order);
+                } catch (e) {
+                  Tools.showSnackBar(
+                      ScaffoldMessenger.of(context), e.toString());
+                  isPaying = false;
+                  unawaited(_deletePendingOrder(order.id));
+                }
+              }
+            });
+        return;
+      }
+
+      /// Midtrans payment.
+      final availableMidtrans = kMidtransConfig['paymentMethodId'] != null &&
+          (kMidtransConfig['enabled'] ?? false) &&
+          paymentMethod.id!.contains(kMidtransConfig['paymentMethodId']);
+      if (!isSubscriptionProduct && availableMidtrans) {
+        createOrderOnWebsite(
+            paid: false,
+            hideLoading: false,
+            onFinish: (Order? order) async {
+              if (order != null) {
+                final midtransServices = MidtransServices(
+                    amount: cartModel.getTotal()!.toString(),
+                    orderId: order.id!,
+                    currency: cartModel.currencyCode!.toUpperCase(),
+                    onCallback: (bool success) {
+                      if (success) {
+                        onFinish!(order);
+                      } else {
+                        isPaying = false;
+                        unawaited(_deletePendingOrder(order.id));
+                      }
+                    })
+                  ..initSDK(context);
+                try {
+                  await midtransServices.openPayment((bool loading) {
+                    onLoading?.call(loading);
+                  });
                 } catch (e) {
                   Tools.showSnackBar(
                       ScaffoldMessenger.of(context), e.toString());
@@ -454,6 +807,222 @@ mixin CheckoutMixin<T extends StatefulWidget> on State<T>, RazorDelegate {
                   isPaying = false;
                   unawaited(_deletePendingOrder(order.id));
                 }
+              }
+            });
+        return;
+      }
+
+      final availableMyFatoorah =
+          kMyFatoorahConfig['paymentMethodId'] != null &&
+              (kMyFatoorahConfig['enabled'] ?? false) &&
+              paymentMethod.id!.contains(kMyFatoorahConfig['paymentMethodId']);
+      if (!isSubscriptionProduct && availableMyFatoorah) {
+        createOrderOnWebsite(
+            paid: false,
+            onFinish: (Order? order) async {
+              if (order != null) {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MyFatoorahScreen(
+                      amount: PriceTools.getPriceByRate(
+                          cartModel.getTotal(), currencyRate,
+                          currency: cartModel.currencyCode)!,
+                      currency: cartModel.currencyCode,
+                      customerName: cartModel.address?.fullName ?? '',
+                      customerAddress: cartModel.address?.fullAddress ?? '',
+                      customerMobile: cartModel.address?.phoneNumber ?? '',
+                      customerEmail: cartModel.address?.email ?? '',
+                      orderID: order.id,
+                      onFinish: (String? paymentId) {
+                        onLoading?.call(false);
+                        isPaying = false;
+                        if (paymentId != null) {
+                          onFinish!(order);
+                        } else {
+                          unawaited(_deletePendingOrder(order.id));
+                        }
+                      },
+                    ),
+                  ),
+                );
+              }
+            });
+
+        return;
+      }
+
+      /// Xendit payment.
+      final availableXendit = kXenditConfig['paymentMethodId'] != null &&
+          (kXenditConfig['enabled'] ?? false) &&
+          paymentMethod.id!.contains(kXenditConfig['paymentMethodId']);
+      if (!isSubscriptionProduct && availableXendit) {
+        if (cartModel.currencyCode?.toUpperCase() != 'IDR' &&
+            cartModel.currencyCode?.toUpperCase() != 'PHP') {
+          isPaying = false;
+          onLoading?.call(false);
+          return Tools.showSnackBar(
+              ScaffoldMessenger.of(context),
+              S.of(context).currencyIsNotSupported(
+                  cartModel.currencyCode?.toUpperCase() ?? ''));
+        }
+        var errMsg = XenditServices().checkMinMaxAmount(
+            cartModel.getTotal() ?? 0, cartModel.currencyCode ?? '');
+        if (errMsg?.isNotEmpty ?? false) {
+          isPaying = false;
+          onLoading?.call(false);
+          return Tools.showSnackBar(ScaffoldMessenger.of(context), errMsg);
+        }
+        createOrderOnWebsite(
+            paid: false,
+            hideLoading: false,
+            onFinish: (Order? order) async {
+              if (order != null) {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => XenditPayment(
+                            orderId: order.id ?? '',
+                            email: cartModel.address?.email ?? '',
+                            amount: PriceTools.getPriceByRate(
+                                cartModel.getTotal(), currencyRate,
+                                currency: cartModel.currencyCode)!,
+                            currency: cartModel.currencyCode ?? '',
+                            onFailed: () {
+                              onLoading?.call(false);
+                              isPaying = false;
+                              unawaited(_deletePendingOrder(order.id));
+                            },
+                            onComplete: () {
+                              onLoading?.call(false);
+                              isPaying = false;
+                              onFinish!(order);
+                            },
+                          )),
+                );
+              }
+            });
+        return;
+      }
+
+      /// ExpressPay payment.
+      final isExpressPayApplePay = paymentMethod.id == 'expresspay_apple_pay';
+      final availableExpressPay = kExpressPayConfig['paymentMethodId'] !=
+              null &&
+          (kExpressPayConfig['enabled'] ?? false) &&
+          (paymentMethod.id!.contains(kExpressPayConfig['paymentMethodId']) ||
+              isExpressPayApplePay);
+      if (!isSubscriptionProduct && availableExpressPay) {
+        var errMessage = ExpressPayHelper.validateCheckout(context, cartModel);
+        if (errMessage?.isNotEmpty ?? false) {
+          isPaying = false;
+          onLoading?.call(false);
+          return Tools.showSnackBar(ScaffoldMessenger.of(context), errMessage);
+        }
+
+        createOrderOnWebsite(
+            paid: false,
+            hideLoading: false,
+            onFinish: (Order? order) async {
+              if (order != null) {
+                final expressPayServices = ExpressPayServices(
+                    amount: order.total ?? 0,
+                    orderId: order.id!,
+                    currency: cartModel.currencyCode ?? '',
+                    onCancel: () {
+                      onLoading?.call(false);
+                      isPaying = false;
+                      unawaited(_deletePendingOrder(order.id));
+                    },
+                    onFail: (String errMsg) {
+                      onLoading?.call(false);
+                      isPaying = false;
+                      unawaited(_deletePendingOrder(order.id));
+                      Tools.showSnackBar(ScaffoldMessenger.of(context), errMsg);
+                    },
+                    onSuccess: () {
+                      onLoading?.call(false);
+                      onFinish!(order);
+                    })
+                  ..initSDK(context);
+                if (isExpressPayApplePay) {
+                  isPaying = false;
+                  onLoading?.call(false);
+                }
+                expressPayServices.openPayment(context,
+                    isApplePay: isExpressPayApplePay);
+              }
+            });
+        return;
+      }
+
+      /// FIB payment.
+      final availableFIB = kFIBConfig['paymentMethodId'] != null &&
+          (kFIBConfig['enabled'] ?? false) &&
+          paymentMethod.id!.contains(kFIBConfig['paymentMethodId']);
+      if (!isSubscriptionProduct && availableFIB) {
+        createOrderOnWebsite(
+            paid: false,
+            hideLoading: false,
+            onFinish: (Order? order) async {
+              if (order != null) {
+                try {
+                  await _fibServices.createPayment(
+                      amount: cartModel.getTotal()!.toString(),
+                      order: order,
+                      currency: cartModel.currencyCode ?? 'usd',
+                      onLoading: (bool loading) {
+                        isPaying = false;
+                        onLoading?.call(loading);
+                      });
+                } catch (e) {
+                  Tools.showSnackBar(
+                      ScaffoldMessenger.of(context), e.toString());
+                  unawaited(_deletePendingOrder(order.id));
+                }
+              }
+            });
+        return;
+      }
+
+      /// Thawani payment.
+      final availableThawani = kThawaniConfig['paymentMethodId'] != null &&
+          (kThawaniConfig['enabled'] ?? false) &&
+          (kThawaniConfig['paymentMethodId']!.contains(paymentMethod.id) ||
+              paymentMethod.id!.contains(kThawaniConfig['paymentMethodId']));
+      if (!isSubscriptionProduct && availableThawani) {
+        if (cartModel.currencyCode?.toUpperCase() != 'OMR') {
+          isPaying = false;
+          onLoading?.call(false);
+          return Tools.showSnackBar(
+              ScaffoldMessenger.of(context),
+              S.of(context).currencyIsNotSupported(
+                  cartModel.currencyCode?.toUpperCase() ?? ''));
+        }
+        createOrderOnWebsite(
+            paid: false,
+            hideLoading: false,
+            onFinish: (Order? order) async {
+              if (order != null) {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ThawaniPayment(
+                            orderId: order.id ?? '',
+                            email: cartModel.address?.email ?? '',
+                            amount: order.total ?? 0.0,
+                            onFailed: () {
+                              onLoading?.call(false);
+                              isPaying = false;
+                              unawaited(_deletePendingOrder(order.id));
+                            },
+                            onComplete: () {
+                              onLoading?.call(false);
+                              isPaying = false;
+                              onFinish!(order);
+                            },
+                          )),
+                );
               }
             });
         return;

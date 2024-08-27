@@ -6,6 +6,7 @@ import '../../common/tools.dart';
 import '../../models/index.dart';
 import '../../routes/flux_navigate.dart';
 import '../../services/index.dart';
+import '../../services/outside/index.dart';
 import 'banner/banner_animate_items.dart';
 import 'banner/banner_grid.dart';
 import 'banner/banner_group_items.dart';
@@ -78,13 +79,22 @@ class DynamicLayout extends StatelessWidget {
           notificationCount:
               Provider.of<NotificationModel>(context).unreadCount,
           onSearch: () {
-            FluxNavigate.pushNamed(RouteList.homeSearch);
+            FluxNavigate.pushNamed(
+              RouteList.homeSearch,
+              context: context,
+            );
           },
           onCheckout: () {
-            FluxNavigate.pushNamed(RouteList.cart);
+            FluxNavigate.pushNamed(
+              RouteList.cart,
+              context: context,
+            );
           },
           onTapNotifications: () {
-            FluxNavigate.pushNamed(RouteList.notify);
+            FluxNavigate.pushNamed(
+              RouteList.notify,
+              context: context,
+            );
           },
           onTapDrawerMenu: () => NavigateTools.onTapOpenDrawerMenu(context),
         );
@@ -101,6 +111,7 @@ class DynamicLayout extends StatelessWidget {
             FluxNavigate.pushNamed(
               RouteList.homeSearch,
               forceRootNavigator: true,
+              context: context,
             );
           },
         );
@@ -124,6 +135,7 @@ class DynamicLayout extends StatelessWidget {
               config: item.toJson(),
               data: item.data,
             ),
+            context: context,
           );
         }
 
@@ -302,7 +314,7 @@ class DynamicLayout extends StatelessWidget {
           config: WebEmbedConfig.fromJson(config),
         );
       default:
-        return const SizedBox();
+        return OutsideService.dynamicLayout(config) ?? const SizedBox();
     }
   }
 }

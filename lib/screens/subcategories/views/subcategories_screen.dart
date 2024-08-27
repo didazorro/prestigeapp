@@ -134,6 +134,7 @@ class _SubcategoryScreenState extends State<SubcategoryScreen> {
                                     categoryName: category.name,
                                     level: widget.level + 1,
                                   ),
+                                  context: context,
                                 );
                                 return;
                               }
@@ -143,6 +144,7 @@ class _SubcategoryScreenState extends State<SubcategoryScreen> {
                                   cateId: category.id,
                                   cateName: category.name,
                                 ),
+                                context: context,
                               );
                             },
                             child: CategoryColumnItem(category),

@@ -26,7 +26,7 @@ class RecentProductsCustom extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 10),
                 child: Text(
-                  S.of(context).recents,
+                  S.of(context).recent,
                   style: const TextStyle(
                     fontWeight: FontWeight.w700,
                     fontSize: 20,

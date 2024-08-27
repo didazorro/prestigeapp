@@ -85,7 +85,11 @@ class _VerticalViewLayoutState extends State<VerticalViewLayout>
               config: widget.config,
               onTap: () {
                 if (_blogs[i].imageFeature == '') return;
-                onTapBlog(blog: _blogs[i], blogs: _blogs);
+                onTapBlog(
+                  blog: _blogs[i],
+                  blogs: _blogs,
+                  context: context,
+                );
               },
             );
           }),

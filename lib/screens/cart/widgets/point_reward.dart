@@ -1,16 +1,19 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../common/config.dart';
-import '../../../common/constants.dart';
 import '../../../common/extensions/num_ext.dart';
 import '../../../common/tools.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/index.dart'
     show CartModel, PointModel, AppModel, UserModel;
+import '../../../widgets/product/cart_item/cart_item_state_ui.dart';
 
 class PointReward extends StatefulWidget {
-  const PointReward();
+  final CartStyle cartStyle;
+
+  const PointReward({this.cartStyle = CartStyle.normal});
 
   @override
   State<PointReward> createState() => _PointRewardState();
@@ -108,7 +111,13 @@ class _PointRewardState extends State<PointReward> {
         final points = model.point?.points ?? 0;
 
         return Container(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+          decoration: widget.cartStyle.isStyle01
+              ? BoxDecoration(
+                  color: Theme.of(context).cardColor,
+                  borderRadius: BorderRadius.circular(5),
+                )
+              : null,
+          padding: const EdgeInsets.all(10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -138,24 +147,33 @@ class _PointRewardState extends State<PointReward> {
               const SizedBox(height: 5.0),
               Row(
                 children: [
-                  PointSelection(
-                    controller: controller,
-                    enabled: applied == false,
-                    limit: points,
-                    value: int.tryParse(controller.text) ?? 0,
+                  Expanded(
+                    child: PointSelection(
+                      controller: controller,
+                      enabled: applied == false,
+                      limit: points,
+                      value: int.tryParse(controller.text) ?? 0,
+                    ),
                   ),
-                  const SizedBox(height: 10.0),
-                  ElevatedButton(
+                  const SizedBox(width: 10.0),
+                  ElevatedButton.icon(
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Theme.of(context).primaryColor,
-                      backgroundColor: Colors.transparent,
+                      backgroundColor: Theme.of(context).primaryColorLight,
                       elevation: 0.0,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                      ),
+                    ),
+                    label: Text(
+                        applied ? S.of(context).remove : S.of(context).apply),
+                    icon: const Icon(
+                      CupertinoIcons.checkmark_seal_fill,
+                      size: 18,
                     ),
                     onPressed: () {
                       applyPoints(pointModel, cartModel);
                     },
-                    child: Text(
-                        applied ? S.of(context).remove : S.of(context).apply),
                   ),
                 ],
               ),
@@ -253,22 +271,12 @@ class _PointSelectionState extends State<PointSelection> {
     return Container(
       width: 150,
       height: 44,
-      decoration: BoxDecoration(
-        color: !widget.enabled!
-            ? Colors.black.withOpacity(0.05)
-            : Colors.transparent,
-        border: Border.all(width: 1.0, color: kGrey200),
-        borderRadius: BorderRadius.circular(22),
-      ),
+      margin: const EdgeInsets.symmetric(vertical: 10.0),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+        padding: const EdgeInsets.symmetric(vertical: 2),
         child: TextField(
           enabled: widget.enabled,
           controller: widget.controller,
-          decoration: const InputDecoration(
-            border: InputBorder.none,
-          ),
-          textAlign: TextAlign.center,
           keyboardType: TextInputType.number,
           onChanged: (text) {
             widget.onChanged?.call(int.parse(text));

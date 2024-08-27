@@ -111,7 +111,7 @@ class ColorSelection extends StatelessWidget {
     );
   }
 
-  void showOptions(context, colorAppMap) {
+  void showOptions(context, Map colorAppMap) {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {

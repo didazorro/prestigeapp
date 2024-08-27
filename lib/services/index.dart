@@ -1,6 +1,7 @@
 export 'advertisement/advertisement_service.dart';
 export 'audio/audio_manager.dart';
 export 'dependency_injection.dart';
+export 'link_service.dart';
 export 'locale_service.dart';
 export 'notification/notification_service.dart';
 export 'service_config.dart';

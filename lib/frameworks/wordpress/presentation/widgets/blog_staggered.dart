@@ -123,11 +123,15 @@ class StaggeredBlogCard extends StatelessWidget with BlogActionButtonMixin {
     this.marginRight = 10.0,
   });
 
-  Widget getImageFeature() {
+  Widget getImageFeature(BuildContext context) {
     return GestureDetector(
       onTap: () {
         if (blogs[index].imageFeature == '') return;
-        onTapBlog(blog: blogs[index], blogs: blogs);
+        onTapBlog(
+          blog: blogs[index],
+          blogs: blogs,
+          context: context,
+        );
       },
       child: isHero
           ? Hero(
@@ -155,7 +159,7 @@ class StaggeredBlogCard extends StatelessWidget with BlogActionButtonMixin {
         Container(
           color: Theme.of(context).cardColor,
           margin: const EdgeInsets.only(right: 2),
-          child: getImageFeature(),
+          child: getImageFeature(context),
         ),
         if (kBlogDetail['showHeart'] && !blogs[index].isEmpty)
           Positioned(

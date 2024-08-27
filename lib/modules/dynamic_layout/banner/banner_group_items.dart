@@ -20,17 +20,23 @@ class BannerGroupItems extends StatefulWidget {
 }
 
 class _StateBannerGroupItems extends State<BannerGroupItems> {
-  int? indexSelected;
+  int indexSelected = 0;
 
-  @override
-  void initState() {
-    super.initState();
-    if (widget.config.items.isNotEmpty) {
-      var firstItem = widget.config.items.first;
-      if (firstItem.defaultShowProduct && firstItem.bannerWithProduct) {
-        indexSelected = 0;
-      }
+  List<BannerItemConfig> get items => widget.config.items;
+
+  BannerItemConfig? get currentItem {
+    final index = indexSelected;
+    if (index < items.length) {
+      final item = items[index];
+      return item;
     }
+    return null;
+  }
+
+  bool get showProduct {
+    final item = currentItem;
+    if (item == null) return false;
+    return item.defaultShowProduct && item.bannerWithProduct;
   }
 
   double? bannerPercent(context, width) {
@@ -43,15 +49,9 @@ class _StateBannerGroupItems extends State<BannerGroupItems> {
     var bannerItems = widget.config.items;
     var item = bannerItems[index];
     if (item.bannerWithProduct) {
-      if (indexSelected == index) {
-        setState(() {
-          indexSelected = null;
-        });
-      } else {
-        setState(() {
-          indexSelected = index;
-        });
-      }
+      setState(() {
+        indexSelected = index;
+      });
       return;
     }
     widget.onTap(value);
@@ -65,12 +65,10 @@ class _StateBannerGroupItems extends State<BannerGroupItems> {
     }
   }
 
-  Future<List<Product>?> getProductsByCategoryId() async {
+  Future<List<Product>?> getProductsByCategoryId(dynamic id) async {
     try {
-      var bannerItems = widget.config.items;
-      var item = bannerItems[indexSelected!];
       return await Services().api.fetchProductsByCategory(
-            categoryId: item.categoryId?.toString(),
+            categoryId: id,
             page: 1,
           );
     } catch (e) {
@@ -86,13 +84,6 @@ class _StateBannerGroupItems extends State<BannerGroupItems> {
     final boxShadow = widget.config.boxShadow ?? BoxShadowConfig.empty();
 
     final boxFit = widget.config.fit;
-    var headerHeight = 0.0;
-    // var headerHeight = config.title != null
-    //     ? config.title['height']  +
-    //         (config['title']['marginTop'] ?? 0) +
-    //         (config['title']['marginBottom'] ?? 0) +
-    //         30
-    //     : 0.0;
 
     return BackgroundColorWidget(
       enable: widget.config.enableBackground,
@@ -102,8 +93,7 @@ class _StateBannerGroupItems extends State<BannerGroupItems> {
         return Column(
           children: [
             Container(
-              // color: Theme.of(context).backgroundColor,
-              height: height + headerHeight,
+              height: height,
               margin: EdgeInsets.only(
                 left: widget.config.marginLeft,
                 right: widget.config.marginRight,
@@ -139,70 +129,83 @@ class _StateBannerGroupItems extends State<BannerGroupItems> {
                 ],
               ),
             ),
-            if (indexSelected != null)
-              Builder(builder: (context) {
-                var bannerItems = widget.config.items;
-                var bannerSelected = bannerItems[indexSelected!];
+            if (showProduct)
+              Builder(
+                key: Key('index-$indexSelected'),
+                builder: (context) {
+                  final item = currentItem;
+                  if (item == null) {
+                    return const SizedBox();
+                  }
+                  final products = item.products;
 
-                /// display with list products
-                if (bannerSelected.products.isNotEmpty) {
-                  return Column(
-                    children: List.generate(
-                      bannerSelected.productLength,
-                      (index) => FutureBuilder<Product?>(
-                          future:
-                              getProductById(bannerSelected.products[index]),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
+                  /// display with list products
+                  if (products.isNotEmpty) {
+                    return Column(
+                      children: List.generate(
+                        item.productLength,
+                        (index) {
+                          if (index > products.length) {
+                            return const SizedBox();
+                          }
+                          final product = products[index];
+                          return FutureBuilder<Product?>(
+                            future: getProductById(product),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                return ProductSimpleView(
+                                  item: snapshot.data,
+                                  type: SimpleType.backgroundColor,
+                                  enableBackgroundColor: false,
+                                );
+                              }
                               return ProductSimpleView(
-                                item: snapshot.data,
+                                item: Product.empty(index.toString()),
                                 type: SimpleType.backgroundColor,
                                 enableBackgroundColor: false,
                               );
-                            }
-                            return ProductSimpleView(
-                              item: Product.empty(index.toString()),
+                            },
+                          );
+                        },
+                      ),
+                    );
+                  }
+
+                  /// display with category id
+                  return FutureBuilder<List<Product>?>(
+                    future: getProductsByCategoryId(item.categoryId),
+                    builder: (context, snapshot) {
+                      final data = snapshot.data ?? [];
+                      var length = data.length;
+                      if (length > item.productLength) {
+                        length = item.productLength;
+                      }
+                      if (snapshot.hasData) {
+                        return Column(
+                          children: List.generate(
+                            length,
+                            (index) => ProductSimpleView(
+                              item: data[index],
                               type: SimpleType.backgroundColor,
                               enableBackgroundColor: false,
-                            );
-                          }),
-                    ),
-                  );
-                }
-
-                /// display with category id
-                return FutureBuilder<List<Product>?>(
-                  future: getProductsByCategoryId(),
-                  builder: (context, snapshot) {
-                    var length = snapshot.data?.length ?? 0;
-                    if (length > bannerSelected.productLength) {
-                      length = bannerSelected.productLength;
-                    }
-                    if (snapshot.hasData) {
+                            ),
+                          ),
+                        );
+                      }
                       return Column(
                         children: List.generate(
-                          length,
+                          item.productLength,
                           (index) => ProductSimpleView(
-                            item: snapshot.data![index],
+                            item: Product.empty(index.toString()),
                             type: SimpleType.backgroundColor,
                             enableBackgroundColor: false,
                           ),
                         ),
                       );
-                    }
-                    return Column(
-                      children: List.generate(
-                        bannerSelected.productLength,
-                        (index) => ProductSimpleView(
-                          item: Product.empty(index.toString()),
-                          type: SimpleType.backgroundColor,
-                          enableBackgroundColor: false,
-                        ),
-                      ),
-                    );
-                  },
-                );
-              }),
+                    },
+                  );
+                },
+              ),
           ],
         );
       }),

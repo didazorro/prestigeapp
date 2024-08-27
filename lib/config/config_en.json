@@ -63,7 +63,6 @@
         }
       ]
     },
-
     {
       "layout": "category",
       "type": "icon",
@@ -140,7 +139,12 @@
       "isSnapping": true,
       "tag": 90
     },
-    {"layout": "brand", "name": "Top Brand Choices", "isBrandNameShown": true , "isLogoCornerRounded":  true},
+    {
+      "layout": "brand",
+      "name": "Top Brand Choices",
+      "isBrandNameShown": true,
+      "isLogoCornerRounded": true
+    },
     {
       "name": "Recent View",
       "layout": "recentView"
@@ -152,7 +156,6 @@
       "isSnapping": true,
       "category": 38
     },
-
     {
       "layout": "bannerImage",
       "items": [

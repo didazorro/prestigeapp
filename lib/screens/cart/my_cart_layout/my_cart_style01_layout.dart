@@ -123,12 +123,13 @@ class _MyCartStyle01LayoutState extends State<MyCartStyle01Layout>
                                               widget.enabledTextBoxQuantity,
                                             ),
                                           ),
-                                        const SizedBox(
-                                          height: 10.0,
-                                        ),
-                                        const ShoppingCartSummary(
-                                          showPrice: false,
-                                          cartStyle: CartStyle.style01,
+                                        const Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 16, vertical: 8),
+                                          child: ShoppingCartSummary(
+                                            showPrice: false,
+                                            cartStyle: CartStyle.style01,
+                                          ),
                                         ),
                                         if (totalCartQuantity == 0)
                                           const EmptyCart(),

@@ -11,14 +11,11 @@ import '../../../models/entities/chat_user.dart';
 
 class ChatRoomItem extends StatefulWidget {
   final ChatRoom chatRoom;
-  final ChatUser? chatUser;
-
   final VoidCallback onTap;
 
   const ChatRoomItem({
     super.key,
     required this.chatRoom,
-    this.chatUser,
     required this.onTap,
   });
 
@@ -29,16 +26,29 @@ class ChatRoomItem extends StatefulWidget {
 class _ChatRoomItemState extends State<ChatRoomItem> {
   bool isHovered = false;
 
+  ChatRoom get chatRoom => widget.chatRoom;
+
+  String get senderEmail => context.read<ChatViewModel>().senderEmail;
+
+  List<ChatUser> get otherUsers => chatRoom.getOtherUsers(senderEmail);
+
+  ChatUser? get receiverUser => chatRoom.getReceiverUser(senderEmail);
+
+  ChatUser? get senderUser => chatRoom.getSenderUser(senderEmail);
+
   @override
   Widget build(BuildContext context) {
-    final model = context.read<ChatViewModel>();
-    final isAdmin = model.isAdminOrVendor;
-    final currentUserEmail = widget.chatUser?.email ?? '';
-    if (currentUserEmail.isEmpty) {
+    final receiverEmail = receiverUser?.email ?? '';
+
+    if (receiverEmail.isEmpty) {
       /// Hide invalid chat.
       return const SizedBox.shrink();
     }
-    final unread = widget.chatRoom.getOtherUser(currentUserEmail)?.unread ?? 0;
+    final isSelectedRoom = context.select((ChatViewModel chatViewModel) =>
+        chatViewModel.selectedChatRoomId == chatRoom.id);
+    final unread = senderUser?.unread ?? 0;
+    final isReceiverActive = receiverUser?.isActive;
+
     return MouseRegion(
       onExit: (_) => setState(() => isHovered = false),
       onEnter: (_) => setState(() => isHovered = true),
@@ -54,16 +64,12 @@ class _ChatRoomItemState extends State<ChatRoomItem> {
             horizontal: 8,
           ),
           decoration: BoxDecoration(
-            color: context.select((ChatViewModel chatViewModel) =>
-                        chatViewModel.selectedChatRoomId ==
-                        widget.chatRoom.id) ||
-                    isHovered
+            color: isSelectedRoom || isHovered
                 ? Theme.of(context).primaryColor.withOpacity(0.1)
                 : Theme.of(context).primaryColorLight,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: context.select((ChatViewModel chatViewModel) =>
-                      chatViewModel.selectedChatRoomId == widget.chatRoom.id)
+              color: isSelectedRoom
                   ? Theme.of(context).primaryColor.withOpacity(0.1)
                   : Colors.transparent,
               width: 2.0,
@@ -71,33 +77,35 @@ class _ChatRoomItemState extends State<ChatRoomItem> {
           ),
           child: Row(
             children: [
-              const SizedBox(width: 16),
-              DecoratedBox(
-                decoration: BoxDecoration(
-                  color: widget.chatUser?.isActive == true
-                      ? Colors.green
-                      : Colors.transparent,
-                  borderRadius: BorderRadius.circular(4),
-                  border: Border.all(
-                    color: widget.chatUser?.isActive == true
-                        ? Colors.green
-                        : Colors.grey,
-                    width: 1,
-                  ),
-                ),
-                child: const SizedBox(
-                  width: 8,
-                  height: 8,
-                ),
-              ),
-              const SizedBox(width: 16),
+              const SizedBox(width: 8),
               SizedBox.square(
                 dimension: 32.0,
                 child: CircleAvatar(
-                  foregroundImage: NetworkImage(
-                    getGravatarUrl(widget.chatUser?.email ?? ''),
+                  backgroundImage: NetworkImage(
+                    getGravatarUrl(receiverEmail),
                   ),
                   backgroundColor: Colors.grey[200],
+                  child: Align(
+                    alignment: Alignment.bottomRight,
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: isReceiverActive == true
+                            ? Colors.green
+                            : Colors.transparent,
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(
+                          color: isReceiverActive == true
+                              ? Theme.of(context).colorScheme.surface
+                              : Colors.transparent,
+                          width: 1,
+                        ),
+                      ),
+                      child: const SizedBox(
+                        width: 9,
+                        height: 9,
+                      ),
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(width: 8),
@@ -107,10 +115,10 @@ class _ChatRoomItemState extends State<ChatRoomItem> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Tooltip(
-                      message: widget.chatUser?.email ?? '',
+                      message: receiverEmail,
                       waitDuration: const Duration(milliseconds: 500),
                       child: Text(
-                        widget.chatUser?.email ?? '',
+                        receiverEmail,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
@@ -120,9 +128,7 @@ class _ChatRoomItemState extends State<ChatRoomItem> {
                     ),
                     Row(
                       children: [
-                        if (isAdmin
-                            ? widget.chatRoom.userTyping
-                            : widget.chatRoom.adminTyping)
+                        if (otherUsers.any((user) => user.isTyping))
                           Flexible(
                             child: Text(
                               S.of(context).typing,
@@ -131,13 +137,13 @@ class _ChatRoomItemState extends State<ChatRoomItem> {
                               ),
                             ),
                           )
-                        else if (widget.chatRoom.latestMessage.isNotEmpty)
+                        else if (chatRoom.latestMessage.isNotEmpty)
                           Flexible(
                             child: Tooltip(
                               waitDuration: const Duration(milliseconds: 500),
-                              message: widget.chatRoom.latestMessage,
+                              message: chatRoom.latestMessage,
                               child: Text(
-                                widget.chatRoom.latestMessage,
+                                chatRoom.latestMessage,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
@@ -155,7 +161,7 @@ class _ChatRoomItemState extends State<ChatRoomItem> {
                   ],
                 ),
               ),
-              if (widget.chatUser?.email != null && unread > 0) ...[
+              if (receiverUser?.email != null && unread > 0) ...[
                 const SizedBox(width: 16),
                 Container(
                   height: 24,
@@ -178,10 +184,10 @@ class _ChatRoomItemState extends State<ChatRoomItem> {
               ],
               const SizedBox(width: 16),
               Text(
-                timeago.format(widget.chatRoom.createdAt.toLocal()),
+                timeago.format(chatRoom.updatedAt.toLocal()),
                 style: context.theme.textTheme.bodySmall,
               ),
-              const SizedBox(width: 16),
+              const SizedBox(width: 8),
             ],
           ),
         ),

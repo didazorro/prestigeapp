@@ -10,6 +10,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../common/config.dart';
 import '../../common/constants.dart';
 import '../../common/extensions/extensions.dart';
+import '../../models/entities/cookie_data.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
@@ -17,7 +18,7 @@ class WebViewInApp extends StatefulWidget {
   final String url;
   final String? title;
   final String? script;
-  final Function(String?)? onUrlChanged;
+  final Function(String?, String?, InAppWebViewController?)? onUrlChanged;
   final Map<String, String>? headers;
   final Function? onClosed;
   final bool enableForward;
@@ -27,6 +28,7 @@ class WebViewInApp extends StatefulWidget {
   final AppBar? appBar;
   final bool showAppBar;
   final bool showLoading;
+  final List<CookieData>? cookies;
 
   const WebViewInApp({
     super.key,
@@ -43,6 +45,7 @@ class WebViewInApp extends StatefulWidget {
     this.appBar,
     this.showAppBar = true,
     this.showLoading = true,
+    this.cookies,
   });
 
   @override
@@ -66,12 +69,14 @@ class _WebViewInAppState extends State<WebViewInApp> {
   );
 
   late PullToRefreshController pullToRefreshController;
+  bool get _canPop =>
+      ModalRoute.of(context)?.canPop ?? Navigator.of(context).canPop();
 
   void onTapBackButton() async {
     final value = await webViewController?.canGoBack();
     if (value == true) {
       await webViewController?.goBack();
-    } else if (!widget.enableClose && Navigator.canPop(context)) {
+    } else if (!widget.enableClose && _canPop) {
       widget.onClosed?.call();
       Navigator.of(context).pop();
     }
@@ -83,7 +88,10 @@ class _WebViewInAppState extends State<WebViewInApp> {
 
   void onTapCloseButton() async {
     widget.onClosed?.call();
-    Navigator.of(context).pop();
+
+    if (_canPop) {
+      Navigator.of(context).pop();
+    }
   }
 
   @override
@@ -97,6 +105,20 @@ class _WebViewInAppState extends State<WebViewInApp> {
   @override
   void initState() {
     super.initState();
+    if (widget.cookies?.isNotEmpty ?? false) {
+      final cookieManager = CookieManager.instance();
+      for (var cookie in widget.cookies!) {
+        if (cookie.valid) {
+          cookieManager.setCookie(
+            url: WebUri(widget.url),
+            name: cookie.name,
+            value: cookie.value,
+            isSecure: true,
+          );
+        }
+      }
+    }
+
     pullToRefreshController = PullToRefreshController(
       settings: PullToRefreshSettings(
         color: Colors.black45,
@@ -232,19 +254,22 @@ class _WebViewInAppState extends State<WebViewInApp> {
             onReceivedError: (controller, request, error) {
               pullToRefreshController.endRefreshing();
             },
-            onLoadStop: (_, __) {
+            onLoadStop: (androidIsReload, uri) {
               setState(() {
                 selectedIndex = 0;
               });
+              if (isAndroid) {
+                _onUrlChange(uri);
+              }
             },
             onProgressChanged: (_, progress) {
               if (progress == 100) {
                 pullToRefreshController.endRefreshing();
               }
             },
-            onUpdateVisitedHistory: (_, uri, androidIsReload) {
-              if (widget.onUrlChanged != null) {
-                widget.onUrlChanged!(uri?.toString());
+            onUpdateVisitedHistory: (ctrl, uri, androidIsReload) {
+              if (isAndroid == false) {
+                _onUrlChange(uri);
               }
             },
             onDownloadStartRequest: (_, request) async {
@@ -261,5 +286,13 @@ class _WebViewInAppState extends State<WebViewInApp> {
         ],
       ),
     );
+  }
+
+  Future<void> _onUrlChange(WebUri? uri) async {
+    if (widget.onUrlChanged != null) {
+      final html = await webViewController?.getHtml();
+      WidgetsBinding.instance.addPostFrameCallback((_) =>
+          widget.onUrlChanged!(uri?.toString(), html, webViewController));
+    }
   }
 }

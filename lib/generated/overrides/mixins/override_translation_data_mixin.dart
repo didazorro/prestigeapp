@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 import '../../l10n.dart';
 import 'override_translation_mixin.dart';
 
@@ -124,6 +126,10 @@ mixin OverrideTranslateMixin on OverrideTranslateActionMixin implements S {
   @override
   String get myWishList => getCustomTranslate('myWishList', parent.myWishList);
 
+  /// `My Order`
+  @override
+  String get myOrder => getCustomTranslate('myOrder', parent.myOrder);
+
   /// `Your bag is empty`
   @override
   String get yourBagIsEmpty =>
@@ -181,6 +187,11 @@ mixin OverrideTranslateMixin on OverrideTranslateActionMixin implements S {
   /// `Shipping`
   @override
   String get shipping => getCustomTranslate('shipping', parent.shipping);
+
+  /// `Shipping Fee`
+  @override
+  String get shippingFee =>
+      getCustomTranslate('shippingFee', parent.shippingFee);
 
   /// `preview`
   @override
@@ -300,7 +311,7 @@ mixin OverrideTranslateMixin on OverrideTranslateActionMixin implements S {
   String get yourOrderIsConfirmed =>
       getCustomTranslate('yourOrderIsConfirmed', parent.yourOrderIsConfirmed);
 
-  /// `Thanks for your order at FluxStore. We're working quickly to process your order. Stay tuned for a confirmation email shortly`
+  /// `Thanks for your order. We're working quickly to process your order. Stay tuned for a confirmation email shortly`
   @override
   String get subTitleOrderConfirmed => getCustomTranslate(
       'subTitleOrderConfirmed', parent.subTitleOrderConfirmed);
@@ -332,7 +343,7 @@ mixin OverrideTranslateMixin on OverrideTranslateActionMixin implements S {
   @override
   String get itsOrdered => getCustomTranslate('itsOrdered', parent.itsOrdered);
 
-  /// `Order No.`
+  /// `Order No`
   @override
   String get orderNo => getCustomTranslate('orderNo', parent.orderNo);
 
@@ -424,7 +435,7 @@ mixin OverrideTranslateMixin on OverrideTranslateActionMixin implements S {
 
   /// `Recent`
   @override
-  String get recents => getCustomTranslate('recents', parent.recents);
+  String get recent => getCustomTranslate('recent', parent.recent);
 
   /// `By Price`
   @override
@@ -433,6 +444,10 @@ mixin OverrideTranslateMixin on OverrideTranslateActionMixin implements S {
   /// `By Category`
   @override
   String get byCategory => getCustomTranslate('byCategory', parent.byCategory);
+
+  /// `By Brand`
+  @override
+  String get byBrand => getCustomTranslate('byBrand', parent.byBrand);
 
   /// `No internet connection`
   @override
@@ -600,6 +615,11 @@ mixin OverrideTranslateMixin on OverrideTranslateActionMixin implements S {
   String get availability =>
       getCustomTranslate('availability', parent.availability);
 
+  /// `Availability: `
+  @override
+  String get availabilityProduct =>
+      getCustomTranslate('availabilityProduct', parent.availabilityProduct);
+
   /// `Tracking page`
   @override
   String get trackingPage =>
@@ -648,6 +668,10 @@ mixin OverrideTranslateMixin on OverrideTranslateActionMixin implements S {
   /// `Loading...`
   @override
   String get loading => getCustomTranslate('loading', parent.loading);
+
+  /// `Processing...`
+  @override
+  String get processing => getCustomTranslate('processing', parent.processing);
 
   /// `Your rating`
   @override
@@ -989,10 +1013,10 @@ mixin OverrideTranslateMixin on OverrideTranslateActionMixin implements S {
   String get newPassword =>
       getCustomTranslate('newPassword', parent.newPassword);
 
-  /// `have been added to your cart`
+  /// `Added to cart successfully`
   @override
-  String get addToCartSucessfully =>
-      getCustomTranslate('addToCartSucessfully', parent.addToCartSucessfully);
+  String get addToCartSuccessfully =>
+      getCustomTranslate('addToCartSuccessfully', parent.addToCartSuccessfully);
 
   /// `Pull to Load more`
   @override
@@ -1007,6 +1031,10 @@ mixin OverrideTranslateMixin on OverrideTranslateActionMixin implements S {
   @override
   String get releaseToLoadMore =>
       getCustomTranslate('releaseToLoadMore', parent.releaseToLoadMore);
+
+  /// `View more`
+  @override
+  String get viewMore => getCustomTranslate('viewMore', parent.viewMore);
 
   /// `No more Data`
   @override
@@ -1138,7 +1166,7 @@ mixin OverrideTranslateMixin on OverrideTranslateActionMixin implements S {
       'shoppingCartItems', parent.shoppingCartItems(totalCartQuantity),
       args: {'totalCartQuantity': totalCartQuantity});
 
-  /// `On-hold`
+  /// `On hold`
   @override
   String get orderStatusOnHold =>
       getCustomTranslate('orderStatusOnHold', parent.orderStatusOnHold);
@@ -1252,8 +1280,8 @@ mixin OverrideTranslateMixin on OverrideTranslateActionMixin implements S {
 
   /// `Error: {message}`
   @override
-  String error(Object message) =>
-      getCustomTranslate('error', parent.error(message),
+  String errorMsg(Object message) =>
+      getCustomTranslate('errorMsg', parent.errorMsg(message),
           args: {'message': message});
 
   /// `Go back to home page`
@@ -1338,20 +1366,20 @@ mixin OverrideTranslateMixin on OverrideTranslateActionMixin implements S {
 
   /// `Enter the code sent to`
   @override
-  String get enterSendedCode =>
-      getCustomTranslate('enterSendedCode', parent.enterSendedCode);
+  String get enterSentCode =>
+      getCustomTranslate('enterSentCode', parent.enterSentCode);
 
   /// `*Please fill up all the cells properly`
   @override
-  String get pleasefillUpAllCellsProperly => getCustomTranslate(
-      'pleasefillUpAllCellsProperly', parent.pleasefillUpAllCellsProperly);
+  String get pleaseFillUpAllCellsProperly => getCustomTranslate(
+      'pleaseFillUpAllCellsProperly', parent.pleaseFillUpAllCellsProperly);
 
   /// `Didn't receive the code? `
   @override
   String get didntReceiveCode =>
       getCustomTranslate('didntReceiveCode', parent.didntReceiveCode);
 
-  /// ` RESEND`
+  /// `resend`
   @override
   String get resend => getCustomTranslate('resend', parent.resend);
 
@@ -1379,10 +1407,33 @@ mixin OverrideTranslateMixin on OverrideTranslateActionMixin implements S {
   String get noResultFound =>
       getCustomTranslate('noResultFound', parent.noResultFound);
 
+  /// `There are no suggestions`
+  @override
+  String get noSuggestionSearch =>
+      getCustomTranslate('noSuggestionSearch', parent.noSuggestionSearch);
+
   /// `Search Place`
   @override
   String get searchPlace =>
       getCustomTranslate('searchPlace', parent.searchPlace);
+
+  /// `{keyword} ({count} items)`
+  @override
+  String searchResultItems(Object keyword, Object count) => getCustomTranslate(
+      'searchResultItems', parent.searchResultItems(keyword, count),
+      args: {'keyword': keyword, 'count': count});
+
+  /// `{keyword} ({count} item)`
+  @override
+  String searchResultItem(Object keyword, Object count) => getCustomTranslate(
+      'searchResultItem', parent.searchResultItem(keyword, count),
+      args: {'keyword': keyword, 'count': count});
+
+  /// `Search results for: '{keyword}'`
+  @override
+  String searchResultFor(Object keyword) =>
+      getCustomTranslate('searchResultFor', parent.searchResultFor(keyword),
+          args: {'keyword': keyword});
 
   /// `Tap to select this location`
   @override
@@ -1761,9 +1812,9 @@ mixin OverrideTranslateMixin on OverrideTranslateActionMixin implements S {
   String get saveForLater =>
       getCustomTranslate('saveForLater', parent.saveForLater);
 
-  /// `Refunds`
+  /// `Refund`
   @override
-  String get refund => getCustomTranslate('refunds', parent.refund);
+  String get refund => getCustomTranslate('refund', parent.refund);
 
   /// `Continue`
   @override
@@ -2149,6 +2200,11 @@ mixin OverrideTranslateMixin on OverrideTranslateActionMixin implements S {
   String get noListingNearby =>
       getCustomTranslate('noListingNearby', parent.noListingNearby);
 
+  /// `No store nearby!`
+  @override
+  String get noStoreNearby =>
+      getCustomTranslate('noStoreNearby', parent.noStoreNearby);
+
   /// `The email account that you entered does not exist. Please try again.`
   @override
   String get emailDoesNotExist =>
@@ -2468,10 +2524,38 @@ mixin OverrideTranslateMixin on OverrideTranslateActionMixin implements S {
   @override
   String get delivered => getCustomTranslate('delivered', parent.delivered);
 
+  /// `Cancel`
+  @override
+  String get cancelOrder =>
+      getCustomTranslate('cancelOrder', parent.cancelOrder);
+
+  /// `Waiting for delivery`
+  @override
+  String get readyToPick =>
+      getCustomTranslate('readyToPick', parent.readyToPick);
+
+  /// `Waiting for delivery`
+  @override
+  String get picking => getCustomTranslate('picking', parent.picking);
+
+  /// `Delivering`
+  @override
+  String get delivering => getCustomTranslate('delivering', parent.delivering);
+
   /// `Incorrect password`
   @override
   String get incorrectPassword =>
       getCustomTranslate('incorrectPassword', parent.incorrectPassword);
+
+  /// `The request is invalid or expired. Please try again`
+  @override
+  String get registerInvalid =>
+      getCustomTranslate('registerInvalid', parent.registerInvalid);
+
+  /// `Unable to sync account. Please log in to continue.`
+  @override
+  String get registerErrorSyncAccount => getCustomTranslate(
+      'registerErrorSyncAccount', parent.registerErrorSyncAccount);
 
   /// `Delivery Details`
   @override
@@ -2523,7 +2607,7 @@ mixin OverrideTranslateMixin on OverrideTranslateActionMixin implements S {
   String get productCreateReview =>
       getCustomTranslate('productCreateReview', parent.productCreateReview);
 
-  /// `Your post has been created succesfully`
+  /// `Your post has been created successfully`
   @override
   String get postSuccessfully =>
       getCustomTranslate('postSuccessfully', parent.postSuccessfully);
@@ -3015,7 +3099,7 @@ mixin OverrideTranslateMixin on OverrideTranslateActionMixin implements S {
   String get transactionResult =>
       getCustomTranslate('transactionResult', parent.transactionResult);
 
-  /// `Transfer failed`
+  /// `Transfer failed!`
   @override
   String get transferFailed =>
       getCustomTranslate('transferFailed', parent.transferFailed);
@@ -3270,7 +3354,7 @@ mixin OverrideTranslateMixin on OverrideTranslateActionMixin implements S {
   @override
   String get added => getCustomTranslate('added', parent.added);
 
-  /// `Re-Order`
+  /// `Re-order`
   @override
   String get reOrder => getCustomTranslate('reOrder', parent.reOrder);
 
@@ -3440,6 +3524,12 @@ mixin OverrideTranslateMixin on OverrideTranslateActionMixin implements S {
   String get walletBalance =>
       getCustomTranslate('walletBalance', parent.walletBalance);
 
+  /// `Wallet balance: {balance}`
+  @override
+  String walletBalanceWithValue(Object balance) => getCustomTranslate(
+      'walletBalanceWithValue', parent.walletBalanceWithValue(balance),
+      args: {'balance': balance});
+
   /// `More information`
   @override
   String get moreInformation =>
@@ -3505,6 +3595,30 @@ mixin OverrideTranslateMixin on OverrideTranslateActionMixin implements S {
   /// `Item`
   @override
   String get item => getCustomTranslate('item', parent.item);
+
+  /// `{count} item`
+  @override
+  String countItem(Object count) =>
+      getCustomTranslate('countItem', parent.countItem(count),
+          args: {'count': count});
+
+  /// `{count} items`
+  @override
+  String countItems(Object count) =>
+      getCustomTranslate('countItems', parent.countItems(count),
+          args: {'count': count});
+
+  /// `{count} item`
+  @override
+  String countProduct(Object count) =>
+      getCustomTranslate('countProduct', parent.countProduct(count),
+          args: {'count': count});
+
+  /// `{count} items`
+  @override
+  String countProducts(Object count) =>
+      getCustomTranslate('countProducts', parent.countProducts(count),
+          args: {'count': count});
 
   /// `Bluetooth Adapter is {state}`
   @override
@@ -3902,6 +4016,11 @@ mixin OverrideTranslateMixin on OverrideTranslateActionMixin implements S {
   String get accountIsPendingApproval => getCustomTranslate(
       'accountIsPendingApproval', parent.accountIsPendingApproval);
 
+  /// `Under Approval`
+  @override
+  String get accountApprovalTitle =>
+      getCustomTranslate('accountApprovalTitle', parent.accountApprovalTitle);
+
   /// `The username or password is incorrect.`
   @override
   String get userNameInCorrect =>
@@ -3956,8 +4075,8 @@ mixin OverrideTranslateMixin on OverrideTranslateActionMixin implements S {
 
   /// `Too many failed login attempts. Please try again later.`
   @override
-  String get tooManyFaildedLogin =>
-      getCustomTranslate('tooManyFaildedLogin', parent.tooManyFaildedLogin);
+  String get tooManyFailedLogin =>
+      getCustomTranslate('tooManyFailedLogin', parent.tooManyFailedLogin);
 
   /// `View on Google Maps`
   @override
@@ -4011,7 +4130,7 @@ mixin OverrideTranslateMixin on OverrideTranslateActionMixin implements S {
   String get noConversation =>
       getCustomTranslate('noConversation', parent.noConversation);
 
-  /// `It will appear once your customers start chatting with you`
+  /// `It will appear when someone starts chatting with you`
   @override
   String get noConversationDescription => getCustomTranslate(
       'noConversationDescription', parent.noConversationDescription);
@@ -4022,8 +4141,8 @@ mixin OverrideTranslateMixin on OverrideTranslateActionMixin implements S {
 
   /// `Transaction failed`
   @override
-  String get transactionFailded =>
-      getCustomTranslate('transactionFailded', parent.transactionFailded);
+  String get transactionFailed =>
+      getCustomTranslate('transactionFailed', parent.transactionFailed);
 
   /// `Apple Pay is not available on this device!`
   @override
@@ -4238,7 +4357,7 @@ mixin OverrideTranslateMixin on OverrideTranslateActionMixin implements S {
           'maxAmountForPayment', parent.maxAmountForPayment(currency, amount),
           args: {'currency': currency, 'amount': amount});
 
-  /// `There is a product out of stock`
+  /// `This product is out of stock`
   @override
   String get productOutOfStock =>
       getCustomTranslate('productOutOfStock', parent.productOutOfStock);
@@ -4354,6 +4473,12 @@ mixin OverrideTranslateMixin on OverrideTranslateActionMixin implements S {
   @override
   String get by => getCustomTranslate('by', parent.by);
 
+  /// `Author: {author}`
+  @override
+  String byAuthor(Object author) =>
+      getCustomTranslate('byAuthor', parent.byAuthor(author),
+          args: {'author': author});
+
   /// `PromptPay ID:`
   @override
   String get promptPayID =>
@@ -4452,6 +4577,28 @@ mixin OverrideTranslateMixin on OverrideTranslateActionMixin implements S {
   String get qRCodeSaveFailure =>
       getCustomTranslate('qRCodeSaveFailure', parent.qRCodeSaveFailure);
 
+  /// `Mobile`
+  @override
+  String get mobile => getCustomTranslate('mobile', parent.mobile);
+
+  /// `Fax`
+  @override
+  String get fax => getCustomTranslate('fax', parent.fax);
+
+  /// `Website`
+  @override
+  String get website => getCustomTranslate('website', parent.website);
+
+  /// `Enter address / city`
+  @override
+  String get storeLocatorSearchPlaceholder => getCustomTranslate(
+      'storeLocatorSearchPlaceholder', parent.storeLocatorSearchPlaceholder);
+
+  /// `Oops! It looks like no results match your search criteria`
+  @override
+  String get searchEmptyDataMessage => getCustomTranslate(
+      'searchEmptyDataMessage', parent.searchEmptyDataMessage);
+
   /// `Product name can not be empty`
   @override
   String get productNameCanNotEmpty => getCustomTranslate(
@@ -4474,6 +4621,30 @@ mixin OverrideTranslateMixin on OverrideTranslateActionMixin implements S {
   @override
   String get informationTable =>
       getCustomTranslate('informationTable', parent.informationTable);
+
+  /// `Withdrawal`
+  @override
+  String get withdrawal => getCustomTranslate('withdrawal', parent.withdrawal);
+
+  /// `Withdraw Request`
+  @override
+  String get withdrawRequest =>
+      getCustomTranslate('withdrawRequest', parent.withdrawRequest);
+
+  /// `Approved Requests`
+  @override
+  String get approvedRequests =>
+      getCustomTranslate('approvedRequests', parent.approvedRequests);
+
+  /// `Cancelled Requests`
+  @override
+  String get cancelledRequests =>
+      getCustomTranslate('cancelledRequests', parent.cancelledRequests);
+
+  /// `Payment Settings`
+  @override
+  String get paymentSettings =>
+      getCustomTranslate('paymentSettings', parent.paymentSettings);
 
   /// `To`
   @override
@@ -4507,6 +4678,20 @@ mixin OverrideTranslateMixin on OverrideTranslateActionMixin implements S {
   String get confirmPassword =>
       getCustomTranslate('confirmPassword', parent.confirmPassword);
 
+  /// `Branch`
+  @override
+  String get branch => getCustomTranslate('branch', parent.branch);
+
+  /// `Choose the branch`
+  @override
+  String get chooseBranch =>
+      getCustomTranslate('chooseBranch', parent.chooseBranch);
+
+  /// `Please choose a branch`
+  @override
+  String get pleaseChooseBranch =>
+      getCustomTranslate('pleaseChooseBranch', parent.pleaseChooseBranch);
+
   /// `{number} characters remaining`
   @override
   String characterRemain(Object number) =>
@@ -4531,4 +4716,344 @@ mixin OverrideTranslateMixin on OverrideTranslateActionMixin implements S {
   @override
   String get passwordsDoNotMatch =>
       getCustomTranslate('passwordsDoNotMatch', parent.passwordsDoNotMatch);
+
+  /// `Looks like you haven't made any bookings yet. \nStart exploring and make your first booking!`
+  @override
+  String get emptyBookingHistoryMsg => getCustomTranslate(
+      'emptyBookingHistoryMsg', parent.emptyBookingHistoryMsg);
+
+  /// `{name} have been added to cart successfully`
+  @override
+  String productAddToCart(Object name) =>
+      getCustomTranslate('productAddToCart', parent.productAddToCart(name),
+          args: {'name': name});
+
+  /// `Not rated`
+  @override
+  String get notRated => getCustomTranslate('notRated', parent.notRated);
+
+  /// `{count, plural, one {{count} item} other {{count} items}}`
+  @override
+  String itemQuantity(num count) {
+    return Intl.plural(
+      count,
+      one: '$count item',
+      other: '$count items',
+      name: 'itemQuantity',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `Your order is empty`
+  @override
+  String get yourOrderIsEmpty =>
+      getCustomTranslate('yourOrderIsEmpty', parent.yourOrderIsEmpty);
+
+  /// `Looks like you haven't added any items.\nStart shopping to fill it in.`
+  @override
+  String get yourOrderIsEmptyMsg =>
+      getCustomTranslate('yourOrderIsEmptyMsg', parent.yourOrderIsEmptyMsg);
+
+  /// `Thank you for your review`
+  @override
+  String get createReviewSuccess =>
+      getCustomTranslate('createReviewSuccess', parent.createReviewSuccess);
+
+  /// `We truly appreciate your input and value your contribution in helping us improve`
+  @override
+  String get createReviewSuccessMsg => getCustomTranslate(
+      'createReviewSuccessMsg', parent.createReviewSuccessMsg);
+
+  /// `Are you sure you want to exit?`
+  @override
+  String get areYouWantToExit =>
+      getCustomTranslate('areYouWantToExit', parent.areYouWantToExit);
+
+  /// `Do you want to leave without submitting your review?`
+  @override
+  String get doYouWantToLeaveWithoutSubmit => getCustomTranslate(
+      'doYouWantToLeaveWithoutSubmit', parent.doYouWantToLeaveWithoutSubmit);
+
+  /// `Rate Product`
+  @override
+  String get rateProduct =>
+      getCustomTranslate('rateProduct', parent.rateProduct);
+
+  /// `Upload image`
+  @override
+  String get uploadImage =>
+      getCustomTranslate('uploadImage', parent.uploadImage);
+
+  /// `View detail`
+  @override
+  String get viewDetail => getCustomTranslate('viewDetail', parent.viewDetail);
+
+  /// `View`
+  @override
+  String get view => getCustomTranslate('view', parent.view);
+
+  /// `Terrible`
+  @override
+  String get terrible => getCustomTranslate('terrible', parent.terrible);
+
+  /// `Poor`
+  @override
+  String get poor => getCustomTranslate('poor', parent.poor);
+
+  /// `Fair`
+  @override
+  String get fair => getCustomTranslate('fair', parent.fair);
+
+  /// `Good`
+  @override
+  String get good => getCustomTranslate('good', parent.good);
+
+  /// `Amazing`
+  @override
+  String get amazing => getCustomTranslate('amazing', parent.amazing);
+
+  /// `refunds`
+  @override
+  String get refunds => getCustomTranslate('refunds', parent.refunds);
+
+  /// `Welcome back`
+  @override
+  String get welcomeBack =>
+      getCustomTranslate('welcomeBack', parent.welcomeBack);
+
+  /// `Start your shopping journey with us now`
+  @override
+  String get welcomeRegister =>
+      getCustomTranslate('welcomeRegister', parent.welcomeRegister);
+
+  /// `View cart`
+  @override
+  String get viewCart => getCustomTranslate('viewCart', parent.viewCart);
+
+  /// `Cancelled`
+  @override
+  String get cancelled => getCustomTranslate('cancelled', parent.cancelled);
+
+  /// `Withdraw Amount`
+  @override
+  String get withdrawAmount =>
+      getCustomTranslate('withdrawAmount', parent.withdrawAmount);
+
+  /// `Payment details changed successfully.`
+  @override
+  String get paymentDetailsChangedSuccessfully => getCustomTranslate(
+      'paymentDetailsChangedSuccessfully',
+      parent.paymentDetailsChangedSuccessfully);
+
+  /// `Sorry, no transactions were found!`
+  @override
+  String get noTransactionsMsg =>
+      getCustomTranslate('noTransactionsMsg', parent.noTransactionsMsg);
+
+  /// `Tag`
+  @override
+  String get tag => getCustomTranslate('tag', parent.tag);
+
+  /// `Attribute`
+  @override
+  String get attribute => getCustomTranslate('attribute', parent.attribute);
+
+  /// `Brands`
+  @override
+  String get brands => getCustomTranslate('brands', parent.brands);
+
+  /// `Sorry, the shopping cart will be emptied due to the change of region. We are happy to contact you if you need assistance.`
+  @override
+  String get branchChangeWarning =>
+      getCustomTranslate('branchChangeWarning', parent.branchChangeWarning);
+
+  /// `Are you sure you want to logout?`
+  @override
+  String get areYouSureLogOut =>
+      getCustomTranslate('areYouSureLogOut', parent.areYouSureLogOut);
+
+  /// `Please login to review`
+  @override
+  String get loginToReview =>
+      getCustomTranslate('loginToReview', parent.loginToReview);
+
+  /// `Size Guide`
+  @override
+  String get sizeGuide => getCustomTranslate('sizeGuide', parent.sizeGuide);
+
+  /// `Mobile Number already in use!`
+  @override
+  String get mobileNumberInUse =>
+      getCustomTranslate('mobileNumberInUse', parent.mobileNumberInUse);
+
+  /// `Please install the DIGITS: Wordpress Mobile Number Signup and Login plugin`
+  @override
+  String get installDigitsPlugin =>
+      getCustomTranslate('installDigitsPlugin', parent.installDigitsPlugin);
+
+  /// `Email already in use!`
+  @override
+  String get emailAlreadyInUse =>
+      getCustomTranslate('emailAlreadyInUse', parent.emailAlreadyInUse);
+
+  /// `Username is required`
+  @override
+  String get usernameIsRequired =>
+      getCustomTranslate('usernameIsRequired', parent.usernameIsRequired);
+
+  /// `Country code is required`
+  @override
+  String get countryCodeIsRequired =>
+      getCustomTranslate('countryCodeIsRequired', parent.countryCodeIsRequired);
+
+  /// `Mobile is required`
+  @override
+  String get mobileIsRequired =>
+      getCustomTranslate('mobileIsRequired', parent.mobileIsRequired);
+
+  /// `Username already in use!`
+  @override
+  String get usernameAlreadyInUse =>
+      getCustomTranslate('usernameAlreadyInUse', parent.usernameAlreadyInUse);
+
+  /// `This account can't delete`
+  @override
+  String get cannotDeleteAccount =>
+      getCustomTranslate('cannotDeleteAccount', parent.cannotDeleteAccount);
+
+  /// `The account you want to transfer to (email)`
+  @override
+  String get sendTo => getCustomTranslate('sendTo', parent.sendTo);
+
+  /// `Enter amount`
+  @override
+  String get enterAmount =>
+      getCustomTranslate('enterAmount', parent.enterAmount);
+
+  /// `Received money from {name}`
+  @override
+  String receivedMoneyFrom(Object name) =>
+      getCustomTranslate('receivedMoneyFrom', parent.receivedMoneyFrom(name),
+          args: {'name': name});
+
+  /// `You only have {currentBalance} left in your wallet`
+  @override
+  String insufficientBalanceMessage(Object currentBalance) =>
+      getCustomTranslate('insufficientBalanceMessage',
+          parent.insufficientBalanceMessage(currentBalance),
+          args: {'currentBalance': currentBalance});
+
+  /// `Transfer money to {name}`
+  @override
+  String transferMoneyTo(Object name) =>
+      getCustomTranslate('transferMoneyTo', parent.transferMoneyTo(name),
+          args: {'name': name});
+
+  /// `Error`
+  @override
+  String get errorTitle => getCustomTranslate('errorTitle', parent.errorTitle);
+
+  /// `TeraWallet`
+  @override
+  String get teraWallet => getCustomTranslate('teraWallet', parent.teraWallet);
+
+  /// `Error on getting post!`
+  @override
+  String get errorOnGettingPost =>
+      getCustomTranslate('errorOnGettingPost', parent.errorOnGettingPost);
+
+  /// `You have no posts`
+  @override
+  String get youHaveNoPost =>
+      getCustomTranslate('youHaveNoPost', parent.youHaveNoPost);
+
+  /// `You don't have permission to create Post`
+  @override
+  String get youDontHavePermissionToCreatePost => getCustomTranslate(
+      'youDontHavePermissionToCreatePost',
+      parent.youDontHavePermissionToCreatePost);
+
+  /// `The user is not found`
+  @override
+  String get userNotFound =>
+      getCustomTranslate('userNotFound', parent.userNotFound);
+
+  /// `Random`
+  @override
+  String get random => getCustomTranslate('random', parent.random);
+
+  /// `Enter your username`
+  @override
+  String get enterYourUsername =>
+      getCustomTranslate('enterYourUsername', parent.enterYourUsername);
+
+  /// `Username is invalid`
+  @override
+  String get usernameInvalid =>
+      getCustomTranslate('usernameInvalid', parent.usernameInvalid);
+
+  /// `E-mail address is invalid`
+  @override
+  String get emailAddressInvalid =>
+      getCustomTranslate('emailAddressInvalid', parent.emailAddressInvalid);
+
+  /// `No payment methods are available.`
+  @override
+  String get noPaymentMethodsAvailable => getCustomTranslate(
+      'noPaymentMethodsAvailable', parent.noPaymentMethodsAvailable);
+
+  /// `No Comments`
+  @override
+  String get noComments => getCustomTranslate('noComments', parent.noComments);
+
+  /// `Free`
+  @override
+  String get free => getCustomTranslate('free', parent.free);
+
+  /// `Delete conversation`
+  @override
+  String get deleteConversation =>
+      getCustomTranslate('deleteConversation', parent.deleteConversation);
+
+  /// `Need help?`
+  @override
+  String get needHelp => getCustomTranslate('needHelp', parent.needHelp);
+
+  /// `Block user`
+  @override
+  String get blockUser => getCustomTranslate('blockUser', parent.blockUser);
+
+  /// `Unblock user`
+  @override
+  String get unblockUser =>
+      getCustomTranslate('unblockUser', parent.unblockUser);
+
+  /// `User has been blocked`
+  @override
+  String get userHasBeenBlocked =>
+      getCustomTranslate('userHasBeenBlocked', parent.userHasBeenBlocked);
+
+  /// `You can't send messages to this user`
+  @override
+  String get cannotSendMessage =>
+      getCustomTranslate('cannotSendMessage', parent.cannotSendMessage);
+
+  /// `You won't be able to send and receive messages from this user.`
+  @override
+  String get willNotSendAndReceiveMessage => getCustomTranslate(
+      'willNotSendAndReceiveMessage', parent.willNotSendAndReceiveMessage);
+
+  /// `Do you want to unblock this user?`
+  @override
+  String get doYouWantToUnblock =>
+      getCustomTranslate('doYouWantToUnblock', parent.doYouWantToUnblock);
+
+  /// `Block`
+  @override
+  String get block => getCustomTranslate('block', parent.block);
+
+  /// `Unblock`
+  @override
+  String get unblock => getCustomTranslate('unblock', parent.unblock);
 }

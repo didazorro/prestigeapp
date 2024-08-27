@@ -3,4 +3,5 @@ enum RealtimeChatType {
   adminToCustomers,
   customerToVendor,
   vendorToCustomers,
+  userToUsers,
 }

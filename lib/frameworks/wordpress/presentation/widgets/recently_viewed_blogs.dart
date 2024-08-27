@@ -62,8 +62,11 @@ class RecentlyViewedBlogs extends StatelessWidget with BlogActionButtonMixin {
                           BlogCard(
                             item: item,
                             width: screenWidth * 0.35,
-                            onTap: () =>
-                                onTapBlog(blog: item, blogs: recentBlogs),
+                            onTap: () => onTapBlog(
+                              blog: item,
+                              blogs: recentBlogs,
+                              context: context,
+                            ),
                           )
                       ],
                     ),

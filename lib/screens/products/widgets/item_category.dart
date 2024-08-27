@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../common/config.dart';
+import '../../../common/tools/image_tools.dart';
 import '../../../widgets/common/index.dart' show FluxImage;
 
 class ItemCategory extends StatelessWidget {
@@ -23,6 +25,10 @@ class ItemCategory extends StatelessWidget {
     var highlightColor = (selectedCategories?.contains(categoryId) ?? false)
         ? Theme.of(context).colorScheme.secondary.withOpacity(0.2)
         : Colors.transparent;
+    final imageBoxFit = ImageTools.boxFit(
+      kAdvanceConfig.categoryImageBoxFit,
+      defaultValue: BoxFit.contain,
+    );
     return GestureDetector(
       onTap: () => onTap?.call(categoryId),
       child: AnimatedContainer(
@@ -49,7 +55,7 @@ class ItemCategory extends StatelessWidget {
                         height: 50,
                         child: FluxImage(
                           imageUrl: categoryImage!,
-                          fit: BoxFit.contain,
+                          fit: imageBoxFit,
                         ),
                       ),
                     ),

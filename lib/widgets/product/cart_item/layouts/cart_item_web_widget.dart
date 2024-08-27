@@ -36,6 +36,7 @@ class CartItemWebWidget extends StatelessWidget {
       if (stateUI.cartItemMetaData?.variation != null)
         Services().widget.renderVariantCartItem(
               context,
+              stateUI.product,
               stateUI.cartItemMetaData!.variation!,
               stateUI.cartItemMetaData?.options,
               style: AttributeProductCartStyle.column,

@@ -28,7 +28,11 @@ class BlogSelectCard extends StatelessWidget with BlogActionButtonMixin {
     void onTapProduct() {
       if (item.imageFeature == '') return;
 
-      onTapBlog(blog: item, blogs: listBlog);
+      onTapBlog(
+        blog: item,
+        blogs: listBlog,
+        context: context,
+      );
     }
 
     return GestureDetector(

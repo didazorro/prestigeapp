@@ -1,6 +1,7 @@
 import 'package:country_pickers/country_pickers.dart';
 import 'package:flutter/material.dart';
 import 'package:inspireui/widgets/expandable/expansion_widget.dart';
+import 'package:inspireui/widgets/timeago/timeago.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
@@ -72,6 +73,27 @@ abstract class BaseFrameworks {
     Function? loading,
   }) async {}
 
+  Future<void> onePageCheckoutForWebPWA(
+    BuildContext context, {
+    required String url,
+    String? orderNumber,
+    Map<String, String> headers = const <String, String>{},
+  }) async {
+    // Requirement: Support OnePageCheckout checkout for Web WPA
+    //
+    // Problem: Currently cannot use InAppWebView, iframe -> Load site error,
+    // cannot catch response.
+    //
+    // Solution: Temporarily solve by opening a new web using launchUrl
+    // to checkout. In the future, this processing flow will be
+    // optimized later.
+    await Tools.launchURL(url, headers: headers);
+    final cartModel = Provider.of<CartModel>(context, listen: false);
+
+    Analytics.triggerPurchased(Order(number: orderNumber), context);
+    cartModel.clearCart();
+  }
+
   Future<void> applyCoupon(
     BuildContext context, {
     Coupons? coupons,
@@ -113,6 +135,7 @@ abstract class BaseFrameworks {
 
   Widget renderVariantCartItem(
     BuildContext context,
+    Product product,
     ProductVariation variation,
     Map? options, {
     AttributeProductCartStyle style = AttributeProductCartStyle.normal,
@@ -137,6 +160,7 @@ abstract class BaseFrameworks {
     required String currentPassword,
     required String userDisplayName,
     String? userEmail,
+    String? username,
     String? userNiceName,
     String? userUrl,
     String? userPassword,
@@ -144,12 +168,6 @@ abstract class BaseFrameworks {
     String? userLastname,
     String? userPhone,
   });
-
-  Widget renderCurrentPassInputforEditProfile({
-    BuildContext? context,
-    TextEditingController? currentPasswordController,
-  }) =>
-      const SizedBox();
 
   /// For app model
   Future<void>? onLoadedAppConfig(String? lang, Function callback) => null;
@@ -209,15 +227,12 @@ abstract class BaseFrameworks {
   ) =>
       [const SizedBox()];
 
-  List<Widget> getProductAddonsWidget({
-    required BuildContext context,
-    String? lang,
+  Widget getProductAddonsWidget({
     required Product product,
-    required Map<String, Map<String, AddonsOption>> selectedOptions,
-    Function? onSelectProductAddons,
-    int quantity = 1,
+    required bool isProductInfoLoading,
+    Widget? appointmentWidget,
   }) {
-    return const [SizedBox()];
+    return const SizedBox();
   }
 
   List<Widget> getProductComponentsWidget({
@@ -416,9 +431,6 @@ abstract class BaseFrameworks {
     return ShippingMethods(onBack: onBack, onNext: onNext);
   }
 
-  /// render screen for Category Vendor
-  Widget renderVendorCategoriesScreen(data) => const SizedBox();
-
   Widget renderCategoryLayout({
     required String layout,
     bool enableParallax = false,
@@ -551,7 +563,10 @@ abstract class BaseFrameworks {
   }
 
   /// render Search Screen
-  Widget renderSearchScreen({bool? boostEngine}) {
+  Widget renderSearchScreen({
+    bool? boostEngine,
+    bool? showQRCode,
+  }) {
     return ChangeNotifierProvider<SearchModel>(
       create: (context) => SearchModel(),
       builder: (context, _) {
@@ -560,6 +575,7 @@ abstract class BaseFrameworks {
           autoFocusSearch: false,
           key: const Key('search'),
           isModal: Navigator.canPop(context),
+          showQRCode: showQRCode,
         );
       },
     );
@@ -903,6 +919,10 @@ abstract class BaseFrameworks {
       );
 
   Widget renderCommentLayout(dynamic postId, kBlogLayout type) {
+    if (ServerConfig().isNotSuppportCommentBlog) {
+      return const SizedBox();
+    }
+
     return CommentLayout(
       postId: postId,
       type: type,
@@ -926,18 +946,52 @@ abstract class BaseFrameworks {
   }
 
   Widget renderDetailPrice(
-      BuildContext context, Product product, String? price) {
-    final currency = Provider.of<AppModel>(context, listen: false).currency;
-    final currencyRate =
-        Provider.of<AppModel>(context, listen: false).currencyRate;
+    BuildContext context,
+    Product product,
+    String? price,
+  ) {
+    final appModel = context.read<AppModel>();
+    final currency = appModel.currency;
+    final currencyRate = appModel.currencyRate;
+    final style = Theme.of(context).textTheme.headlineSmall?.copyWith(
+          fontWeight: FontWeight.w600,
+        );
+    var priceString = PriceTools.getCurrencyFormatted(
+      price ?? '0.0',
+      currencyRate,
+      currency: currency,
+    );
+    if (product.type == 'grouped') {
+      priceString = Provider.of<ProductModel>(context).detailPriceRange;
+    }
+    if (product.isAppointment && product.appointmentDuration != null) {
+      final duration = product.appointmentDuration ?? 0;
+      final unit = product.appointmentDurationUnit;
+      return Text.rich(
+        TextSpan(
+          text: '$priceString ',
+          children: [
+            TextSpan(
+                text: '- ${TimeAgo.toUnitString(
+                  duration,
+                  unit: unit,
+                )}',
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 18,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .secondary
+                          .withOpacity(0.7),
+                    ))
+          ],
+        ),
+        style: style,
+      );
+    }
+
     return Text(
-      product.type != 'grouped'
-          ? PriceTools.getCurrencyFormatted(price ?? '0.0', currencyRate,
-              currency: currency)!
-          : Provider.of<ProductModel>(context).detailPriceRange,
-      style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
+      '$priceString',
+      style: style,
     );
   }
 
@@ -1112,6 +1166,11 @@ abstract class BaseFrameworks {
               title: S.of(context).averageRating,
               value: 'rating-null',
             ),
+          if (supportedSortByOptions.contains(OrderByType.rand))
+            GroupCheckBoxItem(
+              title: S.of(context).random,
+              value: 'rand-null',
+            ),
         },
       ),
     ];
@@ -1233,6 +1292,11 @@ abstract class BaseFrameworks {
       ],
     );
   }
+
+  Widget authWebViewScreen({bool isRegister = false}) =>
+      const SizedBox.shrink();
+
+  Widget checkoutWebViewScreen() => const SizedBox.shrink();
 }
 
 class AddToCartArgs {

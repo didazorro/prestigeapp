@@ -77,6 +77,7 @@ class AdvancedConfig {
   final bool enableWOOCSCurrencySwitcher;
   final bool enableProductBackdrop;
   final bool categoryImageMenu;
+  final String? categoryImageBoxFit;
   final bool enableDigitsMobileLogin;
   final bool enableDigitsMobileFirebase;
   final bool enableDigitsMobileWhatsApp;
@@ -99,6 +100,7 @@ class AdvancedConfig {
   final bool enablePWGiftCard;
   final bool enableTeraWalletWithdrawal;
   final bool allowGetDatasByCategoryFilter;
+  final bool enableIsAllData;
 
   /// To show/hide opening status banner in the [ListingCardView] for FluxStore Listing
   final bool showOpeningStatus;
@@ -158,6 +160,7 @@ class AdvancedConfig {
     required this.enableWOOCSCurrencySwitcher,
     required this.enableProductBackdrop,
     required this.categoryImageMenu,
+    this.categoryImageBoxFit,
     required this.enableDigitsMobileLogin,
     required this.enableDigitsMobileFirebase,
     required this.enableDigitsMobileWhatsApp,
@@ -181,6 +184,7 @@ class AdvancedConfig {
     required this.enablePWGiftCard,
     required this.enableTeraWalletWithdrawal,
     required this.allowGetDatasByCategoryFilter,
+    required this.enableIsAllData,
   });
 
   int? get privacyPoliciesPageId => int.tryParse(
@@ -324,6 +328,7 @@ class AdvancedConfig {
           DefaultConfig.advanceConfig['enableProductBackdrop'],
       categoryImageMenu: json['categoryImageMenu'] ??
           DefaultConfig.advanceConfig['categoryImageMenu'],
+      categoryImageBoxFit: json['categoryImageBoxFit'],
       enableDigitsMobileLogin: json['EnableDigitsMobileLogin'] ??
           DefaultConfig.advanceConfig['EnableDigitsMobileLogin'],
       enableDigitsMobileFirebase: json['EnableDigitsMobileFirebase'] ??
@@ -375,6 +380,8 @@ class AdvancedConfig {
           DefaultConfig.advanceConfig['EnableTeraWalletWithdrawal'],
       allowGetDatasByCategoryFilter: json['allowGetDatasByCategoryFilter'] ??
           DefaultConfig.advanceConfig['allowGetDatasByCategoryFilter'],
+      enableIsAllData: json['EnableIsAllData'] ??
+          DefaultConfig.advanceConfig['EnableIsAllData'],
     );
   }
 
@@ -438,6 +445,7 @@ class AdvancedConfig {
     data['EnableWOOCSCurrencySwitcher'] = enableWOOCSCurrencySwitcher;
     data['enableProductBackdrop'] = enableProductBackdrop;
     data['categoryImageMenu'] = categoryImageMenu;
+    data['categoryImageBoxFit'] = categoryImageBoxFit;
     data['EnableDigitsMobileLogin'] = enableDigitsMobileLogin;
     data['EnableDigitsMobileFirebase'] = enableDigitsMobileFirebase;
     data['EnableDigitsMobileWhatsApp'] = enableDigitsMobileWhatsApp;
@@ -458,6 +466,7 @@ class AdvancedConfig {
     data['enablePWGiftCard'] = enablePWGiftCard;
     data['EnableTeraWalletWithdrawal'] = enableTeraWalletWithdrawal;
     data['allowGetDatasByCategoryFilter'] = allowGetDatasByCategoryFilter;
+    data['EnableIsAllData'] = enableIsAllData;
     return data;
   }
 }

@@ -93,17 +93,20 @@ class _WebSimpleLayoutState extends State<WebSimpleLayout>
                     : VendorChat(
                         user: userModel.user,
                         store: product.store,
+                        product: product,
                       ),
                 backgroundColor: Theme.of(context).colorScheme.surface,
                 body: SliverWebLayout(
                   scrollController: _scrollController,
                   pathHeaders: [
                     PathHeaderItem(
-                        title: S.of(context).allProducts,
-                        onTap: () => FluxNavigate.pushNamedAndRemoveUntil(
-                              RouteList.products,
-                              (route) => false,
-                            )),
+                      title: S.of(context).allProducts,
+                      onTap: () => FluxNavigate.pushNamedAndRemoveUntil(
+                        RouteList.products,
+                        (route) => false,
+                        context: context,
+                      ),
+                    ),
                     PathHeaderItem(title: widget.product.name ?? ''),
                   ],
                   slivers: <Widget>[
@@ -223,11 +226,6 @@ class ProductInfoWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) {
-        var item = Product.cloneFrom(product);
-        if (!kProductDetail.showVideo && item.videoUrl != null) {
-          item.videoUrl = null;
-        }
-
         final screenSize = MediaQuery.of(context).size;
 
         return Row(
@@ -245,7 +243,7 @@ class ProductInfoWidget extends StatelessWidget {
                   children: [
                     ProductImageWeb(
                       isFlexibleSpaceBar: false,
-                      product: item,
+                      product: product,
                       onChange: (index) {
                         _selectIndexNotifier.value = index;
                       },

@@ -81,7 +81,7 @@ class _RegistrationScreenState extends State<DigitsMobileLoginSignUpScreen> {
   void _snackBar(String text) {
     if (mounted) {
       final snackBar = SnackBar(
-        content: Text(text),
+        content: Text(text.clearExceptionKey()),
         duration: const Duration(seconds: 10),
         action: SnackBarAction(
           label: S.of(context).close,
@@ -280,8 +280,10 @@ class _RegistrationScreenState extends State<DigitsMobileLoginSignUpScreen> {
                         onCancel: () {
                           firstName = '';
                         },
-                        decoration:
-                            InputDecoration(labelText: S.of(context).firstName),
+                        decoration: InputDecoration(
+                          labelText: S.of(context).firstName,
+                          hintText: S.of(context).enterYourFirstName,
+                        ),
                       ),
                       const SizedBox(height: 20.0),
                       CustomTextField(
@@ -293,8 +295,10 @@ class _RegistrationScreenState extends State<DigitsMobileLoginSignUpScreen> {
                         onCancel: () {
                           lastName = '';
                         },
-                        decoration:
-                            InputDecoration(labelText: S.of(context).lastName),
+                        decoration: InputDecoration(
+                          labelText: S.of(context).lastName,
+                          hintText: S.of(context).enterYourLastName,
+                        ),
                       ),
                       const SizedBox(height: 20.0),
                       CustomTextField(
@@ -308,8 +312,10 @@ class _RegistrationScreenState extends State<DigitsMobileLoginSignUpScreen> {
                         onCancel: () {
                           username = '';
                         },
-                        decoration:
-                            InputDecoration(labelText: S.of(context).username),
+                        decoration: InputDecoration(
+                          labelText: S.of(context).username,
+                          hintText: S.of(context).enterYourUsername,
+                        ),
                       ),
                       const SizedBox(height: 20.0),
                       CustomTextField(
@@ -324,8 +330,9 @@ class _RegistrationScreenState extends State<DigitsMobileLoginSignUpScreen> {
                         },
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
-                            labelText: S.of(context).enterYourEmail),
-                        hintText: S.of(context).enterYourEmail,
+                          labelText: S.of(context).email,
+                          hintText: S.of(context).enterYourEmail,
+                        ),
                       ),
                       const SizedBox(height: 20.0),
                       Row(
@@ -361,7 +368,9 @@ class _RegistrationScreenState extends State<DigitsMobileLoginSignUpScreen> {
                                 mobile = '';
                               },
                               decoration: InputDecoration(
-                                  labelText: S.of(context).phone),
+                                labelText: S.of(context).phone,
+                                hintText: S.of(context).enterYourPhoneNumber,
+                              ),
                             ),
                           )
                         ],

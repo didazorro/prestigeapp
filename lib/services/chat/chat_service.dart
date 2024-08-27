@@ -5,7 +5,7 @@ abstract class ChatService {
 
   void dispose();
 
-  Future<void> showChatScreen();
+  Future<void> showChatScreen(context);
 
   Future<void> changeLanguage(String? langCode);
 

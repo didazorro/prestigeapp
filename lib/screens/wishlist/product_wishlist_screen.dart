@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../common/constants.dart';
-import '../../common/extensions/buildcontext_ext.dart';
+import '../../common/extensions/translate_ext.dart';
 import '../../common/tools.dart';
 import '../../generated/l10n.dart';
 import '../../models/index.dart' show CartModel, ProductWishListModel;
@@ -159,7 +159,7 @@ class _WishListState extends State<ProductWishListScreen> with AppBarMixin {
                         horizontal: 15,
                       ),
                       child: Text(
-                        '${model.products.length} ${S.of(context).items}',
+                        context.transCountProduct(model.products.length),
                         style: const TextStyle(
                           fontSize: 14,
                           color: kGrey400,
@@ -199,7 +199,7 @@ class _WishListState extends State<ProductWishListScreen> with AppBarMixin {
                                 final name = model.products[index].name;
                                 msg = name != null
                                     ? S.of(context).productAddToCart(name)
-                                    : S.of(context).addToCartSucessfully;
+                                    : S.of(context).addToCartSuccessfully;
                               }
                               Tools.showSnackBar(
                                   ScaffoldMessenger.of(context), msg);

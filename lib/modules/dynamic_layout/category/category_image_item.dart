@@ -57,6 +57,7 @@ class CategoryImageItem extends StatelessWidget {
               config: config.toJson(),
               cateName: name,
             ),
+            context: context,
           );
         },
         child: Container(

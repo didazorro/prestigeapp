@@ -8,7 +8,6 @@ import '../../../models/index.dart';
 import 'item_category.dart';
 
 class ProductCategoryMenu extends StatefulWidget {
-  final bool enableSearchHistory;
   final bool imageLayout;
   final List<String>? selectedCategories;
   final Function(String?)? onTap;
@@ -16,7 +15,6 @@ class ProductCategoryMenu extends StatefulWidget {
 
   const ProductCategoryMenu({
     super.key,
-    this.enableSearchHistory = false,
     this.imageLayout = false,
     this.selectedCategories,
     this.onTap,
@@ -82,10 +80,6 @@ class StateProductCategoryMenu extends State<ProductCategoryMenu> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.enableSearchHistory) {
-      return const SizedBox(width: double.infinity);
-    }
-
     return Consumer<CategoryModel>(builder: (context, categoryModel, child) {
       if (categoryModel.isLoading) {
         return Center(child: kLoadingWidget(context));

@@ -166,6 +166,15 @@ class RouteList {
   /// B2BKing
   static const String b2bkingSignUp = 'b2bkingSignUp';
 
+  /// Login with Webview
+  static const String loginWithWebview = 'loginWithWebview';
+
+  /// Signup with Webview
+  static const String signUpWithWebview = 'signUpWithWebview';
+
+  /// Signup with Webview
+  static const String checkoutWithWebview = 'checkoutWithWebview';
+
   /// Branch
   static const String branchSelecter = 'branchSelecter';
 }

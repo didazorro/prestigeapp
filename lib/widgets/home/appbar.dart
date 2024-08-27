@@ -77,13 +77,22 @@ class _HomeAppBarState extends State<HomeAppBar> {
                       Provider.of<NotificationModel>(context).unreadCount,
                   totalCart: totalCart,
                   onSearch: () {
-                    FluxNavigate.pushNamed(RouteList.homeSearch);
+                    FluxNavigate.pushNamed(
+                      RouteList.homeSearch,
+                      context: context,
+                    );
                   },
                   onCheckout: () {
-                    FluxNavigate.pushNamed(RouteList.cart);
+                    FluxNavigate.pushNamed(
+                      RouteList.cart,
+                      context: context,
+                    );
                   },
                   onTapNotifications: () {
-                    FluxNavigate.pushNamed(RouteList.notify);
+                    FluxNavigate.pushNamed(
+                      RouteList.notify,
+                      context: context,
+                    );
                   },
                   onTapDrawerMenu: () =>
                       NavigateTools.onTapOpenDrawerMenu(context),

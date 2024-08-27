@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 import '../../models/entities/firebase_error_exception.dart';
+import '../../models/entities/product.dart';
 import '../../models/entities/user.dart';
 
 class BaseFirebaseServices {
@@ -27,7 +28,7 @@ class BaseFirebaseServices {
   dynamic getFirebaseCredential({verificationId, smsCode}) {}
 
   /// save user to firebase
-  void saveUserToFirestore({user}) {}
+  void saveUserToFirestore({User? user}) {}
 
   /// verify SMS login
   dynamic getFirebaseStream() {}
@@ -45,11 +46,14 @@ class BaseFirebaseServices {
   /// render Chat Screen
   Widget renderChatAuthScreen() => const SizedBox();
 
-  Widget renderListChatScreen() => const SizedBox();
+  Widget renderListChatScreen({String? email}) => const SizedBox();
 
-  Widget renderVendorListChatScreen({String? email}) => const SizedBox();
-
-  Widget renderChatScreen({User? senderUser, receiverEmail, receiverName}) =>
+  Widget renderChatScreen({
+    User? senderUser,
+    String? receiverEmail,
+    String? receiverName,
+    Product? product,
+  }) =>
       const SizedBox();
 
   /// load firebase remote config
@@ -58,11 +62,6 @@ class BaseFirebaseServices {
   String getRemoteConfigString(String key) => '';
 
   Future<List<String>> getRemoteKeys() async => [];
-
-  /// init Firebase Dynamic link
-  void initDynamicLinkService(context) {}
-
-  void shareDynamicLinkProduct({itemUrl}) {}
 
   /// register new user with email and password
   void createUserWithEmailAndPassword({email, password}) {}
@@ -75,4 +74,6 @@ class BaseFirebaseServices {
       const <NavigatorObserver>[];
 
   void deleteAccount() {}
+
+  Future<String?>? getIdToken() => null;
 }

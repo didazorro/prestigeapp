@@ -21,7 +21,6 @@ import 'checkout/shipping_method_screen.dart';
 import 'dokan_stores_map/dokan_stores_screen.dart';
 import 'model/list_order_vendor_model.dart';
 import 'route.dart';
-import 'store/vendor_categories_screen.dart';
 import 'store_detail/store_detail_screen_from_config.dart';
 import 'stores_map/map_screen.dart';
 import 'vendor_orders_screen.dart';
@@ -83,14 +82,6 @@ mixin VendorMixin {
   Widget renderShippingMethods(BuildContext context,
       {Function? onBack, Function? onNext}) {
     return ShippingMethods(onBack: onBack, onNext: onNext);
-  }
-
-  Widget renderVendorCategoriesScreen(data) {
-    return VendorCategoriesScreen(
-      layout: data['categoryLayout'],
-      enableParallax: data['parallax'] ?? false,
-      parallaxImageRatio: Tools.formatDouble(data['parallaxImageRatio']),
-    );
   }
 
   Widget renderMapScreen() => ServerConfig().typeName.isDokan

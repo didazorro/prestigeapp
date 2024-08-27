@@ -255,9 +255,9 @@ class _CreditCardPaymentState extends State<CreditCardPayment> {
                 );
               },
               child: widget.payButton ??
-                  const Text(
-                    'PAY NOW',
-                    style: TextStyle(
+                  Text(
+                    S.of(context).payNow.toUpperCase(),
+                    style: const TextStyle(
                       fontWeight: FontWeight.w700,
                     ),
                   ),

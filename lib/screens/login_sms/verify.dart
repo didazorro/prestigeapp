@@ -231,7 +231,7 @@ class _VerifyCodeState extends State<VerifyCode>
                 textDirection: TextDirection.rtl,
                 child: RichText(
                   text: TextSpan(
-                    text: S.of(context).enterSendedCode,
+                    text: S.of(context).enterSentCode,
                     children: [
                       TextSpan(
                         text: Tools.isRTL(context)
@@ -292,7 +292,7 @@ class _VerifyCodeState extends State<VerifyCode>
               padding: const EdgeInsets.symmetric(horizontal: 30.0),
               // error showing widget
               child: Text(
-                hasError ? S.of(context).pleasefillUpAllCellsProperly : '',
+                hasError ? S.of(context).pleaseFillUpAllCellsProperly : '',
                 style: TextStyle(color: Colors.red.shade300, fontSize: 15),
               ),
             ),
@@ -301,12 +301,12 @@ class _VerifyCodeState extends State<VerifyCode>
               textAlign: TextAlign.center,
               text: TextSpan(
                   text: S.of(context).didntReceiveCode,
-                  style: const TextStyle(fontSize: 15),
+                  style: textStyle?.copyWith(fontSize: 15),
                   children: [
                     TextSpan(
-                        text: S.of(context).resend,
+                        text: S.of(context).resend.toUpperCase(),
                         recognizer: onTapRecognizer,
-                        style: TextStyle(
+                        style: textStyle?.copyWith(
                           color: Theme.of(context).primaryColor,
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
@@ -347,6 +347,7 @@ class _VerifyCodeState extends State<VerifyCode>
         Navigator.pop(context);
       } else {
         await Provider.of<UserModel>(context, listen: false).loginFirebaseSMS(
+          context: context,
           phoneNumber: user.phoneNumber!.replaceAll('+', ''),
           success: (user) {
             _stopAnimation();

@@ -1,24 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:fstore/common/tools/gravatar.dart';
-import 'package:fstore/generated/l10n.dart';
+import 'package:jumping_dot/jumping_dot.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/chat_view_model.dart';
 import '../../../models/entities/chat_room.dart';
 
-class ChatTypingStatus extends StatefulWidget {
+class ChatTypingStatus extends StatelessWidget {
   const ChatTypingStatus({super.key});
 
   @override
-  State<ChatTypingStatus> createState() => _ChatTypingStatusState();
-}
-
-class _ChatTypingStatusState extends State<ChatTypingStatus>
-    with SingleTickerProviderStateMixin {
-  @override
   Widget build(BuildContext context) {
     final model = context.read<ChatViewModel>();
-    final isAdminOrVendor = model.isAdminOrVendor;
     return AnimatedSize(
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeOut,
@@ -27,46 +20,52 @@ class _ChatTypingStatusState extends State<ChatTypingStatus>
         builder: (context, snapshot) {
           final chatRoom = snapshot.data;
 
-          if (chatRoom?.userTyping == null || chatRoom?.adminTyping == null) {
+          // Take max 3 users
+          final usersTyping = chatRoom
+                  ?.getOtherUsers(model.senderEmail)
+                  .where((user) => user.isTyping)
+                  .take(3) ??
+              [];
+
+          if (usersTyping.isEmpty) {
             return const SizedBox(width: double.infinity);
           }
 
-          if (isAdminOrVendor && (chatRoom?.userTyping ?? false) ||
-              !isAdminOrVendor && (chatRoom?.adminTyping ?? false)) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: <Widget>[
-                  CircleAvatar(
-                    radius: 10.0,
-                    backgroundImage: NetworkImage(
-                      getGravatarUrl(
-                        context.select<ChatViewModel, String>(
-                          (ChatViewModel chatViewModel) =>
-                              chatViewModel.receiverEmail,
+          return Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Stack(
+                  children: <Widget>[
+                    for (var i = 0; i < usersTyping.length; i++)
+                      Padding(
+                        padding: EdgeInsetsDirectional.only(start: 8.0 * i),
+                        child: CircleAvatar(
+                          radius: 10,
+                          child: CircleAvatar(
+                            radius: 8.0,
+                            backgroundImage: NetworkImage(
+                              getGravatarUrl(usersTyping.elementAt(i).email),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10.0),
-                    child: Text(
-                      S.of(context).isTyping,
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Theme.of(context)
-                            .colorScheme
-                            .secondary
-                            .withOpacity(0.5),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            );
-          }
-
-          return const SizedBox(width: double.infinity);
+                  ],
+                ),
+                const SizedBox(width: 8.0),
+                JumpingDots(
+                  animationDuration: const Duration(milliseconds: 200),
+                  innerPadding: 3,
+                  radius: 4,
+                  verticalOffset: 8,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ],
+            ),
+          );
         },
       ),
     );

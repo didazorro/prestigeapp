@@ -250,9 +250,9 @@ class CartModelMagento
       if (cartItemMetaData?.variation?.id != null) {
         key += '-${cartItemMetaData?.variation?.id}';
       }
-      for (var attribute in (cartItemMetaData?.variation?.attributes ?? [])) {
-        if (attribute.id == null) {
-          key += '-${attribute.name!}${attribute.option!}';
+      if (cartItemMetaData?.options != null) {
+        for (var option in (cartItemMetaData?.options?.keys ?? [])) {
+          key += '-$option${cartItemMetaData?.options?[option]}';
         }
       }
     }

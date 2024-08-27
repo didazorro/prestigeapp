@@ -316,7 +316,7 @@ class CartModelWoo
         }
       }
     } else if (product.bookingInfo != null) {
-      key += '-${product.bookingInfo!.timeStart.toString()}';
+      key += '-${UniqueKey().toString()}';
     }
     if (cartItemMetaData?.selectedComponents != null) {
       for (var selectedComponentKey
@@ -341,7 +341,12 @@ class CartModelWoo
       if (product.isVariableProduct) {
         /// Loading attributes & variants.
         if (cartItemMetaData?.variation == null) {
-          message = S.of(context).pleaseSelectAllAttributes;
+          if (product.attributes != null &&
+              product.attributes?.length == cartItemMetaData?.options?.length) {
+            message = S.of(context).outOfStock;
+          } else {
+            message = S.of(context).pleaseSelectAllAttributes;
+          }
           return message;
         }
 
@@ -360,14 +365,16 @@ class CartModelWoo
             /// For customer-defined price, text & upload type, label is entered by user.
             /// So we need to check using addon name.
             final requiredOptions = addOns.options!.map((e) {
-              if (e.isEnteredByUser) {
+              if (e.type?.isEnteredByUser ?? false) {
                 return e.parent;
               }
               return e.label;
             }).toList();
             final check = product.selectedOptions?.firstWhereOrNull(
               (option) => requiredOptions.contains(
-                option.isEnteredByUser ? option.parent : option.label,
+                (option.type?.isEnteredByUser ?? false)
+                    ? option.parent
+                    : option.label,
               ),
             );
             if (check == null) {

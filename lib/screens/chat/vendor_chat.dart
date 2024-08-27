@@ -4,7 +4,7 @@ import 'package:quiver/strings.dart';
 
 import '../../common/config.dart';
 import '../../generated/l10n.dart';
-import '../../models/index.dart' show Store, User;
+import '../../models/index.dart' show Product, Store, User;
 import 'chat_arguments.dart';
 import 'chat_mixin.dart';
 import 'scale_animation_mixin.dart';
@@ -13,8 +13,14 @@ import 'smartchat.dart';
 class VendorChat extends StatefulWidget {
   final Store? store;
   final User? user;
+  final Product? product;
 
-  const VendorChat({this.store, this.user});
+  const VendorChat({
+    this.store,
+    this.user,
+    this.product,
+    super.key,
+  });
 
   @override
   State<VendorChat> createState() => _VendorChatState();
@@ -42,7 +48,7 @@ class _VendorChatState extends State<VendorChat>
 
   List<Map> getSmartChatOptions() {
     final options = [];
-    if (showAdminChat) return Configurations.smartChat;
+    if (showAdminChat) return kListSmartChat;
     if (isNotBlank(store!.email) &&
         store!.showEmail &&
         isNotBlank(store!.name)) {
@@ -106,6 +112,7 @@ class _VendorChatState extends State<VendorChat>
                   senderUser: user,
                   receiverEmail: store!.chatEmail,
                   receiverName: store!.name,
+                  product: widget.product,
                 ),
               );
               await scaleAnimationController.forward();

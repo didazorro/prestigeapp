@@ -9,13 +9,13 @@ import '../../models/entities/address.dart';
 import '../../models/index.dart' show CartModel, Product, TaxModel, UserModel;
 import '../../modules/dynamic_layout/helper/helper.dart';
 import '../../services/index.dart';
-import '../../widgets/common/common_safe_area.dart';
 import '../../widgets/common/expansion_info.dart';
 import '../../widgets/product/cart_item/cart_item.dart';
 import '../../widgets/product/cart_item/cart_item_state_ui.dart';
 import '../base_screen.dart';
 import '../cart/widgets/list_cart_items.dart';
 import '../cart/widgets/shopping_cart_sumary.dart';
+import 'widgets/checkout_action.dart';
 import 'widgets/choose_address_item_widget.dart';
 import 'widgets/price_row_item.dart';
 
@@ -169,9 +169,12 @@ class _ReviewState extends BaseScreen<ReviewScreen> {
                             style: const TextStyle(fontSize: 18)),
                       ),
                       ...getProducts(model, context),
-                      const ShoppingCartSummary(
-                        showPrice: false,
-                        showRecurringTotals: false,
+                      const Padding(
+                        padding: EdgeInsets.all(10.0),
+                        child: ShoppingCartSummary(
+                          showPrice: false,
+                          showRecurringTotals: false,
+                        ),
                       ),
                       const SizedBox(height: 20),
                       PriceRowItemWidget(
@@ -274,59 +277,21 @@ class _ReviewState extends BaseScreen<ReviewScreen> {
 
   Widget _buildBottom() {
     final cartModel = Provider.of<CartModel>(context, listen: false);
-    final bgColor = Theme.of(context).primaryColor;
-    return CommonSafeArea(
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (enabledShipping || kPaymentConfig.enableAddress) ...[
-            SizedBox(
-              width: 130,
-              child: OutlinedButton(
-                onPressed: () {
-                  widget.onBack!();
-                },
-                child: Text(
-                  S.of(context).goBack.toUpperCase(),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(width: 8),
-          ],
-          Expanded(
-            child: ButtonTheme(
-              height: 45,
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: bgColor,
-                  elevation: 0,
-                ),
-                onPressed: cartModel.enableCheckoutButton == false
-                    ? null
-                    : () => {
-                          widget.onNext!(),
-                          if (note.text.isNotEmpty)
-                            cartModel.setOrderNotes(note.text)
-                        },
-                icon: Icon(
-                  CupertinoIcons.creditcard,
-                  size: 18,
-                  color: bgColor.getColorBasedOnBackground,
-                ),
-                label: Text(
-                  S.of(context).continueToPayment.toUpperCase(),
-                  style: TextStyle(color: bgColor.getColorBasedOnBackground),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
+
+    return CheckoutActionWidget(
+      iconPrimary: CupertinoIcons.creditcard,
+      labelPrimary: S.of(context).continueToPayment,
+      showSecondary: enabledShipping || kPaymentConfig.enableAddress,
+      onTapPrimary: cartModel.enableCheckoutButton == false
+          ? null
+          : () => {
+                widget.onNext!(),
+                if (note.text.isNotEmpty) cartModel.setOrderNotes(note.text)
+              },
+      labelSecondary: S.of(context).goBack,
+      onTapSecondary: () {
+        widget.onBack!();
+      },
     );
   }
 

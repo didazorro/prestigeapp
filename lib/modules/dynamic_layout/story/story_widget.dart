@@ -147,6 +147,7 @@ class _StoryWidgetState extends State<StoryWidget> {
                 isHorizontal: _storyConfig.isHorizontal,
               ),
             ),
+            context: context,
           );
         },
       ),

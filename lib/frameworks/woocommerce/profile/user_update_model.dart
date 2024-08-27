@@ -12,6 +12,7 @@ class UserUpdateModel extends ChangeNotifier {
   var state = UserUpdateState.loaded;
   final _service = Services();
   TextEditingController userEmail = TextEditingController();
+  TextEditingController username = TextEditingController();
   TextEditingController userPassword = TextEditingController();
   TextEditingController userDisplayName = TextEditingController();
   TextEditingController userFirstName = TextEditingController();
@@ -36,6 +37,7 @@ class UserUpdateModel extends ChangeNotifier {
 
   void _initAllController() {
     userEmail.text = _user?.identifierInformation ?? '';
+    username.text = _user?.username ?? '';
     userDisplayName.text = _user!.name!;
     userFirstName.text = _user!.firstName!;
     userLastName.text = _user!.lastName!;
@@ -63,8 +65,11 @@ class UserUpdateModel extends ChangeNotifier {
     List<AssetEntity>? resultList;
 
     try {
-      resultList =
-          (await ImagePicker.select(context, maxFiles: 1)).cast<AssetEntity>();
+      resultList = await ImagePicker.select(
+        context,
+        maxFiles: 1,
+        requestType: RequestType.image,
+      );
     } on Exception catch (e) {
       printLog(e);
     }

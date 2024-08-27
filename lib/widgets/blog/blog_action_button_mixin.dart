@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import '../../common/constants.dart';
 import '../../models/entities/blog.dart';
 import '../../modules/analytics/analytics.dart';
@@ -6,6 +8,7 @@ import '../../screens/blog/views/blog_detail_screen.dart';
 
 mixin BlogActionButtonMixin {
   void onTapBlog({
+    required BuildContext context,
     String? id,
     Blog? blog,
     List<Blog>? blogs,
@@ -20,6 +23,7 @@ mixin BlogActionButtonMixin {
         listBlog: blogs,
       ),
       forceRootNavigator: forceRootNavigator,
+      context: context,
     );
   }
 }

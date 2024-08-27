@@ -126,6 +126,7 @@ class _CategoryMenuWidgetState extends State<CategoryMenuWidget> {
         cateId: currentCtg.id,
         cateName: currentCtg.name,
       ),
+      context: context,
     );
   }
 

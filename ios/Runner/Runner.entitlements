@@ -12,6 +12,10 @@
 	<array>
 		<string>applinks:${websiteDomain}</string>
 		<string>applinks:${firebaseDynamicUrl}</string>
+		<string>applinks:${branchLiveLinkDomain}</string>
+        <string>applinks:${branchLiveAlternateLinkDomain}</string>
+        <string>applinks:${branchTestLinkDomain}</string>
+        <string>applinks:${branchTestAlternateLinkDomain}</string>
 	</array>
 	<key>com.apple.developer.in-app-payments</key>
 	<array>

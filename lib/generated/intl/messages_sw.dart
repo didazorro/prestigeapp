@@ -28,112 +28,131 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m3(state) => "Adapta ya Bluetooth ni ${state}";
 
-  static String m4(currency) => "Umebadilisha sarafu kuwa ${currency}";
+  static String m4(author) => "Mwandishi: ${author}";
 
-  static String m5(number) => " Zimesalia herufi${number} ";
+  static String m5(currency) => "Umebadilisha sarafu kuwa ${currency}";
 
-  static String m6(priceRate, pointRate) =>
+  static String m6(number) => " Zimesalia herufi${number} ";
+
+  static String m7(priceRate, pointRate) =>
       "${priceRate} = ${pointRate} Pointi";
 
-  static String m7(count) => "${count} kipengee";
+  static String m8(count) => "${count} kipengee";
 
-  static String m8(count) => "${count} vitu";
+  static String m9(count) => "${count} vitu";
 
-  static String m9(country) => "${country} nchi haitumiki";
+  static String m10(count) => "${count} kipengee";
 
-  static String m10(currency) => "${currency} haitumiki";
+  static String m11(count) => "${count} vipengee";
 
-  static String m11(day) => " siku${day} zilizopita";
+  static String m12(country) => "${country} nchi haitumiki";
 
-  static String m12(total) => "~${total} kilomita";
+  static String m13(currency) => "${currency} haitumiki";
 
-  static String m13(timeLeft) => "Inaisha baada ya ${timeLeft}";
+  static String m14(day) => " siku${day} zilizopita";
 
-  static String m14(captcha) => "Weka ${captcha} ili kuthibitisha:";
+  static String m15(total) => "~${total} kilomita";
 
-  static String m15(message) => "Hitilafu: ${message}";
+  static String m16(timeLeft) => "Inaisha baada ya ${timeLeft}";
 
-  static String m16(time) => "Inaisha baada ya ${time}";
+  static String m17(captcha) => "Weka ${captcha} ili kuthibitisha:";
 
-  static String m17(total) => "> kilomita${total} ";
+  static String m18(message) => "Hitilafu: ${message}";
 
-  static String m18(hour) => " saa${hour} zilizopita";
+  static String m19(message) => "Hitilafu: ${message}";
 
-  static String m19(count) =>
+  static String m20(time) => "Inaisha baada ya ${time}";
+
+  static String m21(total) => "> kilomita${total} ";
+
+  static String m22(hour) => " saa${hour} zilizopita";
+
+  static String m23(currentBalance) =>
+      "Umebakisha ${currentBalance} pekee kwenye pochi yako";
+
+  static String m24(count) =>
       " ${Intl.plural(count, one: '${count} item', other: '${count} items')}";
 
-  static String m20(message) =>
+  static String m25(message) =>
       "Kuna tatizo na programu wakati wa ombi la data, tafadhali wasiliana na msimamizi ili kurekebisha masuala: ${message}";
 
-  static String m21(currency, amount) =>
+  static String m26(currency, amount) =>
       "Kiasi cha juu zaidi cha kutumia malipo haya ni ${currency} ${amount}";
 
-  static String m22(size) => "Upeo wa ukubwa wa faili: ${size} MB";
+  static String m27(size) => "Upeo wa ukubwa wa faili: ${size} MB";
 
-  static String m23(currency, amount) =>
+  static String m28(currency, amount) =>
       "Kiasi cha chini kabisa cha kutumia malipo haya ni ${currency} ${amount}";
 
-  static String m24(minute) => " dakika${minute} zilizopita";
+  static String m29(minute) => " dakika${minute} zilizopita";
 
-  static String m25(month) => " Miezi${month} iliyopita";
+  static String m30(month) => " Miezi${month} iliyopita";
 
-  static String m26(store) => "Zaidi kutoka kwa ${store}";
+  static String m31(store) => "Zaidi kutoka kwa ${store}";
 
-  static String m27(number) => "lazima inunuliwe katika vikundi vya ${number}";
+  static String m32(number) => "lazima inunuliwe katika vikundi vya ${number}";
 
-  static String m28(itemCount) => "${itemCount} vitu";
+  static String m33(itemCount) => "${itemCount} vitu";
 
-  static String m29(price) => "Jumla ya chaguo: ${price}";
+  static String m34(price) => "Jumla ya chaguo: ${price}";
 
-  static String m30(amount) => "Lipa ${amount}";
+  static String m35(amount) => "Lipa ${amount}";
 
-  static String m31(name) => "${name} zimeongezwa kwenye rukwama";
+  static String m36(name) => "${name} zimeongezwa kwenye rukwama";
 
-  static String m32(total) => "Kiasi: ${total}";
+  static String m37(total) => "Kiasi: ${total}";
 
-  static String m33(percent) => "Uuzaji ${percent}%";
+  static String m38(name) => "Umepokea pesa kutoka kwa ${name}";
 
-  static String m34(keyword) => "Matokeo ya utafutaji wa: \'${keyword}\'";
+  static String m39(percent) => "Uuzaji ${percent}%";
 
-  static String m35(keyword, count) => "${keyword} (${count} bidhaa)";
+  static String m40(keyword) => "Matokeo ya utafutaji wa: \'${keyword}\'";
 
-  static String m36(keyword, count) => "${keyword} (${count} vitu)";
+  static String m41(keyword, count) => "${keyword} (${count} bidhaa)";
 
-  static String m37(second) => " sekunde${second} zilizopita";
+  static String m42(keyword, count) => "${keyword} (${count} vitu)";
 
-  static String m38(totalCartQuantity) =>
+  static String m43(second) => " sekunde${second} zilizopita";
+
+  static String m44(totalCartQuantity) =>
       "Rukwama ya ununuzi, ${totalCartQuantity} vitu";
 
-  static String m39(numberOfUnitsSold) => "Zinauzwa: ${numberOfUnitsSold}";
+  static String m45(numberOfUnitsSold) => "Zinauzwa: ${numberOfUnitsSold}";
 
-  static String m40(fieldName) => "Sehemu ya ${fieldName} inahitajika";
+  static String m46(fieldName) => "Sehemu ya ${fieldName} inahitajika";
 
-  static String m41(total) => "${total} bidhaa";
+  static String m47(total) => "${total} bidhaa";
 
-  static String m42(maxPointDiscount, maxPriceDiscount) =>
+  static String m48(name) => "Hamisha pesa kwa ${name}";
+
+  static String m49(maxPointDiscount, maxPriceDiscount) =>
       "Tumia upeo wa pointi ${maxPointDiscount} kwa punguzo la ${maxPriceDiscount} kwa agizo hili!";
 
-  static String m43(date) => "Inatumika hadi ${date}";
+  static String m50(date) => "Inatumika hadi ${date}";
 
-  static String m44(message) => "Onyo: ${message}";
+  static String m51(balance) => "Salio la Wallet: ${balance}";
 
-  static String m45(defaultCurrency) =>
+  static String m52(message) => "Onyo: ${message}";
+
+  static String m53(defaultCurrency) =>
       "Sarafu iliyochaguliwa kwa sasa haipatikani kwa kipengele cha Wallet, tafadhali ibadilishe iwe ${defaultCurrency}";
 
-  static String m46(length) => "Tulipata bidhaa ${length} ";
+  static String m54(length) => "Tulipata bidhaa ${length} ";
 
-  static String m47(week) => "Wiki ${week}";
+  static String m55(week) => "Wiki ${week}";
 
-  static String m48(name) => "Karibu ${name}";
+  static String m56(name) => "Karibu ${name}";
 
-  static String m49(year) => " miaka${year} iliyopita";
+  static String m57(year) => " miaka${year} iliyopita";
 
-  static String m50(total) => "Umekabidhi kuagiza #${total}";
+  static String m58(total) => "Umekabidhi kuagiza #${total}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "aboutUs": MessageLookupByLibrary.simpleMessage("Kuhusu sisi"),
         "account": MessageLookupByLibrary.simpleMessage("Akaunti"),
+        "accountApprovalTitle":
+            MessageLookupByLibrary.simpleMessage("Chini ya Idhini"),
         "accountDeleteDescription": MessageLookupByLibrary.simpleMessage(
             "Kufuta akaunti yako huondoa taarifa za kibinafsi kutoka kwa hifadhidata yetu. Barua pepe yako itahifadhiwa kabisa na barua pepe ile ile haiwezi kutumika tena kusajili akaunti mpya."),
         "accountIsPendingApproval": MessageLookupByLibrary.simpleMessage(
@@ -163,7 +182,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addToCart": MessageLookupByLibrary.simpleMessage("Ongeza kwenye kapu"),
         "addToCartMaximum": MessageLookupByLibrary.simpleMessage(
             "Kiwango cha juu zaidi kimepitwa"),
-        "addToCartSucessfully":
+        "addToCartSuccessfully":
             MessageLookupByLibrary.simpleMessage("Imeongezwa kwenye rukwama"),
         "addToOrder": MessageLookupByLibrary.simpleMessage("Ongeza kwenye oda"),
         "addToQuoteRequest":
@@ -224,6 +243,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "audioDetected": MessageLookupByLibrary.simpleMessage(
             "Kipengee cha sauti kimetambuliwa. Je, ungependa kuongeza kwenye Kicheza Sauti?"),
         "availability": MessageLookupByLibrary.simpleMessage("Upatikanaji"),
+        "availabilityProduct":
+            MessageLookupByLibrary.simpleMessage("Upatikanaji: "),
         "availablePoints": m2,
         "averageRating":
             MessageLookupByLibrary.simpleMessage("Ukadiriaji Wastani"),
@@ -250,6 +271,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "bleHasNotBeenEnabled":
             MessageLookupByLibrary.simpleMessage("Bluetooth haijawashwa"),
         "bleState": m3,
+        "block": MessageLookupByLibrary.simpleMessage("Zuia"),
+        "blockUser": MessageLookupByLibrary.simpleMessage("Zuia mtumiaji"),
         "blog": MessageLookupByLibrary.simpleMessage("Blogi"),
         "booked": MessageLookupByLibrary.simpleMessage("Tayari imehifadhiwa"),
         "booking": MessageLookupByLibrary.simpleMessage("Kuhifadhi"),
@@ -280,6 +303,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "by": MessageLookupByLibrary.simpleMessage("na"),
         "byAppointmentOnly":
             MessageLookupByLibrary.simpleMessage("Kwa Kuteuliwa Pekee"),
+        "byAuthor": m4,
         "byBrand": MessageLookupByLibrary.simpleMessage("Kwa Brand"),
         "byCategory": MessageLookupByLibrary.simpleMessage("Kwa kundi"),
         "byPrice": MessageLookupByLibrary.simpleMessage("Kwa Bei"),
@@ -311,9 +335,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "canNotUpdateInfo": MessageLookupByLibrary.simpleMessage(
             "Haiwezi kusasisha maelezo ya mtumiaji."),
         "cancel": MessageLookupByLibrary.simpleMessage("Ghairi"),
+        "cancelOrder": MessageLookupByLibrary.simpleMessage("Ghairi"),
         "cancelled": MessageLookupByLibrary.simpleMessage("Imeghairiwa"),
         "cancelledRequests":
             MessageLookupByLibrary.simpleMessage("Maombi Yaliyoghairiwa"),
+        "cannotDeleteAccount":
+            MessageLookupByLibrary.simpleMessage("Akaunti hii haiwezi kufuta"),
+        "cannotSendMessage": MessageLookupByLibrary.simpleMessage(
+            "Huwezi kutuma ujumbe kwa mtumiaji huyu"),
         "cantFindThisOrderId": MessageLookupByLibrary.simpleMessage(
             "Imeshindwa kupata kitambulisho hiki cha agizo"),
         "cantPickDateInThePast": MessageLookupByLibrary.simpleMessage(
@@ -331,8 +360,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Badilisha Lugha"),
         "changePrinter":
             MessageLookupByLibrary.simpleMessage("Badilisha Printer"),
-        "changedCurrencyTo": m4,
-        "characterRemain": m5,
+        "changedCurrencyTo": m5,
+        "characterRemain": m6,
         "chat": MessageLookupByLibrary.simpleMessage("Ongea"),
         "chatGPT": MessageLookupByLibrary.simpleMessage("Gumzo la GPT"),
         "chatListScreen": MessageLookupByLibrary.simpleMessage("Ujumbe"),
@@ -415,15 +444,19 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Endelea kwa Usafirishaji"),
         "continues": MessageLookupByLibrary.simpleMessage("Endelea"),
         "conversations": MessageLookupByLibrary.simpleMessage("Mazungumzo"),
-        "convertPoint": m6,
+        "convertPoint": m7,
         "copied": MessageLookupByLibrary.simpleMessage("Imenakiliwa"),
         "copy": MessageLookupByLibrary.simpleMessage("Nakala"),
         "copyright": MessageLookupByLibrary.simpleMessage(
             "© 2024 InspireUI Haki zote zimehifadhiwa."),
-        "countItem": m7,
-        "countItems": m8,
+        "countItem": m8,
+        "countItems": m9,
+        "countProduct": m10,
+        "countProducts": m11,
         "country": MessageLookupByLibrary.simpleMessage("Nchi"),
-        "countryIsNotSupported": m9,
+        "countryCodeIsRequired":
+            MessageLookupByLibrary.simpleMessage("Msimbo wa nchi unahitajika"),
+        "countryIsNotSupported": m12,
         "countryIsRequired":
             MessageLookupByLibrary.simpleMessage("Sehemu ya nchi inahitajika"),
         "couponCode": MessageLookupByLibrary.simpleMessage("Namba ya kuponi"),
@@ -447,7 +480,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Unda anuwai zote"),
         "createdOn": MessageLookupByLibrary.simpleMessage("Iliundwa mnamo:"),
         "currencies": MessageLookupByLibrary.simpleMessage("Fedha"),
-        "currencyIsNotSupported": m10,
+        "currencyIsNotSupported": m13,
         "currentPassword":
             MessageLookupByLibrary.simpleMessage("Nenosiri la sasa"),
         "currentlyWeOnlyHave":
@@ -474,7 +507,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "dateTime": MessageLookupByLibrary.simpleMessage("Muda wa Tarehe"),
         "dateWiseClose":
             MessageLookupByLibrary.simpleMessage("Funga kwa Tarehe"),
-        "daysAgo": m11,
+        "daysAgo": m14,
         "debit": MessageLookupByLibrary.simpleMessage("Debit"),
         "decline": MessageLookupByLibrary.simpleMessage("Kataa"),
         "delete": MessageLookupByLibrary.simpleMessage("Futa"),
@@ -484,9 +517,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteAccountSuccess": MessageLookupByLibrary.simpleMessage(
             "Akaunti imefutwa. Muda wa kipindi chako umeisha."),
         "deleteAll": MessageLookupByLibrary.simpleMessage("Futa zote"),
+        "deleteConversation":
+            MessageLookupByLibrary.simpleMessage("Futa mazungumzo"),
         "delivered": MessageLookupByLibrary.simpleMessage("Imeokolewa"),
         "deliveredTo":
             MessageLookupByLibrary.simpleMessage("Imewasilishwa kwa"),
+        "delivering": MessageLookupByLibrary.simpleMessage("Inatoa"),
         "deliveryBoy":
             MessageLookupByLibrary.simpleMessage("Kijana wa usafirishaji:"),
         "deliveryDate":
@@ -507,7 +543,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "discount": MessageLookupByLibrary.simpleMessage("Punguzo"),
         "displayName":
             MessageLookupByLibrary.simpleMessage("Jina la kuonyesha"),
-        "distance": m12,
+        "distance": m15,
         "doNotAnyTransactions":
             MessageLookupByLibrary.simpleMessage("Bado huna miamala yoyote"),
         "doYouWantToExitApp": MessageLookupByLibrary.simpleMessage(
@@ -516,6 +552,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Je, ungependa kuondoka bila kuwasilisha ukaguzi wako?"),
         "doYouWantToLogout":
             MessageLookupByLibrary.simpleMessage("Je, ungependa kuondoka?"),
+        "doYouWantToUnblock": MessageLookupByLibrary.simpleMessage(
+            "Je, ungependa kumwondolea mtumiaji huyu kizuizi?"),
         "doesNotSupportApplePay": MessageLookupByLibrary.simpleMessage(
             "ApplePay haitumiki. Tafadhali angalia pochi na kadi yako"),
         "done": MessageLookupByLibrary.simpleMessage("Imemaliza"),
@@ -535,6 +573,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "editWithoutColon": MessageLookupByLibrary.simpleMessage("Hariri"),
         "egypt": MessageLookupByLibrary.simpleMessage("Misri"),
         "email": MessageLookupByLibrary.simpleMessage("Barua pepe"),
+        "emailAddressInvalid": MessageLookupByLibrary.simpleMessage(
+            "Anwani ya barua pepe si sahihi"),
+        "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(
+            "Barua pepe tayari inatumika!"),
         "emailDeleteDescription": MessageLookupByLibrary.simpleMessage(
             "Kufuta akaunti yako kutakuondoa kwenye orodha zote za wanaopokea barua pepe."),
         "emailDoesNotExist": MessageLookupByLibrary.simpleMessage(
@@ -574,12 +616,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Washa hali ya likizo"),
         "endDateCantBeAfterFirstDate": MessageLookupByLibrary.simpleMessage(
             "Tafadhali chagua tarehe baada ya tarehe ya kwanza"),
-        "endsIn": m13,
+        "endsIn": m16,
         "english": MessageLookupByLibrary.simpleMessage("Kiingereza"),
-        "enterCaptcha": m14,
+        "enterAmount": MessageLookupByLibrary.simpleMessage("Weka kiasi"),
+        "enterCaptcha": m17,
         "enterEmailEachRecipient": MessageLookupByLibrary.simpleMessage(
             "Weka barua pepe kwa kila mpokeaji"),
-        "enterSendedCode":
+        "enterSentCode":
             MessageLookupByLibrary.simpleMessage("Ingiza msimbo uliotumwa kwa"),
         "enterVoucherCode":
             MessageLookupByLibrary.simpleMessage("Weka msimbo wa vocha"),
@@ -599,13 +642,19 @@ class MessageLookup extends MessageLookupByLibrary {
             "Weka nambari yako ya simu ili kuanza."),
         "enterYourPhoneNumber":
             MessageLookupByLibrary.simpleMessage("Ingiza nambari yako ya simu"),
-        "error": m15,
+        "enterYourUsername": MessageLookupByLibrary.simpleMessage(
+            "Ingiza jina lako la mtumiaji"),
+        "error": m18,
         "errorAmountTransfer": MessageLookupByLibrary.simpleMessage(
             "Kiasi kilichowekwa ni kikubwa kuliko kiasi cha sasa cha pochi. Tafadhali jaribu tena!"),
         "errorEmailFormat": MessageLookupByLibrary.simpleMessage(
             "Tafadhali weka barua pepe halali."),
+        "errorMsg": m19,
+        "errorOnGettingPost": MessageLookupByLibrary.simpleMessage(
+            "Hitilafu katika kupata chapisho!"),
         "errorPasswordFormat": MessageLookupByLibrary.simpleMessage(
             "Tafadhali weka nenosiri la angalau vibambo 8"),
+        "errorTitle": MessageLookupByLibrary.simpleMessage("Hitilafu"),
         "evening": MessageLookupByLibrary.simpleMessage("Jioni"),
         "events": MessageLookupByLibrary.simpleMessage("Matukio"),
         "expectedDeliveryDate": MessageLookupByLibrary.simpleMessage(
@@ -613,7 +662,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "expired": MessageLookupByLibrary.simpleMessage("Imeisha muda"),
         "expiredDate": MessageLookupByLibrary.simpleMessage("Tarehe ya kuisha"),
         "expiredDateHint": MessageLookupByLibrary.simpleMessage("MM/YY"),
-        "expiringInTime": m16,
+        "expiringInTime": m20,
         "exploreNow": MessageLookupByLibrary.simpleMessage("Chunguza sasa"),
         "external": MessageLookupByLibrary.simpleMessage("Ya nje"),
         "extraServices":
@@ -658,6 +707,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Punguzo la Bidhaa Zisizohamishika"),
         "forThisProduct":
             MessageLookupByLibrary.simpleMessage("kwa bidhaa hii"),
+        "free": MessageLookupByLibrary.simpleMessage("Bure"),
         "freeOfCharge": MessageLookupByLibrary.simpleMessage("Bure"),
         "french": MessageLookupByLibrary.simpleMessage("Kifaransa"),
         "friday": MessageLookupByLibrary.simpleMessage("Ijumaa"),
@@ -684,7 +734,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "goBackToShipping":
             MessageLookupByLibrary.simpleMessage("Rudi kwenye usafirishaji"),
         "good": MessageLookupByLibrary.simpleMessage("Nzuri"),
-        "greaterDistance": m17,
+        "greaterDistance": m21,
         "greek": MessageLookupByLibrary.simpleMessage("Kigiriki"),
         "grossSales": MessageLookupByLibrary.simpleMessage("mauzo ya jumla"),
         "grouped":
@@ -703,7 +753,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "historyTransaction": MessageLookupByLibrary.simpleMessage("Historia"),
         "home": MessageLookupByLibrary.simpleMessage("Nyumbani"),
         "hour": MessageLookupByLibrary.simpleMessage("Saa"),
-        "hoursAgo": m18,
+        "hoursAgo": m22,
         "hungarian": MessageLookupByLibrary.simpleMessage("Kihungari"),
         "hungary": MessageLookupByLibrary.simpleMessage("Kihungari"),
         "iAgree": MessageLookupByLibrary.simpleMessage("Nakubaliana na"),
@@ -723,8 +773,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "indonesian": MessageLookupByLibrary.simpleMessage("Kiindonesia"),
         "informationTable":
             MessageLookupByLibrary.simpleMessage("Jedwali la Habari"),
+        "installDigitsPlugin": MessageLookupByLibrary.simpleMessage(
+            "Tafadhali sakinisha DIGITS: Kujisajili kwa Nambari ya Simu ya Wordpress na programu-jalizi ya Kuingia"),
         "instantlyClose":
             MessageLookupByLibrary.simpleMessage("Karibu mara moja"),
+        "insufficientBalanceMessage": m23,
         "invalidPhoneNumber":
             MessageLookupByLibrary.simpleMessage("Nambari batili ya simu"),
         "invalidSMSCode": MessageLookupByLibrary.simpleMessage(
@@ -737,7 +790,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "isTyping": MessageLookupByLibrary.simpleMessage("inaandika ..."),
         "italian": MessageLookupByLibrary.simpleMessage("Kiitaliano"),
         "item": MessageLookupByLibrary.simpleMessage("Bidhaa"),
-        "itemQuantity": m19,
+        "itemQuantity": m24,
         "itemTotal": MessageLookupByLibrary.simpleMessage("Jumla ya bidhaa:"),
         "items": MessageLookupByLibrary.simpleMessage("Vitu"),
         "itsOrdered": MessageLookupByLibrary.simpleMessage("Imeagizwa!"),
@@ -779,7 +832,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("Ingia"),
         "loginCanceled":
             MessageLookupByLibrary.simpleMessage("Kuingia kumeghairiwa"),
-        "loginErrorServiceProvider": m20,
+        "loginErrorServiceProvider": m25,
         "loginFailed": MessageLookupByLibrary.simpleMessage(
             "Imeshindikana kujiandikisha kuingia!"),
         "loginInvalid": MessageLookupByLibrary.simpleMessage(
@@ -809,30 +862,34 @@ class MessageLookup extends MessageLookupByLibrary {
             "Weka alama kuwa imesafirishwa"),
         "markAsUnread":
             MessageLookupByLibrary.simpleMessage("Weka alama kuwa haijasomwa"),
-        "maxAmountForPayment": m21,
-        "maximumFileSizeMb": m22,
+        "maxAmountForPayment": m26,
+        "maximumFileSizeMb": m27,
         "maybeLater": MessageLookupByLibrary.simpleMessage("Labda baadae"),
         "menuOrder": MessageLookupByLibrary.simpleMessage("Agizo la menyu"),
         "menus": MessageLookupByLibrary.simpleMessage("Menyu"),
         "message": MessageLookupByLibrary.simpleMessage("Ujumbe"),
         "messageTo": MessageLookupByLibrary.simpleMessage("Tuma Ujumbe Kwa"),
-        "minAmountForPayment": m23,
+        "minAmountForPayment": m28,
         "minimumQuantityIs":
             MessageLookupByLibrary.simpleMessage("Kiasi cha chini ni"),
-        "minutesAgo": m24,
+        "minutesAgo": m29,
         "mobile": MessageLookupByLibrary.simpleMessage("Rununu"),
+        "mobileIsRequired":
+            MessageLookupByLibrary.simpleMessage("Simu inahitajika"),
+        "mobileNumberInUse": MessageLookupByLibrary.simpleMessage(
+            "Nambari ya Simu tayari inatumika!"),
         "mobileVerification":
             MessageLookupByLibrary.simpleMessage("Uthibitishaji wa Simu"),
         "momentAgo":
             MessageLookupByLibrary.simpleMessage("muda mfupi uliopita"),
         "monday": MessageLookupByLibrary.simpleMessage("Jumatatu"),
-        "monthsAgo": m25,
+        "monthsAgo": m30,
         "more": MessageLookupByLibrary.simpleMessage("...zaidi"),
-        "moreFromStore": m26,
+        "moreFromStore": m31,
         "moreInformation":
             MessageLookupByLibrary.simpleMessage("Taarifa zaidi"),
         "morning": MessageLookupByLibrary.simpleMessage("Asubuhi"),
-        "mustBeBoughtInGroupsOf": m27,
+        "mustBeBoughtInGroupsOf": m32,
         "mustSelectOneItem":
             MessageLookupByLibrary.simpleMessage("Lazima uchague kipengee 1"),
         "myCart": MessageLookupByLibrary.simpleMessage("Mkokoteni Wangu"),
@@ -844,11 +901,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "myWallet": MessageLookupByLibrary.simpleMessage("Mkoba wangu"),
         "myWishList":
             MessageLookupByLibrary.simpleMessage("Orodha Yangu ya Matamanio"),
-        "nItems": m28,
+        "nItems": m33,
         "name": MessageLookupByLibrary.simpleMessage("Jina"),
         "nameOnCard": MessageLookupByLibrary.simpleMessage("Jina kwa kadi"),
         "nearbyPlaces":
             MessageLookupByLibrary.simpleMessage("Maeneo ya Karibu"),
+        "needHelp":
+            MessageLookupByLibrary.simpleMessage("Je, unahitaji usaidizi?"),
         "needToLoginAgain": MessageLookupByLibrary.simpleMessage(
             "Unahitaji kuingia tena ili kutekeleza sasisho"),
         "netherlands": MessageLookupByLibrary.simpleMessage("Kiholanzi"),
@@ -867,10 +926,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "Lo, blogu inaonekana haipo tena"),
         "noCameraPermissionIsGranted": MessageLookupByLibrary.simpleMessage(
             "Hakuna ruhusa ya kamera inayotolewa. Tafadhali iruhusu katika Mipangilio ya kifaa chako."),
+        "noComments": MessageLookupByLibrary.simpleMessage("Hakuna Maoni"),
         "noConversation":
             MessageLookupByLibrary.simpleMessage("Hakuna mazungumzo bado"),
         "noConversationDescription": MessageLookupByLibrary.simpleMessage(
-            "Itaonekana wateja wako watakapoanza kupiga gumzo nawe"),
+            "Itaonekana mtu atakapoanza kupiga gumzo nawe"),
         "noData": MessageLookupByLibrary.simpleMessage("Hakuna Data zaidi"),
         "noFavoritesYet":
             MessageLookupByLibrary.simpleMessage("Bado hakuna vipendwa."),
@@ -883,6 +943,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "noListingNearby":
             MessageLookupByLibrary.simpleMessage("Hakuna tangazo karibu!"),
         "noOrders": MessageLookupByLibrary.simpleMessage("Hakuna maagizo"),
+        "noPaymentMethodsAvailable": MessageLookupByLibrary.simpleMessage(
+            "Hakuna njia za malipo zinazopatikana."),
         "noPermissionForCurrentRole": MessageLookupByLibrary.simpleMessage(
             "Samahani, bidhaa hii haiwezi kufikiwa kwa jukumu lako la sasa."),
         "noPermissionToViewProduct": MessageLookupByLibrary.simpleMessage(
@@ -935,7 +997,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "openingHours": MessageLookupByLibrary.simpleMessage("Saa za Ufunguzi"),
         "optional": MessageLookupByLibrary.simpleMessage("Hiari"),
         "options": MessageLookupByLibrary.simpleMessage("chaguzi"),
-        "optionsTotal": m29,
+        "optionsTotal": m34,
         "or": MessageLookupByLibrary.simpleMessage("au"),
         "orLoginWith": MessageLookupByLibrary.simpleMessage("au ingia na"),
         "orderConfirmation":
@@ -1014,7 +1076,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bandika url ya picha yako"),
         "payByWallet": MessageLookupByLibrary.simpleMessage("Lipa kwa mkoba"),
         "payNow": MessageLookupByLibrary.simpleMessage("LIPA sasa"),
-        "payWithAmount": m30,
+        "payWithAmount": m35,
         "payment": MessageLookupByLibrary.simpleMessage("Malipo"),
         "paymentDetailsChangedSuccessfully":
             MessageLookupByLibrary.simpleMessage(
@@ -1041,6 +1103,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Uthibitishaji wa Nambari ya Simu"),
         "pickADate":
             MessageLookupByLibrary.simpleMessage("Chagua Tarehe na Wakati"),
+        "picking": MessageLookupByLibrary.simpleMessage("Inasubiri kujifungua"),
         "placeMyOrder":
             MessageLookupByLibrary.simpleMessage("Weka Agizo Langu"),
         "playAll": MessageLookupByLibrary.simpleMessage("Cheza Zote"),
@@ -1060,6 +1123,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Tafadhali weka jina la bidhaa"),
         "pleaseFillCode":
             MessageLookupByLibrary.simpleMessage("Tafadhali jaza msimbo wako"),
+        "pleaseFillUpAllCellsProperly": MessageLookupByLibrary.simpleMessage(
+            "*Tafadhali jaza seli zote vizuri"),
         "pleaseIncreaseOrDecreaseTheQuantity":
             MessageLookupByLibrary.simpleMessage(
                 "Tafadhali ongeza au punguza idadi ili kuendelea."),
@@ -1081,8 +1146,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Tafadhali chagua chaguo zinazohitajika!"),
         "pleaseSignInBeforeUploading": MessageLookupByLibrary.simpleMessage(
             "Tafadhali ingia kwenye akaunti yako kabla ya kupakia faili zozote."),
-        "pleasefillUpAllCellsProperly": MessageLookupByLibrary.simpleMessage(
-            "*Tafadhali jaza seli zote vizuri"),
         "point": MessageLookupByLibrary.simpleMessage("Hatua"),
         "pointMsgConfigNotFound": MessageLookupByLibrary.simpleMessage(
             "Hakuna usanidi wa pointi za punguzo umepatikana kwenye seva"),
@@ -1145,8 +1208,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "privacyTerms":
             MessageLookupByLibrary.simpleMessage("Faragha na Masharti"),
         "private": MessageLookupByLibrary.simpleMessage("Privat"),
+        "processing": MessageLookupByLibrary.simpleMessage("Inachakata..."),
         "product": MessageLookupByLibrary.simpleMessage("Bidhaa"),
-        "productAddToCart": m31,
+        "productAddToCart": m36,
         "productAdded":
             MessageLookupByLibrary.simpleMessage("Bidhaa hiyo huongezwa"),
         "productCreateReview": MessageLookupByLibrary.simpleMessage(
@@ -1184,10 +1248,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "qRCodeSaveFailure": MessageLookupByLibrary.simpleMessage(
             "Imeshindwa Kuhifadhi Msimbo wa QR"),
         "qty": MessageLookupByLibrary.simpleMessage("Kiasi"),
-        "qtyTotal": m32,
+        "qtyTotal": m37,
         "quantity": MessageLookupByLibrary.simpleMessage("Kiasi"),
         "quantityProductExceedInStock": MessageLookupByLibrary.simpleMessage(
             "Kiasi cha sasa ni zaidi ya kiasi kilichopo"),
+        "random": MessageLookupByLibrary.simpleMessage("Nasibu"),
         "rate": MessageLookupByLibrary.simpleMessage("Kiwango"),
         "rateProduct":
             MessageLookupByLibrary.simpleMessage("Kiwango cha Bidhaa"),
@@ -1201,14 +1266,17 @@ class MessageLookup extends MessageLookupByLibrary {
             "Tafadhali kadiria kabla ya kutuma maoni yako"),
         "reOrder": MessageLookupByLibrary.simpleMessage("Agiza Upya"),
         "readReviews": MessageLookupByLibrary.simpleMessage("Ukaguzi"),
+        "readyToPick":
+            MessageLookupByLibrary.simpleMessage("Inasubiri kujifungua"),
         "receivedMoney": MessageLookupByLibrary.simpleMessage("Imepokea pesa"),
+        "receivedMoneyFrom": m38,
         "receiver": MessageLookupByLibrary.simpleMessage("Mpokeaji"),
+        "recent": MessageLookupByLibrary.simpleMessage("kumbuka"),
         "recentSearches": MessageLookupByLibrary.simpleMessage("Historia"),
         "recentView": MessageLookupByLibrary.simpleMessage(
             "Mwonekano Wako wa Hivi Karibuni"),
         "recentlyViewed":
             MessageLookupByLibrary.simpleMessage("Iliyotazamwa Hivi Karibuni"),
-        "recents": MessageLookupByLibrary.simpleMessage("kumbuka"),
         "recommended": MessageLookupByLibrary.simpleMessage("Imependekezwa"),
         "recurringTotals":
             MessageLookupByLibrary.simpleMessage("Nambari Zinazorudiwa"),
@@ -1228,8 +1296,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "registerAs": MessageLookupByLibrary.simpleMessage("Jisajili kama"),
         "registerAsVendor": MessageLookupByLibrary.simpleMessage(
             "Jisajili kama Mtumiaji Muuzaji"),
+        "registerErrorSyncAccount": MessageLookupByLibrary.simpleMessage(
+            "Imeshindwa kusawazisha akaunti. Tafadhali ingia ili kuendelea."),
         "registerFailed":
             MessageLookupByLibrary.simpleMessage("Usajili umeshindwa"),
+        "registerInvalid": MessageLookupByLibrary.simpleMessage(
+            "Ombi ni batili au muda wake umeisha. Tafadhali jaribu tena"),
         "registerSuccess":
             MessageLookupByLibrary.simpleMessage("Jisajili kwa mafanikio"),
         "regularPrice": MessageLookupByLibrary.simpleMessage("Bei ya kawaida"),
@@ -1260,7 +1332,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reviews": MessageLookupByLibrary.simpleMessage("Ukaguzi"),
         "romanian": MessageLookupByLibrary.simpleMessage("Kiromania"),
         "russian": MessageLookupByLibrary.simpleMessage("Kirusi"),
-        "sale": m33,
+        "sale": m39,
         "salePrice": MessageLookupByLibrary.simpleMessage("Bei ya kuuza"),
         "saturday": MessageLookupByLibrary.simpleMessage("Jumamosi"),
         "save": MessageLookupByLibrary.simpleMessage("Okoa"),
@@ -1293,12 +1365,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "searchOrderId": MessageLookupByLibrary.simpleMessage(
             "Tafuta kwa Kitambulisho cha Agizo..."),
         "searchPlace": MessageLookupByLibrary.simpleMessage("Tafuta Mahali"),
-        "searchResultFor": m34,
-        "searchResultItem": m35,
-        "searchResultItems": m36,
+        "searchResultFor": m40,
+        "searchResultItem": m41,
+        "searchResultItems": m42,
         "searchingAddress":
             MessageLookupByLibrary.simpleMessage("Inatafuta Anwani"),
-        "secondsAgo": m37,
+        "secondsAgo": m43,
         "seeAll": MessageLookupByLibrary.simpleMessage("Ona yote"),
         "seeNewAppConfig": MessageLookupByLibrary.simpleMessage(
             "Endelea kuona maudhui mapya kwenye programu yako."),
@@ -1328,6 +1400,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "sendSMSCode": MessageLookupByLibrary.simpleMessage("Pata msimbo"),
         "sendSMStoVendor": MessageLookupByLibrary.simpleMessage(
             "Tuma SMS kwa Mmiliki wa Duka"),
+        "sendTo": MessageLookupByLibrary.simpleMessage(
+            "Akaunti unayotaka kuhamisha kwa (barua pepe)"),
         "separateMultipleEmailWithComma": MessageLookupByLibrary.simpleMessage(
             "Tenganisha barua pepe nyingi kwa koma."),
         "serbian": MessageLookupByLibrary.simpleMessage("Kiserbia"),
@@ -1342,6 +1416,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "shipping": MessageLookupByLibrary.simpleMessage("Usafirishaji"),
         "shippingAddress":
             MessageLookupByLibrary.simpleMessage("Anwani ya kusafirishia"),
+        "shippingFee":
+            MessageLookupByLibrary.simpleMessage("Ada ya Usafirishaji"),
         "shippingMethod":
             MessageLookupByLibrary.simpleMessage("Njia ya Usafirishaji"),
         "shop": MessageLookupByLibrary.simpleMessage("Duka"),
@@ -1350,7 +1426,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shopOrders": MessageLookupByLibrary.simpleMessage("Maagizo ya Duka"),
         "shopPhone": MessageLookupByLibrary.simpleMessage("Nunua simu"),
         "shopSlug": MessageLookupByLibrary.simpleMessage("Duka slug"),
-        "shoppingCartItems": m38,
+        "shoppingCartItems": m44,
         "shortDescription":
             MessageLookupByLibrary.simpleMessage("Maelezo Fupi"),
         "showAllMyOrdered":
@@ -1372,7 +1448,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "slovak": MessageLookupByLibrary.simpleMessage("Kislovak"),
         "smsCodeExpired": MessageLookupByLibrary.simpleMessage(
             "Msimbo wa SMS umekwisha muda. Tafadhali tuma tena nambari ya kuthibitisha ili ujaribu tena."),
-        "sold": m39,
+        "sold": m45,
         "soldBy": MessageLookupByLibrary.simpleMessage("Imeuzwa na"),
         "somethingWrong": MessageLookupByLibrary.simpleMessage(
             "Hitilafu fulani imetokea. Tafadhali jaribu tena baadae."),
@@ -1446,9 +1522,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "tapTheMicToTalk": MessageLookupByLibrary.simpleMessage(
             "Gusa maikrofoni ili kuzungumza"),
         "tax": MessageLookupByLibrary.simpleMessage("Kodi"),
+        "teraWallet": MessageLookupByLibrary.simpleMessage("TeraWallet"),
         "terrible": MessageLookupByLibrary.simpleMessage("Ya kutisha"),
         "thailand": MessageLookupByLibrary.simpleMessage("Thai"),
-        "theFieldIsRequired": m40,
+        "theFieldIsRequired": m46,
         "thisDateIsNotAvailable":
             MessageLookupByLibrary.simpleMessage("Tarehe hii haipatikani"),
         "thisFeatureDoesNotSupportTheCurrentLanguage":
@@ -1469,7 +1546,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "titleAToZ": MessageLookupByLibrary.simpleMessage("Kichwa: A hadi Z"),
         "titleZToA": MessageLookupByLibrary.simpleMessage("Kichwa: Z hadi A"),
         "to": MessageLookupByLibrary.simpleMessage("Kwa"),
-        "tooManyFaildedLogin": MessageLookupByLibrary.simpleMessage(
+        "tooManyFailedLogin": MessageLookupByLibrary.simpleMessage(
             "Majaribio mengi sana ya kuingia yameshindwa. Tafadhali jaribu tena baadae."),
         "topUp": MessageLookupByLibrary.simpleMessage("ongeza juu"),
         "topUpProductNotFound": MessageLookupByLibrary.simpleMessage(
@@ -1478,7 +1555,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "totalCartValue": MessageLookupByLibrary.simpleMessage(
             "Thamani ya jumla ya agizo lazima iwe angalau"),
         "totalPrice": MessageLookupByLibrary.simpleMessage("Bei jumla"),
-        "totalProducts": m41,
+        "totalProducts": m47,
         "totalTax": MessageLookupByLibrary.simpleMessage("Jumla ya kodi"),
         "trackingNumberIs":
             MessageLookupByLibrary.simpleMessage("Nambari ya ufuatiliaji ni"),
@@ -1489,6 +1566,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "transactionDetail":
             MessageLookupByLibrary.simpleMessage("Maelezo ya muamala"),
         "transactionFailded":
+            MessageLookupByLibrary.simpleMessage("Muamala haukufaulu"),
+        "transactionFailed":
             MessageLookupByLibrary.simpleMessage("Muamala haukufaulu"),
         "transactionFee":
             MessageLookupByLibrary.simpleMessage("Ada ya muamala"),
@@ -1501,6 +1580,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Huwezi kuhamishia kwa mtumiaji huyu"),
         "transferFailed":
             MessageLookupByLibrary.simpleMessage("Imeshindwa kuhamisha"),
+        "transferMoneyTo": m48,
         "transferSuccess":
             MessageLookupByLibrary.simpleMessage("Uhamisho umefanikiwa"),
         "tuesday": MessageLookupByLibrary.simpleMessage("Jumanne"),
@@ -1513,6 +1593,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "typing": MessageLookupByLibrary.simpleMessage("Kuandika ..."),
         "ukrainian": MessageLookupByLibrary.simpleMessage("Kiukreni"),
         "unavailable": MessageLookupByLibrary.simpleMessage("Haipatikani"),
+        "unblock": MessageLookupByLibrary.simpleMessage("Ondoa kizuizi"),
+        "unblockUser":
+            MessageLookupByLibrary.simpleMessage("Ondoa kizuizi kwa mtumiaji"),
         "undo": MessageLookupByLibrary.simpleMessage("Tendua"),
         "unpaid": MessageLookupByLibrary.simpleMessage("Haijalipwa"),
         "update": MessageLookupByLibrary.simpleMessage("Sasisha"),
@@ -1530,20 +1613,30 @@ class MessageLookup extends MessageLookupByLibrary {
         "uploadProduct": MessageLookupByLibrary.simpleMessage("Pakia Bidhaa"),
         "uploading": MessageLookupByLibrary.simpleMessage("Inapakia"),
         "url": MessageLookupByLibrary.simpleMessage("URL"),
-        "useMaximumPointDiscount": m42,
+        "useMaximumPointDiscount": m49,
         "useNow": MessageLookupByLibrary.simpleMessage("Tumia Sasa"),
         "useThisImage": MessageLookupByLibrary.simpleMessage("Tumia Picha hii"),
         "userExists": MessageLookupByLibrary.simpleMessage(
             "Jina hili la mtumiaji/barua pepe haipatikani."),
+        "userHasBeenBlocked":
+            MessageLookupByLibrary.simpleMessage("Mtumiaji amezuiwa"),
         "userNameInCorrect": MessageLookupByLibrary.simpleMessage(
             "Jina la mtumiaji au nenosiri si sahihi."),
+        "userNotFound":
+            MessageLookupByLibrary.simpleMessage("Mtumiaji hapatikani"),
         "username": MessageLookupByLibrary.simpleMessage("Jina la mtumiaji"),
+        "usernameAlreadyInUse": MessageLookupByLibrary.simpleMessage(
+            "Jina la mtumiaji tayari linatumika!"),
         "usernameAndPasswordRequired": MessageLookupByLibrary.simpleMessage(
             "Jina la mtumiaji na nenosiri zinahitajika"),
+        "usernameInvalid":
+            MessageLookupByLibrary.simpleMessage("Jina la mtumiaji ni batili"),
+        "usernameIsRequired": MessageLookupByLibrary.simpleMessage(
+            "Jina la mtumiaji linahitajika"),
         "vacationMessage":
             MessageLookupByLibrary.simpleMessage("Ujumbe wa likizo"),
         "vacationType": MessageLookupByLibrary.simpleMessage("Aina ya likizo"),
-        "validUntilDate": m43,
+        "validUntilDate": m50,
         "variable": MessageLookupByLibrary.simpleMessage("Inaweza kubadilika"),
         "variation": MessageLookupByLibrary.simpleMessage("Tofauti"),
         "vendor": MessageLookupByLibrary.simpleMessage("Mchuuzi"),
@@ -1575,11 +1668,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "waitingForConfirmation":
             MessageLookupByLibrary.simpleMessage("Inasubiri uthibitisho"),
         "walletBalance": MessageLookupByLibrary.simpleMessage("Salio la mkoba"),
+        "walletBalanceWithValue": m51,
         "walletName": MessageLookupByLibrary.simpleMessage("Jina la Wallet"),
-        "warning": m44,
-        "warningCurrencyMessageForWallet": m45,
+        "warning": m52,
+        "warningCurrencyMessageForWallet": m53,
         "weFoundBlogs": MessageLookupByLibrary.simpleMessage("Tumepata Blogu"),
-        "weFoundProducts": m46,
+        "weFoundProducts": m54,
         "weNeedCameraAccessTo": MessageLookupByLibrary.simpleMessage(
             "Tunahitaji ufikiaji wa kamera ili kutafuta msimbo wa QR au Msimbo wa Pau."),
         "weSentAnOTPTo": MessageLookupByLibrary.simpleMessage(
@@ -1589,16 +1683,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "webView": MessageLookupByLibrary.simpleMessage("Mwonekano wa Wavuti"),
         "website": MessageLookupByLibrary.simpleMessage("Tovuti"),
         "wednesday": MessageLookupByLibrary.simpleMessage("Jumatano"),
-        "week": m47,
+        "week": m55,
         "welcome": MessageLookupByLibrary.simpleMessage("Karibu"),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Karibu tena"),
         "welcomeRegister": MessageLookupByLibrary.simpleMessage(
             "Anza safari yako ya ununuzi nasi sasa"),
-        "welcomeUser": m48,
+        "welcomeUser": m56,
         "whichLanguageDoYouPrefer":
             MessageLookupByLibrary.simpleMessage("Je, unapendelea lugha gani?"),
         "wholesaleRegisterMsg": MessageLookupByLibrary.simpleMessage(
             "Tafadhali wasiliana na msimamizi ili kuidhinisha usajili wako."),
+        "willNotSendAndReceiveMessage": MessageLookupByLibrary.simpleMessage(
+            "Hutaweza kutuma na kupokea ujumbe kutoka kwa mtumiaji huyu."),
         "withdrawAmount": MessageLookupByLibrary.simpleMessage("Toa Kiasi"),
         "withdrawRequest":
             MessageLookupByLibrary.simpleMessage("Ombi la Kuondoa"),
@@ -1609,15 +1705,20 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Andika maoni yako"),
         "writeYourNote":
             MessageLookupByLibrary.simpleMessage("Andika dokezo lako"),
-        "yearsAgo": m49,
+        "yearsAgo": m57,
         "yes": MessageLookupByLibrary.simpleMessage("Ndio"),
         "youCanOnlyOrderSingleStore": MessageLookupByLibrary.simpleMessage(
             "Unaweza kununua tu kwenye duka moja."),
         "youCanOnlyPurchase":
             MessageLookupByLibrary.simpleMessage("Unaweza kununua tu"),
-        "youHaveAssignedToOrder": m50,
+        "youDontHavePermissionToCreatePost":
+            MessageLookupByLibrary.simpleMessage(
+                "Huna ruhusa ya kuunda Chapisho"),
+        "youHaveAssignedToOrder": m58,
         "youHaveBeenSaveAddressYourLocal": MessageLookupByLibrary.simpleMessage(
             "Umehifadhi anwani katika eneo lako"),
+        "youHaveNoPost":
+            MessageLookupByLibrary.simpleMessage("Huna machapisho"),
         "youHavePoints":
             MessageLookupByLibrary.simpleMessage("Una pointi \$pointi"),
         "youMightAlsoLike":

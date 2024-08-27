@@ -27,6 +27,7 @@ class _StateCardCategories extends BaseScreen<ParallaxCategories> {
         cateId: category.id,
         cateName: category.name,
       ),
+      context: context,
     );
   }
 
@@ -50,6 +51,7 @@ class _StateCardCategories extends BaseScreen<ParallaxCategories> {
                         cateId: category.id,
                         cateName: category.name,
                       ),
+                      context: context,
                     );
                   },
                   child: ParallaxImage(

@@ -26,6 +26,7 @@ mixin BranchMixin {
             onTap: () => FluxNavigate.pushNamed(
               RouteList.branchSelecter,
               forceRootNavigator: true,
+              context: context,
             ),
             icon: Icons.menu,
             title: S.of(context).branch,

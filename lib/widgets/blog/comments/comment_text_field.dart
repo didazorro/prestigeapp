@@ -5,6 +5,7 @@ import '../../../../../common/constants.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../../models/user_model.dart';
 import '../../../../../services/services.dart';
+import '../../../common/config.dart';
 
 class CommentInput extends StatefulWidget {
   final dynamic blogId;
@@ -64,6 +65,7 @@ class _CommentInputState extends State<CommentInput> {
           .showSnackBar(SnackBar(content: Text(e.toString())));
     }
     hideLoading();
+    FocusManager.instance.primaryFocus?.unfocus();
   }
 
   Widget _buildCommentSection() {
@@ -96,6 +98,9 @@ class _CommentInputState extends State<CommentInput> {
   }
 
   Widget _buildRequiredLoginButton() {
+    if (!kLoginSetting.enable) {
+      return const SizedBox();
+    }
     return Container(
       constraints: const BoxConstraints(
         minHeight: 32,

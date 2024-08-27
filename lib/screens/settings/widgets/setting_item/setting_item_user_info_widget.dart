@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../common/constants.dart';
 import '../../../../models/entities/user.dart';
+import '../../../../services/service_config.dart';
 import '../../../../widgets/common/flux_image.dart';
 import 'setting_card_widget.dart';
 
@@ -19,6 +20,7 @@ class SettingItemUserInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isSupportEditProfile = ServerConfig().isSupportEditProfile;
     if ([
       SettingItemStyle.flat,
       SettingItemStyle.flatShadow,
@@ -55,22 +57,24 @@ class SettingItemUserInfoWidget extends StatelessWidget {
                     color: Theme.of(context).colorScheme.secondary),
               )
             : null,
-        onTap: onTapUpdateProfile,
-        trailing: IconButton(
-          onPressed: onTapUpdateProfile,
-          icon: Container(
-            decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor.withOpacity(0.3),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            padding: const EdgeInsets.all(8),
-            child: const Center(
-              child: FittedBox(
-                child: Icon(Icons.edit),
-              ),
-            ),
-          ),
-        ),
+        onTap: isSupportEditProfile ? onTapUpdateProfile : null,
+        trailing: isSupportEditProfile
+            ? IconButton(
+                onPressed: onTapUpdateProfile,
+                icon: Container(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).primaryColor.withOpacity(0.3),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  padding: const EdgeInsets.all(8),
+                  child: const Center(
+                    child: FittedBox(
+                      child: Icon(Icons.edit),
+                    ),
+                  ),
+                ),
+              )
+            : null,
       );
 
       return SettingCardWidget(
@@ -112,11 +116,13 @@ class SettingItemUserInfoWidget extends StatelessWidget {
                   fontSize: 16, color: Theme.of(context).colorScheme.secondary),
             )
           : null,
-      onTap: onTapUpdateProfile,
-      trailing: IconButton(
-        onPressed: onTapUpdateProfile,
-        icon: const Icon(Icons.edit),
-      ),
+      onTap: isSupportEditProfile ? onTapUpdateProfile : null,
+      trailing: isSupportEditProfile
+          ? IconButton(
+              onPressed: onTapUpdateProfile,
+              icon: const Icon(Icons.edit),
+            )
+          : null,
     );
   }
 }

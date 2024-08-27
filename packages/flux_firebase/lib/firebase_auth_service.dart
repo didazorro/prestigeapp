@@ -33,4 +33,6 @@ class FirebaseAuthService {
   void createUserWithEmailAndPassword({email, password}) {}
 
   void signOut() {}
+
+  Future<String?>? getIdToken() => null;
 }

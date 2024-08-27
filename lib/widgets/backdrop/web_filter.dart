@@ -37,17 +37,18 @@ class WebFilterWidget extends StatefulWidget {
     this.tagIds,
   });
 
-  final Function({
+  final void Function({
     dynamic minPrice,
     dynamic maxPrice,
     List<String>? categoryId,
     String? categoryName,
     List<String>? tagId,
-    dynamic listingLocationId,
+    String? listingLocationId,
     FilterSortBy? sortBy,
+    String? search,
     bool? isSearch,
     List<String>? brandIds,
-    Map? attributes,
+    Map<FilterAttribute, List<SubAttribute>>? attributes,
   })? onFilter;
 
   final VoidCallback? onApply;

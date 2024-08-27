@@ -46,19 +46,27 @@ class GeneralButtonWidget extends GeneralWidget {
       alignment: itemVal.displayButtonAlignment,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: List.generate(
-            buttons.length,
-            (index) => InkWell(
-              onTap: () => onTapNavigateOptions(
-                  context: context, config: buttons[index].navigator),
-              child: Container(
-                  margin: EdgeInsets.only(
-                    left: buttons[index].marginLeft.toDouble(),
-                    right: buttons[index].marginRight.toDouble(),
+        child: ClipRect(
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: List.generate(
+              buttons.length,
+              (index) {
+                final item = buttons[index];
+                return InkWell(
+                  onTap: () => onTapNavigateOptions(
+                    context: context,
+                    config: item.navigator,
                   ),
-                  child: renderButtonItem(context, buttons[index])),
+                  child: Container(
+                    margin: EdgeInsets.only(
+                      left: item.marginLeft.toDouble(),
+                      right: item.marginRight.toDouble(),
+                    ),
+                    child: renderButtonItem(context, item),
+                  ),
+                );
+              },
             ),
           ),
         ),

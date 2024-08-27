@@ -53,6 +53,7 @@ class ProductBrand extends StatelessWidget {
                       brandName: brand.name,
                       brandImg: brand.image,
                     ),
+                    context: context,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

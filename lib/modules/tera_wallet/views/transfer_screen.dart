@@ -132,8 +132,8 @@ class _TransferScreenState extends State<TransferScreen> {
                         controller: _emailTextController,
                         onSubmitted: _onCheckValidEmail,
                         keyboardType: TextInputType.emailAddress,
-                        decoration: const InputDecoration(
-                          labelText: 'Send to',
+                        decoration: InputDecoration(
+                          labelText: S.of(context).sendTo,
                         ),
                       ),
                       ChangeNotifierProvider.value(
@@ -168,7 +168,10 @@ class _TransferScreenState extends State<TransferScreen> {
                             final errorMessage = isValid == null
                                 ? null
                                 : !isValid
-                                    ? 'You only have ${WalletHelpers.parseNumberToCurrencyText(_walletTransferModel.currentBalance)} left in your wallet'
+                                    ? S.of(context).insufficientBalanceMessage(
+                                        WalletHelpers.parseNumberToCurrencyText(
+                                            _walletTransferModel
+                                                .currentBalance))
                                     : null;
                             return CustomTextField(
                               focusNode: _numberFocusNode,
@@ -263,7 +266,7 @@ class _TransferScreenState extends State<TransferScreen> {
     } catch (e) {
       unawaited(FlashHelper.errorBar(
         context,
-        message: e.toString(),
+        message: e.toString().clearExceptionKey(),
       ));
       Future.delayed(
         const Duration(milliseconds: 100),
@@ -319,7 +322,7 @@ class _TransferScreenState extends State<TransferScreen> {
                         ),
                         const SizedBox(height: 16),
                         Text(
-                          'Transfer money to ${user.fullName}',
+                          S.of(context).transferMoneyTo(user.fullName),
                           style: Theme.of(context).textTheme.titleMedium,
                         ),
                         const SizedBox(height: 16),
@@ -337,7 +340,7 @@ class _TransferScreenState extends State<TransferScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'TeraWallet',
+                                  S.of(context).teraWallet,
                                   style: Theme.of(context)
                                       .textTheme
                                       .titleMedium
@@ -347,7 +350,7 @@ class _TransferScreenState extends State<TransferScreen> {
                                 ),
                                 const SizedBox(height: 8),
                                 Text(
-                                  'Balance: ${WalletHelpers.parseNumberToCurrencyText(_walletTransferModel.currentBalance)}',
+                                  '${S.of(context).balance}: ${WalletHelpers.parseNumberToCurrencyText(_walletTransferModel.currentBalance)}',
                                   style: Theme.of(context).textTheme.bodySmall,
                                 ),
                               ],

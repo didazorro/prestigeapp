@@ -90,7 +90,6 @@ class _SMSInputWidgetState extends State<SMSInputWidget> {
                                 .textTheme
                                 .titleLarge!
                                 .copyWith(
-                                    fontFamily: 'Roboto',
                                     color: model.dialPhoneNumber.isEmpty
                                         ? Colors.grey
                                         : Theme.of(context)

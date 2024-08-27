@@ -30,7 +30,8 @@ import '../../models/index.dart'
         ProductVariation,
         ShippingMethodModel,
         User,
-        UserModel;
+        UserModel,
+        AddonsType;
 import '../../models/order/index.dart';
 import '../../models/tera_wallet/index.dart';
 import '../../modules/analytics/analytics.dart';
@@ -44,7 +45,7 @@ import '../../screens/index.dart'
 import '../../services/index.dart';
 import '../frameworks.dart';
 import '../product_variant_mixin.dart';
-import 'product_addons_mixin.dart';
+import 'product_addons_mixin/index.dart';
 import 'product_components_mixin.dart';
 import 'profile/user_update_woo_screen.dart';
 import 'pw_gift_card_mixin.dart';
@@ -154,7 +155,7 @@ class WooWidget extends BaseFrameworks
         return;
       }
     } catch (err) {
-      error!(err.toString());
+      error!(err.toString().clearExceptionKey());
       return;
     }
     error!(S.of(context).couponInvalid);
@@ -176,17 +177,22 @@ class WooWidget extends BaseFrameworks
 
       /// Navigate to Webview payment
       String? orderNum;
+
       await FluxNavigate.push(
         MaterialPageRoute(
-            builder: (context) => PaymentWebview(
-                  url: url,
-                  onFinish: (number) async {
-                    orderNum = number;
-                  },
-                )),
+          builder: (ctx) => PaymentWebview(
+            url: url,
+            orderNumber: orderNum,
+            onFinish: (number) async {
+              orderNum = number;
+            },
+          ),
+        ),
         forceRootNavigator: true,
+        context: context,
       );
-      if (orderNum != null) {
+
+      if (orderNum != null && !kIsWeb) {
         cartModel.clearCart();
         Analytics.triggerPurchased(Order(number: orderNum), context);
         if (kPaymentConfig.showWebviewCheckoutSuccessScreen) {
@@ -336,6 +342,7 @@ class WooWidget extends BaseFrameworks
     required currentPassword,
     required userDisplayName,
     userEmail,
+    username,
     userNiceName,
     userUrl,
     userPassword,
@@ -475,6 +482,7 @@ class WooWidget extends BaseFrameworks
   @override
   Widget renderVariantCartItem(
     BuildContext context,
+    Product product,
     variation,
     Map? options, {
     AttributeProductCartStyle style = AttributeProductCartStyle.normal,
@@ -482,8 +490,10 @@ class WooWidget extends BaseFrameworks
     var list = <Widget>[];
     if (options != null && options.isNotEmpty) {
       for (var key in options.keys) {
-        list.add(
-            renderVariantItem(context, key, '${options[key]}', style: style));
+        final name = product.getNameAttribute(key);
+        final option = '${options[key]}';
+
+        list.add(renderVariantItem(context, name, option, style: style));
 
         if (style.isNormalStyle) {
           list.add(const SizedBox(height: 5.0));
@@ -519,7 +529,9 @@ class WooWidget extends BaseFrameworks
       padding: const EdgeInsets.only(bottom: 5.0),
       child: Text(
         selectedOptions!
-            .map((e) => e.isFileUploadType ? e.label!.split('/').last : e.label)
+            .map((e) => e.type == AddonsType.file_upload
+                ? e.label?.split('/').last
+                : e.label)
             .join(', '),
         style: TextStyle(
           fontSize: 11,
@@ -866,6 +878,7 @@ class WooWidget extends BaseFrameworks
         OrderByType.date,
         OrderByType.price,
         OrderByType.menu_order,
+        OrderByType.rand,
       ];
 
   @override
@@ -919,6 +932,7 @@ class WooWidget extends BaseFrameworks
           components.add(
             Services().widget.renderVariantCartItem(
                   context,
+                  item.product,
                   item.variant!,
                   null,
                   style: AttributeProductCartStyle.short,

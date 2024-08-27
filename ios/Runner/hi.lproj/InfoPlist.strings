@@ -1,7 +1,7 @@
 NSCameraUsageDescription = "इस ऐप को क्यूआर कोड या बारकोड स्कैनर सुविधा के लिए कैमरे तक पहुंच की आवश्यकता है जिसे खोज बार से एक्सेस किया जा सकता है";
-NSLocationAlwaysAndWhenInUseUsageDescription = "वितरण के लिए अपना वर्तमान स्थान प्राप्त करें";
-NSLocationAlwaysUsageDescription = "वर्तमान स्थान पहुंच की आवश्यकता है";
-NSLocationWhenInUseUsageDescription = "वितरण के लिए अपना वर्तमान स्थान प्राप्त करें";
+NSLocationAlwaysAndWhenInUseUsageDescription = "इस ऐप को आपके स्थान तक पहुँच की आवश्यकता है ताकि यह मानचित्र स्क्रीन पर दिखा सके और स्थानिक सेवाएँ प्रदान कर सके";
+NSLocationAlwaysUsageDescription = "इस ऐप को आपके स्थान तक पहुँच की आवश्यकता है ताकि यह मानचित्र स्क्रीन पर दिखा सके और स्थानिक सेवाएँ प्रदान कर सके";
+NSLocationWhenInUseUsageDescription = "इस ऐप को आपके स्थान तक पहुँच की आवश्यकता है ताकि यह मानचित्र स्क्रीन पर दिखा सके और स्थानिक सेवाएँ प्रदान कर सके";
 NSMicrophoneUsageDescription = "हम ध्वनि संदेशों को रिकॉर्ड करने की अनुमति देने के लिए माइक्रोफ़ोन तक पहुंच चाहते हैं";
 NSPhotoLibraryAddUsageDescription = "हम आपकी फोटो लाइब्रेरी में स्टोर छवि/वीडियो तक पहुंच चाहते हैं";
 NSPhotoLibraryUsageDescription = "इस ऐप को प्रोफाइल फोटो चुनने के लिए फोटो लाइब्रेरी तक पहुंच की आवश्यकता है जिसे चैट फीचर के लिए चैट छवि के रूप में उपयोग किया जाएगा।";

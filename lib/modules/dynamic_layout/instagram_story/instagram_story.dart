@@ -98,6 +98,7 @@ class _StateInstagramStory extends State<InstagramStory> {
                   items: items!,
                 ),
               ),
+              context: context,
             ),
           ),
         ),

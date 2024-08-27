@@ -16,7 +16,7 @@ abstract class NotificationService {
 
   NotificationService() {
     // var initSetting = const InitializationSettings(
-    //   android: AndroidInitializationSettings('@mipmap/ic_launcher'),
+    //   android: AndroidInitializationSettings('@drawable/ic_stat_onesignal_default'),
     //   iOS: IOSInitializationSettings(),
     // );
     //

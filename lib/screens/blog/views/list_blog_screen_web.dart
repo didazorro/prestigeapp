@@ -68,6 +68,7 @@ class _ListBlogScreenWebState extends BaseScreen<ListBlogScreenWeb>
                               blog: data.first,
                               blogs: provider.data,
                               forceRootNavigator: true,
+                              context: context,
                             ),
                           ),
                         ),
@@ -90,6 +91,7 @@ class _ListBlogScreenWebState extends BaseScreen<ListBlogScreenWeb>
                                           blog: blog,
                                           blogs: provider.data,
                                           forceRootNavigator: true,
+                                          context: context,
                                         ),
                                       ),
                                     ))
@@ -128,6 +130,7 @@ class _ListBlogScreenWebState extends BaseScreen<ListBlogScreenWeb>
                         blog: blog,
                         blogs: provider.data,
                         forceRootNavigator: true,
+                        context: context,
                       ),
                     );
                   },

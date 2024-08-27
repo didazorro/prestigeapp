@@ -26,6 +26,7 @@ class ProductItem {
 
   CommissionData? commissionData;
   double? commissionTotal;
+  String? appointmentDate;
 
   String get displayAddonOptions {
     final temp = {};
@@ -74,9 +75,8 @@ class ProductItem {
       featuredImage ??= kDefaultImage;
 
       final metaData = parsedJson['meta_data'] ?? parsedJson['meta'];
-      if (metaData is List) {
-        if (parsedJson['product_data'] != null &&
-            parsedJson['product_data']['type'] == 'appointment') {
+      if (metaData is List && productData != null) {
+        if (productData['type'] == 'appointment') {
           final Map<String, dynamic>? day = metaData.firstWhere(
               (element) =>
                   element['key'] == 'wc_appointments_field_start_date_day',
@@ -96,42 +96,50 @@ class ProductItem {
           if (day != null && month != null && year != null && time != null) {
             final dateTime = DateTime.parse(
                 "${year['value']}-${Tools.getTimeWith2Digit(month['value'])}-${Tools.getTimeWith2Digit(day['value'])} ${time['value']}");
-            var appointmentDate = Tools.convertDateTime(dateTime);
-            if (appointmentDate != null) {
-              addonsOptions['appointment_date'] = appointmentDate;
-            }
+            appointmentDate = Tools.convertDateTime(dateTime);
           }
-        } else {
-          addonsOptions = {};
+        }
+        addonsOptions = {};
 
-          /// Not from Vendor Admin.
-          if (parsedJson['meta'] == null &&
-              parsedJson['product_data'] != null) {
-            final productMetaData = parsedJson['product_data']?['meta_data'];
-            for (var item in productMetaData) {
-              if (item['key'] == '_product_addons') {
-                for (var element in metaData) {
-                  if (element['key'].toString().isNotEmpty &&
-                      element['key'].toString().substring(0, 1) != '_') {
-                    if (element['value'].toString().isNotEmpty) {
-                      addonsOptions[element['key'].toString()] =
-                          element['value'].toString();
-                    }
+        /// Not from Vendor Admin.
+        if (parsedJson['meta'] == null && parsedJson['product_data'] != null) {
+          final productMetaData = parsedJson['product_data']?['meta_data'];
+          for (var item in productMetaData) {
+            if (item['key'] == '_product_addons') {
+              for (var element in metaData) {
+                /// remove appointment value
+                if (productData['type'] == 'appointment') {
+                  if ('${element['key']}'.contains('wc_appointments')) {
+                    continue;
+                  }
+                  if ('${element['key']}' == 'product_id') {
+                    continue;
+                  }
+                  if ('${element['key']}' == 'staff_ids') {
+                    continue;
                   }
                 }
-                break;
+
+                if (element['key'].toString().isNotEmpty &&
+                    element['key'].toString().substring(0, 1) != '_') {
+                  if (element['value'].toString().isNotEmpty) {
+                    addonsOptions[element['key'].toString()] =
+                        element['value'].toString();
+                  }
+                }
               }
+              break;
             }
           }
+        }
 
-          /// From Vendor Admin.
-          if (parsedJson['meta'] != null) {
-            for (var element in metaData) {
-              if (element['key'].toString().isNotEmpty &&
-                  element['key'].toString().substring(0, 1) != '_') {
-                addonsOptions[element['key'].toString()] =
-                    element['value'].toString();
-              }
+        /// From Vendor Admin.
+        if (parsedJson['meta'] != null) {
+          for (var element in metaData) {
+            if (element['key'].toString().isNotEmpty &&
+                element['key'].toString().substring(0, 1) != '_') {
+              addonsOptions[element['key'].toString()] =
+                  element['value'].toString();
             }
           }
         }
@@ -208,7 +216,31 @@ class ProductItem {
       printLog(trace.toString());
     }
   }
+  ProductItem.fromHaravan(Map parsedJson) {
+    try {
+      productId = parsedJson['product_id'].toString();
+      name = parsedJson['name'];
+      quantity = num.tryParse('${parsedJson['quantity']}')?.toInt() ?? 0;
+      final price =
+          num.tryParse(parsedJson['price']?.toString() ?? '')?.toDouble() ??
+              0.0;
+      total = (price * quantity).toString();
 
+      if (parsedJson['image'] != null) {
+        if (parsedJson['image']['src'] != null) {
+          featuredImage = parsedJson['image']['src'];
+        }
+      }
+      // if (parsedJson['order_options'] != null) {
+      //   parsedJson['order_options'].forEach((option) {
+      //     prodOptions.add(Map<String, dynamic>.from(option));
+      //   });
+      // }
+    } catch (e, trace) {
+      printLog(e.toString());
+      printLog(trace.toString());
+    }
+  }
   Map<String, dynamic> toJson() {
     try {
       return {

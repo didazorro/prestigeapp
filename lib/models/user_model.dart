@@ -8,9 +8,11 @@ import 'package:the_apple_sign_in/the_apple_sign_in.dart' as apple;
 
 import '../common/config.dart';
 import '../common/constants.dart';
+import '../common/tools/error_key.dart';
 import '../data/boxes.dart';
 import '../generated/l10n.dart';
 import '../services/index.dart';
+import 'entities/cookie_data.dart';
 import 'entities/user.dart';
 
 abstract class UserModelDelegate {
@@ -32,7 +34,7 @@ class UserModel with ChangeNotifier {
 
   void updateUser(User newUser) {
     user = newUser;
-    saveUser(user);
+    _saveUser(user);
     notifyListeners();
   }
 
@@ -66,7 +68,7 @@ class UserModel with ChangeNotifier {
                   identityToken: result.credential!.identityToken!,
                 );
 
-            await saveUser(user);
+            await _saveUser(user);
             success!(user);
 
             notifyListeners();
@@ -74,7 +76,7 @@ class UserModel with ChangeNotifier {
           break;
 
         case apple.AuthorizationStatus.error:
-          fail!(S.of(context).error(result.error!));
+          fail!(S.of(context).errorMsg(result.error!));
           break;
         case apple.AuthorizationStatus.cancelled:
           fail!(S.of(context).loginCanceled);
@@ -90,10 +92,10 @@ class UserModel with ChangeNotifier {
       {String? phoneNumber,
       required Function success,
       Function? fail,
-      context}) async {
+      required BuildContext context}) async {
     try {
       user = await _service.api.loginSMS(token: phoneNumber);
-      await saveUser(user);
+      await _saveUser(user);
       success(user);
 
       notifyListeners();
@@ -117,7 +119,7 @@ class UserModel with ChangeNotifier {
           user =
               await _service.api.loginFacebook(token: accessToken.tokenString);
 
-          await saveUser(user);
+          await _saveUser(user);
           success!(user);
           break;
         case LoginStatus.cancelled:
@@ -152,7 +154,7 @@ class UserModel with ChangeNotifier {
         var auth = await res.authentication;
         Services().firebase.loginFirebaseGoogle(token: auth.accessToken);
         user = await _service.api.loginGoogle(token: auth.accessToken);
-        await saveUser(user);
+        await _saveUser(user);
         success!(user);
         notifyListeners();
       }
@@ -162,7 +164,53 @@ class UserModel with ChangeNotifier {
     }
   }
 
-  Future<void> saveUser(User? user) async {
+  Future<void> loginWithCookie(
+    String cookie, {
+    Function? success,
+    Function? fail,
+    context,
+  }) async {
+    try {
+      loading = true;
+      notifyListeners();
+      user = await _service.api.getUserInfo(cookie);
+
+      if (user == null) {
+        final cookies = cookie.convertToCookies();
+        final hasInfoUser = cookies.any((element) =>
+            ['pro_loyalty_api_session', 'customer_sig']
+                .contains(element.name) &&
+            element.value.isNotEmpty);
+
+        if (hasInfoUser) {
+          printLog('[loginWithUserWebAccess]:[ROUTE:] recheck cookie');
+          await Future.delayed(const Duration(seconds: 2));
+          user = await _service.api.getUserInfo(cookie);
+        }
+
+        if (user == null) {
+          if (hasInfoUser) {
+            throw Exception(ErrorKeyConstant.registerUnableToSyncAccount.name);
+          }
+
+          throw Exception(ErrorKeyConstant.registerInvalid.name);
+        }
+      }
+
+      user!.cookie = cookie;
+
+      await _saveUser(user);
+      success?.call(user!);
+      loading = false;
+      notifyListeners();
+    } catch (err) {
+      loading = false;
+      fail?.call(err.toString());
+      notifyListeners();
+    }
+  }
+
+  Future<void> _saveUser(User? user) async {
     try {
       if (Services().firebase.isEnabled && ServerConfig().isVendorType()) {
         Services().firebase.saveUserToFirestore(user: user);
@@ -174,6 +222,7 @@ class UserModel with ChangeNotifier {
 
       // save the user Info as local storage
       UserBox().userInfo = user;
+      this.user = user;
       delegate?.onLoaded(user);
 
       //reload Home screen to show product price based on role
@@ -194,12 +243,12 @@ class UserModel with ChangeNotifier {
         user = localUser;
         loggedIn = true;
         final userInfo = await _service.api.getUserInfo(user!.cookie);
+
         if (userInfo != null) {
           userInfo.isSocial = user!.isSocial;
           user = userInfo;
         }
-        await saveUser(user);
-        notifyListeners();
+        await setUser(user, acceptNull: true);
       } else {
         if (kPaymentConfig.guestCheckout &&
             ServerConfig().isNeedToGenerateTokenForGuestCheckout) {
@@ -217,16 +266,23 @@ class UserModel with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> setUser(User? user) async {
-    if (user != null) {
+  Future<void> setUser(User? user, {bool acceptNull = false}) async {
+    if (user != null || acceptNull) {
       this.user = user;
-      await saveUser(user);
+      await _saveUser(user);
+      if (ServerConfig().isHaravan && ['null', null].contains(user?.id)) {
+        UserBox().isLoggedIn = false;
+        loggedIn = false;
+        user?.id = null;
+      }
+
       notifyListeners();
     }
   }
 
   Future<void> createUser({
     String? username,
+    String? email,
     String? password,
     String? firstName,
     String? lastName,
@@ -239,17 +295,18 @@ class UserModel with ChangeNotifier {
       loading = true;
       notifyListeners();
       Services().firebase.createUserWithEmailAndPassword(
-          email: username!, password: password!);
+          email: email ?? username, password: password!);
 
       user = await _service.api.createUser(
         firstName: firstName,
         lastName: lastName,
         username: username,
+        email: email,
         password: password,
         phoneNumber: phoneNumber,
         isVendor: isVendor ?? false,
       );
-      await saveUser(user);
+      await _saveUser(user);
       success(user);
 
       loading = false;
@@ -315,7 +372,7 @@ class UserModel with ChangeNotifier {
       if (user == null) {
         throw 'Something went wrong!!!';
       }
-      await saveUser(user);
+      await _saveUser(user);
       success(user!);
       loading = false;
       notifyListeners();

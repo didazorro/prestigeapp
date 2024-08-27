@@ -40,8 +40,11 @@ mixin ActionButtonMixin {
       return;
     }
 
-    FluxNavigate.pushNamed(RouteList.productDetail,
-        arguments: product, forceRootNavigator: true);
+    FluxNavigate.pushNamed(
+      RouteList.productDetail,
+      arguments: product,
+      context: context,
+    );
   }
 
   void addToCart(
@@ -74,7 +77,7 @@ mixin ActionButtonMixin {
           context,
           message: product.name != null
               ? S.of(context).productAddToCart(product.name!)
-              : S.of(context).addToCartSucessfully,
+              : S.of(context).addToCartSuccessfully,
           messageStyle: const TextStyle(
             color: Colors.white,
             fontSize: 18.0,

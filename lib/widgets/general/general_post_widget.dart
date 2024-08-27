@@ -28,7 +28,13 @@ class GeneralPostWidget extends GeneralWidget {
     if (item != null) {
       icon = iconPicker(item!.icon, item!.iconFontFamily) ?? Icons.error;
       onTap = () {
-        onPushScreen(PostScreen(pageId: item!.pageId, pageTitle: title));
+        onPushScreen(
+          PostScreen(
+            pageId: item!.pageId,
+            pageTitle: title,
+          ),
+          context: context,
+        );
       };
     }
 

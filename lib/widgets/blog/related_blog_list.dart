@@ -99,6 +99,7 @@ class _RelatedBlogListState extends State<RelatedBlogList> {
                             blog: blog,
                             listBlog: listBlog.toList(),
                           ),
+                          context: context,
                         ),
                         config: BlogConfig(),
                       );

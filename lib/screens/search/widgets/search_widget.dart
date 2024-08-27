@@ -18,8 +18,13 @@ import 'search_results_custom.dart';
 
 class SearchWidget extends StatefulWidget {
   final bool isModal;
+  final bool? showQRCode;
 
-  const SearchWidget({super.key, this.isModal = false});
+  const SearchWidget({
+    super.key,
+    this.isModal = false,
+    this.showQRCode,
+  });
 
   @override
   StateSearchScreen createState() => StateSearchScreen();
@@ -89,7 +94,7 @@ class StateSearchScreen extends State<SearchWidget>
     );
   }
 
-  Future<void> _onSearchTextChange(String value) async {
+  void _onSearchTextChange(String value) {
     if (value.isEmpty) {
       _showResult = false;
       setState(() {});
@@ -97,7 +102,7 @@ class StateSearchScreen extends State<SearchWidget>
     }
     if (_searchFieldNode.hasFocus) {
       if (suggestSearch.isEmpty) {
-        await _onSearch();
+        _onSearch();
         setState(() {
           _showResult = true;
         });
@@ -131,6 +136,7 @@ class StateSearchScreen extends State<SearchWidget>
             _renderHeader(),
             SearchBox(
               // width: widthSearchBox,
+              showQRCode: widget.showQRCode ?? true,
               controller: _searchFieldController,
               focusNode: _searchFieldNode,
               onChanged: _onSearchTextChange,
@@ -295,8 +301,9 @@ class StateSearchScreen extends State<SearchWidget>
     );
   }
 
-  Future<void> _onSubmit(String name) async {
-    await _onSearch();
+  void _onSubmit(String name) {
+    _searchFieldController.text = name;
+    _onSearch();
     setState(() {
       _showResult = true;
     });

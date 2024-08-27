@@ -11,6 +11,19 @@ allprojects {
 }
 
 rootProject.buildDir = '../build'
+// This is just a temporary solution while waiting for flutter v3.24.0 to fix the bug 
+// After flutter v3.24.0 is fixed, please remove from subprojects -> afterEvaluate.
+subprojects {
+    afterEvaluate { project ->
+        if (project.plugins.hasPlugin("com.android.application") ||
+                project.plugins.hasPlugin("com.android.library")) {
+            project.android {
+                compileSdkVersion 34
+                buildToolsVersion "34.0.0"
+            }
+        }
+    }
+}
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
 }

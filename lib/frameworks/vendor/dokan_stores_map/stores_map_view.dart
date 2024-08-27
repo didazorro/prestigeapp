@@ -1,4 +1,5 @@
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:carousel_slider_plus/carousel_slider_plus.dart' as carousel;
+import 'package:carousel_slider_plus/carousel_slider_plus.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -24,7 +25,8 @@ class StoresMapView extends StatefulWidget {
 
 class _StoresMapViewState extends State<StoresMapView> with GoogleMapMixin {
   late GoogleMapController _controller;
-  final CarouselController _carouselController = CarouselController();
+  final CarouselSliderController _carouselController =
+      CarouselSliderController();
   void _onMapCreated(
       GoogleMapController controller, DokanStoresModel mapModel) async {
     _controller = controller;
@@ -59,13 +61,13 @@ class _StoresMapViewState extends State<StoresMapView> with GoogleMapMixin {
       alignment: Alignment.bottomCenter,
       child: Padding(
         padding: const EdgeInsets.only(bottom: 20.0),
-        child: CarouselSlider(
-          carouselController: _carouselController,
+        child: carousel.CarouselSlider(
+          controller: _carouselController,
           items: List.generate(stores.length, (index) {
             return StoreItem(
                 store: stores[index], width: width * 0.8, height: width * 0.4);
           }),
-          options: CarouselOptions(
+          options: carousel.CarouselOptions(
             onPageChanged: (int index, _) {
               var store = stores[index];
               _controller.animateCamera(

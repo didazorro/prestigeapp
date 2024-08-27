@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../common/config.dart';
 import '../../../common/tools.dart';
 import '../../../common/tools/flash.dart';
 import '../../../generated/l10n.dart';
@@ -29,15 +30,23 @@ class _WholesaleSignUpScreenState extends State<WholesaleSignUpScreen> {
   List<WholesaleRole>? _roles;
   String? _selectedRole;
 
-  String? firstName, lastName, emailAddress, username, password;
+  String? firstName, lastName, emailAddress, username, password, phoneNumber;
   bool isChecked = false;
   bool isLoading = false;
+
+  final bool showPhoneNumberWhenRegister =
+      kLoginSetting.showPhoneNumberWhenRegister;
+  final bool requirePhoneNumberWhenRegister =
+      kLoginSetting.requirePhoneNumberWhenRegister;
+  final bool requireUsernameWhenRegister =
+      kLoginSetting.requireUsernameWhenRegister;
 
   final firstNameNode = FocusNode();
   final lastNameNode = FocusNode();
   final usernameNode = FocusNode();
   final emailNode = FocusNode();
   final passwordNode = FocusNode();
+  final phoneNumberNode = FocusNode();
 
   @override
   void initState() {
@@ -60,6 +69,7 @@ class _WholesaleSignUpScreenState extends State<WholesaleSignUpScreen> {
     emailNode.dispose();
     passwordNode.dispose();
     usernameNode.dispose();
+    phoneNumberNode.dispose();
     super.dispose();
   }
 
@@ -81,30 +91,12 @@ class _WholesaleSignUpScreenState extends State<WholesaleSignUpScreen> {
   }
 
   Future<void> _showSuccessDialog() async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(S.of(context).registerSuccess),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text(S.of(context).wholesaleRegisterMsg),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: Text(S.of(context).ok),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
+    await context.showFluxDialogText(
+      title: S.of(context).registerSuccess,
+      body: S.of(context).wholesaleRegisterMsg,
+      primaryAction: S.of(context).ok,
     );
+    return;
   }
 
   Future<void> _submitRegister(
@@ -112,68 +104,85 @@ class _WholesaleSignUpScreenState extends State<WholesaleSignUpScreen> {
       String? lastName,
       String? emailAddress,
       String? password,
-      String? username}) async {
-    if (firstName == null ||
-        lastName == null ||
-        emailAddress == null ||
-        password == null ||
-        username == null) {
+      String? username,
+      String? phoneNumber}) async {
+    final invalidFirstName = firstName?.trim().isEmpty ?? true;
+    final invalidLastName = lastName?.trim().isEmpty ?? true;
+    final invalidUsername =
+        (requireUsernameWhenRegister && (username?.trim().isEmpty ?? true));
+    final invalidEmail = emailAddress?.trim().isEmpty ?? true;
+    final invalidPassword = password?.isEmpty ?? true;
+    final invalidPhoneNumber = (showPhoneNumberWhenRegister &&
+        requirePhoneNumberWhenRegister &&
+        (phoneNumber?.trim().isEmpty ?? true));
+
+    if (invalidFirstName ||
+        invalidLastName ||
+        invalidUsername ||
+        invalidEmail ||
+        invalidPassword ||
+        invalidPhoneNumber) {
       _snackBar(S.of(context).pleaseInputFillAllFields);
-    } else if (isChecked == false) {
+      return;
+    }
+    if (isChecked == false) {
       _snackBar(S.of(context).pleaseAgreeTerms);
-    } else {
-      if (!emailAddress.validateEmail()) {
-        _snackBar(S.of(context).errorEmailFormat);
-        return;
-      }
+      return;
+    }
 
-      if (password.length < 8) {
-        _snackBar(S.of(context).errorPasswordFormat);
-        return;
-      }
+    if (!emailAddress.validateEmail()) {
+      _snackBar(S.of(context).errorEmailFormat);
+      return;
+    }
 
-      try {
-        setState(() {
-          isLoading = true;
-        });
-        if (_selectedRole == 'vendor') {
-          await Services().api.createUser(
-                firstName: firstName,
-                lastName: lastName,
-                username: username,
-                email: emailAddress,
-                password: password,
-                isVendor: true,
-              );
-        } else {
-          await _services.signUp(
-              username: username,
-              email: emailAddress,
+    if (password == null || password.length < 8) {
+      _snackBar(S.of(context).errorPasswordFormat);
+      return;
+    }
+
+    try {
+      setState(() {
+        isLoading = true;
+      });
+      if (_selectedRole == 'vendor') {
+        await Services().api.createUser(
               firstName: firstName,
               lastName: lastName,
+              username: username ?? emailAddress,
+              email: emailAddress,
               password: password,
-              selectedRole: _selectedRole);
-        }
-        if (_selectedRole == 'vendor' || _selectedRole == 'subscriber') {
-          await FlashHelper.message(
-            context,
-            message: S.of(context).registerSuccess,
-            duration: const Duration(seconds: 1),
-          );
-        }
-        if (_selectedRole != 'vendor' && _selectedRole != 'subscriber') {
-          await _showSuccessDialog();
-        }
-        setState(() {
-          isLoading = false;
-        });
-        NavigateTools.goBackLogin(context);
-      } catch (e) {
-        setState(() {
-          isLoading = false;
-        });
-        _snackBar(e.toString());
+              phoneNumber: phoneNumber,
+              isVendor: true,
+            );
+      } else {
+        await _services.signUp(
+            username: username ?? emailAddress,
+            email: emailAddress,
+            firstName: firstName,
+            lastName: lastName,
+            password: password,
+            phoneNumber: phoneNumber,
+            selectedRole: _selectedRole);
       }
+      if (_selectedRole == 'vendor' || _selectedRole == 'subscriber') {
+        await FlashHelper.message(
+          context,
+          message: S.of(context).registerSuccess,
+          duration: const Duration(seconds: 1),
+        );
+      }
+      if (_selectedRole != 'vendor' && _selectedRole != 'subscriber') {
+        await _showSuccessDialog();
+      }
+      setState(() {
+        isLoading = false;
+      });
+      NavigateTools.goBackLogin(context);
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+      _snackBar(e.toString());
     }
   }
 
@@ -229,7 +238,11 @@ class _WholesaleSignUpScreenState extends State<WholesaleSignUpScreen> {
                         key: const Key('registerLastNameField'),
                         autofillHints: const [AutofillHints.familyName],
                         focusNode: lastNameNode,
-                        nextNode: usernameNode,
+                        nextNode: showPhoneNumberWhenRegister
+                            ? phoneNumberNode
+                            : requireUsernameWhenRegister
+                                ? usernameNode
+                                : emailNode,
                         showCancelIcon: true,
                         textCapitalization: TextCapitalization.words,
                         onChanged: (value) => lastName = value,
@@ -239,18 +252,38 @@ class _WholesaleSignUpScreenState extends State<WholesaleSignUpScreen> {
                         ),
                       ),
                       const SizedBox(height: 20.0),
-                      CustomTextField(
-                        key: const Key('registerUsernameField'),
-                        autofillHints: const [AutofillHints.familyName],
-                        focusNode: usernameNode,
-                        nextNode: emailNode,
-                        showCancelIcon: true,
-                        keyboardType: TextInputType.emailAddress,
-                        onChanged: (value) => username = value,
-                        decoration:
-                            InputDecoration(labelText: S.of(context).username),
-                      ),
-                      const SizedBox(height: 20.0),
+                      if (showPhoneNumberWhenRegister) ...[
+                        CustomTextField(
+                          key: const Key('registerPhoneField'),
+                          autofillHints: const [AutofillHints.telephoneNumber],
+                          focusNode: phoneNumberNode,
+                          nextNode: requireUsernameWhenRegister
+                              ? usernameNode
+                              : emailNode,
+                          showCancelIcon: true,
+                          onChanged: (value) => phoneNumber = value,
+                          decoration: InputDecoration(
+                            labelText: S.of(context).phone,
+                            hintText: S.of(context).enterYourPhoneNumber,
+                          ),
+                        ),
+                        const SizedBox(height: 20.0),
+                      ],
+                      if (requireUsernameWhenRegister) ...[
+                        CustomTextField(
+                          key: const Key('registerUsernameField'),
+                          autofillHints: const [AutofillHints.familyName],
+                          focusNode: usernameNode,
+                          nextNode: emailNode,
+                          showCancelIcon: true,
+                          keyboardType: TextInputType.emailAddress,
+                          onChanged: (value) => username = value,
+                          decoration: InputDecoration(
+                              labelText: S.of(context).username,
+                              hintText: S.of(context).enterYourUsername),
+                        ),
+                        const SizedBox(height: 20.0),
+                      ],
                       CustomTextField(
                         key: const Key('registerEmailField'),
                         focusNode: emailNode,
@@ -260,8 +293,8 @@ class _WholesaleSignUpScreenState extends State<WholesaleSignUpScreen> {
                         onChanged: (value) => emailAddress = value,
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
-                            labelText: S.of(context).enterYourEmail),
-                        hintText: S.of(context).enterYourEmail,
+                            labelText: S.of(context).email,
+                            hintText: S.of(context).enterYourEmail),
                       ),
                       const SizedBox(height: 20.0),
                       CustomTextField(
@@ -272,7 +305,7 @@ class _WholesaleSignUpScreenState extends State<WholesaleSignUpScreen> {
                         obscureText: true,
                         onChanged: (value) => password = value,
                         decoration: InputDecoration(
-                          labelText: S.of(context).enterYourPassword,
+                          labelText: S.of(context).password,
                           hintText: S.of(context).enterYourPassword,
                         ),
                       ),
@@ -349,6 +382,7 @@ class _WholesaleSignUpScreenState extends State<WholesaleSignUpScreen> {
                                                 ),
                                               ),
                                               forceRootNavigator: true,
+                                              context: context,
                                             ),
                                     ),
                                   ],
@@ -376,7 +410,8 @@ class _WholesaleSignUpScreenState extends State<WholesaleSignUpScreen> {
                                         lastName: lastName,
                                         emailAddress: emailAddress,
                                         password: password,
-                                        username: username);
+                                        username: username,
+                                        phoneNumber: phoneNumber);
                                   },
                             minWidth: 200.0,
                             elevation: 0.0,
@@ -433,14 +468,16 @@ class SelectRole extends StatelessWidget {
                   onChanged!(val);
                 },
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(role.name ?? '',
-                      style: Theme.of(context).textTheme.titleMedium),
-                  const SizedBox(height: 5),
-                  Text(role.desc ?? '')
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(role.name ?? '',
+                        style: Theme.of(context).textTheme.titleMedium),
+                    const SizedBox(height: 5),
+                    Text(role.desc ?? '')
+                  ],
+                ),
               )
             ]),
           ),

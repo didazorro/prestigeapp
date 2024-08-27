@@ -77,7 +77,7 @@ extension CartStyleFromStringExt on String? {
 extension CartItemStateExt on CartItemStateUI {
   bool get isPWGiftCardProduct =>
       cartItemMetaData?.pwGiftCardInfo != null && product.isPWGiftCardProduct;
-  bool get showQuantity => !isPWGiftCardProduct;
+  bool get showQuantity => !isPWGiftCardProduct && !product.isAppointment;
   bool showPrice(BuildContext context) {
     return !Services().widget.hideProductPrice(context, product) &&
         !isPWGiftCardProduct;

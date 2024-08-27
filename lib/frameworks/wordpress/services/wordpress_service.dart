@@ -12,6 +12,7 @@ import '../../../common/tools/image_tools.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/entities/index.dart';
 import '../../../services/base_services.dart';
+import '../../../services/services.dart';
 
 class WordPressService extends BaseServices {
   WordPressService({
@@ -102,12 +103,14 @@ class WordPressService extends BaseServices {
   @override
   Future<User> loginSMS({String? token}) async {
     try {
-      //var endPoint = "$url/wp-json/api/flutter_user/sms_login/?access_token=$token$isSecure";
-      var endPoint =
-          // ignore: prefer_single_quotes
-          "$domain/wp-json/api/flutter_user/firebase_sms_login?phone=$token$isSecure";
+      var idToken = await Services().firebase.getIdToken();
+      var endPoint = '$domain/wp-json/api/flutter_user/firebase_sms';
 
-      var response = await httpGet(endPoint.toUri()!);
+      var response = await httpPost(endPoint.toUri()!,
+          body: convert.jsonEncode({
+            'id_token': idToken,
+          }),
+          headers: {'Content-Type': 'application/json'});
 
       var jsonDecode = convert.jsonDecode(response.body);
 
@@ -249,11 +252,11 @@ class WordPressService extends BaseServices {
       final response = await httpPost(
           '$domain/wp-json/api/flutter_user/register/?insecure=cool'.toUri()!,
           body: convert.jsonEncode({
-            'user_email': username,
-            'user_login': username,
-            'username': username,
+            'user_email': email ?? username,
+            'user_login': username ?? email,
+            'username': username ?? email,
             'user_pass': password,
-            'email': username,
+            'email': email ?? username,
             'user_nicename': niceName,
             'display_name': niceName,
             'first_name': firstName,
@@ -296,7 +299,7 @@ class WordPressService extends BaseServices {
         throw (S.current.accountIsPendingApproval);
       } else if (body['code'] == 'too_many_retries') {
         // For plugin https://wordpress.org/plugins/limit-login-attempts-reloaded/
-        throw S.current.tooManyFaildedLogin;
+        throw S.current.tooManyFailedLogin;
       } else {
         throw S.current.userNameInCorrect;
       }
@@ -367,7 +370,7 @@ class WordPressService extends BaseServices {
     bool? boostEngine,
   }) async {
     final enableBoostEngine =
-        boostEngine ?? kBoostEngineConfig.isOptimizeEnable;
+        boostEngine ?? kBoostEngineConfig.isOptimizeEnable && blogApi.isRoot;
     if (enableBoostEngine) {
       try {
         return await boostBlogs(search: name);
@@ -403,7 +406,7 @@ class WordPressService extends BaseServices {
       return null;
     } catch (e) {
       //This error exception is about your Rest API is not config correctly so that not return the correct JSON format, please double check the document from this link https://docs.inspireui.com/fluxstore/woocommerce-setup/
-      rethrow;
+      return null;
     }
   }
 
@@ -475,6 +478,9 @@ class WordPressService extends BaseServices {
           });
       var body = convert.jsonDecode(response.body);
       if (body is Map && body['message'] != null) {
+        if (body['code'] == 'invalid_account') {
+          throw Exception(S.current.cannotDeleteAccount);
+        }
         throw body['message'];
       }
       return body;

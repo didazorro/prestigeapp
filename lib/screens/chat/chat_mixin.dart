@@ -7,6 +7,7 @@ import '../../common/constants.dart';
 import '../../common/tools/tools.dart';
 import '../../generated/l10n.dart';
 import '../../models/index.dart';
+import '../../services/chat/chat_service.dart';
 import '../../services/chat/constants/enums.dart';
 import '../../services/service_config.dart';
 import '../../services/services.dart';
@@ -18,6 +19,13 @@ import 'chat_screen.dart';
 mixin ChatMixin {
   late List<Map> options;
 
+  Map<ChatProviders, ChatService> get supportChatProviders =>
+      Services().chatServices.supportChatProviders;
+
+  /// Currently, Haravan cases supporting gpt have not been tested,
+  /// so both firebase and gpt chat cases are hidden.
+  bool get _supportChatProvider => !(ServerConfig().isHaravan);
+
   List<CupertinoActionSheetAction> getListAction({
     required BuildContext popupContext,
     required BuildContext context,
@@ -26,25 +34,24 @@ mixin ChatMixin {
     var listWidget = <CupertinoActionSheetAction>[];
 
     for (var i = 0; i < options.length; i++) {
-      if (Services()
-          .chatServices
-          .supportChatProviders
-          .keys
-          .map((e) => e.toString())
-          .contains(options[i]['app'])) {
-        if (Services()
-                .chatServices
-                .supportChatProviders['${options[i]['app']}'.toChatProviders()]
-                ?.enable ??
-            false) {
+      final app = options[i]['app']?.toString();
+      final isExist =
+          supportChatProviders.keys.map((e) => e.toString()).contains(app);
+      if (isExist) {
+        final chatProvider = '$app'.toChatProvider();
+        final isEnabled =
+            (supportChatProviders[chatProvider]?.enable ?? false) &&
+                _supportChatProvider;
+        if (isEnabled) {
           listWidget.add(
             CupertinoActionSheetAction(
               onPressed: () async {
                 Navigator.of(popupContext).pop();
                 await Future.delayed(const Duration(milliseconds: 300), () {});
-                await Services()
-                    .chatServices
-                    .showChatScreen('${options[i]['app']}'.toChatProviders());
+                await Services().chatServices.showChatScreen(
+                      context,
+                      chatProvider,
+                    );
               },
               child: buildItemAction(
                 option: options[i],
@@ -57,7 +64,9 @@ mixin ChatMixin {
       }
       switch (options[i]['app']) {
         case 'firebase':
-          if (Services().firebase.isEnabled || ServerConfig().isBuilder) {
+          if ((Services().firebase.isEnabled || ServerConfig().isBuilder) &&
+              kLoginSetting.enable &&
+              _supportChatProvider) {
             listWidget.add(
               CupertinoActionSheetAction(
                 onPressed: () async {
@@ -85,8 +94,9 @@ mixin ChatMixin {
           }
           continue;
         case 'store':
-          if (kConfigChat.useRealtimeChat &&
+          if (kConfigChat.realtimeChatConfig.enable &&
               Services().firebase.isEnabled &&
+              kLoginSetting.enable &&
               storeArguments is ChatArguments) {
             listWidget.add(
               CupertinoActionSheetAction(
@@ -242,7 +252,14 @@ mixin ChatMixin {
         cancelButton: CupertinoActionSheetAction(
           onPressed: Navigator.of(popupContext).pop,
           isDestructiveAction: true,
-          child: Text(S.of(context).cancel),
+          child: Text(
+            S.of(context).cancel,
+            style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                  color: Colors.red,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16,
+                ),
+          ),
         ),
       ),
     );

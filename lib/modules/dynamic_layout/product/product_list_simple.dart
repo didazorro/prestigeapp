@@ -36,6 +36,7 @@ class SimpleVerticalProductList extends StatelessWidget {
             showSeeAll: true,
             callback: () => ProductModel.showList(
               config: config.jsonData,
+              context: context,
             ),
           ),
           SingleChildScrollView(
@@ -62,6 +63,7 @@ class SimpleVerticalProductList extends StatelessWidget {
               callback: () => ProductModel.showList(
                 config: config.jsonData,
                 products: products,
+                context: context,
               ),
             ),
             renderProductListWidgets(products)

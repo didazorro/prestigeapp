@@ -1,6 +1,5 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
-
 import 'package:fstore/models/index.dart';
 import 'package:fstore/services/firebase/firebase_analytics_service.dart';
 
@@ -24,7 +23,7 @@ class FirebaseAnalyticsServiceImpl extends FirebaseAnalyticsService {
   @override
   Future<void> logCustomEvent({
     required String name,
-    Map<String, dynamic>? parameter,
+    Map<String, Object>? parameter,
   }) async {
     await FirebaseAnalytics.instance
         .logEvent(name: name, parameters: parameter);

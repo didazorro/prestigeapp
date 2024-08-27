@@ -7,12 +7,9 @@ import '../../../common/config.dart';
 import '../../../common/constants.dart';
 import '../../../common/tools/tools.dart';
 import '../../../generated/l10n.dart';
-import '../../../models/brand_layout_model.dart';
 import '../../../models/category/category_model.dart';
 import '../../../models/entities/category.dart';
-import '../../../models/filter_attribute_model.dart';
-import '../../../models/index.dart'
-    show AppModel, Product, ProductModel, ProductPriceModel, TagModel;
+import '../../../models/index.dart' show Product, ProductModel;
 import '../../../screens/common/app_bar_mixin.dart';
 import '../../../screens/products/filter_mixin/products_filter_mixin.dart';
 import '../../../screens/search/widgets/search_empty_result.dart';
@@ -46,31 +43,14 @@ class _VerticalViewLayoutWithFilterState
   bool isFirstLoading = true;
   String? location;
 
-  @override
-  BrandLayoutModel get brandModel => context.read<BrandLayoutModel>();
-
-  @override
-  TagModel get tagModel => context.read<TagModel>();
-
-  @override
-  ProductPriceModel get productPriceModel => context.read<ProductPriceModel>();
-
   ProductConfig get productConfig => widget.config;
 
   ProductModel get productModel => context.read<ProductModel>();
 
   @override
-  void onTapOpenFilter({
-    bool showCategory = true,
-    bool showPrice = true,
-    bool showTag = true,
-  }) {
+  void onTapOpenFilter() {
     productModel.listingLocationId = location;
-    super.onTapOpenFilter(
-      showCategory: showCategory,
-      showPrice: showPrice,
-      showTag: showTag,
-    );
+    super.onTapOpenFilter();
   }
 
   void _getAllCategory() async {
@@ -196,6 +176,8 @@ class _VerticalViewLayoutWithFilterState
 
   bool get hasAppbar => showAppBar(RouteList.home) && (appBar?.pinned ?? false);
 
+  bool get useSort => productConfig.useSort;
+
   @override
   Widget build(BuildContext context) {
     final query = MediaQuery.of(context);
@@ -211,6 +193,7 @@ class _VerticalViewLayoutWithFilterState
         ),
       );
     }
+
     final colorText =
         Theme.of(context).textTheme.bodySmall?.color?.withOpacity(0.7);
 
@@ -225,13 +208,13 @@ class _VerticalViewLayoutWithFilterState
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  if (productConfig.name != null &&
-                      productConfig.useSort == false)
+                  if (productConfig.name != null && useSort == false)
                     HeaderView(
                       headerText: productConfig.name ?? '',
                       showSeeAll: false,
                       callback: () => ProductModel.showList(
                         config: productConfig.jsonData,
+                        context: context,
                       ),
                     ),
                   AnimatedSize(
@@ -241,10 +224,12 @@ class _VerticalViewLayoutWithFilterState
                       decoration: BoxDecoration(
                         color: Theme.of(context).cardColor,
                         boxShadow: [
-                          if (stuckAmount <= 0.0 &&
-                              productConfig.useSort == false)
+                          if (stuckAmount <= 0.0 && useSort == false)
                             BoxShadow(
-                              color: Colors.grey.withOpacity(0.3),
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .secondary
+                                  .withOpacity(0.1),
                               blurRadius: 1,
                               spreadRadius: 1,
                               offset: const Offset(0, 3),
@@ -256,13 +241,12 @@ class _VerticalViewLayoutWithFilterState
                         height: kToolbarHeight,
                         child: renderFilters(
                           context,
-                          showCategory: productConfig.useSort == false,
-                          showPrice: productConfig.useSort == false,
-                          showTag: productConfig.useSort == false,
                           trailingWidget: Row(
                             children: [
                               Text(
-                                S.of(context).sortBy,
+                                useSort
+                                    ? S.of(context).sortBy
+                                    : S.of(context).filter,
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodySmall
@@ -279,7 +263,7 @@ class _VerticalViewLayoutWithFilterState
                               ),
                             ],
                           ),
-                          title: productConfig.useSort
+                          title: useSort
                               ? Text(
                                   productConfig.name ?? '',
                                   style: isDesktop
@@ -325,8 +309,11 @@ class _VerticalViewLayoutWithFilterState
                                       borderRadius: BorderRadius.circular(10),
                                       boxShadow: [
                                         BoxShadow(
-                                          color: Colors
-                                              .grey[isSelected ? 300 : 100]!,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .secondary
+                                              .withOpacity(
+                                                  isSelected ? 0.25 : 0.1),
                                           blurRadius: 10,
                                           spreadRadius: isSelected ? 2 : 1,
                                           offset: const Offset(0, 0),
@@ -500,17 +487,10 @@ class _VerticalViewLayoutWithFilterState
   }
 
   @override
-  CategoryModel get categoryModel => context.read<CategoryModel>();
-
-  @override
   void clearProductList() {
     products.value.clear();
     rebuild();
   }
-
-  @override
-  FilterAttributeModel get filterAttrModel =>
-      context.read<FilterAttributeModel>();
 
   @override
   Future<void> getProductList({bool forceLoad = false}) async {
@@ -518,9 +498,6 @@ class _VerticalViewLayoutWithFilterState
     forceLoadingData = forceLoad;
     await _loadProduct(forceLoad: forceLoad);
   }
-
-  @override
-  String get lang => context.read<AppModel>().langCode;
 
   @override
   void onCategorySelected(String? name) {}
@@ -534,12 +511,27 @@ class _VerticalViewLayoutWithFilterState
   }
 
   @override
-  bool get shouldShowLayout => false;
+  bool get showLayout => false;
+
+  // Only allow filter by single category from category list, and hide filter by
+  // category in the filter bottom sheet because of conflicting with selected category
+  @override
+  bool get showCategory => !useSort && !productConfig.showCategory;
 
   @override
-  void onClearTextSearch() {
-    // TODO: implement onClearTextSearch
-  }
+  bool get showPriceSlider => !useSort;
+
+  @override
+  bool get showTag => !useSort;
+
+  @override
+  bool get showAttribute => !useSort;
+
+  @override
+  bool get showBrand => !useSort;
+
+  @override
+  bool get allowMultipleCategory => false;
 
   void _onSelectCategory(int index, Category category) {
     setState(() {

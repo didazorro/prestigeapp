@@ -150,8 +150,11 @@ class _StateBlogListCategory extends BaseScreen<BlogListCategory>
                           child: BlogCard(
                             item: blogs[index * 2],
                             width: constraints.maxWidth / 2,
-                            onTap: () =>
-                                onTapBlog(blog: blogs[index * 2], blogs: blogs),
+                            onTap: () => onTapBlog(
+                              blog: blogs[index * 2],
+                              blogs: blogs,
+                              context: context,
+                            ),
                           ),
                         ),
                         if (index * 2 + 1 < blogs.length)
@@ -160,7 +163,10 @@ class _StateBlogListCategory extends BaseScreen<BlogListCategory>
                               item: blogs[index * 2 + 1],
                               width: constraints.maxWidth / 2,
                               onTap: () => onTapBlog(
-                                  blog: blogs[index * 2 + 1], blogs: blogs),
+                                blog: blogs[index * 2 + 1],
+                                blogs: blogs,
+                                context: context,
+                              ),
                             ),
                           ),
                       ],

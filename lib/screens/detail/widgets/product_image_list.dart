@@ -5,6 +5,7 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_carousel/infinite_carousel.dart';
+import 'package:inspireui/inspireui.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -39,17 +40,18 @@ class _ProductImageListState extends State<ProductImageList> {
       InfiniteScrollController();
 
   bool initialized = false;
-  bool hasVideo = false;
   bool variationLoaded = false;
 
-  late final String _videoUrl;
+  String? get _videoUrl => widget.product.videoUrl;
+  bool get hasVideo => widget.product.hasVideo && kProductDetail.showVideo;
+
   final List<String> _images = [];
   final List<String> _variationImages = [];
 
   final ValueNotifier<int> _currentPage = ValueNotifier(0);
 
   List<String> get itemList => {
-        if (hasVideo) _videoUrl,
+        if (hasVideo) '$_videoUrl',
         ..._images,
         ..._variationImages,
       }.toList();
@@ -84,12 +86,6 @@ class _ProductImageListState extends State<ProductImageList> {
         afterFirstLayout(context);
       }
     });
-
-    final url = widget.product.videoUrl;
-    if (url != null && url.isNotEmpty) {
-      _videoUrl = url.replaceAll('http://', 'https://');
-      hasVideo = true;
-    }
 
     _images.addAll(widget.product.images);
 
@@ -157,9 +153,12 @@ class _ProductImageListState extends State<ProductImageList> {
                   itemBuilder: (BuildContext context, int index, _) {
                     final item = itemList[index];
                     if (hasVideo && index == 0) {
-                      return FeatureVideoPlayer(
-                        item,
-                        autoPlay: true,
+                      return KeepAliveWidget(
+                        child: FeatureVideoPlayer(
+                          item,
+                          autoPlay: true,
+                          isSoundOn: true,
+                        ),
                       );
                     }
 
@@ -263,6 +262,7 @@ class _ProductImageListState extends State<ProductImageList> {
                     builder: (context, currentPage, child) {
                       return ProductImageThumbnail(
                         itemList: itemList,
+                        hasVideo: hasVideo,
                         onSelect: ({required int index, bool? fullScreen}) {
                           if (fullScreen ?? false) {
                             _onShowGallery(context, index);

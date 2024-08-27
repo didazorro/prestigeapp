@@ -276,6 +276,7 @@ class _StateGridSubCategory extends State<GridSubCategory> {
         cateId: widget.parentCategory!.id,
         cateName: widget.parentCategory!.name,
       ),
+      context: context,
     );
   }
 }

@@ -3,6 +3,7 @@ export 'age_restriction_config.dart';
 export 'boost_engine_config.dart';
 export 'color_override_config.dart';
 export 'config_chat.dart';
+export 'dynamic_link_config.dart';
 export 'general_setting_item.dart';
 export 'google_api_key_config.dart';
 export 'in_app_update_for_android_config.dart';

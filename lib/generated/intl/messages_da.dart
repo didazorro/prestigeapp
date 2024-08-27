@@ -28,106 +28,106 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m3(state) => "Bluetooth-adapter er ${state}";
 
-  static String m4(currency) => "Ændrede valuta til ${currency}";
+  static String m5(currency) => "Ændrede valuta til ${currency}";
 
-  static String m5(number) => "${number} tegn tilbage";
+  static String m6(number) => "${number} tegn tilbage";
 
-  static String m6(priceRate, pointRate) => "${priceRate} = ${pointRate} point";
+  static String m7(priceRate, pointRate) => "${priceRate} = ${pointRate} point";
 
-  static String m7(count) => "${count} element";
+  static String m8(count) => "${count} element";
 
-  static String m8(count) => "${count} elementer";
+  static String m9(count) => "${count} elementer";
 
-  static String m9(country) => "${country} land understøttes ikke";
+  static String m12(country) => "${country} land understøttes ikke";
 
-  static String m10(currency) => "${currency} understøttes ikke";
+  static String m13(currency) => "${currency} understøttes ikke";
 
-  static String m11(day) => "${day} dage siden";
+  static String m14(day) => "${day} dage siden";
 
-  static String m12(total) => "~${total} km";
+  static String m15(total) => "~${total} km";
 
-  static String m13(timeLeft) => "Slutter om ${timeLeft}";
+  static String m16(timeLeft) => "Slutter om ${timeLeft}";
 
-  static String m14(captcha) => "Indtast ${captcha} for at bekræfte:";
+  static String m17(captcha) => "Indtast ${captcha} for at bekræfte:";
 
-  static String m15(message) => "Fejl: ${message}";
+  static String m18(message) => "Fejl: ${message}";
 
-  static String m16(time) => "Udløber om ${time}";
+  static String m20(time) => "Udløber om ${time}";
 
-  static String m17(total) => ">${total} km";
+  static String m21(total) => ">${total} km";
 
-  static String m18(hour) => " for${hour} timer siden";
+  static String m22(hour) => " for${hour} timer siden";
 
-  static String m19(count) =>
+  static String m24(count) =>
       " ${Intl.plural(count, one: '${count} item', other: '${count} items')}";
 
-  static String m20(message) =>
+  static String m25(message) =>
       "Der er et problem med appen under anmodning om data. Kontakt venligst administratoren for at løse problemerne: ${message}";
 
-  static String m21(currency, amount) =>
+  static String m26(currency, amount) =>
       "Det maksimale beløb for at bruge denne betaling er ${currency} ${amount}";
 
-  static String m22(size) => "Maksimal filstørrelse: ${size} MB";
+  static String m27(size) => "Maksimal filstørrelse: ${size} MB";
 
-  static String m23(currency, amount) =>
+  static String m28(currency, amount) =>
       "Minimumsbeløbet for at bruge denne betaling er ${currency} ${amount}";
 
-  static String m24(minute) => " for${minute} minutter siden";
+  static String m29(minute) => " for${minute} minutter siden";
 
-  static String m25(month) => " for${month} måneder siden";
+  static String m30(month) => " for${month} måneder siden";
 
-  static String m26(store) => "Mere fra ${store}";
+  static String m31(store) => "Mere fra ${store}";
 
-  static String m27(number) => "skal købes i grupper af ${number}";
+  static String m32(number) => "skal købes i grupper af ${number}";
 
-  static String m28(itemCount) => "${itemCount} elementer";
+  static String m33(itemCount) => "${itemCount} elementer";
 
-  static String m29(price) => "Indstillinger i alt: ${price}";
+  static String m34(price) => "Indstillinger i alt: ${price}";
 
-  static String m30(amount) => "Betal ${amount}";
+  static String m35(amount) => "Betal ${amount}";
 
-  static String m31(name) => "${name} er blevet tilføjet til indkøbskurven";
+  static String m36(name) => "${name} er blevet tilføjet til indkøbskurven";
 
-  static String m32(total) => "Antal: ${total}";
+  static String m37(total) => "Antal: ${total}";
 
-  static String m33(percent) => "Udsalg ${percent}%";
+  static String m39(percent) => "Udsalg ${percent}%";
 
-  static String m34(keyword) => "Søgeresultater for: \'${keyword}\'";
+  static String m40(keyword) => "Søgeresultater for: \'${keyword}\'";
 
-  static String m35(keyword, count) => "${keyword} (${count} element)";
+  static String m41(keyword, count) => "${keyword} (${count} element)";
 
-  static String m36(keyword, count) => "${keyword} (${count} elementer)";
+  static String m42(keyword, count) => "${keyword} (${count} elementer)";
 
-  static String m37(second) => " for${second} sekunder siden";
+  static String m43(second) => " for${second} sekunder siden";
 
-  static String m38(totalCartQuantity) =>
+  static String m44(totalCartQuantity) =>
       "Indkøbskurv, ${totalCartQuantity} varer";
 
-  static String m39(numberOfUnitsSold) => "Solgt: ${numberOfUnitsSold}";
+  static String m45(numberOfUnitsSold) => "Solgt: ${numberOfUnitsSold}";
 
-  static String m40(fieldName) => "Feltet ${fieldName} er påkrævet";
+  static String m46(fieldName) => "Feltet ${fieldName} er påkrævet";
 
-  static String m41(total) => "${total} produkter";
+  static String m47(total) => "${total} produkter";
 
-  static String m42(maxPointDiscount, maxPriceDiscount) =>
+  static String m49(maxPointDiscount, maxPriceDiscount) =>
       "Brug maksimalt ${maxPointDiscount} point for at få ${maxPriceDiscount} rabat på denne ordre!";
 
-  static String m43(date) => "Gyldig til ${date}";
+  static String m50(date) => "Gyldig til ${date}";
 
-  static String m44(message) => "Advarsel: ${message}";
+  static String m52(message) => "Advarsel: ${message}";
 
-  static String m45(defaultCurrency) =>
+  static String m53(defaultCurrency) =>
       "Den aktuelt valgte valuta er ikke tilgængelig for Wallet-funktionen. Skift den til ${defaultCurrency}";
 
-  static String m46(length) => "Vi fandt ${length} produkter";
+  static String m54(length) => "Vi fandt ${length} produkter";
 
-  static String m47(week) => "Uge ${week}";
+  static String m55(week) => "Uge ${week}";
 
-  static String m48(name) => "Velkommen ${name}";
+  static String m56(name) => "Velkommen ${name}";
 
-  static String m49(year) => " for${year} år siden";
+  static String m57(year) => " for${year} år siden";
 
-  static String m50(total) => "Du har tildelt ordrenummer${total}";
+  static String m58(total) => "Du har tildelt ordrenummer${total}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -161,7 +161,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addToCart": MessageLookupByLibrary.simpleMessage("Tilføj til kurv"),
         "addToCartMaximum": MessageLookupByLibrary.simpleMessage(
             "Den maksimale mængde er overskredet"),
-        "addToCartSucessfully":
+        "addToCartSuccessfully":
             MessageLookupByLibrary.simpleMessage("Føjet til indkøbskurven"),
         "addToOrder": MessageLookupByLibrary.simpleMessage("Tilføj til ordre"),
         "addToQuoteRequest":
@@ -312,8 +312,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "change": MessageLookupByLibrary.simpleMessage("Lave om"),
         "changeLanguage": MessageLookupByLibrary.simpleMessage("Skift sprog"),
         "changePrinter": MessageLookupByLibrary.simpleMessage("Skift printer"),
-        "changedCurrencyTo": m4,
-        "characterRemain": m5,
+        "changedCurrencyTo": m5,
+        "characterRemain": m6,
         "chat": MessageLookupByLibrary.simpleMessage("Snak"),
         "chatGPT": MessageLookupByLibrary.simpleMessage("Chat GPT"),
         "chatListScreen": MessageLookupByLibrary.simpleMessage("Beskeder"),
@@ -392,15 +392,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Fortsæt til forsendelse"),
         "continues": MessageLookupByLibrary.simpleMessage("Blive ved"),
         "conversations": MessageLookupByLibrary.simpleMessage("Samtaler"),
-        "convertPoint": m6,
+        "convertPoint": m7,
         "copied": MessageLookupByLibrary.simpleMessage("Kopieret"),
         "copy": MessageLookupByLibrary.simpleMessage("Kopi"),
         "copyright": MessageLookupByLibrary.simpleMessage(
             "© 2024 InspireUI Alle rettigheder forbeholdes."),
-        "countItem": m7,
-        "countItems": m8,
+        "countItem": m8,
+        "countItems": m9,
         "country": MessageLookupByLibrary.simpleMessage("land"),
-        "countryIsNotSupported": m9,
+        "countryIsNotSupported": m12,
         "countryIsRequired":
             MessageLookupByLibrary.simpleMessage("Landefeltet er påkrævet"),
         "couponCode": MessageLookupByLibrary.simpleMessage("Kuponkode"),
@@ -424,7 +424,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Opret alle varianter"),
         "createdOn": MessageLookupByLibrary.simpleMessage("Oprettet på:"),
         "currencies": MessageLookupByLibrary.simpleMessage("valutaer"),
-        "currencyIsNotSupported": m10,
+        "currencyIsNotSupported": m13,
         "currentPassword":
             MessageLookupByLibrary.simpleMessage("Nuværende kodeord"),
         "currentlyWeOnlyHave":
@@ -448,7 +448,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "dateStart": MessageLookupByLibrary.simpleMessage("startdato"),
         "dateTime": MessageLookupByLibrary.simpleMessage("Dato tid"),
         "dateWiseClose": MessageLookupByLibrary.simpleMessage("Dato kloge tæt"),
-        "daysAgo": m11,
+        "daysAgo": m14,
         "debit": MessageLookupByLibrary.simpleMessage("Debet"),
         "decline": MessageLookupByLibrary.simpleMessage("Nedgang"),
         "delete": MessageLookupByLibrary.simpleMessage("Slet"),
@@ -477,7 +477,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Deaktiver køb"),
         "discount": MessageLookupByLibrary.simpleMessage("Rabat"),
         "displayName": MessageLookupByLibrary.simpleMessage("Visningsnavn"),
-        "distance": m12,
+        "distance": m15,
         "doNotAnyTransactions": MessageLookupByLibrary.simpleMessage(
             "Du har ingen transaktioner endnu"),
         "doYouWantToExitApp":
@@ -543,12 +543,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Aktiver ferietilstand"),
         "endDateCantBeAfterFirstDate": MessageLookupByLibrary.simpleMessage(
             "Vælg venligst en dato efter første date"),
-        "endsIn": m13,
+        "endsIn": m16,
         "english": MessageLookupByLibrary.simpleMessage("engelsk"),
-        "enterCaptcha": m14,
+        "enterCaptcha": m17,
         "enterEmailEachRecipient": MessageLookupByLibrary.simpleMessage(
             "Indtast en e-mailadresse for hver modtager"),
-        "enterSendedCode":
+        "enterSentCode":
             MessageLookupByLibrary.simpleMessage("Indtast koden sendt til"),
         "enterVoucherCode":
             MessageLookupByLibrary.simpleMessage("Indtast voucher kode"),
@@ -568,7 +568,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Indtast dit telefonnummer for at komme i gang."),
         "enterYourPhoneNumber":
             MessageLookupByLibrary.simpleMessage("Indtast dit telefonnummer"),
-        "error": m15,
+        "error": m18,
         "errorAmountTransfer": MessageLookupByLibrary.simpleMessage(
             "Det indtastede beløb er større end det aktuelle tegnebogsbeløb. Prøv igen!"),
         "errorEmailFormat": MessageLookupByLibrary.simpleMessage(
@@ -582,7 +582,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "expired": MessageLookupByLibrary.simpleMessage("Udløbet"),
         "expiredDate": MessageLookupByLibrary.simpleMessage("Udløbsdato"),
         "expiredDateHint": MessageLookupByLibrary.simpleMessage("MM/ÅÅ"),
-        "expiringInTime": m16,
+        "expiringInTime": m20,
         "exploreNow": MessageLookupByLibrary.simpleMessage("Udforsk nu"),
         "external": MessageLookupByLibrary.simpleMessage("Udvendig"),
         "extraServices":
@@ -653,7 +653,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "goBackToShipping":
             MessageLookupByLibrary.simpleMessage("Gå tilbage til forsendelse"),
         "good": MessageLookupByLibrary.simpleMessage("godt"),
-        "greaterDistance": m17,
+        "greaterDistance": m21,
         "greek": MessageLookupByLibrary.simpleMessage("græsk"),
         "grossSales": MessageLookupByLibrary.simpleMessage("engros salg"),
         "grouped": MessageLookupByLibrary.simpleMessage("Grupperet"),
@@ -672,7 +672,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "historyTransaction": MessageLookupByLibrary.simpleMessage("Historie"),
         "home": MessageLookupByLibrary.simpleMessage("HJEM"),
         "hour": MessageLookupByLibrary.simpleMessage("Time"),
-        "hoursAgo": m18,
+        "hoursAgo": m22,
         "hungarian": MessageLookupByLibrary.simpleMessage("ungarsk"),
         "hungary": MessageLookupByLibrary.simpleMessage("ungarsk"),
         "iAgree": MessageLookupByLibrary.simpleMessage("Jeg er enig med"),
@@ -703,7 +703,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "isTyping": MessageLookupByLibrary.simpleMessage("skriver..."),
         "italian": MessageLookupByLibrary.simpleMessage("italiensk"),
         "item": MessageLookupByLibrary.simpleMessage("vare"),
-        "itemQuantity": m19,
+        "itemQuantity": m24,
         "itemTotal": MessageLookupByLibrary.simpleMessage("Samlet vare:"),
         "items": MessageLookupByLibrary.simpleMessage("elementer"),
         "itsOrdered": MessageLookupByLibrary.simpleMessage("Det er bestilt!"),
@@ -745,7 +745,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("Log på"),
         "loginCanceled":
             MessageLookupByLibrary.simpleMessage("Login er annulleret"),
-        "loginErrorServiceProvider": m20,
+        "loginErrorServiceProvider": m25,
         "loginFailed":
             MessageLookupByLibrary.simpleMessage("Login mislykkedes!"),
         "loginInvalid":
@@ -773,28 +773,28 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Marker som afsendt"),
         "markAsUnread":
             MessageLookupByLibrary.simpleMessage("Marker som ulæst"),
-        "maxAmountForPayment": m21,
-        "maximumFileSizeMb": m22,
+        "maxAmountForPayment": m26,
+        "maximumFileSizeMb": m27,
         "maybeLater": MessageLookupByLibrary.simpleMessage("Måske senere"),
         "menuOrder": MessageLookupByLibrary.simpleMessage("Menu rækkefølge"),
         "menus": MessageLookupByLibrary.simpleMessage("Menuer"),
         "message": MessageLookupByLibrary.simpleMessage("Besked"),
         "messageTo": MessageLookupByLibrary.simpleMessage("Send besked til"),
-        "minAmountForPayment": m23,
+        "minAmountForPayment": m28,
         "minimumQuantityIs":
             MessageLookupByLibrary.simpleMessage("Minimum mængde er"),
-        "minutesAgo": m24,
+        "minutesAgo": m29,
         "mobileVerification":
             MessageLookupByLibrary.simpleMessage("Mobil verifikation"),
         "momentAgo": MessageLookupByLibrary.simpleMessage("et øjeblik siden"),
         "monday": MessageLookupByLibrary.simpleMessage("Mandag"),
-        "monthsAgo": m25,
+        "monthsAgo": m30,
         "more": MessageLookupByLibrary.simpleMessage("...mere"),
-        "moreFromStore": m26,
+        "moreFromStore": m31,
         "moreInformation":
             MessageLookupByLibrary.simpleMessage("Mere information"),
         "morning": MessageLookupByLibrary.simpleMessage("Morgen"),
-        "mustBeBoughtInGroupsOf": m27,
+        "mustBeBoughtInGroupsOf": m32,
         "mustSelectOneItem":
             MessageLookupByLibrary.simpleMessage("Skal vælge 1 vare"),
         "myCart": MessageLookupByLibrary.simpleMessage("Min kurv"),
@@ -805,7 +805,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Du har ingen produkter. Prøv at oprette en!"),
         "myWallet": MessageLookupByLibrary.simpleMessage("Min pung"),
         "myWishList": MessageLookupByLibrary.simpleMessage("min ønskeseddel"),
-        "nItems": m28,
+        "nItems": m33,
         "name": MessageLookupByLibrary.simpleMessage("Navn"),
         "nameOnCard": MessageLookupByLibrary.simpleMessage("Navn på kort"),
         "nearbyPlaces":
@@ -830,8 +830,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Der gives ingen kameratilladelse. Giv det venligst i din enheds indstillinger."),
         "noConversation":
             MessageLookupByLibrary.simpleMessage("Ingen samtale endnu"),
-        "noConversationDescription": MessageLookupByLibrary.simpleMessage(
-            "Det vises, når dine kunder begynder at chatte med dig"),
         "noData": MessageLookupByLibrary.simpleMessage("Ingen flere data"),
         "noFavoritesYet":
             MessageLookupByLibrary.simpleMessage("Ingen favoritter endnu."),
@@ -892,7 +890,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "openingHours": MessageLookupByLibrary.simpleMessage("åbningstider"),
         "optional": MessageLookupByLibrary.simpleMessage("Valgfri"),
         "options": MessageLookupByLibrary.simpleMessage("Muligheder"),
-        "optionsTotal": m29,
+        "optionsTotal": m34,
         "or": MessageLookupByLibrary.simpleMessage("eller"),
         "orLoginWith":
             MessageLookupByLibrary.simpleMessage("Eller log ind med"),
@@ -962,7 +960,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Indsæt din billed-url"),
         "payByWallet": MessageLookupByLibrary.simpleMessage("Betal med pung"),
         "payNow": MessageLookupByLibrary.simpleMessage("Betal nu"),
-        "payWithAmount": m30,
+        "payWithAmount": m35,
         "payment": MessageLookupByLibrary.simpleMessage("Betaling"),
         "paymentMethod":
             MessageLookupByLibrary.simpleMessage("Betalingsmetode"),
@@ -1002,6 +1000,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Indtast venligst produktnavnet"),
         "pleaseFillCode":
             MessageLookupByLibrary.simpleMessage("Udfyld venligst din kode"),
+        "pleaseFillUpAllCellsProperly": MessageLookupByLibrary.simpleMessage(
+            "*Fyld venligst alle celler ordentligt ud"),
         "pleaseIncreaseOrDecreaseTheQuantity":
             MessageLookupByLibrary.simpleMessage(
                 "Øg eller reducer venligst mængden for at fortsætte."),
@@ -1023,8 +1023,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Vælg venligst de nødvendige muligheder!"),
         "pleaseSignInBeforeUploading": MessageLookupByLibrary.simpleMessage(
             "Log venligst ind på din konto, før du uploader filer."),
-        "pleasefillUpAllCellsProperly": MessageLookupByLibrary.simpleMessage(
-            "*Fyld venligst alle celler ordentligt ud"),
         "point": MessageLookupByLibrary.simpleMessage("Punkt"),
         "pointMsgConfigNotFound": MessageLookupByLibrary.simpleMessage(
             "Der er ikke fundet nogen rabatpunktkonfiguration på serveren"),
@@ -1086,7 +1084,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Fortrolighed og vilkår"),
         "private": MessageLookupByLibrary.simpleMessage("Privat"),
         "product": MessageLookupByLibrary.simpleMessage("Produkt"),
-        "productAddToCart": m31,
+        "productAddToCart": m36,
         "productAdded":
             MessageLookupByLibrary.simpleMessage("Produktet tilsættes"),
         "productCreateReview": MessageLookupByLibrary.simpleMessage(
@@ -1122,7 +1120,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "qRCodeSaveFailure":
             MessageLookupByLibrary.simpleMessage("Kunne ikke gemme QR-koden"),
         "qty": MessageLookupByLibrary.simpleMessage("QTY"),
-        "qtyTotal": m32,
+        "qtyTotal": m37,
         "quantity": MessageLookupByLibrary.simpleMessage("Antal"),
         "quantityProductExceedInStock": MessageLookupByLibrary.simpleMessage(
             "Den aktuelle mængde er mere end mængden på lager"),
@@ -1139,11 +1137,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "readReviews": MessageLookupByLibrary.simpleMessage("Anmeldelser"),
         "receivedMoney": MessageLookupByLibrary.simpleMessage("Modtaget penge"),
         "receiver": MessageLookupByLibrary.simpleMessage("Modtager"),
+        "recent": MessageLookupByLibrary.simpleMessage("Nylig"),
         "recentSearches": MessageLookupByLibrary.simpleMessage("Historie"),
         "recentView":
             MessageLookupByLibrary.simpleMessage("Din seneste visning"),
         "recentlyViewed": MessageLookupByLibrary.simpleMessage("Senest set"),
-        "recents": MessageLookupByLibrary.simpleMessage("Nylig"),
         "recommended": MessageLookupByLibrary.simpleMessage("Anbefalede"),
         "recurringTotals":
             MessageLookupByLibrary.simpleMessage("Tilbagevendende totaler"),
@@ -1197,7 +1195,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reviews": MessageLookupByLibrary.simpleMessage("Anmeldelser"),
         "romanian": MessageLookupByLibrary.simpleMessage("rumænsk"),
         "russian": MessageLookupByLibrary.simpleMessage("Russisk"),
-        "sale": m33,
+        "sale": m39,
         "salePrice": MessageLookupByLibrary.simpleMessage("Udsalgspris"),
         "saturday": MessageLookupByLibrary.simpleMessage("lørdag"),
         "save": MessageLookupByLibrary.simpleMessage("Gemme"),
@@ -1226,12 +1224,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "searchOrderId":
             MessageLookupByLibrary.simpleMessage("Søg med ordre-id..."),
         "searchPlace": MessageLookupByLibrary.simpleMessage("Søg sted"),
-        "searchResultFor": m34,
-        "searchResultItem": m35,
-        "searchResultItems": m36,
+        "searchResultFor": m40,
+        "searchResultItem": m41,
+        "searchResultItems": m42,
         "searchingAddress":
             MessageLookupByLibrary.simpleMessage("Søger adresse"),
-        "secondsAgo": m37,
+        "secondsAgo": m43,
         "seeAll": MessageLookupByLibrary.simpleMessage("Se alt"),
         "seeNewAppConfig": MessageLookupByLibrary.simpleMessage(
             "Fortsæt med at se nyt indhold på din app."),
@@ -1282,7 +1280,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shopOrders": MessageLookupByLibrary.simpleMessage("Shop Ordrer"),
         "shopPhone": MessageLookupByLibrary.simpleMessage("Butikstelefon"),
         "shopSlug": MessageLookupByLibrary.simpleMessage("Butikssnegl"),
-        "shoppingCartItems": m38,
+        "shoppingCartItems": m44,
         "shortDescription":
             MessageLookupByLibrary.simpleMessage("Kort beskrivelse"),
         "showAllMyOrdered":
@@ -1303,7 +1301,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "slovak": MessageLookupByLibrary.simpleMessage("slovakisk"),
         "smsCodeExpired": MessageLookupByLibrary.simpleMessage(
             "SMS-koden er udløbet. Send venligst bekræftelseskoden igen for at prøve igen."),
-        "sold": m39,
+        "sold": m45,
         "soldBy": MessageLookupByLibrary.simpleMessage("Solgt af"),
         "somethingWrong": MessageLookupByLibrary.simpleMessage(
             "Noget gik galt. Prøv igen senere."),
@@ -1376,7 +1374,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "tax": MessageLookupByLibrary.simpleMessage("SKAT"),
         "terrible": MessageLookupByLibrary.simpleMessage("Forfærdeligt"),
         "thailand": MessageLookupByLibrary.simpleMessage("Thai"),
-        "theFieldIsRequired": m40,
+        "theFieldIsRequired": m46,
         "thisDateIsNotAvailable": MessageLookupByLibrary.simpleMessage(
             "Denne dato er ikke tilgængelig"),
         "thisFeatureDoesNotSupportTheCurrentLanguage":
@@ -1397,7 +1395,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "titleAToZ": MessageLookupByLibrary.simpleMessage("Titel: A til Z"),
         "titleZToA": MessageLookupByLibrary.simpleMessage("Titel: Z til A"),
         "to": MessageLookupByLibrary.simpleMessage("Til"),
-        "tooManyFaildedLogin": MessageLookupByLibrary.simpleMessage(
+        "tooManyFailedLogin": MessageLookupByLibrary.simpleMessage(
             "For mange mislykkede loginforsøg. Prøv igen senere."),
         "topUp": MessageLookupByLibrary.simpleMessage("Top Up"),
         "topUpProductNotFound": MessageLookupByLibrary.simpleMessage(
@@ -1406,7 +1404,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "totalCartValue": MessageLookupByLibrary.simpleMessage(
             "Den samlede ordres værdi skal være mindst"),
         "totalPrice": MessageLookupByLibrary.simpleMessage("Total pris"),
-        "totalProducts": m41,
+        "totalProducts": m47,
         "totalTax": MessageLookupByLibrary.simpleMessage("Samlet skat"),
         "trackingNumberIs":
             MessageLookupByLibrary.simpleMessage("Sporingsnummer er"),
@@ -1415,7 +1413,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Transaktionen annulleret"),
         "transactionDetail":
             MessageLookupByLibrary.simpleMessage("Transaktionsdetaljer"),
-        "transactionFailded":
+        "transactionFailed":
             MessageLookupByLibrary.simpleMessage("Transaktionen mislykkedes"),
         "transactionFee":
             MessageLookupByLibrary.simpleMessage("Transaktionsgebyr"),
@@ -1458,7 +1456,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "uploadProduct": MessageLookupByLibrary.simpleMessage("Upload produkt"),
         "uploading": MessageLookupByLibrary.simpleMessage("Upload"),
         "url": MessageLookupByLibrary.simpleMessage("url"),
-        "useMaximumPointDiscount": m42,
+        "useMaximumPointDiscount": m49,
         "useNow": MessageLookupByLibrary.simpleMessage("Brug nu"),
         "useThisImage":
             MessageLookupByLibrary.simpleMessage("Brug dette billede"),
@@ -1471,7 +1469,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Brugernavn og adgangskode er påkrævet"),
         "vacationMessage": MessageLookupByLibrary.simpleMessage("Feriebesked"),
         "vacationType": MessageLookupByLibrary.simpleMessage("Ferietype"),
-        "validUntilDate": m43,
+        "validUntilDate": m50,
         "variable": MessageLookupByLibrary.simpleMessage("variabel"),
         "variation": MessageLookupByLibrary.simpleMessage("Variation"),
         "vendor": MessageLookupByLibrary.simpleMessage("Sælger"),
@@ -1502,11 +1500,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Venter på bekræftelse"),
         "walletBalance": MessageLookupByLibrary.simpleMessage("Pung-saldo"),
         "walletName": MessageLookupByLibrary.simpleMessage("Tegnebogsnavn"),
-        "warning": m44,
-        "warningCurrencyMessageForWallet": m45,
+        "warning": m52,
+        "warningCurrencyMessageForWallet": m53,
         "weFoundBlogs":
             MessageLookupByLibrary.simpleMessage("Vi har fundet blog(s)"),
-        "weFoundProducts": m46,
+        "weFoundProducts": m54,
         "weNeedCameraAccessTo": MessageLookupByLibrary.simpleMessage(
             "Vi har brug for kameraadgang for at scanne efter QR-kode eller stregkode."),
         "weSentAnOTPTo": MessageLookupByLibrary.simpleMessage(
@@ -1515,13 +1513,13 @@ class MessageLookup extends MessageLookupByLibrary {
             "Vi sender dig meddelelser, når nye produkter er tilgængelige, eller tilbud er tilgængelige. Du kan altid ændre denne indstilling i indstillingerne."),
         "webView": MessageLookupByLibrary.simpleMessage("Webvisning"),
         "wednesday": MessageLookupByLibrary.simpleMessage("onsdag"),
-        "week": m47,
+        "week": m55,
         "welcome": MessageLookupByLibrary.simpleMessage("Velkommen"),
         "welcomeBack":
             MessageLookupByLibrary.simpleMessage("Velkommen tilbage"),
         "welcomeRegister": MessageLookupByLibrary.simpleMessage(
             "Start din shoppingrejse med os nu"),
-        "welcomeUser": m48,
+        "welcomeUser": m56,
         "whichLanguageDoYouPrefer": MessageLookupByLibrary.simpleMessage(
             "Hvilket sprog foretrækker du?"),
         "wholesaleRegisterMsg": MessageLookupByLibrary.simpleMessage(
@@ -1531,13 +1529,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "writeComment":
             MessageLookupByLibrary.simpleMessage("Skriv din kommentar"),
         "writeYourNote": MessageLookupByLibrary.simpleMessage("Skriv din note"),
-        "yearsAgo": m49,
+        "yearsAgo": m57,
         "yes": MessageLookupByLibrary.simpleMessage("Ja"),
         "youCanOnlyOrderSingleStore": MessageLookupByLibrary.simpleMessage(
             "Du kan kun købe fra en enkelt butik."),
         "youCanOnlyPurchase":
             MessageLookupByLibrary.simpleMessage("Du kan kun købe"),
-        "youHaveAssignedToOrder": m50,
+        "youHaveAssignedToOrder": m58,
         "youHaveBeenSaveAddressYourLocal": MessageLookupByLibrary.simpleMessage(
             "Du har gemt adresse i dit lokale"),
         "youHavePoints":

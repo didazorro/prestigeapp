@@ -96,7 +96,11 @@ class SubCategoriesState extends State<SubCategories>
                           width: constraints.maxWidth,
                           onTap: () {
                             var value = snapshot.data ?? [];
-                            onTapBlog(blog: value[index], blogs: value);
+                            onTapBlog(
+                              blog: value[index],
+                              blogs: value,
+                              context: context,
+                            );
                           },
                         ),
                       );

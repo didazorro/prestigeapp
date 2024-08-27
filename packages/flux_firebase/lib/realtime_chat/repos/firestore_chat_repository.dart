@@ -2,13 +2,12 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
-
 import 'package:fstore/services/firebase/base_firebase_services.dart';
 import 'package:fstore/services/services.dart';
+
 import '../data/firestore.dart';
 import '../models/entities/chat_message.dart';
 import '../models/entities/chat_room.dart';
-import '../models/entities/chat_user.dart';
 import 'base/chat_repository.dart';
 
 class FirestoreChatRepository implements ChatRepository {
@@ -42,15 +41,21 @@ class FirestoreChatRepository implements ChatRepository {
       );
 
   @override
-  Stream<List<ChatRoom>> getChatRooms(String email) {
+  Stream<List<ChatRoom>> getChatRooms(String email, bool getAllChatRooms) {
     return FirestoreChat.getChatRooms(_firestore).map((snapshot) {
       return snapshot.docs
           .map<ChatRoom?>((doc) {
+            final data = doc.data();
+
+            if (getAllChatRooms) {
+              return data;
+            }
+
             /// Check if email is a member of the chat room.
-            if (!doc.id.contains(email)) {
+            if (!data.users.any((e) => e.email == email)) {
               return null;
             }
-            return doc.data();
+            return data;
           })
           .whereType<ChatRoom>()
           .toList();
@@ -77,7 +82,6 @@ class FirestoreChatRepository implements ChatRepository {
   Future<void> sendChatMessage(
     String chatId,
     String sender,
-    String receiver,
     String image,
     String message,
   ) async {
@@ -85,7 +89,6 @@ class FirestoreChatRepository implements ChatRepository {
       _firestore,
       chatId,
       sender,
-      receiver,
       image,
       message,
     );
@@ -95,17 +98,13 @@ class FirestoreChatRepository implements ChatRepository {
   Future<void> updateTypingStatus(
     String chatId, {
     bool? isTyping,
-    bool? isAdmin,
     String? senderEmail,
-    List<ChatUser>? users,
   }) async {
     await FirestoreChat.updateTypingStatus(
       _firestore,
       chatId,
       isTyping: isTyping,
-      isAdmin: isAdmin,
       senderEmail: senderEmail,
-      users: users,
     );
   }
 
@@ -113,23 +112,15 @@ class FirestoreChatRepository implements ChatRepository {
   Future<void> updateChatRoom(
     String chatId, {
     String? latestMessage,
-    bool? isSeenByAdmin,
     int? receiverUnreadCountPlus,
     String? sender,
-    bool? isAdminTyping,
-    bool? isUserTyping,
-    List<ChatUser>? users,
   }) async {
     await FirestoreChat.updateChatRoom(
       _firestore,
       chatId,
-      isAdminTyping: isAdminTyping,
-      isUserTyping: isUserTyping,
       latestMessage: latestMessage,
-      isSeenByAdmin: isSeenByAdmin,
       receiverUnreadCountPlus: receiverUnreadCountPlus,
       senderEmail: sender,
-      users: users,
       pushToken: pushToken,
     );
   }
@@ -149,6 +140,21 @@ class FirestoreChatRepository implements ChatRepository {
       _firestore,
       senderEmail,
       receiverEmail,
+    );
+  }
+
+  @override
+  Future<void> updateBlackList(
+    String chatId, {
+    List<String>? blackList,
+    String? senderEmail,
+  }) async {
+    return FirestoreChat.updateBlackList(
+      _firestore,
+      chatId,
+      blackList: blackList,
+      senderEmail: senderEmail,
+      pushToken: pushToken,
     );
   }
 }

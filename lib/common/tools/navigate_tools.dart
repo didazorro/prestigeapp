@@ -28,21 +28,20 @@ import 'flash.dart';
 class NavigateTools {
   static final Map<String, dynamic> _pendingAction = {};
 
-  static Future onTapNavigateOptions(
-      {BuildContext? context,
-      required Map config,
-      List<Product>? products}) async {
+  static Future onTapNavigateOptions({
+    required BuildContext context,
+    required Map config,
+    List<Product>? products,
+  }) async {
     /// support to show the product detail
     if (config.hasProduct) {
-      if (context != null) {
-        unawaited(
-          FlashHelper.message(
-            context,
-            message: S.of(context).loading,
-            duration: const Duration(seconds: 1),
-          ),
-        );
-      }
+      unawaited(
+        FlashHelper.message(
+          context,
+          message: S.of(context).loading,
+          duration: const Duration(seconds: 1),
+        ),
+      );
 
       /// Prevent users from tapping multiple times.
       if (_pendingAction[config.product.toString()] == true) {
@@ -64,6 +63,7 @@ class NavigateTools {
       return FluxNavigate.pushNamed(
         RouteList.productDetail,
         arguments: product,
+        context: context,
       );
     }
     if (config.hasTab) {
@@ -71,41 +71,41 @@ class NavigateTools {
     }
     if (config.hasTabNumber) {
       final index = (Helper.formatInt(config.tabNumber, 1) ?? 1) - 1;
-      if (context != null) {
-        var appModel = Provider.of<AppModel>(context, listen: false);
-        final userModel = Provider.of<UserModel>(context, listen: false);
-        var tabData = appModel.appConfig?.tabBar[index];
+      var appModel = Provider.of<AppModel>(context, listen: false);
+      final userModel = Provider.of<UserModel>(context, listen: false);
+      var tabData = appModel.appConfig?.tabBar[index];
 
-        if (tabData != null) {
-          var routeData;
-          if (['chat-gpt', 'image-generate', 'text-generate']
-              .contains(tabData.layout)) {
-            routeData = {
-              'identifier': userModel.user?.email,
-              'loginCallback': () async {
-                await FluxNavigate.pushNamed(
-                  RouteList.login,
-                  forceRootNavigator: true,
-                );
-                final userModel =
-                    Provider.of<UserModel>(context, listen: false);
-                return userModel.user?.email;
-              },
-            };
-          }
-          if (!tabData.visible) {
-            return FluxNavigate.pushNamed(
-              RouteList.pageTab,
-              arguments: routeData ?? tabData,
-            );
-          }
-          if (tabData.isFullscreen) {
-            return FluxNavigate.pushNamed(
-              tabData.layout.toString(),
-              arguments: routeData ?? tabData,
-              forceRootNavigator: true,
-            );
-          }
+      if (tabData != null) {
+        var routeData;
+        if (['chat-gpt', 'image-generate', 'text-generate']
+            .contains(tabData.layout)) {
+          routeData = {
+            'identifier': userModel.user?.email,
+            'loginCallback': () async {
+              await FluxNavigate.pushNamed(
+                RouteList.login,
+                forceRootNavigator: true,
+                context: context,
+              );
+              final userModel = Provider.of<UserModel>(context, listen: false);
+              return userModel.user?.email;
+            },
+          };
+        }
+        if (!tabData.visible) {
+          return FluxNavigate.pushNamed(
+            RouteList.pageTab,
+            arguments: routeData ?? tabData,
+            context: context,
+          );
+        }
+        if (tabData.isFullscreen) {
+          return FluxNavigate.pushNamed(
+            tabData.layout.toString(),
+            arguments: routeData ?? tabData,
+            forceRootNavigator: true,
+            context: context,
+          );
         }
       }
       return MainTabControlDelegate.getInstance().tabAnimateTo(
@@ -116,49 +116,49 @@ class NavigateTools {
       var tabData = TabBarMenuConfig(jsonData: {});
       var screen = config.screen.toString();
       var routeData;
-      if (context != null) {
-        var appModel = Provider.of<AppModel>(context, listen: false);
-        tabData = appModel.appConfig?.tabBar
-                .firstWhereOrNull((element) => element.layout == screen) ??
-            tabData;
-        final userModel = Provider.of<UserModel>(context, listen: false);
+      var appModel = Provider.of<AppModel>(context, listen: false);
+      tabData = appModel.appConfig?.tabBar
+              .firstWhereOrNull((element) => element.layout == screen) ??
+          tabData;
+      final userModel = Provider.of<UserModel>(context, listen: false);
 
-        if (['chat-gpt', 'image-generate', 'text-generate']
-            .contains(tabData.layout)) {
-          routeData = {
-            'identifier': userModel.user?.email,
-            'loginCallback': () async {
-              await FluxNavigate.pushNamed(
-                RouteList.login,
-                forceRootNavigator: true,
-              );
-              final userModel = Provider.of<UserModel>(context, listen: false);
-              return userModel.user?.email;
-            },
-          };
-        } else if (screen == 'orders') {
-          if (!userModel.loggedIn) {
-            await navigateToLogin(context);
-          }
-
-          final user = context.read<UserModel>().user;
-
-          if (user == null) {
-            return;
-          }
-
-          routeData = user;
+      if (['chat-gpt', 'image-generate', 'text-generate']
+          .contains(tabData.layout)) {
+        routeData = {
+          'identifier': userModel.user?.email,
+          'loginCallback': () async {
+            await FluxNavigate.pushNamed(
+              RouteList.login,
+              forceRootNavigator: true,
+              context: context,
+            );
+            final userModel = Provider.of<UserModel>(context, listen: false);
+            return userModel.user?.email;
+          },
+        };
+      } else if (screen == 'orders') {
+        if (!userModel.loggedIn) {
+          await navigateToLogin(context);
         }
+
+        final user = context.read<UserModel>().user;
+
+        if (user == null) {
+          return;
+        }
+
+        routeData = user;
       }
 
       if (config.isFullscreen) {
         return FluxNavigate.pushNamed(
           screen,
           arguments: routeData ?? tabData,
+          context: context,
         );
       }
 
-      return Navigator.of(context!).pushNamed(
+      return Navigator.of(context).pushNamed(
         screen,
         arguments: routeData ?? tabData,
       );
@@ -180,13 +180,14 @@ class NavigateTools {
       return FluxNavigate.pushNamed(
         RouteList.detailBlog,
         arguments: BlogDetailArguments(id: id),
+        context: context,
       );
     }
 
     /// support to show blog category
     if (config.hasBlogCategory) {
       return Navigator.push(
-        context!,
+        context,
         MaterialPageRoute<void>(
           builder: (BuildContext context) =>
               BlogListCategory(id: config.blogCategory.toString()),
@@ -196,7 +197,7 @@ class NavigateTools {
     }
 
     if (config.hasCoupon) {
-      return Navigator.of(context!).push(
+      return Navigator.of(context).push(
         MaterialPageRoute(
           fullscreenDialog: true,
           builder: (context) => CouponList(
@@ -215,7 +216,7 @@ class NavigateTools {
 
     /// Navigate to vendor store on Banner Image
     if (config.hasVendor) {
-      await Navigator.of(context!).push(
+      await Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) =>
               Services().widget.renderVendorScreen(config.vendor),
@@ -227,8 +228,7 @@ class NavigateTools {
     /// support to show the post detail
     if (config.hasUrl) {
       String url = config.url;
-      if (context != null &&
-          (ServerConfig().isWooType || ServerConfig().isWordPress)) {
+      if (ServerConfig().isWooType || ServerConfig().isWordPress) {
         final cookie =
             Provider.of<UserModel>(context, listen: false).user?.cookie;
         url = url.addWooCookieToUrl(cookie);
@@ -244,6 +244,7 @@ class NavigateTools {
             title: config.title,
           ),
         ),
+        context: context,
       );
     } else {
       /// For static image
@@ -251,7 +252,8 @@ class NavigateTools {
               config.category == kEmptyCategoryID) &&
           config.hasTag == false &&
           (products?.isEmpty ?? true) &&
-          config.hasLocation == false) {
+          config.hasLocation == false &&
+          config.hasAdvancedParams == false) {
         return;
       }
 
@@ -262,6 +264,7 @@ class NavigateTools {
         unawaited(FluxNavigate.pushNamed(
           RouteList.subCategories,
           arguments: SubcategoryArguments(parentId: category.toString()),
+          context: context,
         ));
         return;
       }
@@ -273,6 +276,7 @@ class NavigateTools {
           config: config,
           data: products,
         ),
+        context: context,
       );
     }
   }
@@ -300,8 +304,19 @@ class NavigateTools {
     MainTabControlDelegate.getInstance().changeTab(name);
   }
 
-  static Future<void> navigateToLogin(context,
-      {bool replacement = false}) async {
+  static Future<void> navigateToLogin(
+    BuildContext context, {
+    bool replacement = false,
+  }) async {
+    if (ServerConfig().isSupportAuthWebView) {
+      await _getFluxNavigate(
+        routeName: RouteList.loginWithWebview,
+        replacement: replacement,
+        context: context,
+      );
+      return;
+    }
+
     if (kLoginSetting.smsLoginAsDefault) {
       await navigateToLoginSms(context, replacement: replacement);
       return;
@@ -309,25 +324,31 @@ class NavigateTools {
     await _getFluxNavigate(
       routeName: RouteList.login,
       replacement: replacement,
+      context: context,
     );
   }
 
-  static Future<void> navigateToLoginSms(BuildContext context,
-      {bool replacement = false}) async {
+  static Future<void> navigateToLoginSms(
+    BuildContext context, {
+    bool replacement = false,
+  }) async {
     if (kAdvanceConfig.enableDigitsMobileLogin) {
       await _getFluxNavigate(
         routeName: RouteList.digitsMobileLogin,
         replacement: replacement,
+        context: context,
       );
       return;
     }
     await _getFluxNavigate(
       routeName: RouteList.loginSMS,
       replacement: replacement,
+      context: context,
     );
   }
 
   static Future<Object?> _getFluxNavigate({
+    required BuildContext context,
     required String routeName,
     required bool replacement,
   }) {
@@ -335,11 +356,13 @@ class NavigateTools {
       return FluxNavigate.pushReplacementNamed(
         routeName,
         forceRootNavigator: true,
+        context: context,
       );
     }
     return FluxNavigate.pushNamed(
       routeName,
       forceRootNavigator: true,
+      context: context,
     );
   }
 
@@ -370,7 +393,13 @@ class NavigateTools {
   }
 
   static void navigateRegister(context, {bool replacement = false}) {
-    if (kAdvanceConfig.enableMembershipUltimate) {
+    if (ServerConfig().isSupportAuthWebView) {
+      _getFluxNavigate(
+        routeName: RouteList.signUpWithWebview,
+        replacement: replacement,
+        context: context,
+      );
+    } else if (kAdvanceConfig.enableMembershipUltimate) {
       Navigator.of(context).pushNamed(RouteList.memberShipUltimatePlans);
     } else if (kAdvanceConfig.enableWooCommerceWholesalePrices &&
         ServerConfig().isWooPluginSupported) {
@@ -380,7 +409,8 @@ class NavigateTools {
       Navigator.of(context).pushNamed(RouteList.b2bkingSignUp);
     } else if (kAdvanceConfig.enablePaidMembershipPro) {
       Navigator.of(context).pushNamed(RouteList.paidMemberShipProPlans);
-    } else if (kAdvanceConfig.enableDigitsMobileLogin) {
+    } else if (kAdvanceConfig.enableDigitsMobileLogin &&
+        ServerConfig().isWooPluginSupported) {
       Navigator.of(context).pushNamed(RouteList.digitsMobileLoginSignUp);
     } else {
       if (kLoginSetting.smsLoginAsDefault) {
@@ -424,6 +454,7 @@ extension _ExtensionNavigatorToolConfig on Map {
   dynamic get product => this['product'];
   dynamic get tag => this['tag'];
   dynamic get location => this['location'];
+  dynamic get advancedParams => this['advancedParams'];
 
   ///
   bool get hasLocation => location != null;
@@ -439,6 +470,10 @@ extension _ExtensionNavigatorToolConfig on Map {
   bool get hasTab => tab != null;
   bool get hasProduct => product != null;
   bool get hasCategory => category != null;
+  bool get hasAdvancedParams =>
+      advancedParams != null &&
+      advancedParams is Map &&
+      advancedParams.isNotEmpty;
 
   ///
   bool get isFullscreen => bool.tryParse('${this['fullscreen']}') ?? false;

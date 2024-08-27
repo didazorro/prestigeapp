@@ -1,7 +1,7 @@
 NSCameraUsageDescription = "Cette application nécessite l'accès à l'appareil photo pour la fonction de scanner de code QR ou de code-barres accessible depuis la barre de recherche";
-NSLocationAlwaysAndWhenInUseUsageDescription = "Obtenez votre emplacement actuel pour la livraison";
-NSLocationAlwaysUsageDescription = "Besoin d'un accès à la position actuelle";
-NSLocationWhenInUseUsageDescription = "Obtenez votre emplacement actuel pour la livraison";
+NSLocationAlwaysAndWhenInUseUsageDescription = "Cette application a besoin d'accéder à votre position pour l'afficher sur l'écran de la carte et fournir des services basés sur la localisation";
+NSLocationAlwaysUsageDescription = "Cette application a besoin d'accéder à votre position pour l'afficher sur l'écran de la carte et fournir des services basés sur la localisation";
+NSLocationWhenInUseUsageDescription = "Cette application a besoin d'accéder à votre position pour l'afficher sur l'écran de la carte et fournir des services basés sur la localisation";
 NSMicrophoneUsageDescription = "Nous aimerions avoir accès au microphone pour permettre l'enregistrement de messages vocaux";
 NSPhotoLibraryAddUsageDescription = "Nous aimerions avoir accès au stockage d'images/vidéos dans votre photothèque";
 NSPhotoLibraryUsageDescription = "Cette application nécessite l'accès à la photothèque pour sélectionner une photo de profil qui sera utilisée comme image de chat pour la fonction de chat.";

@@ -13,9 +13,9 @@ import '../../../models/tera_wallet/index.dart';
 import '../../../modules/dynamic_layout/helper/helper.dart';
 import '../../../modules/native_payment/razorpay/services.dart';
 import '../../../services/index.dart';
-import '../../../widgets/common/common_safe_area.dart';
 import '../../cart/widgets/shopping_cart_sumary.dart';
 import '../mixins/checkout_mixin.dart';
+import 'checkout_action.dart';
 
 class PaymentMethods extends StatefulWidget {
   final Function? onBack;
@@ -148,7 +148,12 @@ class _PaymentMethodsState extends State<PaymentMethods>
               );
             }),
             if (widget.hideCheckout == false) ...[
-              const ShoppingCartSummary(showPrice: false),
+              const Padding(
+                padding: EdgeInsets.all(10.0),
+                child: ShoppingCartSummary(
+                  showPrice: false,
+                ),
+              ),
               const SizedBox(height: 20),
               Padding(
                 padding:
@@ -264,66 +269,26 @@ class _PaymentMethodsState extends State<PaymentMethods>
   }
 
   Widget _buildBottom(PaymentMethodModel paymentMethodModel, cartModel) {
-    final bgColor = Theme.of(context).primaryColor;
-    return CommonSafeArea(
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (kPaymentConfig.enableShipping ||
-              kPaymentConfig.enableAddress ||
-              kPaymentConfig.enableReview) ...[
-            SizedBox(
-              width: 130,
-              child: OutlinedButton(
-                onPressed: () {
-                  isPaying ? showSnackbar : widget.onBack!();
-                },
-                child: Text(
-                  kPaymentConfig.enableReview
-                      ? S.of(context).goBack.toUpperCase()
-                      : kPaymentConfig.enableShipping
-                          ? S.of(context).goBackToShipping
-                          : S.of(context).goBackToAddress,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(width: 8),
-          ],
-          if (widget.hideCheckout == false)
-            Expanded(
-              child: ButtonTheme(
-                height: 45,
-                child: ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: bgColor,
-                    elevation: 0,
-                  ),
-                  onPressed: (paymentMethodModel.message?.isNotEmpty ?? false)
-                      ? null
-                      : () => isPaying || selectedId == null
-                          ? showSnackbar
-                          : placeOrder(paymentMethodModel, cartModel),
-                  icon: Icon(
-                    CupertinoIcons.check_mark_circled_solid,
-                    size: 20,
-                    color: bgColor.getColorBasedOnBackground,
-                  ),
-                  label: Text(
-                    S.of(context).placeMyOrder.toUpperCase(),
-                    style: TextStyle(
-                      color: bgColor.getColorBasedOnBackground,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-        ],
-      ),
+    return CheckoutActionWidget(
+      iconPrimary: CupertinoIcons.check_mark_circled_solid,
+      labelPrimary: S.of(context).placeMyOrder,
+      onTapPrimary: (paymentMethodModel.message?.isNotEmpty ?? false)
+          ? null
+          : () => isPaying || selectedId == null
+              ? showSnackbar
+              : placeOrder(paymentMethodModel, cartModel),
+      labelSecondary: kPaymentConfig.enableReview
+          ? S.of(context).goBack.toUpperCase()
+          : kPaymentConfig.enableShipping
+              ? S.of(context).goBackToShipping
+              : S.of(context).goBackToAddress,
+      onTapSecondary: () {
+        isPaying ? showSnackbar : widget.onBack!();
+      },
+      showSecondary: kPaymentConfig.enableShipping ||
+          kPaymentConfig.enableAddress ||
+          kPaymentConfig.enableReview,
+      showPrimary: widget.hideCheckout == false,
     );
   }
 }

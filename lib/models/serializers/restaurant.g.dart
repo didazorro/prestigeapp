@@ -9,7 +9,7 @@ part of 'restaurant.dart';
 SerializerRestaurant _$SerializerRestaurantFromJson(
         Map<String, dynamic> json) =>
     SerializerRestaurant(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
       description: json['description'] as String?,
       address: json['address'] as String?,

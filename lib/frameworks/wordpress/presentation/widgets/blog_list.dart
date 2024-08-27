@@ -89,8 +89,11 @@ class _BlogListState extends State<BlogList> with BlogActionButtonMixin {
                         BlogCard(
                           item: _blogs[i],
                           width: widthContent,
-                          onTap: () =>
-                              onTapBlog(blog: _blogs[i], blogs: _blogs),
+                          onTap: () => onTapBlog(
+                            blog: _blogs[i],
+                            blogs: _blogs,
+                            context: context,
+                          ),
                         )
                     ],
                   ),

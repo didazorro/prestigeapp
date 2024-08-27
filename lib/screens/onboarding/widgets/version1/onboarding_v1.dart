@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:intro_slider/intro_slider.dart';
 
 import '../../../../common/config/models/onboarding_config.dart';
-import '../../../../common/constants.dart';
-import '../../../../common/tools/navigate_tools.dart';
+import '../../../../common/config/models/onboarding_item_config.dart';
+import '../../../../common/tools.dart';
 import '../../../../generated/l10n.dart';
-import '../../../../services/services.dart';
 import '../../../../widgets/common/flux_image.dart';
 import '../../../../widgets/onboarding/multi_language_text_button.dart';
 import '../../../home/change_language_mixin.dart';
@@ -24,60 +23,15 @@ class OnBoardingV1 extends StatefulWidget {
 
 class _OnBoardingV1State extends State<OnBoardingV1>
     with ChangeLanguage, OnBoardingMixin {
-  List<ContentConfig> getSlides(List<dynamic> data) {
-    final slides = <ContentConfig>[];
+  @override
+  void initState() {
+    super.initState();
+    ImageTools.preLoadingListImagesInitState(
+        widget.config.items.map((e) => e.image).toList(), context);
+  }
 
-    Widget renderLoginWidget(String imagePath) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          FluxImage(
-            imageUrl: imagePath,
-            fit: BoxFit.fitWidth,
-          ),
-          if (enableAuth)
-            Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: onTapSignIn,
-                    child: Text(
-                      S.of(context).signIn,
-                      style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontSize: 20.0,
-                      ),
-                    ),
-                  ),
-                  Text(
-                    '    |    ',
-                    style: TextStyle(
-                        color: Theme.of(context).primaryColor, fontSize: 20.0),
-                  ),
-                  GestureDetector(
-                    onTap: () async {
-                      setHasSeen();
-                      NavigateTools.navigateRegister(
-                        context,
-                        replacement: true,
-                      );
-                    },
-                    child: Text(
-                      S.of(context).signUp,
-                      style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontSize: 20.0,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-        ],
-      );
-    }
+  List<ContentConfig> getSlides(List<OnBoardingItemConfig> data) {
+    final slides = <ContentConfig>[];
 
     for (var i = 0; i < data.length; i++) {
       final isLastItem = i == data.length - 1;
@@ -93,19 +47,15 @@ class _OnBoardingV1State extends State<OnBoardingV1>
         styleTitle: const TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 25.0,
-          color: kGrey900,
         ),
         backgroundColor: Colors.white,
         marginDescription: const EdgeInsets.fromLTRB(20.0, 75.0, 20.0, 0),
         styleDescription: const TextStyle(
           fontSize: 15.0,
-          color: kGrey600,
         ),
         foregroundImageFit: BoxFit.fitWidth,
         centerWidget: isLastItem
-            ? renderLoginWidget(
-                data[i].image,
-              )
+            ? _renderButtonWidget(data[i].image)
             : FluxImage(
                 imageUrl: data[i].image,
                 fit: BoxFit.fitWidth,
@@ -116,10 +66,53 @@ class _OnBoardingV1State extends State<OnBoardingV1>
     return slides;
   }
 
+  Widget _renderButton(String text, VoidCallback onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Text(
+        text,
+        style: TextStyle(
+          color: Theme.of(context).primaryColor,
+          fontSize: 20.0,
+        ),
+      ),
+    );
+  }
+
+  Widget _renderButtonWidget(String imagePath) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[
+        FluxImage(
+          imageUrl: imagePath,
+          fit: BoxFit.fitWidth,
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              if (isEnable) ...[
+                _renderButton(S.of(context).signIn, onTapSignIn),
+                if (isEnableRegister)
+                  _renderButton(S.of(context).signUp, () {
+                    setHasSeen();
+                    NavigateTools.navigateRegister(
+                      context,
+                      replacement: true,
+                    );
+                  }),
+              ],
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final data = widget.config.items;
-    final isRequiredLogin = Services().widget.isRequiredLogin;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -129,13 +122,13 @@ class _OnBoardingV1State extends State<OnBoardingV1>
             listContentConfig: getSlides(data),
             renderSkipBtn:
                 MultiLanguageTextButton(getText: () => S.of(context).skip),
-            renderDoneBtn: MultiLanguageTextButton(
-                getText: () => isRequiredLogin ? '' : S.of(context).done),
+            renderDoneBtn:
+                MultiLanguageTextButton(getText: () => S.of(context).done),
             renderPrevBtn:
                 MultiLanguageTextButton(getText: () => S.of(context).prev),
             renderNextBtn:
                 MultiLanguageTextButton(getText: () => S.of(context).next),
-            isShowDoneBtn: !isRequiredLogin,
+            isShowDoneBtn: true,
             onDonePress: onTapDone,
           ),
           if (widget.config.showLanguage) iconLanguage(),

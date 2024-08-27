@@ -55,7 +55,7 @@ class _ShopProductListScreenState extends State<ShopProductListScreen> {
     final theme = Theme.of(context);
     final isEmpty =
         model.products.isEmpty && model.state == ShopModelState.loaded;
-    var mainAxisExtent = 200.0;
+    var mainAxisExtent = 210.0;
     mainAxisExtent += kProductDetail.productListItemHeight;
     if (kProductDetail.showQuantityInList) {
       mainAxisExtent += 30;

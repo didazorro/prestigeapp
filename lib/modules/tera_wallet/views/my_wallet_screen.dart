@@ -40,15 +40,23 @@ class _MyWalletScreenState extends State<MyWalletScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
+      appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Theme.of(context).colorScheme.secondary,
+        ),
+        elevation: 0.5,
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        title: Text(
+          S.of(context).myWallet,
+          style: Theme.of(context)
+              .textTheme
+              .headlineSmall
+              ?.copyWith(fontWeight: FontWeight.w700),
+        ),
+      ),
       body: CustomScrollView(
         physics: const RefreshScrollPhysics(),
         slivers: [
-          CupertinoSliverNavigationBar(
-            largeTitle: Text(
-              S.of(context).myWallet,
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ),
           CupertinoSliverRefreshControl(
             onRefresh: () async {
               await Future.wait([
@@ -98,7 +106,10 @@ class _MyWalletScreenState extends State<MyWalletScreen> {
                       }
 
                       if (listTransaction.isEmpty) {
-                        return Text(S.of(context).doNotAnyTransactions);
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Text(S.of(context).doNotAnyTransactions),
+                        );
                       }
 
                       return ListView.separated(
@@ -130,7 +141,7 @@ class _MyWalletScreenState extends State<MyWalletScreen> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
-        height: MediaQuery.of(context).size.height / 4,
+        height: MediaQuery.sizeOf(context).height / 3,
         child: Stack(
           alignment: Alignment.center,
           children: [
@@ -164,7 +175,7 @@ class _MyWalletScreenState extends State<MyWalletScreen> {
         borderRadius: BorderRadius.circular(24),
         color: color,
       ),
-      height: MediaQuery.of(context).size.height / 4 - 8,
+      height: MediaQuery.sizeOf(context).height / 3 - 8,
     );
   }
 
@@ -179,7 +190,6 @@ class _MyWalletScreenState extends State<MyWalletScreen> {
         borderRadius: BorderRadius.circular(16),
         color: color,
       ),
-      height: MediaQuery.of(context).size.height / 4,
       padding: const EdgeInsets.all(24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -199,30 +209,28 @@ class _MyWalletScreenState extends State<MyWalletScreen> {
                           .primaryTextTheme
                           .headlineSmall!
                           .copyWith(
-                            color: Colors.white,
+                            color: Theme.of(context)
+                                .primaryColor
+                                .getColorBasedOnBackground,
                           ),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
                     ),
-                    // const SizedBox(height: 12),
-                    // Text(
-                    //   cardId,
-                    //   style: Theme.of(context).textTheme.headline6!.copyWith(
-                    //         color: Colors.white.withOpacity(0.8),
-                    //       ),
-                    // ),
                   ],
                 ),
               ),
               Expanded(
                 child: Text(
-                  'TeraWallet',
+                  S.of(context).teraWallet,
                   textAlign: TextAlign.end,
                   style: Theme.of(context)
                       .primaryTextTheme
                       .headlineSmall!
                       .copyWith(
-                          color: Colors.white, fontWeight: FontWeight.bold),
+                          color: Theme.of(context)
+                              .primaryColor
+                              .getColorBasedOnBackground,
+                          fontWeight: FontWeight.bold),
                 ),
               )
             ],
@@ -233,16 +241,17 @@ class _MyWalletScreenState extends State<MyWalletScreen> {
               Text(
                 S.of(context).balance,
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                      color: Colors.white.withOpacity(0.8),
-                    ),
+                    color: Theme.of(context)
+                        .primaryColor
+                        .getColorBasedOnBackground),
               ),
               Text(
                 WalletHelpers.parseNumberToCurrencyText(
                     double.tryParse(balance) ?? 0),
-                style: Theme.of(context)
-                    .textTheme
-                    .headlineMedium!
-                    .copyWith(color: Colors.white),
+                style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                    color: Theme.of(context)
+                        .primaryColor
+                        .getColorBasedOnBackground),
               )
             ],
           )

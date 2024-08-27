@@ -16,6 +16,7 @@ class SMSModel extends ChangeNotifier {
   String _smsCode = '';
   String _phoneNumber = '';
   CountryCode _countryCode = CountryCode();
+  int? _resendToken;
 
   /// Computed
   String get smsCode => _smsCode;
@@ -57,6 +58,7 @@ class SMSModel extends ChangeNotifier {
     try {
       _updateState(SMSModelState.loading);
       await Services().firebase.verifyPhoneNumber(
+            forceResendingToken: _resendToken,
             phoneNumber: dialPhoneNumber,
             verificationCompleted: (String? smsCode) {
               _smsCode = smsCode!;
@@ -68,6 +70,7 @@ class SMSModel extends ChangeNotifier {
             },
             codeSent: (String verificationId, int? resendToken) {
               _verificationId = verificationId;
+              _resendToken = resendToken;
               onPageChanged?.call();
               _updateState(SMSModelState.complete);
 

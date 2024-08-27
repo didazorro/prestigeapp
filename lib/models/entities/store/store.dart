@@ -96,7 +96,10 @@ class Store {
 
     final time = parsedJson['store_open_close']?['time'];
 
-    if (time != null && time is Map && time.isNotEmpty) {
+    if (parsedJson['store_open_close']?['enabled'] == true &&
+        time != null &&
+        time is Map &&
+        time.isNotEmpty) {
       storeHour = StoreHour.fromDokan(time);
     }
 

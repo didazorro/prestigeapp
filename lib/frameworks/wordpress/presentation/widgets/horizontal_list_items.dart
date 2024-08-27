@@ -87,6 +87,7 @@ class _LargeCardHorizontalListItemsState
                             config: configJson,
                             data: snapshot.data,
                           ),
+                          context: context,
                         ),
                       ),
                       SingleChildScrollView(
@@ -129,7 +130,11 @@ class _LargeCardHorizontalListItemsState
                                   context: context,
                                   onTap: () {
                                     final data = snapshot.data ?? [];
-                                    onTapBlog(blog: data[index], blogs: data);
+                                    onTapBlog(
+                                      blog: data[index],
+                                      blogs: data,
+                                      context: context,
+                                    );
                                   },
                                   //isHero: true,
                                 );
@@ -151,6 +156,7 @@ class _LargeCardHorizontalListItemsState
                               config: configJson,
                               data: snapshot.data,
                             ),
+                            context: context,
                           ),
                         ),
                         HandleAutoSlide.list(

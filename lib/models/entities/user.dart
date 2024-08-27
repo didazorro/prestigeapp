@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 import '../../common/constants.dart';
 import '../../common/tools.dart';
+import '../../services/index.dart';
 import '../serializers/user.dart';
 import 'user_address.dart';
 
@@ -24,7 +25,6 @@ class User {
   bool isDeliveryBoy = false;
   bool? isSocial = false;
   bool? isDriverAvailable;
-  bool isManager = false;
 
   /// Google Auth
   String? phoneNumber;
@@ -95,18 +95,22 @@ class User {
         if (roles.contains('seller') ||
             roles.contains('wcfm_vendor') ||
             roles.contains('administrator') ||
-            roles.contains('owner')) {
+            roles.contains('owner') ||
+            roles.contains('shop_manager')) {
           isVender = true;
         }
         if (roles.contains('wcfm_delivery_boy') || roles.contains('driver')) {
           isDeliveryBoy = true;
         }
-        isManager =
-            roles.contains('shop_manager') || roles.contains('administrator');
       } else {
         isVender = (json['capabilities']['wcfm_vendor'] as bool?) ?? false;
       }
-      if (json['dokan_enable_selling'] != null &&
+      if ((ServerConfig().typeName == 'dokan' ||
+              ServerConfig().platform == 'dokan' ||
+
+              // Check Listeo merge Dokan
+              ServerConfig().isVendorType()) &&
+          json['dokan_enable_selling'] != null &&
           json['dokan_enable_selling'].trim().isNotEmpty) {
         isVender = json['dokan_enable_selling'] == 'yes';
       }
@@ -229,7 +233,41 @@ class User {
       printLog(e.toString());
     }
   }
+  User.fromHaravanJson(Map json) {
+    try {
+      printLog('fromHaravan user $json');
 
+      loggedIn = true;
+      id = json['id'].toString();
+      name = json['first_name'] + ' ' + json['last_name'];
+      username = json['email'];
+      cookie = json['secure_key'];
+      firstName = json['first_name'];
+      lastName = json['last_name'];
+      email = json['email'];
+      cookie = id;
+      phoneNumber = json['phone'];
+    } catch (e) {
+      printLog(e.toString());
+    }
+  }
+
+  User.fromHaravanLoyaltyJson(Map json) {
+    try {
+      printLog('fromHaravan user $json');
+
+      loggedIn = true;
+      id = json['source_id']?.toString();
+      name = json['customer_fullname'];
+      username = json['email'];
+      firstName = json['customer_firstname'];
+      lastName = json['customer_lastname'];
+      email = json['customer_email'];
+      phoneNumber = json['customer_phone'];
+    } catch (e) {
+      printLog(e.toString());
+    }
+  }
   User.fromStrapi(Map<String, dynamic> parsedJson) {
     debugPrint('User.fromStrapi $parsedJson');
     loggedIn = true;

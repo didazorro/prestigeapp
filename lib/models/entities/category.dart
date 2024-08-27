@@ -133,14 +133,15 @@ class Category {
 
   Category.fromOpencartJson(Map parsedJson) {
     try {
-      id = parsedJson['id'] ?? '0';
+      id = parsedJson['id'] ?? kRootCategoryID;
       name = HtmlUnescape().convert(parsedJson['name']);
       image = parsedJson['image'] ?? kDefaultImage;
       totalProduct = parsedJson['count'] != null
           ? int.parse(parsedJson['count'].toString())
           : 0;
-      parent =
-          parsedJson['parent'] != null ? parsedJson['parent'].toString() : '0';
+      parent = parsedJson['parent'] != null
+          ? parsedJson['parent'].toString()
+          : kRootCategoryID;
     } catch (e, trace) {
       printLog(e.toString());
       printLog(trace.toString());
@@ -171,7 +172,7 @@ class Category {
       id = parsedJson['id'];
       sku = parsedJson['id'];
       name = parsedJson['title'];
-      parent = '0';
+      parent = kRootCategoryID;
       onlineStoreUrl = parsedJson['onlineStoreUrl'];
       final image = parsedJson['image'];
       if (image != null) {
@@ -202,12 +203,30 @@ class Category {
     }
   }
 
+  Category.fromJsonHaravan(Map parsedJson) {
+    try {
+      id = parsedJson['id'].toString();
+      name = HtmlUnescape().convert(parsedJson['title']);
+      // Haravan has only 1 level, so the category always is root
+      parent = kRootCategoryID;
+      image = parsedJson['image']?['src'];
+      // totalProduct = parsedJson['nb_products_recursive'] != null
+      //     ? int.parse(parsedJson['nb_products_recursive'].toString())
+      //     : null;
+      // hasChildren = parsedJson['has_children'] == true;
+      // _leveldepth = int.tryParse('${parsedJson['level_depth']}');
+    } catch (e, trace) {
+      printLog(e.toString());
+      printLog(trace.toString());
+    }
+  }
+
   Category.fromJsonStrapi(Map<String, dynamic> parsedJson, Function apiLink) {
     try {
       var model = SerializerProductCategory.fromJson(parsedJson);
       id = model.id.toString();
       name = model.name;
-      parent = '0';
+      parent = kRootCategoryID;
       totalProduct = model.products!.length;
 
       products = [];
@@ -260,9 +279,9 @@ class Category {
         throw Exception('Something went wrong!');
       }
       name = NotionDataTools.fromTitle(properties['Name']);
-      final dataParent =
-          NotionDataTools.fromRelation(properties['Parent']) ?? ['0'];
-      parent = dataParent.isNotEmpty ? dataParent.first : '0';
+      final dataParent = NotionDataTools.fromRelation(properties['Parent']) ??
+          [kRootCategoryID];
+      parent = dataParent.isNotEmpty ? dataParent.first : kRootCategoryID;
 
       totalProduct =
           (NotionDataTools.fromNumber(properties['Count']) ?? 0) as int;
@@ -314,10 +333,10 @@ class Category {
     }
   }
 
-  bool get isRoot => parent == '0' || _leveldepth == 2;
+  bool get isRoot => parent == kRootCategoryID || _leveldepth == 2;
 
   @override
-  String toString() => 'Category { id: $id  name: $name}';
+  String toString() => 'Category { id: $id,  name: $name, isRoot: $isRoot }';
 
   static List<Category> parseCategoryList(response) {
     var categories = <Category>[];

@@ -103,7 +103,7 @@ extension on _ShippingAddressState {
     if (email.isEmail) {
       return null;
     }
-    return 'The E-mail Address must be a valid email address.';
+    return S.of(context).errorEmailFormat;
   }
 
   /// Load Shipping beforehand
@@ -377,73 +377,31 @@ extension on _ShippingAddressState {
   }
 
   Widget _buildBottom(bool isDesktop) {
-    final bgButton = Theme.of(context).primaryColor;
+    final textButton = kPaymentConfig.enableShipping
+        ? S.of(context).continueToShipping
+        : kPaymentConfig.enableReview
+            ? S.of(context).continueToReview
+            : S.of(context).continueToPayment;
 
-    final btnContinue = ElevatedButton.icon(
-      style: ElevatedButton.styleFrom(
-        foregroundColor: Colors.white,
-        backgroundColor: bgButton,
-        elevation: 0.0,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-      ),
-      icon: Icon(
-        Icons.local_shipping_outlined,
-        size: 18,
-        color: bgButton.getColorBasedOnBackground,
-      ),
-      onPressed: _onNext,
-      label: Text(
-        (kPaymentConfig.enableShipping
-                ? S.of(context).continueToShipping
-                : kPaymentConfig.enableReview
-                    ? S.of(context).continueToReview
-                    : S.of(context).continueToPayment)
-            .toUpperCase(),
-        style: Theme.of(context)
-            .textTheme
-            .bodySmall!
-            .copyWith(color: bgButton.getColorBasedOnBackground),
-      ),
-    );
-
-    return CommonSafeArea(
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SizedBox(
-            width: 150,
-            child: OutlinedButton.icon(
-              style: OutlinedButton.styleFrom(padding: EdgeInsets.zero),
-              onPressed: () {
-                if (!checkToSave()) return;
-                if (_formKey.currentState!.validate()) {
-                  _formKey.currentState!.save();
-                  Provider.of<CartModel>(context, listen: false)
-                      .setAddress(address);
-                  saveDataToLocal();
-                } else {
-                  FlashHelper.errorMessage(
-                    context,
-                    message: S.of(context).pleaseInput,
-                  );
-                }
-              },
-              icon: const Icon(
-                CupertinoIcons.plus_app,
-                size: 20,
-              ),
-              label: Text(
-                S.of(context).saveAddress.toUpperCase(),
-                style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                      color: Theme.of(context).colorScheme.secondary,
-                    ),
-              ),
-            ),
-          ),
-          const SizedBox(width: 8),
-          if (isDesktop) btnContinue else Expanded(child: btnContinue),
-        ],
-      ),
+    return CheckoutActionWidget(
+      labelPrimary: textButton,
+      iconPrimary: Icons.local_shipping_outlined,
+      onTapPrimary: _onNext,
+      labelSecondary: S.of(context).saveAddress,
+      iconSecondary: CupertinoIcons.plus_app,
+      onTapSecondary: () {
+        if (!checkToSave()) return;
+        if (_formKey.currentState!.validate()) {
+          _formKey.currentState!.save();
+          Provider.of<CartModel>(context, listen: false).setAddress(address);
+          saveDataToLocal();
+        } else {
+          FlashHelper.errorMessage(
+            context,
+            message: S.of(context).pleaseInput,
+          );
+        }
+      },
     );
   }
 

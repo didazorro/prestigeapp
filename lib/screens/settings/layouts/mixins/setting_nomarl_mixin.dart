@@ -30,7 +30,9 @@ mixin SettingNormalMixin on DeleteAccountMixin {
   DataSettingScreen get dataSettings;
   BuildContext get buildContext;
 
-  User? get user => Provider.of<UserModel>(buildContext).user;
+  UserModel get _userModel => Provider.of<UserModel>(buildContext);
+
+  User? get user => _userModel.user;
 
   /// ----- Style Setting -----
 
@@ -77,6 +79,7 @@ mixin SettingNormalMixin on DeleteAccountMixin {
             Provider.of<UserModel>(buildContext, listen: false).user?.cookie ??
                 '',
       ),
+      context: buildContext,
     ) as bool?;
     if (result ?? false) {
       Services().firebase.deleteAccount();
@@ -194,8 +197,10 @@ mixin SettingNormalMixin on DeleteAccountMixin {
   /// Delete account
   bool get isShowDeleteAccount =>
       user != null &&
+      (ServerConfig().isHaravan && _userModel.loggedIn == true) &&
       kAdvanceConfig.gdprConfig.showDeleteAccount &&
       ServerConfig().isSupportDeleteAccount;
+
   SettingItemWidget? get deleteAccountItem => isShowDeleteAccount
       ? SettingItemWidget(
           cardStyle: cardStyle,
@@ -211,6 +216,7 @@ mixin SettingNormalMixin on DeleteAccountMixin {
           ),
           trailing: const SizedBox(),
           onTap: () async {
+            // Use `fluxStoreNavigatorKey` to show dialog full screen
             final acceptDelete = await showConfirmDeleteAccountDialog(
               App.fluxStoreNavigatorKey.currentContext ?? buildContext,
             );

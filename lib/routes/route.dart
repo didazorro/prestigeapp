@@ -45,6 +45,7 @@ import '../screens/settings/branches_screen.dart';
 import '../screens/subcategories/models/subcategory_model.dart';
 import '../screens/videos/videos_screen.dart';
 import '../services/index.dart';
+import '../services/outside/index.dart';
 import '../widgets/multi_site/multi_site_selection_screen.dart';
 
 class Routes {
@@ -86,6 +87,7 @@ class Routes {
         Services().renderAudioPlaylistScreen(),
     RouteList.multiSiteSelection: (context) => const MultiSiteSelectionScreen(),
     RouteList.branchSelecter: (context) => const BranchesScreen(),
+    ...OutsideService.routes(),
     // AudioPlaylistScreen(audioService: injector.get()),
   };
 
@@ -360,7 +362,6 @@ class Routes {
               return ChangeNotifierProvider<OrderHistoryDetailModel>.value(
                 value: arguments.model,
                 child: OrderHistoryDetailScreen(
-                  enableReorder: arguments.enableReorder,
                   disableReview: arguments.disableReview,
                 ),
               );
@@ -387,15 +388,19 @@ class Routes {
       case RouteList.search:
         final data = settings.arguments;
         bool? boostEngine;
+        bool? showQRCode;
         if (data is TabBarMenuConfig) {
           final boost = data.jsonData['boostEngine'];
           boostEngine = boost is bool ? boost : null;
+          showQRCode = bool.tryParse('${data.jsonData['showQRCode']}');
         }
         return _buildRoute(
           settings,
           (_) => AutoHideKeyboard(
-            child:
-                Services().widget.renderSearchScreen(boostEngine: boostEngine),
+            child: Services().widget.renderSearchScreen(
+                  boostEngine: boostEngine,
+                  showQRCode: showQRCode,
+                ),
           ),
         );
 
@@ -507,6 +512,34 @@ class Routes {
           settings,
           (context) => Services().widget.renderVendorDashBoard(),
         );
+
+      case RouteList.loginWithWebview:
+        if (ServerConfig().isSupportAuthWebView) {
+          return _buildRoute(
+            settings,
+            (context) => Services().widget.authWebViewScreen(),
+          );
+        }
+        return _errorRoute();
+
+      case RouteList.checkoutWithWebview:
+        if (ServerConfig().isSupportOnlyCheckoutWebView) {
+          return _buildRoute(
+            settings,
+            (context) => Services().widget.checkoutWebViewScreen(),
+          );
+        }
+        return _errorRoute();
+
+      case RouteList.signUpWithWebview:
+        if (ServerConfig().isSupportAuthWebView) {
+          return _buildRoute(
+            settings,
+            (context) => Services().widget.authWebViewScreen(isRegister: true),
+          );
+        }
+        return _errorRoute();
+
       case RouteList.vendorAdmin:
         final data = settings.arguments;
         if (data is User) {

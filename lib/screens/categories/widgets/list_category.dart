@@ -32,6 +32,7 @@ class _ListCategoryState extends State<ListCategory>
           parentId: category.id!.toString(),
           categoryName: category.name,
         ),
+        context: context,
       );
       return;
     }
@@ -41,6 +42,7 @@ class _ListCategoryState extends State<ListCategory>
         cateId: category.id,
         cateName: category.name,
       ),
+      context: context,
     );
   }
 

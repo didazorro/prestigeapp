@@ -1,0 +1,67 @@
+name: flux_extended
+description: A Extended package for FluxStore apps
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  fstore:
+    path: ../../
+  inspireui: 2.2.1
+
+  ##---- Extended features ------ ###
+  ## Native payment
+  easy_paypal: 1.0.8
+  pay: 2.0.0
+
+  flutter_stripe: 10.1.1
+  stripe_android: 10.1.1
+  stripe_ios: 10.1.0
+  stripe_platform_interface: 10.1.1
+
+  myfatoorah_flutter:
+    git:
+      url: https://github.com/inspireui/myfatoorah_flutter.git
+      ref: ef949b69be6e30dc075cc67e08f0ecffbe1da17a
+  in_app_purchase: ^3.2.0
+  midtrans_sdk:
+    git:
+      url: https://github.com/inspireui/midtrans_sdk
+      ref: 29b94ef300e972ba847e35b0461261fba76a6d21
+  expresspay_sdk:
+    git:
+      url: https://github.com/inspireui/expresspay-flutter-sdk.git
+      ref: 909ef46a2a0e5f68b19a33b656ecbdddddfd983c
+
+  openai:
+    path: ../chatgpt_core
+
+  # OTHERS
+  dropdown_search: 5.0.6
+  provider: ^6.1.2
+  quiver: 3.2.1
+  async: 2.11.0
+  collection: any
+  http: ^1.1.0
+  webview_flutter: 4.7.0
+  freezed_annotation: 2.4.1
+  easy_debounce: 2.0.3
+  flutter_calendar_carousel:
+    git:
+      url: https://github.com/dooboolab-community/flutter_calendar_carousel.git
+      ref: 3ad0085c36c4c974ea0262e769e3eed2eb6cc479
+  intl: any
+  image_gallery_saver: ^2.0.3
+
+  ### CRM services
+  ### 💬 Zoho SalesIQ Mobilisten
+  ### Search "Zoho SalesIQ Mobilisten" and uncomment to use - https://take.ms/McejF
+  # salesiq_mobilisten: 4.0.0
+
+flutter:
+  uses-material-design: true

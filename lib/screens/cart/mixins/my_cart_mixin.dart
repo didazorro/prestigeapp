@@ -124,10 +124,20 @@ mixin MyCartMixin<T extends StatefulWidget> on State<T> {
       context,
       success: () async {
         hideLoading('');
+
+        if (ServerConfig().isHaravan) {
+          return FluxNavigate.pushNamed(
+            RouteList.checkoutWithWebview,
+            context: context,
+            forceRootNavigator: true,
+          );
+        }
+
         var manualClosed = await FluxNavigate.pushNamed(
           RouteList.checkout,
           arguments: CheckoutArgument(isModal: isModal),
           forceRootNavigator: true,
+          context: context,
         );
 
         if (true == manualClosed) {

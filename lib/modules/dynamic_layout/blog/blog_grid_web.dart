@@ -148,6 +148,7 @@ class _BlogGridWebState extends BaseScreen<BlogGridWeb> {
                         blog: blog,
                         listBlog: listBlog.toList(),
                       ),
+                      context: context,
                     ),
                   );
                 }),

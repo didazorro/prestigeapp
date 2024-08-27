@@ -16,6 +16,8 @@ import './layouts/column.dart';
 import './layouts/grid.dart';
 
 class StoreScreen extends StatefulWidget {
+  const StoreScreen({super.key});
+
   @override
   BaseScreen<StoreScreen> createState() => _StoresState();
 }
@@ -69,6 +71,7 @@ class _StoresState extends BaseScreen<StoreScreen> {
           child: SearchBox(
             showCancelButton: false,
             focusNode: _focusNode,
+            showQRCode: false,
             onChanged: (val) {
               EasyDebounce.debounce(
                   'searchStoreScreen', const Duration(milliseconds: 300), () {

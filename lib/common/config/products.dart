@@ -13,7 +13,9 @@ Map get kCartDetail => Configurations.cartDetail;
 
 Map get kProductVariantLanguage => Configurations.productVariantLanguage;
 
-String? get kExcludedCategory => Configurations.excludedCategory;
+String? get kExcludedCategoryIDs => Configurations.excludedCategoryIDs;
+
+String? get kExcludedProductIDs => Configurations.excludedProductIDs;
 
 SaleoffProductConfig get kSaleOffProduct =>
     SaleoffProductConfig.fromJson(Configurations.saleOffProduct);

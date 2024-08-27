@@ -9,7 +9,6 @@ import '../../../generated/l10n.dart' show S;
 import '../../../models/entities/product_component.dart';
 import '../../../models/index.dart'
     show
-        AddonsOption,
         AppModel,
         PWGiftCardInfo,
         Product,
@@ -52,8 +51,7 @@ class _StateProductVariant extends State<ProductVariant> {
       Provider.of<ProductVariantModel>(context, listen: false);
 
   ProductVariation? get productVariation => model.productVariation;
-  Map<String, Map<String, AddonsOption>> get selectedOptions =>
-      model.selectedOptions;
+
   Map<String, SelectedProductComponent>? get selectedComponents =>
       model.selectedComponents;
   Map<String?, String?>? get mapAttribute => model.mapAttribute;
@@ -66,16 +64,6 @@ class _StateProductVariant extends State<ProductVariant> {
 
   List<ProductVariation>? get variations =>
       context.select((ProductModel productModel) => productModel.variations);
-
-  void updateSelectedOptions(
-      Map<String, Map<String, AddonsOption>> selectedOptions) {
-    model.updateValues(selectedOptions: selectedOptions);
-    final options = <AddonsOption>[];
-    for (var addOns in selectedOptions.values) {
-      options.addAll(addOns.values);
-    }
-    product.selectedOptions = options;
-  }
 
   /// Get product variants
   Future<void> getProductVariations(Product? p) async {
@@ -110,19 +98,6 @@ class _StateProductVariant extends State<ProductVariant> {
         });
   }
 
-  Future<void> getProductAddons() async {
-    if (widget.isProductInfoLoading == false) {
-      if (product.addOns?.isNotEmpty ?? false) {
-        /// Select default options.
-        selectedOptions.addAll(product.defaultAddonsOptions);
-        updateSelectedOptions(selectedOptions);
-        if (mounted) {
-          setState(() {});
-        }
-      }
-    }
-  }
-
   @override
   void initState() {
     super.initState();
@@ -132,7 +107,6 @@ class _StateProductVariant extends State<ProductVariant> {
         if (mounted) {
           model.updateValues(quantity: widget.defaultQuantity);
           getProductVariations(widget.product);
-          getProductAddons();
         }
       },
     );
@@ -146,7 +120,6 @@ class _StateProductVariant extends State<ProductVariant> {
         (_) {
           if (mounted) {
             getProductVariations(widget.product);
-            getProductAddons();
           }
         },
       );
@@ -238,14 +211,6 @@ class _StateProductVariant extends State<ProductVariant> {
     );
   }
 
-  void onSelectProductAddons({
-    required Map<String, Map<String, AddonsOption>> selectedOptions,
-  }) {
-    setState(() {
-      updateSelectedOptions(selectedOptions);
-    });
-  }
-
   void onSelectProductComponent(
       Map<String, SelectedProductComponent>? selectedComponents) {
     model.updateValues(selectedComponents: selectedComponents);
@@ -260,15 +225,10 @@ class _StateProductVariant extends State<ProductVariant> {
         lang, product, mapAttribute, onSelectProductVariant, variations!);
   }
 
-  List<Widget> getProductAddonsWidget() {
-    final lang = Provider.of<AppModel>(context, listen: false).langCode;
+  Widget getProductAddonsWidget() {
     return services.widget.getProductAddonsWidget(
-      context: context,
-      selectedOptions: selectedOptions,
-      lang: lang,
       product: product,
-      onSelectProductAddons: onSelectProductAddons,
-      quantity: quantity,
+      isProductInfoLoading: widget.isProductInfoLoading,
     );
   }
 
@@ -304,7 +264,7 @@ class _StateProductVariant extends State<ProductVariant> {
     final isVariationLoading = widget.isProductInfoLoading == true &&
         ServerConfig().type != ConfigType.opencart &&
         ServerConfig().type != ConfigType.notion &&
-        (product.isVariableType &&
+        (product.isVariableProduct &&
             (product.variationProducts?.isEmpty ?? true));
     var layoutType = Provider.of<AppModel>(context).productDetailLayout;
     final showBuyButton = widget.showBuyButton &&
@@ -320,9 +280,9 @@ class _StateProductVariant extends State<ProductVariant> {
         // In some case, this product is simple type, but it has attributes 🥴
         if (!isVariationLoading)
           ...getProductAttributeWidget()
-        else if (product.isVariableType)
+        else if (product.isVariableProduct)
           kLoadingWidget(context),
-        ...getProductAddonsWidget(),
+        getProductAddonsWidget(),
         ...getProductComponentsWidget(),
         if (product.isPWGiftCardProduct) getProductPWGiftCardInfoWidget(),
         if (showBuyButton)

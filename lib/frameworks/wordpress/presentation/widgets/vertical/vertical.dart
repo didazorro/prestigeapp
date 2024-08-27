@@ -50,6 +50,7 @@ class _VerticalLayoutState extends State<VerticalLayout> {
                   arguments: BackDropArguments(
                     config: blogConfig.toJson(),
                   ),
+                  context: context,
                 ),
               ),
             ),

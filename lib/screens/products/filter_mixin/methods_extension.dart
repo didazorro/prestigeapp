@@ -16,14 +16,12 @@ extension ProductsFilterMixinMethodExtension on ProductsFilterMixin {
     String? search,
     bool? isSearch,
     List<String>? brandIds,
-    dynamic attributes,
+    Map<FilterAttribute, List<SubAttribute>>? attributes,
   }) {
     printLog('[onFilter] ♻️ Reload product list');
     filterSortBy = sortBy ?? filterSortBy;
 
-    if (listingLocationId != null) {
-      this.listingLocationId = listingLocationId;
-    }
+    this.listingLocationId = listingLocationId;
 
     if (minPrice == maxPrice && minPrice == 0) {
       this.minPrice = null;

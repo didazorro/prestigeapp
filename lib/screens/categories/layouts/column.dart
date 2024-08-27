@@ -106,6 +106,7 @@ class _ColumnCategoriesState extends State<ColumnCategories> with PagingMixin {
                                     cateId: category.id,
                                     cateName: category.name,
                                   ),
+                                  context: context,
                                 );
                               },
                               child: CategoryColumnItem(category),

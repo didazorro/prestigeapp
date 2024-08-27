@@ -1,10 +1,12 @@
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:fstore/generated/l10n.dart';
 import 'package:inspireui/inspireui.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/chat_view_model.dart';
 import '../../../models/entities/chat_message.dart';
+import '../../../models/entities/chat_room.dart';
 import '../chat_rooms/chat_auth.dart';
 import 'chat_message_bubble.dart';
 import 'chat_typing_status.dart';
@@ -12,13 +14,17 @@ import 'chat_typing_status.dart';
 class ChatConversation extends StatefulWidget {
   const ChatConversation({
     super.key,
+    this.initMessage,
   });
+
+  final String? initMessage;
 
   @override
   State<ChatConversation> createState() => _ChatConversationState();
 }
 
-class _ChatConversationState extends State<ChatConversation> {
+class _ChatConversationState extends State<ChatConversation>
+    with WidgetsBindingObserver {
   final TextEditingController _textEditingController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
 
@@ -31,9 +37,14 @@ class _ChatConversationState extends State<ChatConversation> {
   @override
   void initState() {
     super.initState();
+    if (widget.initMessage?.isNotEmpty ?? false) {
+      _textEditingController.text = widget.initMessage ?? '';
+    }
+
+    WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.endOfFrame.then((_) {
       if (mounted) {
-        _focusNode.requestFocus();
+        // _focusNode.requestFocus();
         _focusNode.addListener(_updateTypingStatus);
       }
     });
@@ -48,17 +59,32 @@ class _ChatConversationState extends State<ChatConversation> {
     if (chatRoomId == null) {
       return;
     }
-    model.updateTypingStatus(chatRoomId, isTyping);
+
+    EasyDebounce.debounce(
+      'chat-message-update-typing-status',
+      const Duration(milliseconds: 1000),
+      () => model.updateTypingStatus(chatRoomId, isTyping),
+    );
   }
 
   @override
   void dispose() {
     _focusNode.removeListener(_updateTypingStatus);
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
   @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state != AppLifecycleState.resumed && isTyping) {
+      _focusNode.unfocus();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final model = context.read<ChatViewModel>();
+
     return DecoratedBox(
       decoration: BoxDecoration(
         color: Theme.of(context).scaffoldBackgroundColor,
@@ -206,37 +232,82 @@ class _ChatConversationState extends State<ChatConversation> {
                     color: Theme.of(context).cardColor,
                   ),
                   child: SafeArea(
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: TextField(
-                            focusNode: _focusNode,
-                            decoration: const InputDecoration(
-                              hintText: 'Type a message',
-                              border: InputBorder.none,
-                              contentPadding: EdgeInsets.all(10),
+                    child: StreamBuilder<ChatRoom>(
+                      stream: model.selectedChatRoomStream,
+                      builder: (context, snapshot) {
+                        final selectedChatRoom = snapshot.data;
+                        if (selectedChatRoom == null) {
+                          return const SizedBox.shrink();
+                        }
+
+                        final senderUser =
+                            selectedChatRoom.getSenderUser(model.senderEmail);
+                        final receiverUser =
+                            selectedChatRoom.getReceiverUser(model.senderEmail);
+
+                        final isSenderBlockReceiver = senderUser?.blackList
+                                .contains(receiverUser?.email) ??
+                            false;
+                        final isReceiverBlockSender = receiverUser?.blackList
+                                .contains(senderUser?.email) ??
+                            false;
+
+                        if (isSenderBlockReceiver || isReceiverBlockSender) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                const Icon(
+                                  Icons.block,
+                                  size: 16,
+                                  color: Colors.red,
+                                ),
+                                const SizedBox(width: 10),
+                                Text(
+                                  isSenderBlockReceiver
+                                      ? S.of(context).userHasBeenBlocked
+                                      : S.of(context).cannotSendMessage,
+                                  style: const TextStyle(color: Colors.red),
+                                ),
+                              ],
                             ),
-                            textInputAction: TextInputAction.send,
-                            controller: _textEditingController,
-                            onChanged: (_) => EasyDebounce.debounce(
-                              'chat-message-update-typing-status',
-                              const Duration(milliseconds: 1000),
-                              () => _updateTypingStatus(),
+                          );
+                        }
+
+                        return Row(
+                          children: [
+                            Expanded(
+                              child: TextField(
+                                focusNode: _focusNode,
+                                decoration: InputDecoration(
+                                  hintText: S.of(context).typeAMessage,
+                                  border: InputBorder.none,
+                                  contentPadding: const EdgeInsets.all(10),
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(Icons.send),
+                                    color: Theme.of(context).primaryColor,
+                                    onPressed: () => _sendMessage(chatRoomId),
+                                  ),
+                                ),
+                                minLines: 1,
+                                maxLines: 3,
+                                textInputAction: TextInputAction.send,
+                                controller: _textEditingController,
+                                onChanged: (_) => _updateTypingStatus(),
+                                onSubmitted: (String text) {
+                                  _sendMessage(chatRoomId);
+                                },
+                                onEditingComplete: () {
+                                  _sendMessage(chatRoomId);
+                                },
+                                onTapOutside: (_) => _focusNode.unfocus(),
+                              ),
                             ),
-                            onSubmitted: (String text) {
-                              _sendMessage(chatRoomId);
-                            },
-                            onEditingComplete: () {
-                              _sendMessage(chatRoomId);
-                            },
-                          ),
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.send),
-                          color: Theme.of(context).primaryColor,
-                          onPressed: () => _sendMessage(chatRoomId),
-                        ),
-                      ],
+                          ],
+                        );
+                      },
                     ),
                   ),
                 ),
@@ -249,7 +320,7 @@ class _ChatConversationState extends State<ChatConversation> {
   }
 
   void _sendMessage(String chatRoomId) {
-    if (_textEditingController.text.isNotEmpty) {
+    if (_textEditingController.text.trim().isNotEmpty) {
       final model = context.read<ChatViewModel>();
       model.sendChatMessage(
         chatRoomId,

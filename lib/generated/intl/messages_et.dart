@@ -28,90 +28,90 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m3(state) => "Bluetooth-adapter on ${state}";
 
-  static String m4(currency) => "Vahetas valuuta ${currency} vastu";
+  static String m5(currency) => "Vahetas valuuta ${currency} vastu";
 
-  static String m6(priceRate, pointRate) =>
+  static String m7(priceRate, pointRate) =>
       "${priceRate} = ${pointRate} punkti";
 
-  static String m9(country) => "${country} riiki ei toetata";
+  static String m12(country) => "${country} riiki ei toetata";
 
-  static String m10(currency) => "${currency} ei ole toetatud";
+  static String m13(currency) => "${currency} ei ole toetatud";
 
-  static String m11(day) => "${day} päeva tagasi";
+  static String m14(day) => "${day} päeva tagasi";
 
-  static String m12(total) => "~${total} km";
+  static String m15(total) => "~${total} km";
 
-  static String m13(timeLeft) => "Lõppeb ${timeLeft} pärast";
+  static String m16(timeLeft) => "Lõppeb ${timeLeft} pärast";
 
-  static String m14(captcha) => "Sisestage ${captcha} kinnitamiseks:";
+  static String m17(captcha) => "Sisestage ${captcha} kinnitamiseks:";
 
-  static String m15(message) => "Viga: ${message}";
+  static String m18(message) => "Viga: ${message}";
 
-  static String m16(time) => "Aegub ${time} pärast";
+  static String m20(time) => "Aegub ${time} pärast";
 
-  static String m17(total) => ">${total} km";
+  static String m21(total) => ">${total} km";
 
-  static String m18(hour) => "${hour} tundi tagasi";
+  static String m22(hour) => "${hour} tundi tagasi";
 
-  static String m20(message) =>
+  static String m25(message) =>
       "Rakendusega ilmnes probleem andmete pärimisel, võtke administraatoriga ühendust probleemi lahendamiseks: ${message}";
 
-  static String m21(currency, amount) =>
+  static String m26(currency, amount) =>
       "Selle makse kasutamiseks on maksimumsumma ${currency} ${amount}";
 
-  static String m22(size) => "Maksimaalne faili suurus: ${size} MB";
+  static String m27(size) => "Maksimaalne faili suurus: ${size} MB";
 
-  static String m23(currency, amount) =>
+  static String m28(currency, amount) =>
       "Selle makse kasutamiseks on miinimumsumma ${currency} ${amount}";
 
-  static String m24(minute) => "${minute} minutit tagasi";
+  static String m29(minute) => "${minute} minutit tagasi";
 
-  static String m25(month) => "${month} kuud tagasi";
+  static String m30(month) => "${month} kuud tagasi";
 
-  static String m26(store) => "Rohkem ${store} poest";
+  static String m31(store) => "Rohkem ${store} poest";
 
-  static String m27(number) => "tuleb osta rühmadena ${number}";
+  static String m32(number) => "tuleb osta rühmadena ${number}";
 
-  static String m28(itemCount) => "${itemCount} toodet";
+  static String m33(itemCount) => "${itemCount} toodet";
 
-  static String m29(price) => "Valikute kogusumma: ${price}";
+  static String m34(price) => "Valikute kogusumma: ${price}";
 
-  static String m30(amount) => "Maksa ${amount}";
+  static String m35(amount) => "Maksa ${amount}";
 
-  static String m32(total) => "Kogus: ${total}";
+  static String m37(total) => "Kogus: ${total}";
 
-  static String m33(percent) => "Müügil ${percent}%";
+  static String m39(percent) => "Müügil ${percent}%";
 
-  static String m37(second) => "${second} sekundit tagasi";
+  static String m43(second) => "${second} sekundit tagasi";
 
-  static String m38(totalCartQuantity) =>
+  static String m44(totalCartQuantity) =>
       "Ostukorv, ${totalCartQuantity} toodet";
 
-  static String m39(numberOfUnitsSold) => "Müüdud: ${numberOfUnitsSold}";
+  static String m45(numberOfUnitsSold) => "Müüdud: ${numberOfUnitsSold}";
 
-  static String m40(fieldName) => "${fieldName} väli on kohustuslik";
+  static String m46(fieldName) => "${fieldName} väli on kohustuslik";
 
-  static String m41(total) => "${total} toodet";
+  static String m47(total) => "${total} toodet";
 
-  static String m42(maxPointDiscount, maxPriceDiscount) =>
+  static String m49(maxPointDiscount, maxPriceDiscount) =>
       "Kasutage maksimaalselt ${maxPointDiscount} punkti, et saada ${maxPriceDiscount} allahindlust selle tellimuse eest!";
 
-  static String m43(date) => "Kehtiv kuni ${date}";
+  static String m50(date) => "Kehtiv kuni ${date}";
 
-  static String m44(message) => "Hoiatus: ${message}";
+  static String m52(message) => "Hoiatus: ${message}";
 
-  static String m45(defaultCurrency) =>
+  static String m53(defaultCurrency) =>
       "Hetkel valitud valuuta pole rahakoti funktsiooni jaoks saadaval, palun muutke see väärtuseks ${defaultCurrency}";
 
-  static String m46(length) => "Leidsime ${length} toodet";
+  static String m54(length) => "Leidsime ${length} toodet";
 
-  static String m47(week) => "Nädal ${week}";
+  static String m55(week) => "Nädal ${week}";
 
-  static String m48(name) => "Tere tulemast, ${name}";
+  static String m56(name) => "Tere tulemast, ${name}";
 
-  static String m49(year) => "${year} aastat tagasi";
+  static String m57(year) => "${year} aastat tagasi";
 
-  static String m50(total) => "Olete määranud tellimusele #${total}";
+  static String m58(total) => "Olete määranud tellimusele #${total}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -283,7 +283,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeLanguage": MessageLookupByLibrary.simpleMessage("Muuda keelt"),
         "changePrinter":
             MessageLookupByLibrary.simpleMessage("Muuda printerit"),
-        "changedCurrencyTo": m4,
+        "changedCurrencyTo": m5,
         "chat": MessageLookupByLibrary.simpleMessage("Vestlus"),
         "chatGPT": MessageLookupByLibrary.simpleMessage("Juturobot GPT"),
         "chatListScreen": MessageLookupByLibrary.simpleMessage("Sõnumid"),
@@ -353,11 +353,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Jätka kohaletoimetamisega"),
         "continues": MessageLookupByLibrary.simpleMessage("Jätkab"),
         "conversations": MessageLookupByLibrary.simpleMessage("Vestlused"),
-        "convertPoint": m6,
+        "convertPoint": m7,
         "copied": MessageLookupByLibrary.simpleMessage("Kopeeritud"),
         "copy": MessageLookupByLibrary.simpleMessage("Kopeeri"),
         "country": MessageLookupByLibrary.simpleMessage("Riik"),
-        "countryIsNotSupported": m9,
+        "countryIsNotSupported": m12,
         "countryIsRequired":
             MessageLookupByLibrary.simpleMessage("Riigi väli on nõutud"),
         "couponCode": MessageLookupByLibrary.simpleMessage("Kupongikood"),
@@ -376,7 +376,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Loo kõik variandid"),
         "createdOn": MessageLookupByLibrary.simpleMessage("Loodud: "),
         "currencies": MessageLookupByLibrary.simpleMessage("Valuutad"),
-        "currencyIsNotSupported": m10,
+        "currencyIsNotSupported": m13,
         "currentPassword":
             MessageLookupByLibrary.simpleMessage("Praegune parool"),
         "currentlyWeOnlyHave":
@@ -403,7 +403,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "dateTime": MessageLookupByLibrary.simpleMessage("Kuupäev ja aeg"),
         "dateWiseClose":
             MessageLookupByLibrary.simpleMessage("Kuupäeva järgi sulgege"),
-        "daysAgo": m11,
+        "daysAgo": m14,
         "debit": MessageLookupByLibrary.simpleMessage("Deebet"),
         "decline": MessageLookupByLibrary.simpleMessage("Keeldu"),
         "delete": MessageLookupByLibrary.simpleMessage("Kustuta"),
@@ -430,7 +430,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Keela ostmine"),
         "discount": MessageLookupByLibrary.simpleMessage("Allahindlus"),
         "displayName": MessageLookupByLibrary.simpleMessage("Kuvatav nimi"),
-        "distance": m12,
+        "distance": m15,
         "doNotAnyTransactions": MessageLookupByLibrary.simpleMessage(
             "Teil pole veel ühtegi tehingut"),
         "doYouWantToExitApp": MessageLookupByLibrary.simpleMessage(
@@ -487,10 +487,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Luba puhkuse režiim"),
         "endDateCantBeAfterFirstDate": MessageLookupByLibrary.simpleMessage(
             "Palun valige esimese kuupäeva järel olev kuupäev"),
-        "endsIn": m13,
+        "endsIn": m16,
         "english": MessageLookupByLibrary.simpleMessage("Inglise"),
-        "enterCaptcha": m14,
-        "enterSendedCode":
+        "enterCaptcha": m17,
+        "enterSentCode":
             MessageLookupByLibrary.simpleMessage("Sisestage saadetud kood"),
         "enterYourEmail":
             MessageLookupByLibrary.simpleMessage("Sisestage oma e-post"),
@@ -508,7 +508,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Alustamiseks sisestage oma telefoninumber."),
         "enterYourPhoneNumber": MessageLookupByLibrary.simpleMessage(
             "Sisestage oma telefoninumber"),
-        "error": m15,
+        "error": m18,
         "errorAmountTransfer": MessageLookupByLibrary.simpleMessage(
             "Sisestatud summa on suurem kui praegune rahakoti summa. Palun proovige uuesti!"),
         "errorEmailFormat": MessageLookupByLibrary.simpleMessage(
@@ -522,7 +522,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "expired": MessageLookupByLibrary.simpleMessage("Aegunud"),
         "expiredDate": MessageLookupByLibrary.simpleMessage("Aegumiskuupäev"),
         "expiredDateHint": MessageLookupByLibrary.simpleMessage("KK/AA"),
-        "expiringInTime": m16,
+        "expiringInTime": m20,
         "external": MessageLookupByLibrary.simpleMessage("Väline"),
         "extraServices": MessageLookupByLibrary.simpleMessage("Lisateenused"),
         "failToAssign": MessageLookupByLibrary.simpleMessage(
@@ -588,7 +588,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tagasi ülevaatamise juurde"),
         "goBackToShipping": MessageLookupByLibrary.simpleMessage(
             "Tagasi kohaletoimetamise juurde"),
-        "greaterDistance": m17,
+        "greaterDistance": m21,
         "greek": MessageLookupByLibrary.simpleMessage("Kreeka"),
         "grossSales": MessageLookupByLibrary.simpleMessage("Kogumüük"),
         "grouped": MessageLookupByLibrary.simpleMessage("Rühmitatud"),
@@ -606,7 +606,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "historyTransaction": MessageLookupByLibrary.simpleMessage("Ajalugu"),
         "home": MessageLookupByLibrary.simpleMessage("Kodu"),
         "hour": MessageLookupByLibrary.simpleMessage("Tund"),
-        "hoursAgo": m18,
+        "hoursAgo": m22,
         "hungarian": MessageLookupByLibrary.simpleMessage("Ungari"),
         "hungary": MessageLookupByLibrary.simpleMessage("Ungari"),
         "iAgree": MessageLookupByLibrary.simpleMessage("Olen nõus"),
@@ -678,7 +678,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("Logi sisse"),
         "loginCanceled":
             MessageLookupByLibrary.simpleMessage("Sisselogimine tühistati"),
-        "loginErrorServiceProvider": m20,
+        "loginErrorServiceProvider": m25,
         "loginFailed":
             MessageLookupByLibrary.simpleMessage("Sisselogimine ebaõnnestus!"),
         "loginInvalid": MessageLookupByLibrary.simpleMessage(
@@ -704,26 +704,26 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Märgi saadetuks"),
         "markAsUnread":
             MessageLookupByLibrary.simpleMessage("Märgi lugematuks"),
-        "maxAmountForPayment": m21,
-        "maximumFileSizeMb": m22,
+        "maxAmountForPayment": m26,
+        "maximumFileSizeMb": m27,
         "maybeLater": MessageLookupByLibrary.simpleMessage("Võib-olla hiljem"),
         "menuOrder": MessageLookupByLibrary.simpleMessage("Menüü tellimus"),
         "message": MessageLookupByLibrary.simpleMessage("Sõnum"),
         "messageTo": MessageLookupByLibrary.simpleMessage("Saada sõnum"),
-        "minAmountForPayment": m23,
+        "minAmountForPayment": m28,
         "minimumQuantityIs":
             MessageLookupByLibrary.simpleMessage("Miinimumkogus on"),
-        "minutesAgo": m24,
+        "minutesAgo": m29,
         "mobileVerification":
             MessageLookupByLibrary.simpleMessage("Mobiilne autentimine"),
         "momentAgo": MessageLookupByLibrary.simpleMessage("hetk tagasi"),
-        "monthsAgo": m25,
+        "monthsAgo": m30,
         "more": MessageLookupByLibrary.simpleMessage("...veel"),
-        "moreFromStore": m26,
+        "moreFromStore": m31,
         "moreInformation":
             MessageLookupByLibrary.simpleMessage("Rohkem teavet"),
         "morning": MessageLookupByLibrary.simpleMessage("Hommik"),
-        "mustBeBoughtInGroupsOf": m27,
+        "mustBeBoughtInGroupsOf": m32,
         "mustSelectOneItem":
             MessageLookupByLibrary.simpleMessage("Peate valima 1 üksuse"),
         "myCart": MessageLookupByLibrary.simpleMessage("Minu ostukorv"),
@@ -734,7 +734,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "myWallet": MessageLookupByLibrary.simpleMessage("Minu rahakott"),
         "myWishList":
             MessageLookupByLibrary.simpleMessage("Minu soovinimekiri"),
-        "nItems": m28,
+        "nItems": m33,
         "name": MessageLookupByLibrary.simpleMessage("Nimi"),
         "nameOnCard": MessageLookupByLibrary.simpleMessage("Nimi kaardil"),
         "nearbyPlaces":
@@ -757,8 +757,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Kaamerale pole luba antud. Palun andke see seadme sätetes."),
         "noConversation":
             MessageLookupByLibrary.simpleMessage("Vestlust pole veel"),
-        "noConversationDescription": MessageLookupByLibrary.simpleMessage(
-            "See ilmub, kui teie kliendid hakkavad teiega vestlema"),
         "noData": MessageLookupByLibrary.simpleMessage("Andmed puuduvad"),
         "noFavoritesYet": MessageLookupByLibrary.simpleMessage(
             "Lemmikuid pole veel lisatud."),
@@ -809,7 +807,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "openMap": MessageLookupByLibrary.simpleMessage("Kaart"),
         "openNow": MessageLookupByLibrary.simpleMessage("Ava nüüd"),
         "options": MessageLookupByLibrary.simpleMessage("Valikud"),
-        "optionsTotal": m29,
+        "optionsTotal": m34,
         "or": MessageLookupByLibrary.simpleMessage("või"),
         "orLoginWith": MessageLookupByLibrary.simpleMessage("või logige sisse"),
         "orderConfirmation":
@@ -884,7 +882,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "payByWallet":
             MessageLookupByLibrary.simpleMessage("Maksa rahakoti abil"),
         "payNow": MessageLookupByLibrary.simpleMessage("Maksa kohe"),
-        "payWithAmount": m30,
+        "payWithAmount": m35,
         "payment": MessageLookupByLibrary.simpleMessage("Makse"),
         "paymentMethod": MessageLookupByLibrary.simpleMessage("Maksemeetod"),
         "paymentMethodIsNotSupported": MessageLookupByLibrary.simpleMessage(
@@ -921,6 +919,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Palun sisestage toote nimi"),
         "pleaseFillCode":
             MessageLookupByLibrary.simpleMessage("Palun täitke oma kood"),
+        "pleaseFillUpAllCellsProperly": MessageLookupByLibrary.simpleMessage(
+            "*Palun täitke kõik väljad korrektselt"),
         "pleaseIncreaseOrDecreaseTheQuantity":
             MessageLookupByLibrary.simpleMessage(
                 "Palun suurendage või vähendage kogust jätkamiseks."),
@@ -942,8 +942,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Palun valige vajalikud valikud!"),
         "pleaseSignInBeforeUploading": MessageLookupByLibrary.simpleMessage(
             "Palun logige oma kontole sisse enne failide üleslaadimist."),
-        "pleasefillUpAllCellsProperly": MessageLookupByLibrary.simpleMessage(
-            "*Palun täitke kõik väljad korrektselt"),
         "point": MessageLookupByLibrary.simpleMessage("Punkt"),
         "pointMsgConfigNotFound": MessageLookupByLibrary.simpleMessage(
             "Serveris pole leitud allahindluspunkti konfiguratsiooni"),
@@ -1019,7 +1017,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pullToLoadMore":
             MessageLookupByLibrary.simpleMessage("Loe rohkem laadimiseks"),
         "qty": MessageLookupByLibrary.simpleMessage("kogus"),
-        "qtyTotal": m32,
+        "qtyTotal": m37,
         "quantityProductExceedInStock": MessageLookupByLibrary.simpleMessage(
             "Praegune kogus on suurem kui varus olev kogus"),
         "rate": MessageLookupByLibrary.simpleMessage("Hinda"),
@@ -1035,13 +1033,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "readReviews": MessageLookupByLibrary.simpleMessage("Loe ülevaateid"),
         "receivedMoney": MessageLookupByLibrary.simpleMessage("Saadud raha"),
         "receiver": MessageLookupByLibrary.simpleMessage("Vastuvõtja"),
+        "recent": MessageLookupByLibrary.simpleMessage("Viimased"),
         "recentSearches":
             MessageLookupByLibrary.simpleMessage("Viimased otsingutulemused"),
         "recentView":
             MessageLookupByLibrary.simpleMessage("Sinu hiljutine vaade"),
         "recentlyViewed":
             MessageLookupByLibrary.simpleMessage("Hiljuti vaadatud"),
-        "recents": MessageLookupByLibrary.simpleMessage("Viimased"),
         "recommended": MessageLookupByLibrary.simpleMessage("Soovitatav"),
         "recurringTotals":
             MessageLookupByLibrary.simpleMessage("Korduvad summad"),
@@ -1094,7 +1092,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reviews": MessageLookupByLibrary.simpleMessage("Arvustused"),
         "romanian": MessageLookupByLibrary.simpleMessage("Rumeenia"),
         "russian": MessageLookupByLibrary.simpleMessage("Vene"),
-        "sale": m33,
+        "sale": m39,
         "salePrice": MessageLookupByLibrary.simpleMessage("Müügihind"),
         "save": MessageLookupByLibrary.simpleMessage("Salvesta"),
         "saveAddress": MessageLookupByLibrary.simpleMessage("Salvesta aadress"),
@@ -1122,7 +1120,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "searchPlace": MessageLookupByLibrary.simpleMessage("Otsi kohta"),
         "searchingAddress":
             MessageLookupByLibrary.simpleMessage("Otsige aadressi"),
-        "secondsAgo": m37,
+        "secondsAgo": m43,
         "seeAll": MessageLookupByLibrary.simpleMessage("Vaata kõike"),
         "seeNewAppConfig": MessageLookupByLibrary.simpleMessage(
             "Jätkake uue sisu vaatamist oma rakenduses."),
@@ -1170,7 +1168,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shopPhone":
             MessageLookupByLibrary.simpleMessage("Poekaupluse telefon"),
         "shopSlug": MessageLookupByLibrary.simpleMessage("Poekaupluse nimi"),
-        "shoppingCartItems": m38,
+        "shoppingCartItems": m44,
         "shortDescription":
             MessageLookupByLibrary.simpleMessage("Lühike kirjeldus"),
         "showAllMyOrdered":
@@ -1191,7 +1189,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "slovak": MessageLookupByLibrary.simpleMessage("Slovaki"),
         "smsCodeExpired": MessageLookupByLibrary.simpleMessage(
             "SMS-kood on aegunud. Palun saatke kinnituskoodi uuesti, et uuesti proovida."),
-        "sold": m39,
+        "sold": m45,
         "soldBy": MessageLookupByLibrary.simpleMessage("Müünud"),
         "somethingWrong": MessageLookupByLibrary.simpleMessage(
             "Midagi läks valesti. Palun proovige hiljem uuesti."),
@@ -1259,7 +1257,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Rääkimiseks koputage mikrofonile"),
         "tax": MessageLookupByLibrary.simpleMessage("Maks"),
         "thailand": MessageLookupByLibrary.simpleMessage("Tai"),
-        "theFieldIsRequired": m40,
+        "theFieldIsRequired": m46,
         "thisDateIsNotAvailable":
             MessageLookupByLibrary.simpleMessage("See kuupäev pole saadaval"),
         "thisFeatureDoesNotSupportTheCurrentLanguage":
@@ -1278,7 +1276,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "title": MessageLookupByLibrary.simpleMessage("Pealkiri"),
         "titleAToZ": MessageLookupByLibrary.simpleMessage("Pealkiri: A kuni Z"),
         "titleZToA": MessageLookupByLibrary.simpleMessage("Pealkiri: Z kuni A"),
-        "tooManyFaildedLogin": MessageLookupByLibrary.simpleMessage(
+        "tooManyFailedLogin": MessageLookupByLibrary.simpleMessage(
             "Liiga palju ebaõnnestunud sisselogimiskatseid. Palun proovige hiljem uuesti."),
         "topUp": MessageLookupByLibrary.simpleMessage("Täiendage"),
         "topUpProductNotFound":
@@ -1286,7 +1284,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "total": MessageLookupByLibrary.simpleMessage("Kogusumma"),
         "totalCartValue": MessageLookupByLibrary.simpleMessage(
             "Tellimuse koguväärtus peab olema vähemalt"),
-        "totalProducts": m41,
+        "totalProducts": m47,
         "totalTax": MessageLookupByLibrary.simpleMessage("Kogumaks"),
         "trackingNumberIs":
             MessageLookupByLibrary.simpleMessage("Jälgimisnumber on"),
@@ -1295,7 +1293,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tehing tühistatud"),
         "transactionDetail":
             MessageLookupByLibrary.simpleMessage("Tehingu detailid"),
-        "transactionFailded":
+        "transactionFailed":
             MessageLookupByLibrary.simpleMessage("Tehing ebaõnnestus"),
         "transactionFee": MessageLookupByLibrary.simpleMessage("Tehingu tasu"),
         "transactionResult":
@@ -1336,7 +1334,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "uploadProduct": MessageLookupByLibrary.simpleMessage("Lae toode üles"),
         "uploading": MessageLookupByLibrary.simpleMessage("Laadimine"),
         "url": MessageLookupByLibrary.simpleMessage("URL"),
-        "useMaximumPointDiscount": m42,
+        "useMaximumPointDiscount": m49,
         "useNow": MessageLookupByLibrary.simpleMessage("Kasuta kohe"),
         "useThisImage":
             MessageLookupByLibrary.simpleMessage("Kasuta seda pilti"),
@@ -1350,7 +1348,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "vacationMessage":
             MessageLookupByLibrary.simpleMessage("Puhkuse teade"),
         "vacationType": MessageLookupByLibrary.simpleMessage("Puhkuse tüüp"),
-        "validUntilDate": m43,
+        "validUntilDate": m50,
         "variable": MessageLookupByLibrary.simpleMessage("Muutuv"),
         "variation": MessageLookupByLibrary.simpleMessage("Varieeruvus"),
         "vendor": MessageLookupByLibrary.simpleMessage("Müüja"),
@@ -1376,11 +1374,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ootab kinnitust"),
         "walletBalance": MessageLookupByLibrary.simpleMessage("Rahakoti saldo"),
         "walletName": MessageLookupByLibrary.simpleMessage("Rahakoti nimi"),
-        "warning": m44,
-        "warningCurrencyMessageForWallet": m45,
+        "warning": m52,
+        "warningCurrencyMessageForWallet": m53,
         "weFoundBlogs":
             MessageLookupByLibrary.simpleMessage("Leidsime blogi(d)"),
-        "weFoundProducts": m46,
+        "weFoundProducts": m54,
         "weNeedCameraAccessTo": MessageLookupByLibrary.simpleMessage(
             "Vajame kaamera juurdepääsu QR-koodi või ribakoodi skaneerimiseks."),
         "weSentAnOTPTo":
@@ -1388,9 +1386,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "weWillSendYouNotification": MessageLookupByLibrary.simpleMessage(
             "Saadame teile teateid uute toodete saadavusest või pakkumistest. Saate selle alati sätetest välja lülitada."),
         "webView": MessageLookupByLibrary.simpleMessage("Veebivaade"),
-        "week": m47,
+        "week": m55,
         "welcome": MessageLookupByLibrary.simpleMessage("Tere tulemast"),
-        "welcomeUser": m48,
+        "welcomeUser": m56,
         "whichLanguageDoYouPrefer":
             MessageLookupByLibrary.simpleMessage("Millist keelt eelistate?"),
         "wholesaleRegisterMsg": MessageLookupByLibrary.simpleMessage(
@@ -1401,13 +1399,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Kirjutage oma kommentaar"),
         "writeYourNote":
             MessageLookupByLibrary.simpleMessage("Kirjutage oma märkus"),
-        "yearsAgo": m49,
+        "yearsAgo": m57,
         "yes": MessageLookupByLibrary.simpleMessage("Jah"),
         "youCanOnlyOrderSingleStore": MessageLookupByLibrary.simpleMessage(
             "Saate osta ainult ühest poest."),
         "youCanOnlyPurchase":
             MessageLookupByLibrary.simpleMessage("Saate osta ainult"),
-        "youHaveAssignedToOrder": m50,
+        "youHaveAssignedToOrder": m58,
         "youHaveBeenSaveAddressYourLocal": MessageLookupByLibrary.simpleMessage(
             "Olete oma aadressi kohalikku faili edukalt salvestanud!"),
         "youHavePoints":

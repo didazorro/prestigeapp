@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/cupertino.dart' show CupertinoIcons;
 import 'package:flutter/material.dart';
+import 'package:inspireui/widgets/coupon_card.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -94,6 +95,8 @@ class _ShoppingCartSummaryState extends State<ShoppingCartSummary> {
       return;
     }
 
+    FocusManager.instance.primaryFocus?.unfocus();
+
     cartModel.setLoadingDiscount();
 
     Services().widget.applyCoupon(
@@ -167,162 +170,165 @@ class _ShoppingCartSummaryState extends State<ShoppingCartSummary> {
       symbol: defaultCurrency?.symbol,
       decimalDigits: defaultCurrency?.decimalDigits,
     );
-    final screenSize = MediaQuery.sizeOf(context);
 
-    return Consumer<CartModel>(builder: (context, cartModel, child) {
-      var couponMsg = '';
-      var isApplyCouponSuccess = false;
-      if (cartModel.couponObj != null &&
-          (cartModel.couponObj!.amount ?? 0) > 0) {
-        isApplyCouponSuccess = true;
-        _onProductInCartChange(cartModel);
-        couponController.text = cartModel.couponObj!.code ?? '';
-        couponMsg = S.of(context).couponMsgSuccess;
-        if (cartModel.couponObj!.discountType == 'percent') {
-          couponMsg += ' ${cartModel.couponObj!.amount}%';
+    return Selector<CartModel, (Coupon?, Map<String, int?>)>(
+      selector: (p0, p1) => (p1.couponObj, p1.productsInCart),
+      builder: (context, (Coupon?, Map<String, int?>) selectorItem, child) {
+        final couponObj = selectorItem.$1;
+        final productsInCart = selectorItem.$2;
+
+        var couponMsg = '';
+        var isApplyCouponSuccess = false;
+        if (couponObj != null && (couponObj.amount ?? 0) > 0) {
+          isApplyCouponSuccess = true;
+          _onProductInCartChange(cartModel);
+          couponController.text = couponObj.code ?? '';
+          couponMsg = S.of(context).couponMsgSuccess;
+          if (couponObj.discountType == 'percent') {
+            couponMsg += ' ${couponObj.amount}%';
+          } else {
+            couponMsg += ' - ${formatter.format(couponObj.amount)}';
+          }
         } else {
-          couponMsg += ' - ${formatter.format(cartModel.couponObj!.amount)}';
+          couponController.clear();
         }
-      } else {
-        couponController.clear();
-      }
-      if (cartModel.productsInCart.isEmpty) {
-        return const SizedBox();
-      }
-      final enableCoupon =
-          kAdvanceConfig.enableCouponCode && !cartModel.isWalletCart();
-      final enablePointReward = !cartModel.isWalletCart();
+        if (productsInCart.isEmpty) {
+          return const SizedBox();
+        }
+        final enableCoupon = kAdvanceConfig.enableCouponCode &&
+            !cartModel.isWalletCart() &&
+            ServerConfig().isSupportCoupon;
+        final enablePointReward = !cartModel.isWalletCart();
 
-      if (_orderSummaryStyle.isWeb) {
-        return OrderSummaryWebWidget(
-          cartModel: cartModel,
-          showPrice: widget.showPrice,
-          enableCoupon: enableCoupon,
-          isApplyCouponSuccess: isApplyCouponSuccess,
-          checkCoupon: checkCoupon,
-          removeCoupon: removeCoupon,
-          couponController: couponController,
-          style: _orderSummaryStyle,
-        );
-      }
+        if (_orderSummaryStyle.isWeb) {
+          return OrderSummaryWebWidget(
+            cartModel: cartModel,
+            showPrice: widget.showPrice,
+            enableCoupon: enableCoupon,
+            isApplyCouponSuccess: isApplyCouponSuccess,
+            checkCoupon: checkCoupon,
+            removeCoupon: removeCoupon,
+            couponController: couponController,
+            style: _orderSummaryStyle,
+          );
+        }
 
-      return SizedBox(
-        width: screenSize.width,
-        child: SizedBox(
-          width:
-              screenSize.width / (2 / (screenSize.height / screenSize.width)),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              if (enableCoupon) _renderCouponCode(isApplyCouponSuccess),
-              if (isApplyCouponSuccess)
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 40,
-                    right: 40,
-                    bottom: 15,
-                    top: 10,
-                  ),
-                  child: Text(
-                    couponMsg,
-                    style: TextStyle(color: Theme.of(context).primaryColor),
-                    textAlign: TextAlign.center,
-                  ),
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            if (enableCoupon) _renderCouponCode(isApplyCouponSuccess),
+            if (isApplyCouponSuccess)
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 40,
+                  right: 40,
+                  bottom: 15,
+                  top: 10,
                 ),
-              if (enablePointReward) const PointReward(),
-              if (widget.showPrice)
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 15.0,
-                    vertical: 10.0,
-                  ),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColorLight),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 12.0,
-                        horizontal: 15.0,
-                      ),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  S.of(context).products,
-                                  style: smallAmountStyle,
-                                ),
-                              ),
-                              Text(
-                                'x${cartModel.totalCartQuantity}',
+                child: Text(
+                  couponMsg,
+                  style: TextStyle(color: Theme.of(context).primaryColor),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            if (enablePointReward)
+              Padding(
+                padding: const EdgeInsets.only(top: 16.0),
+                child: PointReward(
+                  cartStyle: widget.cartStyle,
+                ),
+              ),
+            if (widget.showPrice)
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8.0,
+                  vertical: 10.0,
+                ),
+                child: Container(
+                  decoration:
+                      BoxDecoration(color: Theme.of(context).primaryColorLight),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 12.0,
+                      horizontal: 15.0,
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                S.of(context).products,
                                 style: smallAmountStyle,
                               ),
-                            ],
-                          ),
-                          if (cartModel.rewardTotal > 0) ...[
-                            const SizedBox(height: 10),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: Text(S.of(context).cartDiscount,
-                                      style: smallAmountStyle),
-                                ),
-                                Text(
-                                  PriceTools.getCurrencyFormatted(
-                                      cartModel.rewardTotal, currencyRate,
-                                      currency: currency)!,
-                                  style: smallAmountStyle,
-                                ),
-                              ],
+                            ),
+                            Text(
+                              'x${cartModel.totalCartQuantity}',
+                              style: smallAmountStyle,
                             ),
                           ],
+                        ),
+                        if (cartModel.rewardTotal > 0) ...[
                           const SizedBox(height: 10),
                           Row(
                             children: [
                               Expanded(
-                                child: Text(
-                                  '${S.of(context).total}:',
-                                  style: largeAmountStyle,
-                                ),
+                                child: Text(S.of(context).cartDiscount,
+                                    style: smallAmountStyle),
                               ),
-                              cartModel.calculatingDiscount
-                                  ? const SizedBox(
-                                      width: 20,
-                                      height: 20,
-                                      child: CircularProgressIndicator(
-                                        strokeWidth: 2.0,
-                                      ),
-                                    )
-                                  : Text(
-                                      PriceTools.getCurrencyFormatted(
-                                          cartModel.getTotal()! -
-                                              cartModel.getShippingCost()!,
-                                          currencyRate,
-                                          currency: cartModel.isWalletCart()
-                                              ? defaultCurrency?.currencyCode
-                                              : currency)!,
-                                      style: largeAmountStyle,
-                                    ),
+                              Text(
+                                PriceTools.getCurrencyFormatted(
+                                    cartModel.rewardTotal, currencyRate,
+                                    currency: currency)!,
+                                style: smallAmountStyle,
+                              ),
                             ],
                           ),
                         ],
-                      ),
+                        const SizedBox(height: 10),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                '${S.of(context).total}:',
+                                style: largeAmountStyle,
+                              ),
+                            ),
+                            cartModel.calculatingDiscount
+                                ? const SizedBox(
+                                    width: 20,
+                                    height: 20,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2.0,
+                                    ),
+                                  )
+                                : Text(
+                                    PriceTools.getCurrencyFormatted(
+                                        cartModel.getTotal()! -
+                                            cartModel.getShippingCost()!,
+                                        currencyRate,
+                                        currency: cartModel.isWalletCart()
+                                            ? defaultCurrency?.currencyCode
+                                            : currency)!,
+                                    style: largeAmountStyle,
+                                  ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                 ),
-              if (widget.showRecurringTotals)
-                Services().widget.renderRecurringTotals(context)
-            ],
-          ),
-        ),
-      );
-    });
+              ),
+            if (widget.showRecurringTotals)
+              Services().widget.renderRecurringTotals(context)
+          ],
+        );
+      },
+    );
   }
 
   Widget _renderCouponCode(bool isApplyCouponSuccess) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 15.0),
       decoration: widget.cartStyle.isStyle01
           ? BoxDecoration(
               color: Theme.of(context).cardColor,
@@ -400,9 +406,9 @@ class _ShoppingCartSummaryState extends State<ShoppingCartSummary> {
             label: Text(
               cartModel.calculatingDiscount
                   ? S.of(context).loading
-                  : !isApplyCouponSuccess
-                      ? S.of(context).apply
-                      : S.of(context).remove,
+                  : isApplyCouponSuccess
+                      ? S.of(context).remove
+                      : S.of(context).apply,
             ),
             icon: const Icon(
               CupertinoIcons.checkmark_seal_fill,

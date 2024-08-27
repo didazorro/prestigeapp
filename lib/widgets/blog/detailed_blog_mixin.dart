@@ -95,6 +95,11 @@ mixin DetailedBlogMixin {
           blog.content,
           onTapUrl: (url) async {
             LoadingHelper.show();
+            if (!url.isTheSameServer) {
+              LoadingHelper.hide();
+              return false;
+            }
+
             final blog = await Services().api.getBlogByPermalink(url);
             if (blog == null) {
               LoadingHelper.hide();
@@ -103,6 +108,7 @@ mixin DetailedBlogMixin {
             await FluxNavigate.pushNamed(
               RouteList.detailBlog,
               arguments: BlogDetailArguments(blog: blog),
+              context: context,
             );
             LoadingHelper.hide();
             return true;
@@ -157,8 +163,7 @@ mixin DetailedBlogMixin {
           : const SizedBox();
 
   Widget _renderShareButton(Blog blog) =>
-      ((kBlogDetail['showSharing'] ?? true) &&
-              firebaseDynamicLinkConfig['isEnabled'])
+      ((kBlogDetail['showSharing'] ?? true) && dynamicLinkConfig.enable)
           ? ShareButton(blog: blog)
           : const SizedBox();
 
@@ -225,7 +230,7 @@ Widget renderAuthorInfo(Blog blogData, BuildContext context) {
           children: <Widget>[
             Text(
               blogData.author.isNotEmpty
-                  ? '${S.of(context).by} ${blogData.author}'
+                  ? S.of(context).byAuthor(blogData.author)
                   : S.of(context).loading,
               softWrap: false,
               maxLines: 1,

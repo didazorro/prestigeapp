@@ -67,6 +67,13 @@ class PaymentMethod {
     enabled = true;
   }
 
+  PaymentMethod.fromHaravanJson(Map parsedJson) {
+    id = parsedJson['name'];
+    title = parsedJson['title'];
+    description = parsedJson['description'];
+    enabled = true;
+  }
+
   PaymentMethod.fromStrapiJson(Map<String, dynamic> parsedJson) {
     var model = SerializerPayment.fromJson(parsedJson);
     try {

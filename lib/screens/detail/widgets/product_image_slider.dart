@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:inspireui/inspireui.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -75,18 +76,19 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
     return _pageController.goTo(0);
   }
 
-  bool initialized = false;
-  bool hasVideo = false;
-  bool variationLoaded = false;
-
-  late final String _videoUrl;
   final List<String> _images = [];
   final List<String> _variationImages = [];
 
+  bool initialized = false;
+  bool variationLoaded = false;
+
   int _currentPage = 0;
 
+  String? get _videoUrl => widget.product.videoUrl;
+  bool get hasVideo => widget.product.hasVideo && kProductDetail.showVideo;
+
   List<String> get itemList => {
-        if (hasVideo) _videoUrl,
+        if (hasVideo) '$_videoUrl',
         ..._images,
         ..._variationImages,
       }.toList();
@@ -121,13 +123,6 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
         afterFirstLayout(context);
       }
     });
-
-    final url = widget.product.videoUrl;
-    if (url != null && url.isNotEmpty) {
-      _videoUrl = url.replaceAll('http://', 'https://');
-      hasVideo = true;
-    }
-
     _images.addAll(widget.product.images);
 
     if (kProductDetail.showSelectedImageVariant) {
@@ -215,9 +210,12 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
       },
       itemBuilder: (BuildContext context, int index) {
         if (hasVideo && index == 0) {
-          return FeatureVideoPlayer(
-            itemList[index],
-            autoPlay: true,
+          return KeepAliveWidget(
+            child: FeatureVideoPlayer(
+              itemList[index],
+              autoPlay: true,
+              isSoundOn: true,
+            ),
           );
         }
         return GestureDetector(
@@ -321,9 +319,12 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
         if (kProductDetail.showImageGallery) ...[
           Positioned(
             bottom: 4.0,
+            key: const ValueKey('key-slider-position-product-image-thumb'),
             left: 44,
             child: ProductImageThumbnail(
+              key: const ValueKey('key-slider-product-image-thumb'),
               itemList: itemList,
+              hasVideo: hasVideo,
               onSelect: ({required int index, bool? fullScreen}) {
                 if (fullScreen ?? false) {
                   _onShowGallery(context, index);

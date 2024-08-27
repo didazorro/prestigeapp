@@ -128,7 +128,7 @@ class _FlatStyleDetailProductWidgetState
 
   bool get enableAutoHideButtonBuy =>
       product.isVariableProduct ||
-      product.isSimpleType ||
+      product.isSimpleProduct ||
       product.isNofoundType;
 
   @override
@@ -361,7 +361,9 @@ class _FlatStyleDetailProductWidgetState
                                           product: product,
                                         ),
                                       ),
-                                      const SizedBox(width: 40, height: 40)
+                                      if (!enableAutoHideButtonBuy ||
+                                          !stateUI.enableShoppingCart)
+                                        const SizedBox(width: 40, height: 40),
                                     ],
                                   ),
                                 ],

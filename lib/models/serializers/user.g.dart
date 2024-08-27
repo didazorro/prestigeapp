@@ -21,7 +21,7 @@ Map<String, dynamic> _$SerializerUserToJson(SerializerUser instance) =>
     };
 
 User _$UserFromJson(Map<String, dynamic> json) => User(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       username: json['username'] as String?,
       email: json['email'] as String?,
       displayName: json['displayName'] as String?,
@@ -35,7 +35,7 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
     };
 
 Role _$RoleFromJson(Map<String, dynamic> json) => Role(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
       description: json['description'] as String?,
       type: json['type'] as String?,

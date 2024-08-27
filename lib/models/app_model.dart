@@ -399,7 +399,10 @@ class AppModel with ChangeNotifier {
   }
 
   Map? get overrideTranslation {
-    if ((appConfig?.overrideTranslation?['@@locale'] ?? '') != langCode) {
+    final overrideLocale =
+        appConfig?.overrideTranslation?['@@locale']?.toString() ?? '';
+    if (overrideLocale.isEmpty ||
+        overrideLocale.toLowerCase() != langCode.toLowerCase()) {
       return null;
     }
 

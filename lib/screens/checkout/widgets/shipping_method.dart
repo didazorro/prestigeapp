@@ -14,7 +14,7 @@ import '../../../models/entities/order_delivery_date.dart';
 import '../../../models/shipping_method_model.dart';
 import '../../../modules/analytics/analytics.dart';
 import '../../../modules/dynamic_layout/helper/helper.dart';
-import '../../../widgets/common/common_safe_area.dart';
+import 'checkout_action.dart';
 import 'date_time_picker.dart';
 import 'delivery_calendar.dart';
 import 'selection_shipping_method_widget.dart';
@@ -168,15 +168,14 @@ class _ShippingMethodsState extends State<ShippingMethods> {
   }
 
   Widget _buildBottom(bool isDesktop) {
-    final bgColor = Theme.of(context).primaryColor;
-    final btnContinue = ElevatedButton.icon(
-      style: ElevatedButton.styleFrom(
-        foregroundColor: Colors.white,
-        backgroundColor: bgColor,
-        elevation: 0,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-      ),
-      onPressed: () async {
+    final textButton = kPaymentConfig.enableReview
+        ? S.of(context).continueToReview
+        : S.of(context).continueToPayment;
+
+    return CheckoutActionWidget(
+      labelPrimary: textButton,
+      iconPrimary: Icons.checklist,
+      onTapPrimary: () async {
         // Prevent continue to preview when loading shipping method
         if (shippingMethodModel.isLoading) {
           return;
@@ -203,47 +202,11 @@ class _ShippingMethodsState extends State<ShippingMethods> {
           return;
         }
       },
-      icon: Icon(
-        Icons.checklist,
-        size: 18,
-        color: bgColor.getColorBasedOnBackground,
-      ),
-      label: Text(
-        (kPaymentConfig.enableReview
-                ? S.of(context).continueToReview
-                : S.of(context).continueToPayment)
-            .toUpperCase(),
-        style: TextStyle(
-          color: bgColor.getColorBasedOnBackground,
-        ),
-      ),
-    );
-
-    return CommonSafeArea(
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (kPaymentConfig.enableAddress) ...[
-            SizedBox(
-              width: 130,
-              child: OutlinedButton(
-                onPressed: () {
-                  widget.onBack!();
-                },
-                child: Text(
-                  S.of(context).goBack.toUpperCase(),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(width: 8),
-          ],
-          if (isDesktop) btnContinue else Expanded(child: btnContinue),
-        ],
-      ),
+      showSecondary: kPaymentConfig.enableAddress,
+      labelSecondary: S.of(context).goBack,
+      onTapSecondary: () {
+        widget.onBack!();
+      },
     );
   }
 

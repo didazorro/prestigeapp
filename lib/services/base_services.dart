@@ -23,6 +23,7 @@ import '../modules/dynamic_layout/config/app_config.dart';
 import 'elastic/elastic_client.dart';
 import 'elastic/elastic_query.dart';
 import 'elastic/elastic_service.dart';
+import 'outside/index.dart';
 import 'review_service.dart';
 import 'service_config.dart';
 import 'wordpress/blognews_api.dart';
@@ -32,6 +33,7 @@ export '../models/entities/paging_response.dart';
 abstract class BaseServices {
   final BlogNewsApi blogApi;
   final ReviewService reviewService;
+  final OutsideService outsideService;
 
   final String domain;
 
@@ -41,6 +43,7 @@ abstract class BaseServices {
     bool? isRoot,
     ReviewService? reviewService,
   })  : reviewService = reviewService ?? ReviewService.create(),
+        outsideService = OutsideService.init(),
         blogApi = BlogNewsApi(
           blogDomain ?? domain,
           isRoot: isRoot ?? blogDomain == null,
@@ -150,7 +153,6 @@ abstract class BaseServices {
   Future<PagingResponse<Product>>? searchProducts({
     String? name,
     String? categoryId,
-    String? categoryName,
     String? tag,
     String attribute = '',
     String attributeId = '',
@@ -216,7 +218,7 @@ abstract class BaseServices {
     try {
       final dataConfig = Map<String, dynamic>.from(config);
       final enableBoostEngine = bool.tryParse('${dataConfig['boostEngine']}') ??
-          kBoostEngineConfig.isOptimizeEnable;
+          kBoostEngineConfig.isOptimizeEnable && blogApi.isRoot;
       if (enableBoostEngine) {
         try {
           return await boostBlogLayout(config: dataConfig);
@@ -272,11 +274,10 @@ abstract class BaseServices {
 
       var response = await blogApi.getAsync(endPoint);
 
-      if (response != null) {
-        for (var item in response) {
-          list.add(Blog.fromWooJson(item));
-        }
+      if (response != null && response is List) {
+        list = Blog.parseBlogList(response, config);
       }
+
       return list;
     } catch (e) {
       rethrow;
@@ -350,8 +351,8 @@ abstract class BaseServices {
       mustList.addMatch(key: 'author', value: author);
     }
 
-    final result = await ElasticService.search(
-      uri: Uri.parse(domain),
+    final response = await ElasticService.search(
+      uri: Uri.parse(blogApi.url),
       indiesName: IndiesName.blog,
       languageCode: languageCode,
       limit: limit ?? apiPageSize,
@@ -360,8 +361,8 @@ abstract class BaseServices {
       sortList: sortList,
     );
 
-    for (var item in result ?? []) {
-      list.add(Blog.fromJson(item));
+    if (response != null) {
+      list = Blog.parseBlogList(response, {'include': include});
     }
 
     return list;
@@ -645,9 +646,8 @@ abstract class BaseServices {
       }
       List data = jsonDecode(response.body);
       return PagingResponse(
-          data: data.map((e) {
-        return Blog.fromWooJson(e);
-      }).toList());
+        data: Blog.parseBlogList(data),
+      );
     } on Exception catch (_) {
       return const PagingResponse();
     }
@@ -719,7 +719,7 @@ abstract class BaseServices {
   }) async {
     try {
       final enableBoostEngine =
-          boostEngine ?? kBoostEngineConfig.isOptimizeEnable;
+          boostEngine ?? kBoostEngineConfig.isOptimizeEnable && blogApi.isRoot;
       if (enableBoostEngine) {
         try {
           final boostValues = await boostBlogs(
@@ -768,10 +768,8 @@ abstract class BaseServices {
 
       var response = await blogApi.getAsync(endPoint);
 
-      if (response is List) {
-        for (var item in response) {
-          list.add(Blog.fromWooJson(item));
-        }
+      if (response != null && response is List) {
+        list = Blog.parseBlogList(response);
       }
 
       return list;
@@ -808,7 +806,7 @@ abstract class BaseServices {
     var body = jsonDecode(response.body);
 
     if (response.statusCode == 200) {
-      return Blog.fromWooJson(body);
+      return Blog.fromJson(body);
     }
     return Blog.empty(id);
   }
@@ -895,7 +893,9 @@ abstract class BaseServices {
 
   Future<List<Blog>?> getBlogsByCategory(int? cateId) async {
     try {
-      if (kBoostEngineConfig.isOptimizeEnable) {
+      final enableBoostEngine =
+          kBoostEngineConfig.isOptimizeEnable && blogApi.isRoot;
+      if (enableBoostEngine) {
         try {
           return await boostBlogs(category: cateId?.toString());
         } catch (e, trace) {
@@ -909,9 +909,10 @@ abstract class BaseServices {
       url += '&lang=$languageCode';
       var response = await blogApi.getAsync(url);
       var list = <Blog>[];
-      for (var item in response) {
-        list.add(Blog.fromWooJson(item));
+      if (response != null && response is List) {
+        list = Blog.parseBlogList(response);
       }
+
       return list;
     } catch (e) {
       rethrow;
@@ -1195,6 +1196,10 @@ abstract class BaseServices {
 
   Future<Order?> getOrderByOrderId({required String orderId}) async {
     return null;
+  }
+
+  Future<List<ListingType>> getListingTypes() async {
+    return <ListingType>[];
   }
 
   Future<List<ProductComponent>?>? getProductComponents(String productId) =>

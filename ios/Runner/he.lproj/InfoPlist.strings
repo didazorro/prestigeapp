@@ -1,7 +1,7 @@
 NSCameraUsageDescription = "אפליקציה זו דורשת גישה למצלמה עבור תכונת קוד QR או סורק ברקוד שניתן לגשת אליה מסרגל החיפוש";
-NSLocationAlwaysAndWhenInUseUsageDescription = "קבל את המיקום הנוכחי שלך למשלוח";
-NSLocationAlwaysUsageDescription = "צריך גישה למיקום נוכחי";
-NSLocationWhenInUseUsageDescription = "קבל את המיקום הנוכחי שלך למשלוח";
+NSLocationAlwaysAndWhenInUseUsageDescription = "יישום זה דורש גישה למיקום שלך כדי להציג אותו במסך המפה ולספק שירותים מבוססי מיקום";
+NSLocationAlwaysUsageDescription = "יישום זה דורש גישה למיקום שלך כדי להציג אותו במסך המפה ולספק שירותים מבוססי מיקום";
+NSLocationWhenInUseUsageDescription = "יישום זה דורש גישה למיקום שלך כדי להציג אותו במסך המפה ולספק שירותים מבוססי מיקום";
 NSMicrophoneUsageDescription = "אנחנו רוצים גישה למיקרופון כדי לאפשר הקלטת הודעות קוליות";
 NSPhotoLibraryAddUsageDescription = "אנו רוצים גישה לאחסון תמונות/סרטונים בספריית התמונות שלך";
 NSPhotoLibraryUsageDescription = "אפליקציה זו דורשת גישה לספריית התמונות כדי לבחור תמונת פרופיל שתשמש כתמונת צ'אט עבור תכונת הצ'אט.";

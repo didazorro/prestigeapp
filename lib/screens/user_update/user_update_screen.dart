@@ -1,9 +1,13 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:inspireui/utils/event_bus.dart';
 import 'package:inspireui/widgets/auto_hide_keyboard.dart';
 import 'package:provider/provider.dart';
 
+import '../../common/events.dart';
+import '../../common/extensions/extensions.dart';
 import '../../common/tools/flash.dart';
 import '../../generated/l10n.dart';
 import '../../models/user_model.dart';
@@ -20,6 +24,7 @@ class UserUpdateScreen extends StatefulWidget {
 
 class StateUserUpdate extends BaseScreen<UserUpdateScreen> {
   TextEditingController? userEmail;
+  TextEditingController? username;
   TextEditingController? userPassword;
   TextEditingController? userDisplayName;
   late TextEditingController userNiceName;
@@ -41,11 +46,21 @@ class StateUserUpdate extends BaseScreen<UserUpdateScreen> {
 
   bool get hasChangePassword => isValidPassword();
 
+  bool isPlatformSupported = ![
+    ConfigType.bigCommerce,
+    ConfigType.notion,
+    ConfigType.shopify,
+    ConfigType.presta,
+    ConfigType.opencart,
+    ConfigType.magento,
+  ].contains(ServerConfig().type);
+
   @override
   void afterFirstLayout(BuildContext context) {
     final user = Provider.of<UserModel>(context, listen: false).user;
     setState(() {
       userEmail = TextEditingController(text: user!.email);
+      username = TextEditingController(text: user.username);
       userPassword = TextEditingController(text: '');
       currentPassword = TextEditingController(text: '');
       userDisplayName = TextEditingController(text: user.name);
@@ -71,6 +86,18 @@ class StateUserUpdate extends BaseScreen<UserUpdateScreen> {
     setState(() {
       isLoading = true;
     });
+
+    void onTaploginAgain() async {
+      final confirm = await context.showFluxDialogConfirm(
+          useAppNavigator: true,
+          primaryAsDestructiveAction: true,
+          title: S.of(context).notifications,
+          body: S.of(context).needToLoginAgain);
+      if (confirm) {
+        eventBus.fire(const EventExpiredCookie());
+      }
+    }
+
     Services().widget.updateUserInfo(
           loggedInUser: user,
           onError: (e) {
@@ -85,16 +112,18 @@ class StateUserUpdate extends BaseScreen<UserUpdateScreen> {
             setState(() {
               isLoading = false;
             });
-
-            _scaffoldMessengerKey.currentState?.showSnackBar(
-              SnackBar(
-                content: Text(S.of(context).updateSuccess),
+            unawaited(
+              FlashHelper.message(
+                context,
+                message: S.of(context).updateSuccess,
+                duration: const Duration(seconds: 2),
               ),
             );
 
             /// If update password, need to pop true to force user log-out and
             /// login again to make effect
-            Navigator.of(context).pop(hasChangePassword);
+            if (hasChangePassword) onTaploginAgain();
+            Navigator.of(context).pop();
           },
           currentPassword: currentPassword!.text,
           userDisplayName: userDisplayName!.text,
@@ -111,6 +140,7 @@ class StateUserUpdate extends BaseScreen<UserUpdateScreen> {
   @override
   void dispose() {
     userEmail?.dispose();
+    username?.dispose();
     userPassword?.dispose();
     userDisplayName?.dispose();
     userNiceName.dispose();
@@ -119,6 +149,40 @@ class StateUserUpdate extends BaseScreen<UserUpdateScreen> {
     userFirstname?.dispose();
     userLastname?.dispose();
     super.dispose();
+  }
+
+  Widget buildInputField(String label, TextEditingController? controller,
+      [bool isEnabled = true]) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 16),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+            color: Theme.of(context).colorScheme.secondary,
+          ),
+        ),
+        const SizedBox(height: 8),
+        TextField(
+          decoration: InputDecoration(
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(5),
+              borderSide: BorderSide(
+                color: Theme.of(context).primaryColorLight,
+                width: 1.5,
+              ),
+            ),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+          ),
+          controller: controller,
+          enabled: isEnabled,
+        ),
+      ],
+    );
   }
 
   @override
@@ -146,35 +210,42 @@ class StateUserUpdate extends BaseScreen<UserUpdateScreen> {
                 buildAvatar(),
                 Expanded(
                   child: SingleChildScrollView(
-                    child: Column(
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 20, horizontal: 15),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              const SizedBox(height: 8),
-                              buildEmail(isSocial),
-                              const SizedBox(height: 16),
-                              buildDisplayName(),
-                              if (![
-                                ConfigType.magento,
-                                ConfigType.strapi,
-                                ConfigType.wordpress,
-                                ConfigType.presta
-                              ].contains(ServerConfig().type)) ...[
-                                const SizedBox(height: 16),
-                                buildPhone(),
-                              ],
-                              const SizedBox(height: 16),
-                              buildPassword(),
-                              if (!isSocial) buildNewPassword(),
-                              const SizedBox(height: 50),
-                            ],
-                          ),
-                        ),
-                      ],
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 20, horizontal: 15),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          if (isPlatformSupported)
+                            buildInputField(
+                                S.of(context).username, username, isSocial),
+                          buildInputField(
+                              S.of(context).email, userEmail, isSocial),
+                          buildInputField(
+                              S.of(context).displayName,
+                              userDisplayName,
+                              ServerConfig().type != ConfigType.magento),
+                          if (![
+                            ConfigType.magento,
+                            ConfigType.strapi,
+                            ConfigType.wordpress,
+                            ConfigType.presta,
+                            ConfigType.gpt
+                          ].contains(ServerConfig().type)) ...[
+                            buildInputField(
+                                S.of(context).phoneNumber, userPhone),
+                          ],
+                          if ([ConfigType.magento, ConfigType.presta]
+                              .contains(ServerConfig().type)) ...[
+                            buildInputField(
+                                S.of(context).password, currentPassword),
+                          ],
+                          if (!isSocial)
+                            buildInputField(
+                                S.of(context).newPassword, userPassword),
+                          const SizedBox(height: 50),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -189,12 +260,12 @@ class StateUserUpdate extends BaseScreen<UserUpdateScreen> {
 
   Widget buildAvatar() {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.25,
+      height: MediaQuery.sizeOf(context).height * 0.25,
       child: Stack(
         children: <Widget>[
           Container(
-            height: MediaQuery.of(context).size.height * 0.20,
-            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.sizeOf(context).height * 0.20,
+            width: MediaQuery.sizeOf(context).width,
             decoration: BoxDecoration(
                 color: Theme.of(context).primaryColor,
                 borderRadius: const BorderRadius.vertical(
@@ -202,9 +273,10 @@ class StateUserUpdate extends BaseScreen<UserUpdateScreen> {
                 ),
                 boxShadow: const [
                   BoxShadow(
-                      color: Colors.black12,
-                      offset: Offset(0, 2),
-                      blurRadius: 8)
+                    color: Colors.black12,
+                    offset: Offset(0, 2),
+                    blurRadius: 8,
+                  )
                 ]),
             child: (avatar?.isNotEmpty ?? false)
                 ? ClipRRect(
@@ -256,183 +328,6 @@ class StateUserUpdate extends BaseScreen<UserUpdateScreen> {
           ),
         ],
       ),
-    );
-  }
-
-  Widget buildEmail(bool isSocial) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          S.of(context).email,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: Theme.of(context).colorScheme.secondary,
-          ),
-        ),
-        TextField(
-          decoration: const InputDecoration(
-            border: InputBorder.none,
-          ),
-          controller: userEmail,
-          enabled: !isSocial,
-        ),
-      ],
-    );
-  }
-
-  Widget buildPassword() {
-    return Services().widget.renderCurrentPassInputforEditProfile(
-          context: context,
-          currentPasswordController: currentPassword,
-        );
-  }
-
-  Widget buildNewPassword() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          S.of(context).newPassword,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: Theme.of(context).colorScheme.secondary,
-          ),
-        ),
-        const SizedBox(height: 8),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            border: Border.all(
-              color: Theme.of(context).primaryColorLight,
-              width: 1.5,
-            ),
-          ),
-          child: TextField(
-            obscureText: true,
-            decoration: const InputDecoration(
-              border: InputBorder.none,
-            ),
-            controller: userPassword,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget buildPhone() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          S.of(context).phoneNumber,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: Theme.of(context).colorScheme.secondary,
-          ),
-        ),
-        const SizedBox(height: 8),
-        Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 10,
-          ),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            border: Border.all(
-              color: Theme.of(context).primaryColorLight,
-              width: 1.5,
-            ),
-          ),
-          child: TextField(
-            decoration: const InputDecoration(border: InputBorder.none),
-            controller: userPhone,
-          ),
-        ),
-      ],
-    );
-  }
-
-  List<Widget> buildEnterNameOfUser() {
-    return [
-      Text(S.of(context).firstName,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: Theme.of(context).colorScheme.secondary,
-          )),
-      const SizedBox(height: 8),
-      Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            border: Border.all(
-                color: Theme.of(context).primaryColorLight, width: 1.5)),
-        child: TextField(
-          decoration: const InputDecoration(border: InputBorder.none),
-          controller: userFirstname,
-        ),
-      ),
-      const SizedBox(height: 16),
-      Text(S.of(context).lastName,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: Theme.of(context).colorScheme.secondary,
-          )),
-      const SizedBox(height: 8),
-      Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            border: Border.all(
-                color: Theme.of(context).primaryColorLight, width: 1.5)),
-        child: TextField(
-          decoration: const InputDecoration(border: InputBorder.none),
-          controller: userLastname,
-        ),
-      )
-    ];
-  }
-
-  Widget buildDisplayName() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          S.of(context).displayName,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: Theme.of(context).colorScheme.secondary,
-          ),
-        ),
-        const SizedBox(height: 8),
-        Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 10,
-          ),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            border: Border.all(
-              color: Theme.of(context).primaryColorLight,
-              width: 1.5,
-            ),
-          ),
-          child: TextField(
-            decoration: const InputDecoration(border: InputBorder.none),
-            controller: userDisplayName,
-            enabled: ServerConfig().type != ConfigType.magento,
-          ),
-        ),
-      ],
     );
   }
 

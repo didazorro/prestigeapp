@@ -1,5 +1,7 @@
 // import 'package:audio_service/audio_service.dart';
+import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:openai/openai.dart';
 
 // Enable Audio feature
 // import 'package:flux_audio/index.dart';
@@ -31,7 +33,27 @@ class DependencyInjection {
     injector.registerLazySingleton<WalletServices>(WalletServicesImpl.new);
 
     /// App Coordinator
-    // injector.registerFactoryParam<AppCoordinatorShared, BuildContext, dynamic>(
-    //     (param1, _) => AppCoordinatorSharedImpl(param1));
+    injector.registerFactoryParam<AppCoordinatorShared, BuildContext, dynamic>(
+        (param1, _) => AppCoordinatorSharedImpl(param1));
   }
+}
+
+/// control the OpenAI Key feature
+class AppCoordinatorSharedImpl<T> extends AppCoordinatorShared<T> {
+  final BuildContext context;
+  AppCoordinatorSharedImpl(this.context);
+
+  @override
+  Future<T?> showOpenAiKey([String? identifier]) =>
+      context.showInputOpenAiKey(identifier) as Future<T?>;
+}
+
+extension AppCoordinator<T> on BuildContext {
+  AppCoordinatorShared<T> get shared => injector.get(param1: this);
+
+  Future<T?> showOpenAiKey([String? identifier]) => shared.showOpenAiKey();
+}
+
+abstract class AppCoordinatorShared<T> {
+  Future<T?> showOpenAiKey([String? identifier]) async => null;
 }

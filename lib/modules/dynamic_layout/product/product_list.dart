@@ -127,6 +127,7 @@ class ProductList extends StatelessWidget {
                   products: products,
                   showCountdown: isShowCountDown() && duration > 0,
                   countdownDuration: Duration(milliseconds: duration),
+                  context: context,
                 ),
                 showCountdown: isShowCountDown() && duration > 0,
                 countdownDuration: Duration(milliseconds: duration),

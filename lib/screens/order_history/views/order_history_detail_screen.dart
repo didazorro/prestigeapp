@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
 import 'package:country_pickers/country_pickers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
@@ -10,7 +11,7 @@ import '../../../common/config.dart';
 import '../../../common/tools.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/entities/aftership.dart';
-import '../../../models/index.dart' show AppModel, OrderStatus;
+import '../../../models/index.dart' show AppModel, OrderStatus, UserModel;
 // import '../../../models/order/order.dart';
 import '../../../services/index.dart';
 import '../../../widgets/common/box_comment.dart';
@@ -24,12 +25,10 @@ import 'widgets/product_order.dart';
 
 class OrderDetailArguments {
   OrderHistoryDetailModel model;
-  bool enableReorder;
   bool disableReview;
 
   OrderDetailArguments({
     required this.model,
-    this.enableReorder = true,
     this.disableReview = false,
   });
 }
@@ -95,7 +94,7 @@ class _OrderHistoryDetailScreenState
       final currencyRate = (order.currencyCode?.isEmpty ?? true)
           ? Provider.of<AppModel>(context).currencyRate
           : null;
-      // final loggedIn = Provider.of<UserModel>(context).loggedIn;
+      final loggedIn = Provider.of<UserModel>(context).loggedIn;
 
       final isPending = (order.status != OrderStatus.refunded &&
           order.status != OrderStatus.canceled &&
@@ -106,9 +105,9 @@ class _OrderHistoryDetailScreenState
               kPaymentConfig.paymentListAllowsCancelAndRefund
                   .contains(order.paymentMethod);
 
-      // final isCompositeCart = order.lineItems.firstWhereOrNull(
-      //         (e) => e.product?.isCompositeProduct ?? false) !=
-      //     null;
+      final isCompositeCart = order.lineItems.firstWhereOrNull(
+              (e) => e.product?.isCompositeProduct ?? false) !=
+          null;
       return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.surface,
         appBar: AppBar(
@@ -121,6 +120,10 @@ class _OrderHistoryDetailScreenState
               onPressed: () {
                 Navigator.of(context).pop();
               }),
+          actions: [
+            if (ServerConfig().isSupportReorder && loggedIn && !isCompositeCart)
+              Center(child: Services().widget.reOrderButton(order)),
+          ],
           title: Text(
             '${S.of(context).orderNo} #${order.number}',
             style: TextStyle(color: Theme.of(context).colorScheme.secondary),
@@ -211,7 +214,7 @@ class _OrderHistoryDetailScreenState
                     if (order.totalShipping != null) const SizedBox(height: 10),
                     if (order.totalShipping != null)
                       _CustomListTile(
-                        leading: S.of(context).shipping,
+                        leading: S.of(context).shippingFee,
                         trailing: PriceTools.getCurrencyFormatted(
                             order.totalShipping, currencyRate,
                             currency: currencyCode)!,

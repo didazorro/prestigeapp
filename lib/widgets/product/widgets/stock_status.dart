@@ -30,11 +30,12 @@ class StockStatus extends StatelessWidget {
       }
 
       if (product.inStock != null && !product.isEmptyProduct()) {
+        final inStock = product.checkInStock() ?? false;
+
         return Text(
-          product.inStock! ? S.of(context).inStock : S.of(context).outOfStock,
+          inStock ? S.of(context).inStock : S.of(context).outOfStock,
           style: TextStyle(
-            color:
-                product.inStock! ? kStockColor.inStock : kStockColor.outOfStock,
+            color: inStock ? kStockColor.inStock : kStockColor.outOfStock,
             fontWeight: FontWeight.w500,
             fontSize: 12,
           ),

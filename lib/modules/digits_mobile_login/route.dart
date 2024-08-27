@@ -20,13 +20,4 @@ class DigitsMobileLoginRoute {
     };
     return routes;
   }
-
-  static Widget errorPage(String title) => Scaffold(
-        appBar: AppBar(
-          title: const Text('Error'),
-        ),
-        body: Center(
-          child: Text(title),
-        ),
-      );
 }

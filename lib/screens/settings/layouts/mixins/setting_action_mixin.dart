@@ -87,7 +87,10 @@ mixin SettingActionMixin {
       return;
     }
 
-    FluxNavigate.push(pageRoute);
+    FluxNavigate.push(
+      pageRoute,
+      context: context,
+    );
   }
 
   void openProfile(BuildContext context) {
@@ -96,7 +99,10 @@ mixin SettingActionMixin {
       return;
     }
 
-    FluxNavigate.pushNamed(RouteList.updateUser);
+    FluxNavigate.pushNamed(
+      RouteList.updateUser,
+      context: context,
+    );
   }
 
   void openMyOrder(BuildContext context, User user) {
@@ -111,6 +117,7 @@ mixin SettingActionMixin {
     FluxNavigate.pushNamed(
       RouteList.orders,
       arguments: user,
+      context: context,
     );
     return;
   }

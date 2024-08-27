@@ -53,15 +53,11 @@ class _SMSVerifyWidgetState extends State<SMSVerifyWidget> {
                       style: Theme.of(context)
                           .textTheme
                           .headlineMedium!
-                          .copyWith(
-                              color: Colors.transparent, fontFamily: 'Roboto'),
+                          .copyWith(color: Colors.transparent),
                     )
                   : Text(
                       smsCode[index],
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineMedium!
-                          .copyWith(fontFamily: 'Roboto'),
+                      style: Theme.of(context).textTheme.headlineMedium!,
                     ),
             );
           },

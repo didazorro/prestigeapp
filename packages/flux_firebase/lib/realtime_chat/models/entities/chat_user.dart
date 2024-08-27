@@ -11,6 +11,8 @@ class ChatUser {
   final DateTime lastActive;
   final String languageCode;
   final String pushToken;
+  final bool isTyping;
+  final List<String> blackList;
 
   ChatUser({
     this.email = '',
@@ -19,6 +21,8 @@ class ChatUser {
     required this.lastActive,
     this.languageCode = '',
     this.pushToken = '',
+    this.isTyping = false,
+    this.blackList = const [],
   });
 
   factory ChatUser.fromJson(Map json) => ChatUser(
@@ -29,15 +33,19 @@ class ChatUser {
             DateTime(0),
         languageCode: json[kFirestoreFieldLanguageCode] ?? '',
         pushToken: json[kFirestoreFieldPushToken] ?? '',
+        isTyping: json[kFirestoreFieldIsTyping] ?? false,
+        blackList: List<String>.from(json[kFirestoreFieldBlackList] ?? []),
       );
 
   Map<String, dynamic> toJson() => {
         kFirestoreFieldEmail: email,
         kFirestoreFieldName: name,
         kFirestoreFieldUnread: unread,
-        kFirestoreFieldLastActive: lastActive.toIso8601String(),
+        kFirestoreFieldLastActive: lastActive.toUtc().toIso8601String(),
         kFirestoreFieldLanguageCode: languageCode,
         kFirestoreFieldPushToken: pushToken,
+        kFirestoreFieldIsTyping: isTyping,
+        kFirestoreFieldBlackList: blackList,
       };
 
   @override
@@ -50,7 +58,9 @@ class ChatUser {
           unread == other.unread &&
           languageCode == other.languageCode &&
           pushToken == other.pushToken &&
-          lastActive == other.lastActive;
+          lastActive == other.lastActive &&
+          isTyping == other.isTyping &&
+          blackList == other.blackList;
 
   @override
   int get hashCode =>
@@ -59,7 +69,9 @@ class ChatUser {
       unread.hashCode ^
       lastActive.hashCode ^
       languageCode.hashCode ^
-      languageCode.hashCode;
+      languageCode.hashCode ^
+      isTyping.hashCode ^
+      blackList.hashCode;
 
   ChatUser copyWith({
     String? email,
@@ -68,6 +80,8 @@ class ChatUser {
     DateTime? lastActive,
     String? languageCode,
     String? pushToken,
+    bool? isTyping,
+    List<String>? blackList,
   }) {
     return ChatUser(
       email: email ?? this.email,
@@ -76,6 +90,8 @@ class ChatUser {
       lastActive: lastActive ?? this.lastActive,
       languageCode: languageCode ?? this.languageCode,
       pushToken: pushToken ?? this.pushToken,
+      isTyping: isTyping ?? this.isTyping,
+      blackList: blackList ?? this.blackList,
     );
   }
 }

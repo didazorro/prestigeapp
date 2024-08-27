@@ -44,6 +44,7 @@ class WordPressWidget extends BaseFrameworks {
     required currentPassword,
     required userDisplayName,
     userEmail,
+    username,
     userNiceName,
     userUrl,
     userPassword,
@@ -206,7 +207,10 @@ class WordPressWidget extends BaseFrameworks {
   }
 
   @override
-  Widget renderSearchScreen({bool? boostEngine}) {
+  Widget renderSearchScreen({
+    bool? boostEngine,
+    bool? showQRCode,
+  }) {
     return ChangeNotifierProvider<BlogSearchModel>(
       create: (context) => BlogSearchModel(),
       builder: (context, _) {

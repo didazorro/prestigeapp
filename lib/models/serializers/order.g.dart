@@ -8,7 +8,7 @@ part of 'order.dart';
 
 SerializerOrder _$SerializerOrderFromJson(Map<String, dynamic> json) =>
     SerializerOrder(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       createdAt: json['created_at'] as String?,
       total: (json['total'] as num?)?.toDouble(),
       user: json['user'] == null

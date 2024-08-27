@@ -1,7 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
+import '../../../common/theme/theme_helper.dart';
 import '../../../common/tools.dart';
 import '../../../widgets/html/index.dart';
 import '../config/header_config.dart';
@@ -22,14 +22,25 @@ class HeaderType extends StatelessWidget {
         : Theme.of(context).colorScheme.secondary;
     final alignment = Tools.getAlignment(config.alignment);
 
-    var textStyle = GoogleFonts.getFont(
+    var textStyle = ThemeHelper.getFont(
       font,
-      fontSize: fontSize.toDouble(),
-      fontWeight: Tools.getFontWeight(fontWeight.toString()),
-      color: textColor.withOpacity(textOpacity.toDouble()),
+      textStyle: TextStyle(
+        fontSize: fontSize.toDouble(),
+        fontWeight: Tools.getFontWeight(fontWeight.toString()),
+        color: textColor.withOpacity(textOpacity.toDouble()),
+      ),
     );
 
     Widget renderAnimatedText({required List<AnimatedText> animatedTexts}) {
+      if (animatedTexts.isEmpty) {
+        if (config.title != null && config.title.toString().isNotEmpty) {
+          return HtmlWidget(
+            config.title.getReplacedParams(context),
+            textStyle: textStyle,
+          );
+        }
+        return const SizedBox();
+      }
       return _AnimatedTextItem(
         title: config.title,
         textStyle: textStyle,
@@ -109,12 +120,7 @@ class HeaderType extends StatelessWidget {
         );
       case 'static':
       default:
-        return config.title != null && config.title.toString().isNotEmpty
-            ? HtmlWidget(
-                config.title.getReplacedParams(context),
-                textStyle: textStyle,
-              )
-            : const SizedBox();
+        return renderAnimatedText(animatedTexts: []);
     }
   }
 }

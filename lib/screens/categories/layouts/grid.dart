@@ -131,6 +131,7 @@ class _StateGridCategory extends State<GridCategory> with PagingMixin {
                                       parentId: category.id!.toString(),
                                       categoryName: category.name,
                                     ),
+                                    context: context,
                                   );
                                   return;
                                 }
@@ -140,6 +141,7 @@ class _StateGridCategory extends State<GridCategory> with PagingMixin {
                                     cateId: category.id,
                                     cateName: category.name,
                                   ),
+                                  context: context,
                                 );
                               },
                               child: LayoutBuilder(

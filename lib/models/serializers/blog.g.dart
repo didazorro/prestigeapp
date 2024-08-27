@@ -8,7 +8,7 @@ part of 'blog.dart';
 
 SerializerBlog _$SerializerBlogFromJson(Map<String, dynamic> json) =>
     SerializerBlog(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       title: json['title'] as String?,
       content: json['content'] as String?,
       subTitle: json['subTitle'] as String?,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../common/constants.dart';
+
 class StoreVacationCheckbox extends StatefulWidget {
   final onCallBack;
   final String title;
@@ -34,7 +36,7 @@ class _StoreVacationCheckboxState extends State<StoreVacationCheckbox> {
     final titleTheme = Theme.of(context)
         .textTheme
         .titleMedium!
-        .copyWith(fontWeight: FontWeight.w500, fontFamily: 'Roboto');
+        .copyWith(fontWeight: FontWeight.w500);
     return Row(
       children: [
         Expanded(
@@ -49,7 +51,7 @@ class _StoreVacationCheckboxState extends State<StoreVacationCheckbox> {
             _update();
           },
           activeColor: Theme.of(context).primaryColor,
-          checkColor: Colors.white,
+          checkColor: Theme.of(context).primaryColor.getColorBasedOnBackground,
         ),
       ],
     );

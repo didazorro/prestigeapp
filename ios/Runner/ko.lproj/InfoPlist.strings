@@ -1,7 +1,7 @@
 NSCameraUsageDescription = "이 앱은 검색창에서 액세스할 수 있는 QR 코드 또는 바코드 스캐너 기능을 위해 카메라에 대한 액세스 권한이 필요합니다.";
-NSLocationAlwaysAndWhenInUseUsageDescription = "배송을 위해 현재 위치 확인";
-NSLocationAlwaysUsageDescription = "현재 위치 액세스 필요";
-NSLocationWhenInUseUsageDescription = "배송을 위해 현재 위치 확인";
+NSLocationAlwaysAndWhenInUseUsageDescription = "이 앱은 지도 화면에 표시하고 위치 기반 서비스를 제공하기 위해 귀하의 위치에 액세스해야 합니다";
+NSLocationAlwaysUsageDescription = "이 앱은 지도 화면에 표시하고 위치 기반 서비스를 제공하기 위해 귀하의 위치에 액세스해야 합니다";
+NSLocationWhenInUseUsageDescription = "이 앱은 지도 화면에 표시하고 위치 기반 서비스를 제공하기 위해 귀하의 위치에 액세스해야 합니다";
 NSMicrophoneUsageDescription = "음성 메시지를 녹음할 수 있도록 마이크에 액세스하고 싶습니다.";
 NSPhotoLibraryAddUsageDescription = "사진 라이브러리에 이미지/비디오를 저장할 수 있는 액세스 권한을 원합니다.";
 NSPhotoLibraryUsageDescription = "이 앱은 채팅 기능의 채팅 이미지로 사용될 프로필 사진을 선택하기 위해 사진 라이브러리에 대한 액세스 권한이 필요합니다.";

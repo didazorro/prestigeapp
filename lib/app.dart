@@ -9,7 +9,7 @@ import 'package:flutter/services.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:inspireui/inspireui.dart';
-// import 'package:openai/localizations.dart';
+import 'package:openai/localizations.dart';
 import 'package:provider/provider.dart';
 
 import 'app_init.dart';
@@ -33,7 +33,6 @@ import 'screens/blog/models/list_blog_model.dart';
 import 'screens/categories/layouts/fancy_scroll.dart';
 import 'screens/categories/layouts/multi_level.dart';
 import 'screens/index.dart' show ListBlogModel;
-import 'services/firebase_service.dart';
 import 'services/index.dart';
 import 'widgets/overlay/custom_overlay_state.dart';
 import 'widgets/web_layout/appbar_web_control_delegate.dart';
@@ -481,7 +480,7 @@ class AppState extends State<App>
                   BotToastNavigatorObserver(),
                 ],
                 localizationsDelegates: const [
-                  // SOpenAI.delegate,
+                  SOpenAI.delegate,
                   AppLocalization.delegate,
                   GlobalMaterialLocalizations.delegate,
                   GlobalCupertinoLocalizations.delegate,
@@ -533,9 +532,7 @@ class AppState extends State<App>
     final url = notification.dynamicLink;
     final uri = url?.toUri();
     if (uri != null) {
-      await FirebaseServices()
-          .dynamicLinks
-          ?.handleDynamicLink(uri, App.fluxStoreNavigatorKey.currentContext!);
+      await Services().linkService.handleDynamicLink(uri);
     }
     _notificationModel.saveMessage(notification);
   }

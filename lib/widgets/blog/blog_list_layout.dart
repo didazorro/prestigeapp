@@ -93,7 +93,11 @@ class _ProductListItemsState extends State<BlogListLayout>
                   item: blogs[index],
                   width: _buildBlogWidth(width),
                   config: widget.config,
-                  onTap: () => onTapBlog(blog: blogs[index], blogs: blogs),
+                  onTap: () => onTapBlog(
+                    blog: blogs[index],
+                    blogs: blogs,
+                    context: context,
+                  ),
                 );
               },
             ),
@@ -133,6 +137,7 @@ class _ProductListItemsState extends State<BlogListLayout>
                         config: configJson,
                         data: [],
                       ),
+                      context: context,
                     ),
                   ),
                   Padding(
@@ -175,6 +180,7 @@ class _ProductListItemsState extends State<BlogListLayout>
                         config: configJson,
                         data: value,
                       ),
+                      context: context,
                     );
                   },
                 ),

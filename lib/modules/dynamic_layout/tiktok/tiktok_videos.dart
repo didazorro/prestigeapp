@@ -161,6 +161,7 @@ class _StateTikTokVideos extends State<TikTokVideos> {
                                   position: index,
                                 ),
                               ),
+                              context: context,
                             ),
                   ),
                 ),

@@ -39,7 +39,7 @@ class AttributeFilterWidgetState extends State<AttributeFilterWidget> {
   void initState() {
     _listSelectedAttributes = widget.selectedAttribute ?? {};
     currentAttribute = _listSelectedAttributes.entries.firstOrNull?.key ??
-        filterAttributeModel.listVisibleAttribute?.first;
+        filterAttributeModel.listVisibleAttribute?.firstOrNull;
     super.initState();
   }
 

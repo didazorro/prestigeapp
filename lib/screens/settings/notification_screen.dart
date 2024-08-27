@@ -9,7 +9,7 @@ import '../../generated/l10n.dart';
 import '../../models/index.dart' show FStoreNotificationItem;
 import '../../models/notification_model.dart';
 import '../../screens/common/app_bar_mixin.dart';
-import '../../services/firebase_service.dart';
+import '../../services/index.dart';
 import '../../widgets/common/flux_image.dart';
 
 class NotificationScreen extends StatefulWidget {
@@ -230,7 +230,7 @@ class _NotificationScreenState extends State<NotificationScreen>
     final url = data.dynamicLink;
     final uri = url?.toUri();
     if (uri != null) {
-      await FirebaseServices().dynamicLinks?.handleDynamicLink(uri, context);
+      await Services().linkService.handleDynamicLink(uri);
       return;
     }
     final heightScreen = MediaQuery.sizeOf(context).height;

@@ -66,7 +66,7 @@ class _CommentLayoutState extends State<CommentLayout> {
                   ? Padding(
                       padding: const EdgeInsets.only(top: 10),
                       child: Text(
-                        S.of(context).commentFirst,
+                        S.of(context).noComments,
                         style: widget.type == kBlogLayout.fullSizeImageType
                             ? TextStyle(
                                 color: Colors.white.withOpacity(0.9),
@@ -181,7 +181,7 @@ class _CommentBox extends StatelessWidget {
                     ),
                     Text(
                       comment.date == '' || comment.date!.isEmpty
-                          ? 'Loading ...'
+                          ? S.of(context).loading
                           : comment.date!,
                       style: type == kBlogLayout.fullSizeImageType
                           ? TextStyle(

@@ -78,7 +78,10 @@ class CategoriesScreenState extends State<VendorCategoriesScreen>
       }
     }
 
-    unawaited(FluxNavigate.pushNamed(RouteList.map));
+    unawaited(FluxNavigate.pushNamed(
+      RouteList.map,
+      context: context,
+    ));
   }
 
   void _onChangeTab(value) {
@@ -182,7 +185,7 @@ class CategoriesScreenState extends State<VendorCategoriesScreen>
               controller: _pageController,
               allowImplicitScrolling: true,
               children: [
-                StoreScreen(),
+                const StoreScreen(),
                 renderCategories(
                   widget.layout,
                   widget.enableParallax,

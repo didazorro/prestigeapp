@@ -43,7 +43,7 @@ class _StoreOpenOptionState extends State<StoreOpenOption> {
     final titleTheme = Theme.of(context)
         .textTheme
         .titleMedium!
-        .copyWith(fontWeight: FontWeight.w500, fontFamily: 'Roboto');
+        .copyWith(fontWeight: FontWeight.w500);
     return Stack(
       children: [
         Scaffold(

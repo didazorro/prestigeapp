@@ -10,13 +10,13 @@ _$FeaturedVendorConfigImpl _$$FeaturedVendorConfigImplFromJson(
         Map<String, dynamic> json) =>
     _$FeaturedVendorConfigImpl(
       name: json['name'] as String?,
-      columnCount: json['columnCount'] as int? ?? 3,
+      columnCount: (json['columnCount'] as num?)?.toInt() ?? 3,
       showRating: json['showRating'] as bool? ?? true,
       enableAutoSliding: json['enableAutoSliding'] as bool? ?? false,
-      durationAutoSliding: json['durationAutoSliding'] as int?,
+      durationAutoSliding: (json['durationAutoSliding'] as num?)?.toInt(),
       enableBackground: json['enableBackground'] as bool? ?? false,
       isSnapping: json['isSnapping'] as bool? ?? false,
-      limit: json['limit'] as int?,
+      limit: (json['limit'] as num?)?.toInt(),
       imageBoxfit: json['imageBoxfit'] as String? ?? 'cover',
       alignment: json['alignment'] as String? ?? 'centerStart',
     );

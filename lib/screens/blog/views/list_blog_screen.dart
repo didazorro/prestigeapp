@@ -63,6 +63,7 @@ class _ListBlogScreenState extends BaseScreen<ListBlogScreen>
             blog: blog,
             blogs: context.read<ListBlogModel>().data,
             forceRootNavigator: true,
+            context: context,
           ),
         ),
         loadingWidget: _buildSkeleton(),

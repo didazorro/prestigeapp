@@ -42,6 +42,7 @@ class SettingVendorAdminWidget extends StatelessWidget {
           RouteList.vendorAdmin,
           arguments: user,
           forceRootNavigator: true,
+          context: context,
         );
       },
       icon: Icons.dashboard,

@@ -1,13 +1,14 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fstore/generated/l10n.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/chat_view_model.dart';
 import '../../../models/entities/chat_room.dart';
+import '../../../realtime_chat.dart';
 import '../chat_dashboard/widgets/message_list.dart';
-import 'chat_auth.dart';
 import 'chat_room_item.dart';
 
 class ChatRooms extends StatelessWidget {
@@ -40,27 +41,42 @@ class ChatRooms extends StatelessWidget {
                   if ('${snapshot.error}'.contains('permission-denied')) {
                     return const ChatAuth();
                   }
-                  return Center(
-                    child: Text(snapshot.error.toString()),
+                  return _renderScaffold(
+                    context,
+                    child: Center(
+                      child: Text(
+                        snapshot.error.toString(),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
                   );
                 }
                 if (snapshot.hasData) {
                   final chatRooms = snapshot.data!;
                   if (chatRooms.isEmpty) {
-                    return Center(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            S.of(context).noConversation,
-                            style: Theme.of(context).textTheme.titleLarge,
+                    return _renderScaffold(
+                      context,
+                      floatingActionButton: _rendeChatWithAdminButton(context),
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                S.of(context).noConversation,
+                                style: Theme.of(context).textTheme.titleLarge,
+                              ),
+                              const SizedBox(height: 8.0),
+                              Text(
+                                S.of(context).noConversationDescription,
+                                style: Theme.of(context).textTheme.bodySmall,
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
                           ),
-                          const SizedBox(height: 8.0),
-                          Text(
-                            S.of(context).noConversationDescription,
-                            style: Theme.of(context).textTheme.bodySmall,
-                          ),
-                        ],
+                        ),
                       ),
                     );
                   }
@@ -69,11 +85,7 @@ class ChatRooms extends StatelessWidget {
                     duration: const Duration(milliseconds: 500),
                     child: (context.select((ChatViewModel chatViewModel) =>
                             chatViewModel.selectedChatRoomId != null))
-                        ? MessageList(
-                            onBack: () {
-                              _handleBackMessage(context);
-                            },
-                          )
+                        ? const MessageList(isFromChatList: true)
                         : Scaffold(
                             backgroundColor:
                                 Theme.of(context).colorScheme.surface,
@@ -89,6 +101,8 @@ class ChatRooms extends StatelessWidget {
                               ),
                               centerTitle: true,
                             ),
+                            floatingActionButton:
+                                _rendeChatWithAdminButton(context),
                             body: ListView.builder(
                               controller: scrollController,
                               itemBuilder: (context, index) {
@@ -97,12 +111,8 @@ class ChatRooms extends StatelessWidget {
                                   /// Hide invalid chat.
                                   return const SizedBox();
                                 }
-                                final chatUser = chatRoom.getOtherUser(
-                                  currentUserEmail,
-                                );
                                 return ChatRoomItem(
                                   chatRoom: chatRoom,
-                                  chatUser: chatUser,
                                   onTap: () => _handleChatRoomTap(
                                     context,
                                     chatRoom,
@@ -132,8 +142,46 @@ class ChatRooms extends StatelessWidget {
     model.selectedChatRoomId = chatRoom.id;
   }
 
-  void _handleBackMessage(BuildContext context) {
-    final model = context.read<ChatViewModel>();
-    model.selectedChatRoomId = null;
+  Widget _renderScaffold(
+    BuildContext context, {
+    required Widget child,
+    Widget? floatingActionButton,
+  }) {
+    return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.surface,
+      ),
+      floatingActionButton: floatingActionButton,
+      body: child,
+    );
+  }
+
+  Widget? _rendeChatWithAdminButton(BuildContext context) {
+    final currentUserEmail = context
+        .select((ChatViewModel chatViewModel) => chatViewModel.senderEmail);
+    if (context.read<ChatViewModel>().isAdmin) {
+      return null;
+    }
+    return FloatingActionButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => RealtimeChat(
+              userEmail: currentUserEmail,
+              type: RealtimeChatType.customerToAdmin,
+            ),
+          ),
+        );
+      },
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      tooltip: S.of(context).needHelp,
+      child: Icon(
+        CupertinoIcons.conversation_bubble,
+        color: Theme.of(context).primaryColor,
+        size: 32,
+      ),
+    );
   }
 }

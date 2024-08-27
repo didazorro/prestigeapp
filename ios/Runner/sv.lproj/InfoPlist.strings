@@ -1,7 +1,7 @@
 NSCameraUsageDescription = "Denna app kräver åtkomst till kameran för QR-kod eller streckkodsläsare som kan nås från sökfältet";
-NSLocationAlwaysAndWhenInUseUsageDescription = "Hämta din nuvarande plats för leverans";
-NSLocationAlwaysUsageDescription = "Behöver aktuell platsåtkomst";
-NSLocationWhenInUseUsageDescription = "Hämta din nuvarande plats för leverans";
+NSLocationAlwaysAndWhenInUseUsageDescription = "Den här appen behöver åtkomst till din plats för att visa den på kartskärmen och tillhandahålla platsbaserade tjänster";
+NSLocationAlwaysUsageDescription = "Den här appen behöver åtkomst till din plats för att visa den på kartskärmen och tillhandahålla platsbaserade tjänster";
+NSLocationWhenInUseUsageDescription = "Den här appen behöver åtkomst till din plats för att visa den på kartskärmen och tillhandahålla platsbaserade tjänster";
 NSMicrophoneUsageDescription = "Vi skulle vilja ha tillgång till mikrofonen för att tillåta inspelning av röstmeddelanden";
 NSPhotoLibraryAddUsageDescription = "Vi vill ha tillgång till att lagra bilder/videor i ditt fotobibliotek";
 NSPhotoLibraryUsageDescription = "Denna app kräver åtkomst till fotobiblioteket för att välja ett profilfoto som kommer att användas som en chattbild för chattfunktionen.";

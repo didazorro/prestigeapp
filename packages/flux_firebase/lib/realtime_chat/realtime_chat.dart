@@ -21,6 +21,7 @@ class RealtimeChat extends StatefulWidget {
   final String? vendorName;
   final String? vendorEmail;
   final String userEmail;
+  final String? initMessage;
 
   /// If the [type] is [RealtimeChatType.customerToVendor],
   /// the [vendorName] and [vendorEmail] must be provided.
@@ -31,6 +32,7 @@ class RealtimeChat extends StatefulWidget {
     required this.userEmail,
     this.vendorName,
     this.vendorEmail,
+    this.initMessage,
   }) : assert(
           type != RealtimeChatType.customerToVendor ||
               (type == RealtimeChatType.customerToVendor &&
@@ -87,8 +89,8 @@ class _RealtimeChatState extends State<RealtimeChat> {
     } else {
       _viewModel = ChatViewModel(
         widget.type,
-        Configurations.adminName,
-        Configurations.adminEmail,
+        kConfigChat.realtimeChatConfig.adminName,
+        kConfigChat.realtimeChatConfig.adminEmail,
       );
     }
 
@@ -105,7 +107,7 @@ class _RealtimeChatState extends State<RealtimeChat> {
 
   @override
   Widget build(BuildContext context) {
-    if (!kConfigChat.useRealtimeChat) {
+    if (!kConfigChat.realtimeChatConfig.enable) {
       return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.surface,
         appBar: AppBar(
@@ -164,11 +166,15 @@ class _RealtimeChatState extends State<RealtimeChat> {
               switch (widget.type) {
                 case RealtimeChatType.adminToCustomers:
                 case RealtimeChatType.vendorToCustomers:
+                case RealtimeChatType.userToUsers:
                   return const ChatList();
                 case RealtimeChatType.customerToAdmin:
                 case RealtimeChatType.customerToVendor:
                 default:
-                  return const MessageList();
+                  return MessageList(
+                    isFromChatList: false,
+                    initMessage: widget.initMessage,
+                  );
               }
             },
           ),

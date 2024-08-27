@@ -43,7 +43,7 @@ class _StoreVacationTypeState extends State<StoreVacationType> {
     final titleTheme = Theme.of(context)
         .textTheme
         .titleMedium!
-        .copyWith(fontWeight: FontWeight.w500, fontFamily: 'Roboto');
+        .copyWith(fontWeight: FontWeight.w500);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -213,7 +213,7 @@ class _VacationCalendarState extends State<VacationCalendar> {
               style: Theme.of(context)
                   .textTheme
                   .titleLarge!
-                  .copyWith(fontWeight: FontWeight.w700, fontFamily: 'Roboto'),
+                  .copyWith(fontWeight: FontWeight.w700),
             ),
             const Spacer(),
             InkWell(

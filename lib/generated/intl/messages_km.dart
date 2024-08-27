@@ -28,113 +28,132 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m3(state) => "អាដាប់ទ័រប៊្លូធូសគឺ ${state}";
 
-  static String m4(currency) => "បានប្តូររូបិយប័ណ្ណទៅជា ${currency}";
+  static String m4(author) => "អ្នកនិពន្ធ៖ ${author}";
 
-  static String m5(number) => " នៅសល់${number} តួអក្សរ";
+  static String m5(currency) => "បានប្តូររូបិយប័ណ្ណទៅជា ${currency}";
 
-  static String m6(priceRate, pointRate) =>
+  static String m6(number) => " នៅសល់${number} តួអក្សរ";
+
+  static String m7(priceRate, pointRate) =>
       "${priceRate} = ${pointRate} ពិន្ទុ";
-
-  static String m7(count) => " ធាតុ${count} ";
 
   static String m8(count) => " ធាតុ${count} ";
 
-  static String m9(country) => " ប្រទេស${country} មិនត្រូវបានគាំទ្រទេ។";
+  static String m9(count) => " ធាតុ${count} ";
 
-  static String m10(currency) => "${currency} មិន​ត្រូវ​បាន​គាំទ្រ";
+  static String m10(count) => " ធាតុ${count} ";
 
-  static String m11(day) => "${day} ថ្ងៃមុន។";
+  static String m11(count) => " ធាតុ${count} ";
 
-  static String m12(total) => "~${total} គីឡូម៉ែត្រ";
+  static String m12(country) => " ប្រទេស${country} មិនត្រូវបានគាំទ្រទេ។";
 
-  static String m13(timeLeft) => "បញ្ចប់នៅ ${timeLeft}";
+  static String m13(currency) => "${currency} មិន​ត្រូវ​បាន​គាំទ្រ";
 
-  static String m14(captcha) => "បញ្ចូល ${captcha} ដើម្បីបញ្ជាក់៖";
+  static String m14(day) => "${day} ថ្ងៃមុន។";
 
-  static String m15(message) => "កំហុស៖ ${message}";
+  static String m15(total) => "~${total} គីឡូម៉ែត្រ";
 
-  static String m16(time) => "ផុតកំណត់នៅ ${time}";
+  static String m16(timeLeft) => "បញ្ចប់នៅ ${timeLeft}";
 
-  static String m17(total) => ">${total} គីឡូម៉ែត្រ";
+  static String m17(captcha) => "បញ្ចូល ${captcha} ដើម្បីបញ្ជាក់៖";
 
-  static String m18(hour) => "${hour} ម៉ោងមុន។";
+  static String m18(message) => "កំហុស៖ ${message}";
 
-  static String m19(count) =>
+  static String m19(message) => "កំហុស៖ ${message}";
+
+  static String m20(time) => "ផុតកំណត់នៅ ${time}";
+
+  static String m21(total) => ">${total} គីឡូម៉ែត្រ";
+
+  static String m22(hour) => "${hour} ម៉ោងមុន។";
+
+  static String m23(currentBalance) =>
+      "អ្នកនៅសល់តែ ${currentBalance} ក្នុងកាបូបរបស់អ្នក។";
+
+  static String m24(count) =>
       " ${Intl.plural(count, one: '${count} item', other: '${count} items')}";
 
-  static String m20(message) =>
+  static String m25(message) =>
       "មានបញ្ហាជាមួយកម្មវិធីអំឡុងពេលស្នើសុំទិន្នន័យ សូមទាក់ទងអ្នកគ្រប់គ្រងដើម្បីដោះស្រាយបញ្ហា៖ ${message}";
 
-  static String m21(currency, amount) =>
+  static String m26(currency, amount) =>
       "ចំនួនអតិបរមាសម្រាប់ការប្រើប្រាស់ការទូទាត់នេះគឺ ${currency} ${amount}";
 
-  static String m22(size) => "ទំហំឯកសារអតិបរមា៖ ${size} MB";
+  static String m27(size) => "ទំហំឯកសារអតិបរមា៖ ${size} MB";
 
-  static String m23(currency, amount) =>
+  static String m28(currency, amount) =>
       "ចំនួនអប្បបរមាសម្រាប់ការប្រើប្រាស់ការទូទាត់នេះគឺ ${currency} ${amount}";
 
-  static String m24(minute) => "${minute} នាទីមុន។";
+  static String m29(minute) => "${minute} នាទីមុន។";
 
-  static String m25(month) => "${month} ខែមុន។";
+  static String m30(month) => "${month} ខែមុន។";
 
-  static String m26(store) => "ច្រើនទៀតពី ${store}";
+  static String m31(store) => "ច្រើនទៀតពី ${store}";
 
-  static String m27(number) => "ត្រូវតែទិញជាក្រុមនៃ ${number}";
+  static String m32(number) => "ត្រូវតែទិញជាក្រុមនៃ ${number}";
 
-  static String m28(itemCount) => " ទំនិញ${itemCount} ";
+  static String m33(itemCount) => " ទំនិញ${itemCount} ";
 
-  static String m29(price) => "ជម្រើសសរុប៖ ${price}";
+  static String m34(price) => "ជម្រើសសរុប៖ ${price}";
 
-  static String m30(amount) => "បង់ ${amount}";
+  static String m35(amount) => "បង់ ${amount}";
 
-  static String m31(name) => "${name} ត្រូវបានបញ្ចូលទៅក្នុងរទេះដោយជោគជ័យ";
+  static String m36(name) => "${name} ត្រូវបានបញ្ចូលទៅក្នុងរទេះដោយជោគជ័យ";
 
-  static String m32(total) => "ចំនួន៖ ${total}";
+  static String m37(total) => "ចំនួន៖ ${total}";
 
-  static String m33(percent) => "លក់ ${percent}%";
+  static String m38(name) => "បានទទួលប្រាក់ពី ${name}";
 
-  static String m34(keyword) => "លទ្ធផលស្វែងរកសម្រាប់៖ \'${keyword}\'";
+  static String m39(percent) => "លក់ ${percent}%";
 
-  static String m35(keyword, count) => "${keyword} (ធាតុ${count} )";
+  static String m40(keyword) => "លទ្ធផលស្វែងរកសម្រាប់៖ \'${keyword}\'";
 
-  static String m36(keyword, count) => "${keyword} (ធាតុ${count} )";
+  static String m41(keyword, count) => "${keyword} (ធាតុ${count} )";
 
-  static String m37(second) => "${second} វិនាទីមុន។";
+  static String m42(keyword, count) => "${keyword} (ធាតុ${count} )";
 
-  static String m38(totalCartQuantity) =>
+  static String m43(second) => "${second} វិនាទីមុន។";
+
+  static String m44(totalCartQuantity) =>
       "កន្រ្តកលក់ទំនិញ ${totalCartQuantity} ";
 
-  static String m39(numberOfUnitsSold) => "បានលក់៖ ${numberOfUnitsSold}";
+  static String m45(numberOfUnitsSold) => "បានលក់៖ ${numberOfUnitsSold}";
 
-  static String m40(fieldName) => "វាល ${fieldName} ត្រូវបានទាមទារ";
+  static String m46(fieldName) => "វាល ${fieldName} ត្រូវបានទាមទារ";
 
-  static String m41(total) => " ផលិតផលសរុប${total} ";
+  static String m47(total) => " ផលិតផលសរុប${total} ";
 
-  static String m42(maxPointDiscount, maxPriceDiscount) =>
+  static String m48(name) => "ផ្ទេរប្រាក់ទៅ ${name}";
+
+  static String m49(maxPointDiscount, maxPriceDiscount) =>
       "ប្រើពិន្ទុអតិបរមា ${maxPointDiscount} សម្រាប់ការបញ្ចុះតម្លៃ ${maxPriceDiscount} លើការបញ្ជាទិញនេះ!";
 
-  static String m43(date) => "មានសុពលភាពរហូតដល់ ${date}";
+  static String m50(date) => "មានសុពលភាពរហូតដល់ ${date}";
 
-  static String m44(message) => "ការព្រមាន៖ ${message}";
+  static String m51(balance) => "សមតុល្យកាបូប៖ ${balance}";
 
-  static String m45(defaultCurrency) =>
+  static String m52(message) => "ការព្រមាន៖ ${message}";
+
+  static String m53(defaultCurrency) =>
       "រូបិយប័ណ្ណដែលបានជ្រើសរើសបច្ចុប្បន្នមិនមានសម្រាប់មុខងារកាបូបទេ សូមប្តូរវាទៅជា ${defaultCurrency}";
 
-  static String m46(length) => "យើងបានរកឃើញផលិតផល ${length} ";
+  static String m54(length) => "យើងបានរកឃើញផលិតផល ${length} ";
 
-  static String m47(week) => "សប្តាហ៍ ${week}";
+  static String m55(week) => "សប្តាហ៍ ${week}";
 
-  static String m48(name) => "សូមស្វាគមន៍ ${name}";
+  static String m56(name) => "សូមស្វាគមន៍ ${name}";
 
-  static String m49(year) => "${year} ឆ្នាំមុន";
+  static String m57(year) => "${year} ឆ្នាំមុន";
 
-  static String m50(total) =>
+  static String m58(total) =>
       "អ្នក​បាន​ត្រូវាបានដាក់ទៅក្នុងវិក័យប័ត្របញ្ជាទិញ #${total}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "aboutUs": MessageLookupByLibrary.simpleMessage("អំពី​ពួក​យើង"),
         "account": MessageLookupByLibrary.simpleMessage("គណនី"),
+        "accountApprovalTitle":
+            MessageLookupByLibrary.simpleMessage("ក្រោមការអនុម័ត"),
         "accountDeleteDescription": MessageLookupByLibrary.simpleMessage(
             "ការលុបគណនីរបស់អ្នកលុបព័ត៌មានផ្ទាល់ខ្លួនចេញពីមូលដ្ឋានទិន្នន័យរបស់យើង។ អ៊ីមែលរបស់អ្នកត្រូវបានបម្រុងទុកជាអចិន្ត្រៃយ៍ ហើយអ៊ីមែលដដែលមិនអាចប្រើឡើងវិញដើម្បីចុះឈ្មោះគណនីថ្មីបានទេ។"),
         "accountIsPendingApproval":
@@ -162,7 +181,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("បញ្ចូលទៅក្នុងកន្រ្តក"),
         "addToCartMaximum":
             MessageLookupByLibrary.simpleMessage("បរិមាណអតិបរមាត្រូវបានលើស"),
-        "addToCartSucessfully":
+        "addToCartSuccessfully":
             MessageLookupByLibrary.simpleMessage("បញ្ចូលទៅក្នុងរទេះដោយជោគជ័យ"),
         "addToOrder":
             MessageLookupByLibrary.simpleMessage("បន្ថែមទៅការបញ្ជាទិញ"),
@@ -224,6 +243,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "audioDetected": MessageLookupByLibrary.simpleMessage(
             "បានរកឃើញប្រភេទសំឡេង។ តើអ្នកចង់បន្ថែមទៅកម្មវិធីចាក់អូឌីយ៉ូទេ?"),
         "availability": MessageLookupByLibrary.simpleMessage("ភាពអាចរកបាន"),
+        "availabilityProduct":
+            MessageLookupByLibrary.simpleMessage("ភាពអាចរកបាន៖ "),
         "availablePoints": m2,
         "averageRating":
             MessageLookupByLibrary.simpleMessage("ការវាយតម្លៃជាមធ្យម"),
@@ -248,6 +269,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "bleHasNotBeenEnabled":
             MessageLookupByLibrary.simpleMessage("ប៊្លូធូសមិនត្រូវបានបើកទេ។"),
         "bleState": m3,
+        "block": MessageLookupByLibrary.simpleMessage("ទប់ស្កាត់"),
+        "blockUser":
+            MessageLookupByLibrary.simpleMessage("រារាំងអ្នកប្រើប្រាស់"),
         "blog": MessageLookupByLibrary.simpleMessage("ប្លុក"),
         "booked": MessageLookupByLibrary.simpleMessage("បានកក់រួចហើយ"),
         "booking": MessageLookupByLibrary.simpleMessage("ការកក់ទុក"),
@@ -276,6 +300,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "by": MessageLookupByLibrary.simpleMessage("ដោយ"),
         "byAppointmentOnly":
             MessageLookupByLibrary.simpleMessage("ដោយការណាត់ជួបតែប៉ុណ្ណោះ"),
+        "byAuthor": m4,
         "byBrand": MessageLookupByLibrary.simpleMessage("ដោយម៉ាក"),
         "byCategory": MessageLookupByLibrary.simpleMessage("តាមប្រភេទ"),
         "byPrice": MessageLookupByLibrary.simpleMessage("តាមតម្លៃ"),
@@ -307,9 +332,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "canNotUpdateInfo": MessageLookupByLibrary.simpleMessage(
             "មិនអាចធ្វើបច្ចុប្បន្នភាពព័ត៌មានអ្នកប្រើប្រាស់បានទេ។"),
         "cancel": MessageLookupByLibrary.simpleMessage("បោះបង់"),
+        "cancelOrder": MessageLookupByLibrary.simpleMessage("បោះបង់"),
         "cancelled": MessageLookupByLibrary.simpleMessage("បានលុបចោល"),
         "cancelledRequests":
             MessageLookupByLibrary.simpleMessage("សំណើដែលបានលុបចោល"),
+        "cannotDeleteAccount":
+            MessageLookupByLibrary.simpleMessage("គណនីនេះមិនអាចលុបបានទេ។"),
+        "cannotSendMessage": MessageLookupByLibrary.simpleMessage(
+            "អ្នកមិនអាចផ្ញើសារទៅកាន់អ្នកប្រើប្រាស់នេះបានទេ។"),
         "cantFindThisOrderId": MessageLookupByLibrary.simpleMessage(
             "រកមិនឃើញលេខសម្គាល់ការបញ្ជាទិញនេះទេ។"),
         "cantPickDateInThePast": MessageLookupByLibrary.simpleMessage(
@@ -326,8 +356,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeLanguage": MessageLookupByLibrary.simpleMessage("ប្ដូរ​ភាសា"),
         "changePrinter":
             MessageLookupByLibrary.simpleMessage("ផ្លាស់ប្តូរម៉ាស៊ីនបោះពុម្ព"),
-        "changedCurrencyTo": m4,
-        "characterRemain": m5,
+        "changedCurrencyTo": m5,
+        "characterRemain": m6,
         "chat": MessageLookupByLibrary.simpleMessage("ជជែក"),
         "chatGPT": MessageLookupByLibrary.simpleMessage("ជជែក GPT"),
         "chatListScreen": MessageLookupByLibrary.simpleMessage("សារ"),
@@ -407,15 +437,19 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("បន្តទៅការដឹកជញ្ជូន"),
         "continues": MessageLookupByLibrary.simpleMessage("បន្ត"),
         "conversations": MessageLookupByLibrary.simpleMessage("ការសន្ទនា"),
-        "convertPoint": m6,
+        "convertPoint": m7,
         "copied": MessageLookupByLibrary.simpleMessage("បានចំលង"),
         "copy": MessageLookupByLibrary.simpleMessage("ចម្លង"),
         "copyright": MessageLookupByLibrary.simpleMessage(
             "© 2024 InspireUI រក្សាសិទ្ធិគ្រប់យ៉ាង។"),
-        "countItem": m7,
-        "countItems": m8,
+        "countItem": m8,
+        "countItems": m9,
+        "countProduct": m10,
+        "countProducts": m11,
         "country": MessageLookupByLibrary.simpleMessage("ប្រទេស"),
-        "countryIsNotSupported": m9,
+        "countryCodeIsRequired":
+            MessageLookupByLibrary.simpleMessage("លេខកូដប្រទេសត្រូវបានទាមទារ"),
+        "countryIsNotSupported": m12,
         "countryIsRequired":
             MessageLookupByLibrary.simpleMessage("បញ្ចូលប្រទេសត្រូវបានទាមទារ"),
         "couponCode": MessageLookupByLibrary.simpleMessage("លេខកូដប័ណ្ណ"),
@@ -439,7 +473,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("បង្កើតវ៉ារ្យ៉ង់ទាំងអស់។"),
         "createdOn": MessageLookupByLibrary.simpleMessage("បង្កើតនៅលើ៖"),
         "currencies": MessageLookupByLibrary.simpleMessage("រូបិយប័ណ្ណ"),
-        "currencyIsNotSupported": m10,
+        "currencyIsNotSupported": m13,
         "currentPassword":
             MessageLookupByLibrary.simpleMessage("លេខសំងាត់​បច្ចុប្បន្ន"),
         "currentlyWeOnlyHave":
@@ -471,7 +505,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "dateTime": MessageLookupByLibrary.simpleMessage("ពេល​ណាត់ជួប"),
         "dateWiseClose":
             MessageLookupByLibrary.simpleMessage("កាលបរិច្ឆេទជិតស្និទ្ធ"),
-        "daysAgo": m11,
+        "daysAgo": m14,
         "debit": MessageLookupByLibrary.simpleMessage("ឌីប៊ីត"),
         "decline": MessageLookupByLibrary.simpleMessage("បដិសេធ"),
         "delete": MessageLookupByLibrary.simpleMessage("លុប"),
@@ -481,8 +515,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteAccountSuccess": MessageLookupByLibrary.simpleMessage(
             "គណនីត្រូវបានលុបដោយជោគជ័យ។ វគ្គរបស់អ្នកបានផុតកំណត់ហើយ។"),
         "deleteAll": MessageLookupByLibrary.simpleMessage("លុប​ទាំងអស់"),
+        "deleteConversation":
+            MessageLookupByLibrary.simpleMessage("លុបការសន្ទនា"),
         "delivered": MessageLookupByLibrary.simpleMessage("ចែកចាយ"),
         "deliveredTo": MessageLookupByLibrary.simpleMessage("បញ្ជូនទៅ"),
+        "delivering": MessageLookupByLibrary.simpleMessage("កំពុងចែកចាយ"),
         "deliveryBoy":
             MessageLookupByLibrary.simpleMessage("ក្មេងប្រុសដឹកជញ្ជូន៖"),
         "deliveryDate":
@@ -502,7 +539,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "disablePurchase": MessageLookupByLibrary.simpleMessage("បិទការទិញ"),
         "discount": MessageLookupByLibrary.simpleMessage("ការបញ្ចុះតម្លៃ"),
         "displayName": MessageLookupByLibrary.simpleMessage("បង្ហាញឈ្មោះ"),
-        "distance": m12,
+        "distance": m15,
         "doNotAnyTransactions": MessageLookupByLibrary.simpleMessage(
             "អ្នកមិនទាន់មានប្រតិបត្តិការណាមួយនៅឡើយទេ"),
         "doYouWantToExitApp":
@@ -511,6 +548,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "តើអ្នកចង់ចាកចេញដោយមិនបញ្ជូនការវាយតម្លៃរបស់អ្នកទេ?"),
         "doYouWantToLogout":
             MessageLookupByLibrary.simpleMessage("តើ​អ្នក​ចង់​ចេញ?"),
+        "doYouWantToUnblock": MessageLookupByLibrary.simpleMessage(
+            "តើអ្នកចង់ឈប់ទប់ស្កាត់អ្នកប្រើប្រាស់នេះទេ?"),
         "doesNotSupportApplePay": MessageLookupByLibrary.simpleMessage(
             "ApplePay មិនត្រូវបានគាំទ្រទេ។ សូមពិនិត្យមើលកាបូប និងកាតរបស់អ្នក។"),
         "done": MessageLookupByLibrary.simpleMessage("ធ្វើរួច"),
@@ -530,6 +569,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "editWithoutColon": MessageLookupByLibrary.simpleMessage("កែសម្រួល"),
         "egypt": MessageLookupByLibrary.simpleMessage("អេហ្ស៊ីប"),
         "email": MessageLookupByLibrary.simpleMessage("អ៊ីមែល"),
+        "emailAddressInvalid": MessageLookupByLibrary.simpleMessage(
+            "អាសយដ្ឋានអ៊ីមែលមិនត្រឹមត្រូវទេ។"),
+        "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(
+            "អ៊ី​ម៉ែ​ល​បាន​ប្រើ​រួច​ហើយ​!"),
         "emailDeleteDescription": MessageLookupByLibrary.simpleMessage(
             "ការលុបគណនីរបស់អ្នកនឹងឈប់ជាវអ្នកពីបញ្ជីសំបុត្ររួមទាំងអស់។"),
         "emailDoesNotExist": MessageLookupByLibrary.simpleMessage(
@@ -569,12 +612,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("បើករបៀបវិស្សមកាល"),
         "endDateCantBeAfterFirstDate": MessageLookupByLibrary.simpleMessage(
             "សូមជ្រើសរើសកាលបរិច្ឆេទបន្ទាប់ពីកាលបរិច្ឆេទដំបូង"),
-        "endsIn": m13,
+        "endsIn": m16,
         "english": MessageLookupByLibrary.simpleMessage("អង់គ្លេស"),
-        "enterCaptcha": m14,
+        "enterAmount":
+            MessageLookupByLibrary.simpleMessage("បញ្ចូលចំនួនទឹកប្រាក់"),
+        "enterCaptcha": m17,
         "enterEmailEachRecipient": MessageLookupByLibrary.simpleMessage(
             "បញ្ចូលអាសយដ្ឋានអ៊ីមែលសម្រាប់អ្នកទទួលនីមួយៗ"),
-        "enterSendedCode":
+        "enterSentCode":
             MessageLookupByLibrary.simpleMessage("បញ្ចូលលេខកូដដែលបានផ្ញើទៅ"),
         "enterVoucherCode":
             MessageLookupByLibrary.simpleMessage("បញ្ចូលលេខកូដប័ណ្ណ"),
@@ -594,13 +639,19 @@ class MessageLookup extends MessageLookupByLibrary {
             "បញ្ចូលលេខទូរស័ព្ទរបស់អ្នកដើម្បីចាប់ផ្តើម។"),
         "enterYourPhoneNumber":
             MessageLookupByLibrary.simpleMessage("បញ្ចូលលេខទូរស័ព្ទរបស់អ្នក"),
-        "error": m15,
+        "enterYourUsername": MessageLookupByLibrary.simpleMessage(
+            "បញ្ចូលឈ្មោះអ្នកប្រើរបស់អ្នក។"),
+        "error": m18,
         "errorAmountTransfer": MessageLookupByLibrary.simpleMessage(
             "ចំនួនទឹកប្រាក់ដែលបានបញ្ចូលគឺធំជាងចំនួនកាបូបបច្ចុប្បន្ន។ សូម​ព្យាយាម​ម្តង​ទៀត!"),
         "errorEmailFormat": MessageLookupByLibrary.simpleMessage(
             "សូមបញ្ចូលអាសយដ្ឋានអ៊ីមែលត្រឹមត្រូវ។"),
+        "errorMsg": m19,
+        "errorOnGettingPost":
+            MessageLookupByLibrary.simpleMessage("កំហុសក្នុងការទទួលសារបង្ហោះ!"),
         "errorPasswordFormat": MessageLookupByLibrary.simpleMessage(
             "សូមបញ្ចូលពាក្យសម្ងាត់យ៉ាងហោចណាស់ 8 តួអក្សរ"),
+        "errorTitle": MessageLookupByLibrary.simpleMessage("កំហុស"),
         "evening": MessageLookupByLibrary.simpleMessage("ល្ងាច"),
         "events": MessageLookupByLibrary.simpleMessage("ព្រឹត្តិការណ៍"),
         "expectedDeliveryDate": MessageLookupByLibrary.simpleMessage(
@@ -609,7 +660,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "expiredDate":
             MessageLookupByLibrary.simpleMessage("កាលបរិច្ឆេទ​ផុតកំណត់"),
         "expiredDateHint": MessageLookupByLibrary.simpleMessage("MM/YY"),
-        "expiringInTime": m16,
+        "expiringInTime": m20,
         "exploreNow": MessageLookupByLibrary.simpleMessage("រុករកឥឡូវនេះ"),
         "external": MessageLookupByLibrary.simpleMessage("ខាងក្រៅ"),
         "extraServices":
@@ -654,6 +705,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ការបញ្ចុះតម្លៃផលិតផលថេរ"),
         "forThisProduct":
             MessageLookupByLibrary.simpleMessage("សម្រាប់ផលិតផលនេះ។"),
+        "free": MessageLookupByLibrary.simpleMessage("ឥតគិតថ្លៃ"),
         "freeOfCharge": MessageLookupByLibrary.simpleMessage("ដោយ​ឥត​គិត​ថ្លៃ"),
         "french": MessageLookupByLibrary.simpleMessage("បារាំង"),
         "friday": MessageLookupByLibrary.simpleMessage("ថ្ងៃសុក្រ"),
@@ -681,7 +733,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "goBackToShipping":
             MessageLookupByLibrary.simpleMessage("ត្រលប់ទៅការដឹកជញ្ជូនវិញ។"),
         "good": MessageLookupByLibrary.simpleMessage("ល្អ"),
-        "greaterDistance": m17,
+        "greaterDistance": m21,
         "greek": MessageLookupByLibrary.simpleMessage("ក្រិក"),
         "grossSales": MessageLookupByLibrary.simpleMessage("ការលក់សរុប"),
         "grouped": MessageLookupByLibrary.simpleMessage("ដាក់ជាក្រុម"),
@@ -700,7 +752,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ប្រវត្តិការទូទាត់"),
         "home": MessageLookupByLibrary.simpleMessage("ទំព័រដើម"),
         "hour": MessageLookupByLibrary.simpleMessage("ម៉ោង"),
-        "hoursAgo": m18,
+        "hoursAgo": m22,
         "hungarian": MessageLookupByLibrary.simpleMessage("ហុងគ្រី"),
         "hungary": MessageLookupByLibrary.simpleMessage("ហុងគ្រី"),
         "iAgree": MessageLookupByLibrary.simpleMessage("ខ្ញុំ​យល់ស្រប​ជាមួយ"),
@@ -718,7 +770,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "indonesian": MessageLookupByLibrary.simpleMessage("ឥណ្ឌូនេស៊ី"),
         "informationTable":
             MessageLookupByLibrary.simpleMessage("តារាងព័ត៌មាន"),
+        "installDigitsPlugin": MessageLookupByLibrary.simpleMessage(
+            "សូមដំឡើង DIGITS: Wordpress Mobile Number Signup and Login plugin"),
         "instantlyClose": MessageLookupByLibrary.simpleMessage("បិទភ្លាមៗ"),
+        "insufficientBalanceMessage": m23,
         "invalidPhoneNumber":
             MessageLookupByLibrary.simpleMessage("លេខទូរស័ព្ទមិនត្រឹមត្រូវ"),
         "invalidSMSCode": MessageLookupByLibrary.simpleMessage(
@@ -731,7 +786,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "isTyping": MessageLookupByLibrary.simpleMessage("ជា​ការ​វាយ..."),
         "italian": MessageLookupByLibrary.simpleMessage("អ៊ីតាលី"),
         "item": MessageLookupByLibrary.simpleMessage("ធាតុ"),
-        "itemQuantity": m19,
+        "itemQuantity": m24,
         "itemTotal": MessageLookupByLibrary.simpleMessage("ទំនិញសរុប៖"),
         "items": MessageLookupByLibrary.simpleMessage("ទំនិញ"),
         "itsOrdered":
@@ -774,7 +829,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("ចូល"),
         "loginCanceled":
             MessageLookupByLibrary.simpleMessage("ការចូលត្រូវបានលុបចោល"),
-        "loginErrorServiceProvider": m20,
+        "loginErrorServiceProvider": m25,
         "loginFailed":
             MessageLookupByLibrary.simpleMessage("ការ​ចូល​ប្រើ​បរាជ័យ!"),
         "loginInvalid": MessageLookupByLibrary.simpleMessage(
@@ -802,29 +857,33 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("សម្គាល់ថាបានដឹកជញ្ជូន"),
         "markAsUnread":
             MessageLookupByLibrary.simpleMessage("សម្គាល់ថាមិនទាន់អាន"),
-        "maxAmountForPayment": m21,
-        "maximumFileSizeMb": m22,
+        "maxAmountForPayment": m26,
+        "maximumFileSizeMb": m27,
         "maybeLater": MessageLookupByLibrary.simpleMessage("ប្រហែលជា​ពេលក្រោយ"),
         "menuOrder": MessageLookupByLibrary.simpleMessage("លំដាប់ម៉ឺនុយ"),
         "menus": MessageLookupByLibrary.simpleMessage("ម៉ឺនុយ"),
         "message": MessageLookupByLibrary.simpleMessage("សារ"),
         "messageTo": MessageLookupByLibrary.simpleMessage("ផ្ញើសារទៅ"),
-        "minAmountForPayment": m23,
+        "minAmountForPayment": m28,
         "minimumQuantityIs":
             MessageLookupByLibrary.simpleMessage("បរិមាណអប្បបរមាគឺ"),
-        "minutesAgo": m24,
+        "minutesAgo": m29,
         "mobile": MessageLookupByLibrary.simpleMessage("ទូរស័ព្ទចល័ត"),
+        "mobileIsRequired":
+            MessageLookupByLibrary.simpleMessage("ទូរស័ព្ទចល័តត្រូវបានទាមទារ"),
+        "mobileNumberInUse":
+            MessageLookupByLibrary.simpleMessage("លេខទូរសព្ទ័បានប្រើហើយ!"),
         "mobileVerification":
             MessageLookupByLibrary.simpleMessage("ការផ្ទៀងផ្ទាត់តាមទូរស័ព្ទ"),
         "momentAgo": MessageLookupByLibrary.simpleMessage("មួយសន្ទុះមុន។"),
         "monday": MessageLookupByLibrary.simpleMessage("ថ្ងៃច័ន្ទ"),
-        "monthsAgo": m25,
+        "monthsAgo": m30,
         "more": MessageLookupByLibrary.simpleMessage("...ច្រើនទៀត"),
-        "moreFromStore": m26,
+        "moreFromStore": m31,
         "moreInformation":
             MessageLookupByLibrary.simpleMessage("ព័​ត៍​មាន​បន្ថែម"),
         "morning": MessageLookupByLibrary.simpleMessage("ព្រឹក"),
-        "mustBeBoughtInGroupsOf": m27,
+        "mustBeBoughtInGroupsOf": m32,
         "mustSelectOneItem":
             MessageLookupByLibrary.simpleMessage("ត្រូវតែជ្រើសរើស 1 ទំនិញ"),
         "myCart": MessageLookupByLibrary.simpleMessage("កន្រ្តករបស់ខ្ញុំ"),
@@ -836,10 +895,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "myWallet": MessageLookupByLibrary.simpleMessage("កាបូបរបស់ខ្ញុំ"),
         "myWishList": MessageLookupByLibrary.simpleMessage(
             "បញ្ជី​ចាប់អារម្មណ៍របស់​ខ្ញុំ"),
-        "nItems": m28,
+        "nItems": m33,
         "name": MessageLookupByLibrary.simpleMessage("ឈ្មោះ"),
         "nameOnCard": MessageLookupByLibrary.simpleMessage("ឈ្មោះ​នៅ​លើ​កាត"),
         "nearbyPlaces": MessageLookupByLibrary.simpleMessage("កន្លែងនៅក្បែរ"),
+        "needHelp": MessageLookupByLibrary.simpleMessage("ត្រូវការជំនួយ?"),
         "needToLoginAgain": MessageLookupByLibrary.simpleMessage(
             "អ្នក​ត្រូវ​ចូល​ម្ដង​ទៀត​ដើម្បី​មាន​ប្រសិទ្ធភាព​អាប់ដេត"),
         "netherlands": MessageLookupByLibrary.simpleMessage("ហូឡង់"),
@@ -859,10 +919,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "អូ៎ ប្លុកហាក់ដូចជាលែងមានទៀតហើយ"),
         "noCameraPermissionIsGranted": MessageLookupByLibrary.simpleMessage(
             "គ្មានការអនុញ្ញាតពីកាមេរ៉ាទេ។ សូមផ្តល់វានៅក្នុងការកំណត់ឧបករណ៍របស់អ្នក។"),
+        "noComments": MessageLookupByLibrary.simpleMessage("គ្មានយោបល់"),
         "noConversation":
             MessageLookupByLibrary.simpleMessage("មិនមានការសន្ទនានៅឡើយទេ"),
         "noConversationDescription": MessageLookupByLibrary.simpleMessage(
-            "វានឹងបង្ហាញនៅពេលអតិថិជនរបស់អ្នកចាប់ផ្តើមជជែកជាមួយអ្នក"),
+            "វានឹងបង្ហាញនៅពេលនរណាម្នាក់ចាប់ផ្តើមជជែកជាមួយអ្នក"),
         "noData": MessageLookupByLibrary.simpleMessage("មិនមានទិន្នន័យទៀតទេ"),
         "noFavoritesYet": MessageLookupByLibrary.simpleMessage(
             "មិនទាន់មានចំណូលចិត្តនៅឡើយទេ។"),
@@ -875,6 +936,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "noListingNearby":
             MessageLookupByLibrary.simpleMessage("គ្មានបញ្ជីនៅក្បែរ!"),
         "noOrders": MessageLookupByLibrary.simpleMessage("គ្មានការបញ្ជាទិញ"),
+        "noPaymentMethodsAvailable":
+            MessageLookupByLibrary.simpleMessage("មិនមានវិធីបង់ប្រាក់ទេ។"),
         "noPermissionForCurrentRole": MessageLookupByLibrary.simpleMessage(
             "សូមអភ័យទោស ផលិតផលនេះមិនអាចចូលប្រើបានសម្រាប់តួនាទីបច្ចុប្បន្នរបស់អ្នកទេ។"),
         "noPermissionToViewProduct": MessageLookupByLibrary.simpleMessage(
@@ -929,7 +992,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "openingHours": MessageLookupByLibrary.simpleMessage("បើកម៉ោង"),
         "optional": MessageLookupByLibrary.simpleMessage("ស្រេចចិត្ត"),
         "options": MessageLookupByLibrary.simpleMessage("ជម្រើស"),
-        "optionsTotal": m29,
+        "optionsTotal": m34,
         "or": MessageLookupByLibrary.simpleMessage("ឬ"),
         "orLoginWith": MessageLookupByLibrary.simpleMessage("ឬចូលជាមួយ"),
         "orderConfirmation":
@@ -1015,7 +1078,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "payByWallet":
             MessageLookupByLibrary.simpleMessage("បង់តាមកាបូប Online"),
         "payNow": MessageLookupByLibrary.simpleMessage("ទូទាត់ឥឡូវនេះ"),
-        "payWithAmount": m30,
+        "payWithAmount": m35,
         "payment": MessageLookupByLibrary.simpleMessage("ការទូទាត់"),
         "paymentDetailsChangedSuccessfully":
             MessageLookupByLibrary.simpleMessage(
@@ -1043,6 +1106,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ការផ្ទៀងផ្ទាត់លេខទូរស័ព្ទ"),
         "pickADate": MessageLookupByLibrary.simpleMessage(
             "ជ្រើសរើសកាលបរិច្ឆេទ និងពេលវេលា"),
+        "picking":
+            MessageLookupByLibrary.simpleMessage("កំពុងរង់ចាំការដឹកជញ្ជូន"),
         "placeMyOrder":
             MessageLookupByLibrary.simpleMessage("សម្រាច់ការបញ្ជាទិញរបស់ខ្ញុំ"),
         "playAll": MessageLookupByLibrary.simpleMessage("សម្រាច់​ទាំងអស់"),
@@ -1062,6 +1127,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("សូមបញ្ចូលឈ្មោះផលិតផល"),
         "pleaseFillCode":
             MessageLookupByLibrary.simpleMessage("សូមបំពេញលេខកូដរបស់អ្នក។"),
+        "pleaseFillUpAllCellsProperly": MessageLookupByLibrary.simpleMessage(
+            "* សូមបំពេញប្រអប់ទាំងអស់ឱ្យបានត្រឹមត្រូវ"),
         "pleaseIncreaseOrDecreaseTheQuantity":
             MessageLookupByLibrary.simpleMessage(
                 "សូមបង្កើន ឬបន្ថយបរិមាណ ដើម្បីបន្ត។"),
@@ -1083,8 +1150,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "សូមជ្រើសរើសជម្រើសដែលត្រូវការ!"),
         "pleaseSignInBeforeUploading": MessageLookupByLibrary.simpleMessage(
             "សូមចូលគណនីរបស់អ្នក មុនពេលផ្ទុកឯកសារណាមួយ។"),
-        "pleasefillUpAllCellsProperly": MessageLookupByLibrary.simpleMessage(
-            "* សូមបំពេញប្រអប់ទាំងអស់ឱ្យបានត្រឹមត្រូវ"),
         "point": MessageLookupByLibrary.simpleMessage("ចំណុច"),
         "pointMsgConfigNotFound": MessageLookupByLibrary.simpleMessage(
             "មិនមានការកំណត់រចនាសម្ព័ន្ធចំណុចបញ្ចុះតម្លៃត្រូវបានរកឃើញនៅក្នុងម៉ាស៊ីនមេទេ។"),
@@ -1146,8 +1211,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "privacyTerms":
             MessageLookupByLibrary.simpleMessage("ឯកជនភាព & លក្ខខណ្ឌ"),
         "private": MessageLookupByLibrary.simpleMessage("ឯកជន"),
+        "processing": MessageLookupByLibrary.simpleMessage("កំពុងដំណើរការ..."),
         "product": MessageLookupByLibrary.simpleMessage("ផលិតផល"),
-        "productAddToCart": m31,
+        "productAddToCart": m36,
         "productAdded":
             MessageLookupByLibrary.simpleMessage("ផលិតផលត្រូវបានបន្ថែម"),
         "productCreateReview": MessageLookupByLibrary.simpleMessage(
@@ -1185,10 +1251,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "qRCodeSaveFailure": MessageLookupByLibrary.simpleMessage(
             "បរាជ័យក្នុងការរក្សាទុក QR Code"),
         "qty": MessageLookupByLibrary.simpleMessage("ចំនួន"),
-        "qtyTotal": m32,
+        "qtyTotal": m37,
         "quantity": MessageLookupByLibrary.simpleMessage("បរិមាណ"),
         "quantityProductExceedInStock": MessageLookupByLibrary.simpleMessage(
             "បរិមាណបច្ចុប្បន្នគឺច្រើនជាងបរិមាណនៅក្នុងស្តុក"),
+        "random": MessageLookupByLibrary.simpleMessage("ចៃដន្យ"),
         "rate": MessageLookupByLibrary.simpleMessage("អត្រា"),
         "rateProduct": MessageLookupByLibrary.simpleMessage("វាយតម្លៃផលិតផល"),
         "rateTheApp": MessageLookupByLibrary.simpleMessage("វាយតម្លៃកម្មវិធី"),
@@ -1201,15 +1268,18 @@ class MessageLookup extends MessageLookupByLibrary {
             "សូមវាយតម្លៃមុនពេលអ្នកផ្ញើរមតិយោបល់របស់អ្នក។"),
         "reOrder": MessageLookupByLibrary.simpleMessage("បញ្ជាទិញម្តងទៀត"),
         "readReviews": MessageLookupByLibrary.simpleMessage("ពិនិត្យមត្តិ"),
+        "readyToPick":
+            MessageLookupByLibrary.simpleMessage("កំពុងរង់ចាំការដឹកជញ្ជូន"),
         "receivedMoney": MessageLookupByLibrary.simpleMessage("បានទទួលប្រាក់"),
+        "receivedMoneyFrom": m38,
         "receiver": MessageLookupByLibrary.simpleMessage("អ្នកទទួល"),
+        "recent": MessageLookupByLibrary.simpleMessage("កើតមានឡើង"),
         "recentSearches":
             MessageLookupByLibrary.simpleMessage("ប្រវត្តិការស្វែងរក"),
         "recentView":
             MessageLookupByLibrary.simpleMessage("ទិដ្ឋភាពកើតមានឡើងរបស់អ្នក។"),
         "recentlyViewed":
             MessageLookupByLibrary.simpleMessage("បានមើលថ្មីៗនេះ"),
-        "recents": MessageLookupByLibrary.simpleMessage("កើតមានឡើង"),
         "recommended": MessageLookupByLibrary.simpleMessage("ណែនាំ"),
         "recurringTotals": MessageLookupByLibrary.simpleMessage("សរុបឡើងវិញ"),
         "refresh": MessageLookupByLibrary.simpleMessage("ធ្វើ​ឱ្យ​ស្រស់"),
@@ -1228,8 +1298,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "registerAs": MessageLookupByLibrary.simpleMessage("ចុះឈ្មោះជា"),
         "registerAsVendor":
             MessageLookupByLibrary.simpleMessage("ចុះឈ្មោះជាអ្នកលក់"),
+        "registerErrorSyncAccount": MessageLookupByLibrary.simpleMessage(
+            "មិនអាចធ្វើសមកាលកម្មគណនីបានទេ។ សូមចូលដើម្បីបន្ត។"),
         "registerFailed":
             MessageLookupByLibrary.simpleMessage("ការចុះឈ្មោះបានបរាជ័យ"),
+        "registerInvalid": MessageLookupByLibrary.simpleMessage(
+            "សំណើនេះគឺមិនត្រឹមត្រូវ ឬផុតកំណត់។ សូមព្យាយាមម្តងទៀត"),
         "registerSuccess":
             MessageLookupByLibrary.simpleMessage("ចុះឈ្មោះដោយជោគជ័យ"),
         "regularPrice": MessageLookupByLibrary.simpleMessage("តម្លៃ​ធម្មតា"),
@@ -1261,7 +1335,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reviews": MessageLookupByLibrary.simpleMessage("ពិនិត្យ"),
         "romanian": MessageLookupByLibrary.simpleMessage("រូម៉ានី"),
         "russian": MessageLookupByLibrary.simpleMessage("រុស្ស៊ី"),
-        "sale": m33,
+        "sale": m39,
         "salePrice": MessageLookupByLibrary.simpleMessage("តំលៃពិសេស"),
         "saturday": MessageLookupByLibrary.simpleMessage("ថ្ងៃសៅរ៍"),
         "save": MessageLookupByLibrary.simpleMessage("រក្សាទុក"),
@@ -1294,12 +1368,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "searchOrderId": MessageLookupByLibrary.simpleMessage(
             "ស្វែងរកដោយប្រើលេខសម្គាល់ការបញ្ជាទិញ..."),
         "searchPlace": MessageLookupByLibrary.simpleMessage("ស្វែងរកទីកន្លែង"),
-        "searchResultFor": m34,
-        "searchResultItem": m35,
-        "searchResultItems": m36,
+        "searchResultFor": m40,
+        "searchResultItem": m41,
+        "searchResultItems": m42,
         "searchingAddress":
             MessageLookupByLibrary.simpleMessage("ស្វែងរកអាសយដ្ឋាន"),
-        "secondsAgo": m37,
+        "secondsAgo": m43,
         "seeAll": MessageLookupByLibrary.simpleMessage("ឃើញ​ទាំងអស់"),
         "seeNewAppConfig": MessageLookupByLibrary.simpleMessage(
             "បន្តដើម្បីមើលមាតិកាថ្មីនៅលើកម្មវិធីរបស់អ្នក។"),
@@ -1331,6 +1405,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "sendSMSCode": MessageLookupByLibrary.simpleMessage("យកលេខកូដ"),
         "sendSMStoVendor":
             MessageLookupByLibrary.simpleMessage("ផ្ញើសារ SMS ទៅម្ចាស់ហាង"),
+        "sendTo": MessageLookupByLibrary.simpleMessage(
+            "គណនីដែលអ្នកចង់ផ្ទេរទៅ (អ៊ីមែល)"),
         "separateMultipleEmailWithComma": MessageLookupByLibrary.simpleMessage(
             "បំបែកអាសយដ្ឋានអ៊ីមែលច្រើនដោយប្រើសញ្ញាក្បៀស។"),
         "serbian": MessageLookupByLibrary.simpleMessage("ស៊ែប៊ី"),
@@ -1345,6 +1421,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shipping": MessageLookupByLibrary.simpleMessage("ការដឹកជញ្ជូន"),
         "shippingAddress":
             MessageLookupByLibrary.simpleMessage("អាសយដ្ឋានដឹកជញ្ជូន"),
+        "shippingFee": MessageLookupByLibrary.simpleMessage("ថ្លៃដឹកជញ្ជូន"),
         "shippingMethod":
             MessageLookupByLibrary.simpleMessage("វិធី​សា​ស្រ្ត​ដឹកជញ្ជូន"),
         "shop": MessageLookupByLibrary.simpleMessage("ហាង"),
@@ -1353,7 +1430,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shopOrders": MessageLookupByLibrary.simpleMessage("ការបញ្ជាទិញតាមហាង"),
         "shopPhone": MessageLookupByLibrary.simpleMessage("ហាងទូរស័ព្ទ"),
         "shopSlug": MessageLookupByLibrary.simpleMessage("ហាង slug"),
-        "shoppingCartItems": m38,
+        "shoppingCartItems": m44,
         "shortDescription":
             MessageLookupByLibrary.simpleMessage("ការពិពណ៌នាខ្លី"),
         "showAllMyOrdered": MessageLookupByLibrary.simpleMessage(
@@ -1376,7 +1453,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "slovak": MessageLookupByLibrary.simpleMessage("ស្លូវ៉ាគី"),
         "smsCodeExpired": MessageLookupByLibrary.simpleMessage(
             "លេខកូដ SMS បានផុតកំណត់ហើយ។ សូមផ្ញើលេខកូដផ្ទៀងផ្ទាត់ឡើងវិញ ដើម្បីព្យាយាមម្តងទៀត។"),
-        "sold": m39,
+        "sold": m45,
         "soldBy": MessageLookupByLibrary.simpleMessage("បានលក់​ដោយ"),
         "somethingWrong": MessageLookupByLibrary.simpleMessage(
             "មាន​អ្វីមួយ​មិន​ប្រក្រតី។ សូម​ព្យាយាម​ម្តង​ទៀត​នៅ​ពេល​ក្រោយ។"),
@@ -1449,9 +1526,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "tapTheMicToTalk":
             MessageLookupByLibrary.simpleMessage("ប៉ះមីក្រូហ្វូនដើម្បីនិយាយ"),
         "tax": MessageLookupByLibrary.simpleMessage("ពន្ធ"),
+        "teraWallet": MessageLookupByLibrary.simpleMessage("TeraWallet"),
         "terrible": MessageLookupByLibrary.simpleMessage("គួរឱ្យខ្លាច"),
         "thailand": MessageLookupByLibrary.simpleMessage("ថៃ"),
-        "theFieldIsRequired": m40,
+        "theFieldIsRequired": m46,
         "thisDateIsNotAvailable":
             MessageLookupByLibrary.simpleMessage("កាលបរិច្ឆេទនេះមិនមានទេ។"),
         "thisFeatureDoesNotSupportTheCurrentLanguage":
@@ -1472,7 +1550,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "titleAToZ": MessageLookupByLibrary.simpleMessage("ចំណងជើង៖ A ដល់ Z"),
         "titleZToA": MessageLookupByLibrary.simpleMessage("ចំណងជើង៖ Z ដល់ A"),
         "to": MessageLookupByLibrary.simpleMessage("ទៅ"),
-        "tooManyFaildedLogin": MessageLookupByLibrary.simpleMessage(
+        "tooManyFailedLogin": MessageLookupByLibrary.simpleMessage(
             "ការព្យាយាមចូលដែលបរាជ័យច្រើនពេក។ សូម​ព្យាយាម​ម្តង​ទៀត​នៅ​ពេល​ក្រោយ។"),
         "topUp": MessageLookupByLibrary.simpleMessage("បញ្ចូល​លុយ"),
         "topUpProductNotFound": MessageLookupByLibrary.simpleMessage(
@@ -1481,7 +1559,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "totalCartValue":
             MessageLookupByLibrary.simpleMessage("តម្លៃសរុបនៅក្នុងកន្ត្រក"),
         "totalPrice": MessageLookupByLibrary.simpleMessage("តម្លៃ​សរុប"),
-        "totalProducts": m41,
+        "totalProducts": m47,
         "totalTax": MessageLookupByLibrary.simpleMessage("ពន្ធសរុប"),
         "trackingNumberIs": MessageLookupByLibrary.simpleMessage("លេខតាមដានគឺ"),
         "trackingPage": MessageLookupByLibrary.simpleMessage("ទំព័រតាមដាន"),
@@ -1490,6 +1568,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "transactionDetail": MessageLookupByLibrary.simpleMessage(
             "ព័ត៌មានលម្អិតអំពីប្រតិបត្តិការ"),
         "transactionFailded":
+            MessageLookupByLibrary.simpleMessage("ប្រតិបត្តិការបានបរាជ័យ"),
+        "transactionFailed":
             MessageLookupByLibrary.simpleMessage("ប្រតិបត្តិការបានបរាជ័យ"),
         "transactionFee":
             MessageLookupByLibrary.simpleMessage("ថ្លៃប្រតិបត្តិការ"),
@@ -1502,6 +1582,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "អ្នកមិនអាចផ្ទេរទៅអ្នកប្រើប្រាស់នេះបានទេ។"),
         "transferFailed":
             MessageLookupByLibrary.simpleMessage("ការផ្ទេរបានបរាជ័យ"),
+        "transferMoneyTo": m48,
         "transferSuccess":
             MessageLookupByLibrary.simpleMessage("ការផ្ទេរបានជោគជ័យ"),
         "tuesday": MessageLookupByLibrary.simpleMessage("ថ្ងៃអង្គារ"),
@@ -1513,6 +1594,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "typing": MessageLookupByLibrary.simpleMessage("កំពុងវាយ..."),
         "ukrainian": MessageLookupByLibrary.simpleMessage("អ៊ុយក្រែន"),
         "unavailable": MessageLookupByLibrary.simpleMessage("មិនអាចប្រើបាន"),
+        "unblock": MessageLookupByLibrary.simpleMessage("ឈប់ទប់ស្កាត់"),
+        "unblockUser":
+            MessageLookupByLibrary.simpleMessage("ឈប់រារាំងអ្នកប្រើប្រាស់"),
         "undo": MessageLookupByLibrary.simpleMessage("ធ្វើឡើងវិញ"),
         "unpaid": MessageLookupByLibrary.simpleMessage("មិនទាន់បង់ប្រាក់"),
         "update": MessageLookupByLibrary.simpleMessage("អាប់ដេត"),
@@ -1532,20 +1616,30 @@ class MessageLookup extends MessageLookupByLibrary {
         "uploadProduct": MessageLookupByLibrary.simpleMessage("បង្ហោះផលិតផល"),
         "uploading": MessageLookupByLibrary.simpleMessage("កំពុងបង្ហោះ..."),
         "url": MessageLookupByLibrary.simpleMessage("Url"),
-        "useMaximumPointDiscount": m42,
+        "useMaximumPointDiscount": m49,
         "useNow": MessageLookupByLibrary.simpleMessage("ប្រើឥឡូវនេះ"),
         "useThisImage": MessageLookupByLibrary.simpleMessage("ប្រើរូបភាពនេះ។"),
         "userExists": MessageLookupByLibrary.simpleMessage(
             "ឈ្មោះអ្នកប្រើ/អ៊ីមែលនេះមានរួចហើយ។"),
+        "userHasBeenBlocked": MessageLookupByLibrary.simpleMessage(
+            "អ្នកប្រើប្រាស់ត្រូវបានរារាំង"),
         "userNameInCorrect": MessageLookupByLibrary.simpleMessage(
             "ឈ្មោះ​អ្នក​ប្រើ ឬ​ពាក្យ​សម្ងាត់​មិន​ត្រឹមត្រូវ។"),
+        "userNotFound":
+            MessageLookupByLibrary.simpleMessage("រកមិនឃើញអ្នកប្រើប្រាស់ទេ។"),
         "username":
             MessageLookupByLibrary.simpleMessage("ឈ្មោះ​អ្នកប្រើប្រាស់"),
+        "usernameAlreadyInUse": MessageLookupByLibrary.simpleMessage(
+            "ឈ្មោះអ្នកប្រើត្រូវបានប្រើប្រាស់រួចហើយ!"),
         "usernameAndPasswordRequired": MessageLookupByLibrary.simpleMessage(
             "ឈ្មោះអ្នកប្រើ និងពាក្យសម្ងាត់ត្រូវបានទាមទារ"),
+        "usernameInvalid": MessageLookupByLibrary.simpleMessage(
+            "ឈ្មោះអ្នកប្រើមិនត្រឹមត្រូវទេ។"),
+        "usernameIsRequired":
+            MessageLookupByLibrary.simpleMessage("ឈ្មោះអ្នកប្រើត្រូវបានទាមទារ"),
         "vacationMessage": MessageLookupByLibrary.simpleMessage("សារវិស្សមកាល"),
         "vacationType": MessageLookupByLibrary.simpleMessage("ប្រភេទវិស្សមកាល"),
-        "validUntilDate": m43,
+        "validUntilDate": m50,
         "variable": MessageLookupByLibrary.simpleMessage("អថេរ"),
         "variation": MessageLookupByLibrary.simpleMessage("បំរែបំរួល"),
         "vendor": MessageLookupByLibrary.simpleMessage("អ្នកលក់"),
@@ -1576,12 +1670,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "waitingForConfirmation":
             MessageLookupByLibrary.simpleMessage("រង់ចាំសម្រាប់ការបញ្ជាក់"),
         "walletBalance": MessageLookupByLibrary.simpleMessage("សមតុល្យកាបូប"),
+        "walletBalanceWithValue": m51,
         "walletName": MessageLookupByLibrary.simpleMessage("ឈ្មោះកាបូប"),
-        "warning": m44,
-        "warningCurrencyMessageForWallet": m45,
+        "warning": m52,
+        "warningCurrencyMessageForWallet": m53,
         "weFoundBlogs":
             MessageLookupByLibrary.simpleMessage("យើងបានរកឃើញប្លុក"),
-        "weFoundProducts": m46,
+        "weFoundProducts": m54,
         "weNeedCameraAccessTo": MessageLookupByLibrary.simpleMessage(
             "យើង​ត្រូវ​ការ​ការ​ចូល​ប្រើ​កាមេរ៉ា​ដើម្បី​ស្កេន​រក​កូដ QR ឬ Bar code។"),
         "weSentAnOTPTo": MessageLookupByLibrary.simpleMessage(
@@ -1591,17 +1686,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "webView": MessageLookupByLibrary.simpleMessage("មើលក្នុងវេបសារ"),
         "website": MessageLookupByLibrary.simpleMessage("គេហទំព័រ"),
         "wednesday": MessageLookupByLibrary.simpleMessage("ថ្ងៃពុធ"),
-        "week": m47,
+        "week": m55,
         "welcome": MessageLookupByLibrary.simpleMessage("សូមស្វាគមន៍"),
         "welcomeBack": MessageLookupByLibrary.simpleMessage(
             "ស្វា​គម​ន៏​ការ​ត្រ​លប់​មក​វិញ"),
         "welcomeRegister": MessageLookupByLibrary.simpleMessage(
             "ចាប់ផ្តើមដំណើរទិញទំនិញរបស់អ្នកជាមួយយើងឥឡូវនេះ"),
-        "welcomeUser": m48,
+        "welcomeUser": m56,
         "whichLanguageDoYouPrefer":
             MessageLookupByLibrary.simpleMessage("តើអ្នកចូលចិត្តភាសាមួយណា?"),
         "wholesaleRegisterMsg": MessageLookupByLibrary.simpleMessage(
             "សូមទាក់ទងទៅអ្នកគ្រប់គ្រងដើម្បីយល់ព្រមលើការចុះឈ្មោះរបស់អ្នក។"),
+        "willNotSendAndReceiveMessage": MessageLookupByLibrary.simpleMessage(
+            "អ្នកនឹងមិនអាចផ្ញើ និងទទួលសារពីអ្នកប្រើប្រាស់នេះបានទេ។"),
         "withdrawAmount": MessageLookupByLibrary.simpleMessage("ដកប្រាក់"),
         "withdrawRequest": MessageLookupByLibrary.simpleMessage("សំណើដកប្រាក់"),
         "withdrawal": MessageLookupByLibrary.simpleMessage("ការដកប្រាក់"),
@@ -1611,15 +1708,20 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("សរសេរមតិរបស់អ្នក។"),
         "writeYourNote":
             MessageLookupByLibrary.simpleMessage("សរសេរកំណត់ចំណាំរបស់អ្នក។"),
-        "yearsAgo": m49,
+        "yearsAgo": m57,
         "yes": MessageLookupByLibrary.simpleMessage("ត្រូវហើយ"),
         "youCanOnlyOrderSingleStore": MessageLookupByLibrary.simpleMessage(
             "អ្នកអាចទិញបានតែពីហាងលុះត្រាតែចូលប្រើ"),
         "youCanOnlyPurchase":
             MessageLookupByLibrary.simpleMessage("អ្នកអាចទិញតែប៉ុណ្ណោះ"),
-        "youHaveAssignedToOrder": m50,
+        "youDontHavePermissionToCreatePost":
+            MessageLookupByLibrary.simpleMessage(
+                "អ្នក​មិន​មាន​សិទ្ធិ​ក្នុង​ការ​បង្កើត​ការ​បង្ហោះ​ទេ។"),
+        "youHaveAssignedToOrder": m58,
         "youHaveBeenSaveAddressYourLocal": MessageLookupByLibrary.simpleMessage(
             "អ្នកត្រូវបានរក្សាទុកអាសយដ្ឋានក្នុងតំបន់របស់អ្នក។"),
+        "youHaveNoPost":
+            MessageLookupByLibrary.simpleMessage("អ្នកមិនមានប្រកាសទេ។"),
         "youHavePoints":
             MessageLookupByLibrary.simpleMessage("អ្នកមានពិន្ទុ \$point"),
         "youMightAlsoLike":

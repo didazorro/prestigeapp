@@ -23,6 +23,12 @@ class CountryState {
     name = parsedJson['name'];
   }
 
+  CountryState.fromHaravan(Map parsedJson) {
+    id = parsedJson['id']?.toString();
+    code = parsedJson['code'];
+    name = parsedJson['name'];
+  }
+
   CountryState.fromOpencartJson(Map parsedJson) {
     id = parsedJson['zone_id'];
     code = parsedJson['code'];
@@ -30,7 +36,7 @@ class CountryState {
   }
 
   CountryState.fromPrestashop(Map parsedJson) {
-    id = parsedJson['id'].toString();
+    id = parsedJson['id']?.toString();
     name = parsedJson['name'];
     code = parsedJson['iso_code'];
   }

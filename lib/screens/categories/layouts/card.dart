@@ -57,6 +57,7 @@ class _StateCardCategories extends BaseScreen<CardCategories> {
         cateId: category.id,
         cateName: category.name,
       ),
+      context: context,
     );
   }
 
@@ -90,6 +91,7 @@ class _StateCardCategories extends BaseScreen<CardCategories> {
                             cateId: cate.id,
                             cateName: cate.name,
                           ),
+                          context: context,
                         );
                       }
                     },
@@ -105,6 +107,7 @@ class _StateCardCategories extends BaseScreen<CardCategories> {
                                   cateId: cate.id,
                                   cateName: cate.name,
                                 ),
+                                context: context,
                               );
                             },
                             parent: SubItem(cate, level: 2),
@@ -137,6 +140,7 @@ class _StateCardCategories extends BaseScreen<CardCategories> {
                     parentId: category.id!.toString(),
                     categoryName: category.name,
                   ),
+                  context: context,
                 );
                 return;
               }
@@ -146,6 +150,7 @@ class _StateCardCategories extends BaseScreen<CardCategories> {
                   cateId: category.id,
                   cateName: category.name,
                 ),
+                context: context,
               );
             },
             enableParallax: widget.enableParallax,
@@ -195,6 +200,7 @@ class _StateCardCategories extends BaseScreen<CardCategories> {
                             cateId: category.id,
                             cateName: category.name,
                           ),
+                          context: context,
                         );
                       },
                 enableParallax: widget.enableParallax,
@@ -354,13 +360,14 @@ class SubItem extends StatelessWidget {
 
   const SubItem(this.category, {this.seeAll = '', this.level = 0});
 
-  void showProductList() {
+  void showProductList(BuildContext context) {
     FluxNavigate.pushNamed(
       RouteList.backdrop,
       arguments: BackDropArguments(
         cateId: category.id,
         cateName: category.name,
       ),
+      context: context,
     );
   }
 
@@ -414,7 +421,7 @@ class SubItem extends StatelessWidget {
               ),
               if ((category.totalProduct ?? 0) > 0)
                 GestureDetector(
-                  onTap: showProductList,
+                  onTap: () => showProductList(context),
                   child: Padding(
                     padding:
                         const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
@@ -428,7 +435,7 @@ class SubItem extends StatelessWidget {
                 ),
               IconButton(
                 icon: const Icon(Icons.keyboard_arrow_right),
-                onPressed: showProductList,
+                onPressed: () => showProductList(context),
               )
             ],
           ),

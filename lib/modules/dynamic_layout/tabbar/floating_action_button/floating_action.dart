@@ -3,6 +3,7 @@ import 'package:inspireui/icons/icon_picker.dart' deferred as defer_icon;
 import 'package:inspireui/inspireui.dart' show DeferredWidget;
 
 import '../../../../widgets/common/flux_image.dart';
+import '../../config/app_config.dart';
 import '../../config/tab_bar_config.dart';
 import '../../config/tab_bar_floating_config.dart';
 import '../../config/tab_bar_indicator_config.dart';
@@ -12,7 +13,7 @@ import '../tabbar_icon.dart';
 class IconFloatingAction extends StatelessWidget with TabbarFloatingShape {
   final TabBarFloatingConfig config;
   final Function? onTap;
-  final Map item;
+  final TabBarMenuConfig item;
   final int totalCart;
   const IconFloatingAction({
     super.key,
@@ -27,15 +28,19 @@ class IconFloatingAction extends StatelessWidget with TabbarFloatingShape {
     Widget icon = Builder(
       builder: (context) {
         var iconColor = Colors.white;
-        var isImage = item['icon'].contains('/');
+        var isImage = item.icon.contains('/');
         return isImage
-            ? FluxImage(imageUrl: item['icon'], color: iconColor, width: 24)
+            ? FluxImage(
+                imageUrl: item.icon,
+                color: item.showOriginalColor ? null : iconColor,
+                width: 24,
+              )
             : DeferredWidget(
                 defer_icon.loadLibrary,
                 () => Icon(
                     defer_icon.iconPicker(
-                      item['icon'],
-                      item['fontFamily'],
+                      item.icon,
+                      item.fontFamily,
                     ),
                     color: iconColor,
                     size: 22),
@@ -43,7 +48,7 @@ class IconFloatingAction extends StatelessWidget with TabbarFloatingShape {
       },
     );
 
-    if (item['layout'] == 'cart') {
+    if (item.layout == 'cart') {
       icon = IconCart(
         icon: icon,
         totalCart: totalCart,

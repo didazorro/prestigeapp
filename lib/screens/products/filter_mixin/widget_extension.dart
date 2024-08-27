@@ -1,11 +1,7 @@
 part of 'products_filter_mixin.dart';
 
 extension ProductsFilterMixinWidgetExtension on ProductsFilterMixin {
-  void showFilterBottomSheet({
-    bool showCategory = true,
-    bool showPrice = true,
-    bool showTag = true,
-  }) {
+  void showFilterBottomSheet() {
     showModalBottomSheet(
       context: App.fluxStoreNavigatorKey.currentContext!,
       isScrollControlled: true,
@@ -51,10 +47,12 @@ extension ProductsFilterMixinWidgetExtension on ProductsFilterMixin {
                             selectedAttributes: lstSelectedAttribute,
 
                             /// hide layout filter from Search screen
-                            showLayout: shouldShowLayout,
+                            showLayout: showLayout,
                             showCategory: showCategory,
-                            showPrice: showPrice,
+                            showPriceSlider: showPriceSlider,
                             showTag: showTag,
+                            showAttribute: showAttribute,
+                            showBrand: showBrand,
 
                             onApply: onCloseFilter,
                             allowMultipleCategory: allowMultipleCategory,
@@ -80,9 +78,6 @@ extension ProductsFilterMixinWidgetExtension on ProductsFilterMixin {
   Widget renderFilters(
     BuildContext context, {
     Widget? title,
-    bool showCategory = true,
-    bool showPrice = true,
-    bool showTag = true,
     Widget? trailingWidget,
   }) {
     return Row(
@@ -105,16 +100,14 @@ extension ProductsFilterMixinWidgetExtension on ProductsFilterMixin {
         ],
         CupertinoButton(
           padding: EdgeInsets.zero,
-          onPressed: () => onTapOpenFilter(
-            showCategory: showCategory,
-            showPrice: showPrice,
-            showTag: showTag,
-          ),
+          onPressed: showFilterBottomSheet,
           child: trailingWidget ??
               Row(
                 children: [
-                  Text(S.of(context).filter,
-                      style: Theme.of(context).textTheme.bodySmall),
+                  Text(
+                    S.of(context).filter,
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
                   const SizedBox(width: 4),
                   const Icon(CupertinoIcons.chevron_down, size: 13),
                 ],

@@ -1,7 +1,7 @@
 NSCameraUsageDescription = "Bu uygulama, arama çubuğundan erişilebilen QR Kodu veya Barkod tarayıcı özelliği için kameraya erişim gerektirir";
-NSLocationAlwaysAndWhenInUseUsageDescription = "Teslimat için mevcut konumunuzu alın";
-NSLocationAlwaysUsageDescription = "Mevcut konum erişimine ihtiyacınız var";
-NSLocationWhenInUseUsageDescription = "Teslimat için mevcut konumunuzu alın";
+NSLocationAlwaysAndWhenInUseUsageDescription = "Bu uygulama, harita ekranında göstermek ve konum tabanlı hizmetler sağlamak için konumunuza erişim gerektirir.";
+NSLocationAlwaysUsageDescription = "Bu uygulama, harita ekranında göstermek ve konum tabanlı hizmetler sağlamak için konumunuza erişim gerektirir.";
+NSLocationWhenInUseUsageDescription = "Bu uygulama, harita ekranında göstermek ve konum tabanlı hizmetler sağlamak için konumunuza erişim gerektirir.";
 NSMicrophoneUsageDescription = "Sesli mesajların kaydedilmesine izin vermek için mikrofona erişim istiyoruz";
 NSPhotoLibraryAddUsageDescription = "Fotoğraf Kitaplığınızdaki Görüntüleri/Videoları depolamak için erişim istiyoruz";
 NSPhotoLibraryUsageDescription = "Bu uygulama, Sohbet Özelliği için sohbet görüntüsü olarak kullanılacak bir profil fotoğrafı seçmek için fotoğraf kitaplığına erişim gerektiriyor.";

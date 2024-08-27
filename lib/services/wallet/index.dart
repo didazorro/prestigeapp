@@ -4,6 +4,7 @@ import 'package:inspireui/inspireui.dart';
 import 'package:quiver/strings.dart';
 
 import '../../data/boxes.dart';
+import '../../generated/l10n.dart';
 import '../../models/entities/paging_response.dart';
 import '../../models/entities/product.dart';
 import '../../models/entities/tera_wallet/transaction.dart';
@@ -160,6 +161,9 @@ class TeraWalletServices extends WalletServices {
           });
       final jsonDecode = convert.jsonDecode(response.body);
       if (jsonDecode is Map && isNotBlank(jsonDecode['message'])) {
+        if (jsonDecode['code'] == 'not_found') {
+          throw Exception(S.current.userNotFound);
+        }
         throw Exception(jsonDecode['message']);
       } else {
         return User.fromJson(jsonDecode);

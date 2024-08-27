@@ -36,6 +36,7 @@ class SettingDeliveryBoyWidget extends StatelessWidget {
                 Services().widget.getDeliveryScreen(context, user),
           ),
           forceRootNavigator: true,
+          context: context,
         );
       },
       icon: CupertinoIcons.cube_box,

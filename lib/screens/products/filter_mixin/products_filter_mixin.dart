@@ -24,18 +24,17 @@ part 'getter_extension.dart';
 part 'methods_extension.dart';
 part 'widget_extension.dart';
 
-mixin ProductsFilterMixin {
-  String get lang;
+mixin ProductsFilterMixin<T extends StatefulWidget> on State<T> {
+  FilterAttributeModel get filterAttrModel =>
+      context.read<FilterAttributeModel>();
 
-  FilterAttributeModel get filterAttrModel;
+  CategoryModel get categoryModel => context.read<CategoryModel>();
 
-  CategoryModel get categoryModel;
+  TagModel get tagModel => context.read<TagModel>();
 
-  TagModel get tagModel;
+  BrandLayoutModel get brandModel => context.read<BrandLayoutModel>();
 
-  BrandLayoutModel get brandModel;
-
-  ProductPriceModel get productPriceModel;
+  ProductPriceModel get productPriceModel => context.read<ProductPriceModel>();
 
   Future<void> getProductList({bool forceLoad = false});
 
@@ -48,7 +47,7 @@ mixin ProductsFilterMixin {
 
   void onCategorySelected(String? name);
 
-  void onClearTextSearch();
+  void onClearTextSearch() {}
 
   /// Filter params.
   List<String>? _categoryIds;
@@ -107,23 +106,25 @@ mixin ProductsFilterMixin {
     lstSelectedAttribute.clear();
   }
 
-  void onTapOpenFilter({
-    bool showCategory = true,
-    bool showPrice = true,
-    bool showTag = true,
-  }) {
-    showFilterBottomSheet(
-      showCategory: showCategory,
-      showPrice: showPrice,
-      showTag: showTag,
-    );
+  void onTapOpenFilter() {
+    showFilterBottomSheet();
   }
 
   FilterSortBy filterSortBy = const FilterSortBy();
 
-  bool get enableSearchHistory => false;
+  bool get showLayout => true;
 
-  bool get shouldShowLayout => enableSearchHistory ? false : true;
+  bool get showSort => true;
+
+  bool get showPriceSlider => true;
+
+  bool get showCategory => true;
+
+  bool get showAttribute => true;
+
+  bool get showTag => true;
+
+  bool get showBrand => true;
 
   bool get allowMultipleCategory => ServerConfig().allowMultipleCategory;
 

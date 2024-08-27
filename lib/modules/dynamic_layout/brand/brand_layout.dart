@@ -77,6 +77,7 @@ class _BrandLayoutState extends State<BrandLayout> {
                         arguments: BrandListLayoutArgs(
                           config: widget.config,
                         ),
+                        context: context,
                       );
                     },
                     showSeeAll: true),
@@ -111,8 +112,8 @@ class _BrandLayoutState extends State<BrandLayout> {
                                 brandId: model.brands[i].id,
                                 brandName: model.brands[i].name,
                                 brandImg: model.brands[i].image,
-                                // data: snapshot.data,
                               ),
+                              context: context,
                             ),
                             isBrandNameShown:
                                 widget.config?.isBrandNameShown ?? true,

@@ -57,12 +57,11 @@ class Configurations {
   static Map _cartDetail = DefaultConfig.cartDetail;
   static Map _productVariantLanguage = DefaultConfig.productVariantLanguage;
   static Map _saleOffProduct = DefaultConfig.saleOffProduct;
-  static String? _excludedCategory = DefaultConfig.excludedCategory;
+  static String? _excludedCategoryIDs = DefaultConfig.excludedCategoryIDs;
+  static String? _excludedProductIDs = DefaultConfig.excludedProductIDs;
   static bool _notStrictVisibleVariant = DefaultConfig.notStrictVisibleVariant;
-  static Map _configChat = DefaultConfig.configChat;
+  static ConfigChat _configChat = ConfigChat.fromJson(DefaultConfig.configChat);
   static List<Map> _smartChat = DefaultConfig.smartChat;
-  static String _adminEmail = DefaultConfig.adminEmail;
-  static String _adminName = DefaultConfig.adminName;
   static VendorConfig _vendorConfig =
       VendorConfig.fromJson(DefaultConfig.vendorConfig);
   static List<AddressFieldConfig> _addressFields = DefaultConfig.addressFields;
@@ -91,6 +90,8 @@ class Configurations {
   static Map? _boostEngine;
   static Map? _branchConfig;
   static double? _maxTextScale;
+  static Map? _outsideService;
+  static DynamicLinkConfig _dynamicLinkConfig = DefaultConfig.dynamicLinkConfig;
 
   /// only support firebase remote config
   static Map<String, dynamic>? _layoutDesign;
@@ -201,17 +202,15 @@ class Configurations {
 
   static Map get saleOffProduct => _saleOffProduct;
 
-  static String? get excludedCategory => _excludedCategory;
+  static String? get excludedCategoryIDs => _excludedCategoryIDs;
+
+  static String? get excludedProductIDs => _excludedProductIDs;
 
   static bool get notStrictVisibleVariant => _notStrictVisibleVariant;
 
-  static Map get configChat => _configChat;
+  static ConfigChat get configChat => _configChat;
 
   static List<Map> get smartChat => _smartChat;
-
-  static String get adminEmail => _adminEmail;
-
-  static String get adminName => _adminName;
 
   static VendorConfig get vendorConfig => _vendorConfig;
 
@@ -268,6 +267,10 @@ class Configurations {
   static String get mainSiteUrl => (_multiSiteConfigs?.isNotEmpty ?? false)
       ? _multiSiteConfigs!.first.serverConfig!['url']
       : serverConfig['url'];
+
+  static Map? get outsideService => _outsideService;
+
+  static DynamicLinkConfig get dynamicLinkConfig => _dynamicLinkConfig;
 
   void setConfigurationValues(Map<String, dynamic> value) {
     _environment = value['environment'] ?? DefaultConfig.environment;
@@ -388,14 +391,30 @@ class Configurations {
     _productVariantLanguage =
         value['productVariantLanguage'] ?? DefaultConfig.productVariantLanguage;
     _saleOffProduct = value['saleOffProduct'] ?? DefaultConfig.saleOffProduct;
-    _excludedCategory = value['excludedCategory']?.toString();
+    _excludedCategoryIDs = value['excludedCategoryIDs']?.toString() ??
+        value['excludedCategory']?.toString();
+    _excludedProductIDs = value['excludedProductIDs']?.toString();
     _notStrictVisibleVariant = value['notStrictVisibleVariant'] ??
         DefaultConfig.notStrictVisibleVariant;
-    _configChat = value['configChat'] ?? DefaultConfig.configChat;
+
+    var realtimeChatConfig;
+    if (value['configChat']?['realtimeChatConfig'] != null) {
+      realtimeChatConfig = RealtimeChatConfig.fromJson(
+          value['configChat']?['realtimeChatConfig']);
+    } else {
+      // Adapt for old version
+      realtimeChatConfig = RealtimeChatConfig(
+        adminEmail: value['adminEmail'],
+        adminName: value['adminName'],
+        enable: value['configChat']?['UseRealtimeChat'],
+      );
+    }
+    _configChat =
+        ConfigChat.fromJson(value['configChat'] ?? DefaultConfig.configChat)
+            .copyWith(realtimeChatConfig: realtimeChatConfig);
+
     _smartChat = ConfigurationUtils.loadSmartChat(
         List<Map>.from(value['smartChat'] ?? DefaultConfig.smartChat));
-    _adminEmail = value['adminEmail'] ?? DefaultConfig.adminEmail;
-    _adminName = value['adminName'] ?? DefaultConfig.adminName;
     _vendorConfig = VendorConfig.fromJson(
         value['vendorConfig'] ?? DefaultConfig.vendorConfig);
     final addressFieldsData = value['addressFields'];
@@ -454,6 +473,11 @@ class Configurations {
     _orderConfig = value['orderConfig'] != null
         ? OrderConfig.fromJson(value['orderConfig'])
         : _orderConfig;
+    _outsideService = value['outsideService'];
+    _dynamicLinkConfig = DynamicLinkConfig.fromJson({
+      ...?value['dynamicLinkConfig'],
+      'firebaseDynamicLinkConfig': _firebaseDynamicLinkConfig,
+    });
   }
 
   void setAlwaysShowTabBar(bool value) {
@@ -538,15 +562,17 @@ class Configurations {
       _productVariantLanguage =
           value['productVariantLanguage'] ?? _productVariantLanguage;
       _saleOffProduct = value['saleOffProduct'] ?? _saleOffProduct;
-      _excludedCategory = value['excludedCategory'].toString();
+      _excludedCategoryIDs = value['excludedCategoryIDs']?.toString() ??
+          value['excludedCategory']?.toString();
+      _excludedProductIDs = value['excludedProductIDs']?.toString();
       _notStrictVisibleVariant =
           value['notStrictVisibleVariant'] ?? _notStrictVisibleVariant;
-      _configChat = value['configChat'] ?? _configChat;
+      _configChat = value['configChat'] is Map
+          ? ConfigChat.fromJson(value['configChat'])
+          : _configChat;
       _smartChat = value['smartChat'] is List
           ? ConfigurationUtils.loadSmartChat(List<Map>.from(value['smartChat']))
           : _smartChat;
-      _adminEmail = value['adminEmail'] ?? _adminEmail;
-      _adminName = value['adminName'] ?? _adminName;
       _vendorConfig = value['vendorConfig'] is Map
           ? VendorConfig.fromJson(value['vendorConfig'])
           : _vendorConfig;
@@ -606,6 +632,11 @@ class Configurations {
       _orderConfig = value['orderConfig'] != null
           ? OrderConfig.fromJson(value['orderConfig'])
           : _orderConfig;
+      _outsideService = value['outsideService'] ?? _outsideService;
+      _dynamicLinkConfig = DynamicLinkConfig.fromJson({
+        ...?value['dynamicLinkConfig'],
+        'firebaseDynamicLinkConfig': _firebaseDynamicLinkConfig,
+      });
     } catch (e) {
       rethrow;
     }

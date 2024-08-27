@@ -57,6 +57,7 @@ class GeneralWebWidget extends GeneralWidget {
                       ? kAdvanceConfig.webViewScript
                       : item?.script ?? '',
                 ),
+                context: context,
               );
             } else {
               onLaunch(webUrl);

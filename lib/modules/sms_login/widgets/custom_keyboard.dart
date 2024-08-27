@@ -74,10 +74,7 @@ class _CustomKeyboardState extends State<CustomKeyboard> {
         child: Center(
           child: Text(
             number.toString(),
-            style: Theme.of(context)
-                .textTheme
-                .headlineMedium!
-                .copyWith(fontFamily: 'Roboto'),
+            style: Theme.of(context).textTheme.headlineMedium!,
           ),
         ),
       ),

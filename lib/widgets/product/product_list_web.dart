@@ -26,7 +26,6 @@ class ProductListWeb extends StatefulWidget {
   final double? width;
   final double padding;
   final String? layout;
-  final String? routeName;
   final String? title;
   final Future Function() onRefresh;
   final Future Function() onLoadMore;
@@ -52,7 +51,6 @@ class ProductListWeb extends StatefulWidget {
     this.appbar,
     this.scrollController,
     this.productType = false,
-    this.routeName,
     this.title,
   });
 
@@ -185,10 +183,9 @@ class _ProductListWebState extends State<ProductListWeb> {
                   FluxNavigate.pushNamed(
                     RouteList.backdrop,
                     arguments: BackDropArguments(),
+                    context: context,
                   );
                 }),
-            if (widget.routeName?.isNotEmpty ?? false)
-              PathHeaderItem(title: widget.routeName!),
             if (isEnableSearch)
               PathHeaderItem(title: S.of(context).search)
             else if (widget.title?.isNotEmpty ?? false)

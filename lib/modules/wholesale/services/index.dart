@@ -48,7 +48,13 @@ class MembershipServices {
   }
 
   Future<Map<String, dynamic>> signUp(
-      {username, email, firstName, lastName, password, selectedRole}) async {
+      {username,
+      email,
+      firstName,
+      lastName,
+      password,
+      phoneNumber,
+      selectedRole}) async {
     try {
       var response = await httpPost(
           Uri.parse('$domain/wp-json/api/flutter_wholesale/register'),
@@ -58,6 +64,7 @@ class MembershipServices {
             'first_name': firstName,
             'last_name': lastName,
             'password': password,
+            'phone': phoneNumber,
             'role': selectedRole,
           }),
           headers: {'Content-Type': 'application/json'});

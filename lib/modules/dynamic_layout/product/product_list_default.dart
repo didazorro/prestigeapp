@@ -118,7 +118,7 @@ class ProductListDefault extends StatelessWidget {
               .colorScheme
               .surface
               .withOpacity(enableBackground ? 0.0 : 1.0),
-      padding: EdgeInsets.only(left: padding),
+      padding: EdgeInsetsDirectional.only(start: padding),
       constraints: BoxConstraints(
         minHeight: config.productListItemHeight,
       ),
@@ -204,7 +204,7 @@ class ProductListDefault extends StatelessWidget {
               ),
             ),
           Padding(
-            padding: config.paddingBGP ?? const EdgeInsets.only(),
+            padding: config.paddingBGP ?? EdgeInsets.zero,
             child: body,
           ),
         ],

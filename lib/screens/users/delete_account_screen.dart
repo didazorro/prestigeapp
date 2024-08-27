@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:inspireui/inspireui.dart';
 
+import '../../common/extensions/extensions.dart';
 import '../../generated/l10n.dart';
 import '../../services/services.dart';
 import '../../widgets/common/loading_body.dart';
@@ -36,39 +36,24 @@ class _DeleteAccountScreenState extends State<DeleteAccountScreen> {
   final ValueNotifier<bool> _loadingNotifier = ValueNotifier(false);
 
   void _showDialogError(String message) async {
-    return showCupertinoDialog(
-      context: context,
-      builder: (context) => CupertinoAlertDialog(
-        title: Text(S.of(context).notice),
-        content: Text(message),
-        actions: [
-          CupertinoDialogAction(
-            child: Text(S.of(context).ok),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-        ],
-      ),
+    await context.showFluxDialogText(
+      title: S.of(context).notice,
+      body: message,
+      primaryAction: S.of(context).ok,
     );
+    return;
   }
 
   Future<void> _showDialogDeleteAccountSuccess() async {
-    await showCupertinoDialog(
-      context: context,
-      builder: (ctxDialog) => CupertinoAlertDialog(
-        title: Text(S.of(context).deleteAccount),
-        content: Text(S.of(context).deleteAccountSuccess),
-        actions: [
-          CupertinoDialogAction(
-            isDefaultAction: true,
-            onPressed: () {
-              Navigator.of(ctxDialog).pop();
-              Navigator.of(context).pop(true);
-            },
-            child: Text(S.of(context).ok),
-          )
-        ],
-      ),
+    final confirmed = await context.showFluxDialogText(
+      title: S.of(context).deleteAccount,
+      body: S.of(context).deleteAccountSuccess,
+      primaryAction: S.of(context).ok,
     );
+    if (confirmed) {
+      Navigator.of(context).pop(true);
+    }
+    return;
   }
 
   Future<void> _onTapDelete() async {

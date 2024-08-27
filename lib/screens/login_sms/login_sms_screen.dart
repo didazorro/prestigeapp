@@ -251,11 +251,11 @@ class LoginSMSScreenState<T extends LoginSMSScreen> extends State<T>
     }
   }
 
-  void failMessage(message, context) {
+  void failMessage(String message, BuildContext context) {
     /// Showing Error messageSnackBarDemo
     /// Ability so close message
     final snackBar = SnackBar(
-      content: Text('⚠️: $message'),
+      content: Text(message.clearExceptionKey()),
       duration: const Duration(seconds: 30),
       action: SnackBarAction(
         label: S.of(context).close,

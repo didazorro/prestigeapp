@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../common/config.dart';
@@ -10,8 +11,15 @@ class PaymentWebview extends StatefulWidget {
   final Function? onFinish;
   final Function? onClose;
   final String? token;
+  final String? orderNumber;
 
-  const PaymentWebview({this.onFinish, this.onClose, this.url, this.token});
+  const PaymentWebview({
+    this.onFinish,
+    this.onClose,
+    this.url,
+    this.token,
+    this.orderNumber,
+  });
 
   @override
   State<StatefulWidget> createState() {
@@ -83,6 +91,18 @@ class PaymentWebviewState extends BaseScreen<PaymentWebview> {
     }
   }
 
+  void _checkOutOnePage(String url, Map headers) {
+    WidgetsBinding.instance.addPostFrameCallback((t) async {
+      await Services().widget.onePageCheckoutForWebPWA(
+            context,
+            url: url,
+            headers: Map<String, String>.from(headers),
+            orderNumber: widget.orderNumber,
+          );
+      Navigator.of(context).pop();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     var checkoutMap = <dynamic, dynamic>{
@@ -102,6 +122,14 @@ class PaymentWebviewState extends BaseScreen<PaymentWebview> {
     }
     if (widget.token != null) {
       checkoutMap['headers']['X-Shopify-Customer-Access-Token'] = widget.token;
+    }
+
+    if (kIsWeb) {
+      _checkOutOnePage(
+        checkoutMap['url'] ?? '',
+        checkoutMap['headers'],
+      );
+      return const SizedBox();
     }
 
     return WebView(

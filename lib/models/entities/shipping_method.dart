@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 import '../../common/constants.dart';
 import '../serializers/shipping.dart';
 
@@ -77,22 +75,27 @@ class ShippingMethod {
   }
 
   ShippingMethod.fromPrestaJson(Map parsedJson) {
-    id = parsedJson['id'].toString();
+    id = parsedJson['id']?.toString();
     title = parsedJson['name'];
     description = parsedJson['delay'];
     cost = double.parse('${parsedJson['shipping_external']}');
   }
 
+  ShippingMethod.fromHaravanJson(Map parsedJson) {
+    id = parsedJson['id']?.toString();
+    title = parsedJson['title'];
+    cost = double.parse('${parsedJson['price']}');
+  }
+
   ShippingMethod.fromStrapi(Map<String, dynamic> parsedJson) {
     var model = SerializerShipping.fromJson(parsedJson);
     try {
-      id = model.id.toString();
+      id = model.id?.toString();
       title = model.title;
       description = model.description;
       cost = model.cost!.toDouble();
-    } on Exception catch (e, trace) {
-      debugPrint(
-          'Error on Strapi shipping model: ${e.toString()}, trace: ${trace.toString()}');
+    } catch (e, trace) {
+      printError(e, trace);
     }
   }
 

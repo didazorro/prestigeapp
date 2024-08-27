@@ -67,6 +67,7 @@ class _GeoSearchState extends State<GeoSearch> {
                     arguments: GeoSearchArgs(
                       stores: model.stores,
                     ),
+                    context: context,
                   ),
                 ),
                 SingleChildScrollView(

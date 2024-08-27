@@ -56,7 +56,7 @@ class ProductStaggered extends StatelessWidget {
 
     final body = BackgroundColorWidget(
       enable: config.enableBackground,
-      padding: const EdgeInsets.only(left: 15.0),
+      padding: const EdgeInsetsDirectional.only(start: 15.0),
       height: screenSize.height * 0.8 / (screenSize.height / width),
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,

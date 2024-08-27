@@ -8,7 +8,7 @@ part of 'payment.dart';
 
 SerializerPayment _$SerializerPaymentFromJson(Map<String, dynamic> json) =>
     SerializerPayment(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       title: json['title'] as String?,
       description: json['description'] as String?,
     );

@@ -1,7 +1,39 @@
+// ignore_for_file: constant_identifier_names
+enum AddonsType {
+  heading,
+  radiobutton,
+  multiple_choice,
+  checkbox,
+  custom_text,
+  custom_textarea,
+  custom_price,
+  file_upload,
+  quantity_base,
+  input_multiplier;
+
+  static AddonsType? fromString(String? value) {
+    final index = AddonsType.values.indexWhere((e) => e.name == value);
+    return index != -1 ? AddonsType.values[index] : null;
+  }
+
+  bool get isRadio => [
+        AddonsType.radiobutton,
+        AddonsType.multiple_choice,
+      ].contains(this);
+
+  bool get isEnteredByUser => [
+        AddonsType.custom_textarea,
+        AddonsType.custom_text,
+        AddonsType.custom_price,
+        AddonsType.file_upload,
+        AddonsType.input_multiplier,
+      ].contains(this);
+}
+
 class ProductAddons {
   String? name;
   String? description;
-  String? type;
+  AddonsType? type;
   String? display;
   String? price;
   int? position;
@@ -9,6 +41,14 @@ class ProductAddons {
   bool? required;
   Map<String, AddonsOption> defaultOptions = {};
   String? fieldName;
+  String? priceType;
+  bool? descriptionEnable;
+
+  /// using for WC Appointment
+  bool? hideDuration;
+  bool? hidePrice;
+  bool? showOnTop;
+  int? duration;
 
   ProductAddons({
     this.name,
@@ -17,34 +57,26 @@ class ProductAddons {
     this.position,
     this.options,
     this.required = false,
+    this.priceType,
+    this.descriptionEnable,
+    this.hideDuration,
+    this.hidePrice,
+    this.showOnTop,
+    this.duration,
   });
-
-  bool get isHeadingType => type == 'heading';
-
-  bool get isRadioButtonType =>
-      type == 'multiple_choice' || type == 'radiobutton';
-
-  bool get isCheckboxType => type == 'checkbox';
-
-  bool get isTextType => isLongTextType || isShortTextType;
-
-  bool get isShortTextType => type == 'custom_text';
-
-  bool get isLongTextType => type == 'custom_textarea';
-
-  bool get isCustomPriceType => type == 'custom_price';
-
-  bool get isFileUploadType => type == 'file_upload';
 
   ProductAddons.fromJson(Map json) {
     name = json['name'];
-    description = json['description'];
-    type = json['type'];
+    final desEnable = json['description_enable'];
+    descriptionEnable =
+        int.tryParse('$desEnable') == 1 || bool.tryParse('$desEnable') == true;
+    type = AddonsType.fromString(json['type']);
     display = json['display'];
     price = '${json['price']}';
     position = json['position'];
     required = json['required'] == 1;
     fieldName = json['field_name'];
+    priceType = json['price_type'];
     if (json['options'] != null) {
       final List<dynamic> values = json['options'] ?? [];
       options = List<AddonsOption>.generate(
@@ -63,21 +95,32 @@ class ProductAddons {
         },
       );
     }
+    hideDuration =
+        int.tryParse('${json['wc_appointment_hide_duration_label']}') == 1;
+    hidePrice = int.tryParse('${json['wc_appointment_hide_price_label']}') == 1;
+    showOnTop = int.tryParse('${json['wc_appointment_show_on_top']}') == 1;
+    duration = int.tryParse('${json['duration']}');
   }
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['name'] = name;
     data['description'] = description;
-    data['type'] = type;
+    data['type'] = type?.name;
     data['display'] = display;
     data['price'] = price;
     data['position'] = position;
     data['field_name'] = fieldName;
     data['required'] = (required ?? false) ? 1 : 0;
+    data['price_type'] = priceType;
+    data['description_enable'] = descriptionEnable;
     if (options != null) {
       data['options'] = options!.map((v) => v.toJson()).toList();
     }
+    data['wc_appointment_hide_duration_label'] = hideDuration;
+    data['wc_appointment_hide_price_label'] = hidePrice;
+    data['wc_appointment_show_on_top'] = showOnTop;
+    data['duration'] = duration;
     return data;
   }
 }
@@ -88,25 +131,13 @@ class AddonsOption {
   String? price;
   String? priceType;
   bool? isDefault;
-  String? type;
+  AddonsType? type;
   String? display;
   String? fieldName;
   int? index;
-
-  bool get isFileUploadType => type == 'file_upload';
-
-  bool get isTextType => isLongTextType || isShortTextType;
-
-  bool get isShortTextType => type == 'custom_text';
-
-  bool get isLongTextType => type == 'custom_textarea';
+  int? duration;
 
   bool get isFlatFee => priceType == 'flat_fee';
-
-  bool get isCustomPriceType => type == 'custom_price';
-
-  bool get isEnteredByUser =>
-      isTextType || isCustomPriceType || isFileUploadType;
 
   bool get isQuantityBased => priceType == 'quantity_based';
 
@@ -132,6 +163,7 @@ class AddonsOption {
     isDefault = option.isDefault;
     fieldName = option.fieldName;
     index = option.index;
+    duration = option.duration;
   }
 
   AddonsOption.fromJson(Map json) {
@@ -139,11 +171,12 @@ class AddonsOption {
     label = json['label'];
     priceType = json['price_type'];
     price = '${json['price']}';
-    type = json['type'];
+    type = AddonsType.fromString(json['type']);
     display = json['display'];
     isDefault = json['default'] == '1';
     fieldName = json['field_name'];
     index = json['index'];
+    duration = int.tryParse('${json['duration']}');
   }
 
   Map<String, dynamic> toJson() {
@@ -152,11 +185,12 @@ class AddonsOption {
     data['label'] = label;
     data['price'] = price;
     data['price_type'] = priceType;
-    data['type'] = type;
+    data['type'] = type?.name;
     data['display'] = display;
     data['default'] = (isDefault ?? false) ? '1' : '0';
     data['field_name'] = fieldName;
     data['index'] = index;
+    data['duration'] = duration;
     return data;
   }
 }

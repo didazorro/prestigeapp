@@ -65,7 +65,7 @@ class _GroupedProductState extends State<GroupedProduct> {
     return Row(
       children: <Widget>[
         Text(
-          '${S.of(context).availability}: ',
+          S.of(context).availabilityProduct,
           style: TextStyle(
               fontSize: 15, color: Theme.of(context).colorScheme.secondary),
         ),

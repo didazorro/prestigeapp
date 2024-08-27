@@ -52,6 +52,7 @@ class WooCommerceService extends BaseServices {
   Map<String, Tag> tags = {};
   String? currentLanguage;
   bool? currentHideEmptyCategories;
+  String? currentExcludedCategoryIDs;
   Map<String, List<Product>> categoryCache = <String, List<Product>>{};
 
   WooCommerceService({
@@ -79,7 +80,8 @@ class WooCommerceService extends BaseServices {
     if (kAdvanceConfig.enableWOOCSCurrencySwitcher) {
       endPoint = endPoint.addUrlQuery('currency=$kDefaultCurrency');
     }
-    return endPoint.addUrlQuery('is_all_data=${true}');
+    return endPoint
+        .addUrlQuery('is_all_data=${kAdvanceConfig.enableIsAllData == true}');
   }
 
   String buildUrlByLang(String endPoint, {bool isForceUseLang = false}) {
@@ -94,11 +96,13 @@ class WooCommerceService extends BaseServices {
     try {
       if (categories.isNotEmpty &&
           currentLanguage == languageCode &&
-          currentHideEmptyCategories == kAdvanceConfig.hideEmptyCategories) {
+          currentHideEmptyCategories == kAdvanceConfig.hideEmptyCategories &&
+          currentExcludedCategoryIDs == kExcludedCategoryIDs) {
         return categories;
       }
       currentLanguage = languageCode;
       currentHideEmptyCategories = kAdvanceConfig.hideEmptyCategories;
+      currentExcludedCategoryIDs = kExcludedCategoryIDs;
       var list = <Category>[];
       var isEnd = false;
       var page = 1;
@@ -133,8 +137,8 @@ class WooCommerceService extends BaseServices {
       var url =
           'products/categories?per_page=$limit&page=$page&hide_empty=${kAdvanceConfig.hideEmptyCategories}';
 
-      if (kExcludedCategory?.isNotEmpty ?? false) {
-        url = url.addUrlQuery('exclude=$kExcludedCategory');
+      if (kExcludedCategoryIDs?.isNotEmpty ?? false) {
+        url = url.addUrlQuery('exclude=$kExcludedCategoryIDs');
       }
       url = buildUrlByLang(url);
       if (searchTerm != null && searchTerm.isNotEmpty) {
@@ -197,6 +201,23 @@ class WooCommerceService extends BaseServices {
     final mustList = ElasticActionList();
     final mustNotList = ElasticActionList();
     final sortList = <Map<String, dynamic>>[];
+    var catIds = [];
+    if (category is List) {
+      catIds = category;
+    } else if (category != null) {
+      /// need to remove '' when empty
+      catIds = '$category'.split(',');
+    }
+    catIds.removeWhere(
+      (e) => ['0', kEmptyCategoryID, ''].contains('$e'),
+    );
+    if (catIds.isNotEmpty) {
+      mustList.addFilter(
+        keyFilter: 'terms',
+        key: 'categories.id',
+        value: catIds,
+      );
+    }
     if (category != null && category != kEmptyCategoryID && category != '0') {
       mustList.addFilter(
         keyFilter: 'terms',
@@ -386,7 +407,7 @@ class WooCommerceService extends BaseServices {
 
       var params = '?status=publish';
       params = buildUrlByLang(params);
-      params += ProductQuery.fromJson(config).toParams();
+      params += ProductQuery.fromJson(config).toParams(apiVersion: 3);
       params = buildUrlToGetProducts(params);
 
       var response = await getWooProductsResponse(
@@ -564,7 +585,7 @@ class WooCommerceService extends BaseServices {
         brandIds: brandIds,
       );
       var params = '?status=publish&skip_cache=1';
-      params += query.toParams();
+      params += query.toParams(apiVersion: 3);
       params = buildUrlByLang(params);
 
       params = buildUrlToGetProducts(params);
@@ -603,21 +624,27 @@ class WooCommerceService extends BaseServices {
         if (kAdvanceConfig.enableSkuSearch &&
             search != null &&
             search.isNotEmpty) {
-          var skuList = <Product>[];
-          var response =
-              await getWooProductsResponse(params: '$params&sku=$search');
-          if (response is List) {
-            for (var item in response) {
-              if (!kAdvanceConfig.hideOutOfStock || item['in_stock']) {
-                skuList.add(Product.jsonParser(item));
-              }
-            }
+          final skuList = await _searchBySku(
+            categoryId: categoryId,
+            tagId: tagId,
+            minPrice: minPrice,
+            maxPrice: maxPrice,
+            orderBy: orderBy,
+            order: order,
+            page: page,
+            featured: featured,
+            onSale: onSale,
+            attributes: attributes,
+            include: include,
+            sku: search,
+            brandIds: brandIds,
+            userId: userId,
+          );
 
-            if (skuList.isNotEmpty) {
-              /// Merge results. Let SKU results on top.
-              skuList.addAll(list);
-              return skuList;
-            }
+          if (skuList.isNotEmpty) {
+            /// Merge results. Let SKU results on top.
+            skuList.addAll(list);
+            return skuList;
           }
         }
         return list;
@@ -627,6 +654,61 @@ class WooCommerceService extends BaseServices {
       //This error exception is about your Rest API is not config correctly so that not return the correct JSON format, please double check the document from this link https://docs.inspireui.com/fluxstore/woocommerce-setup/
       rethrow;
     }
+  }
+
+  Future<List<Product>> _searchBySku({
+    String? categoryId,
+    String? tagId,
+    page = 1,
+    minPrice,
+    maxPrice,
+    orderBy,
+    order,
+    featured,
+    onSale,
+    userId,
+    String? include,
+    String? sku,
+    List<String>? brandIds,
+    Map? attributes,
+  }) async {
+    var skuList = <Product>[];
+    var query = ProductQuery.parse(
+      category: categoryId,
+      tag: tagId,
+      page: page,
+      minPrice: minPrice,
+      maxPrice: maxPrice,
+      orderBy: orderBy,
+      order: order,
+      attributes: attributes,
+      featured: featured,
+      onSale: onSale,
+      userId: userId,
+      include: include,
+      sku: sku,
+      perPage: apiPageSize,
+      brandIds: brandIds,
+    );
+    var params = '?status=publish&skip_cache=1';
+    params += query.toParams(apiVersion: 3);
+    params = buildUrlByLang(params);
+    params = buildUrlToGetProducts(params);
+    final response = await getWooProductsResponse(params: params, version: 3);
+    if (response is List) {
+      for (var item in response) {
+        final product = Product.jsonParser(item);
+
+        if ((kAdvanceConfig.hideOutOfStock) &&
+            !product.inStock! &&
+            !product.backordersAllowed) {
+          continue;
+        }
+
+        skuList.add(product);
+      }
+    }
+    return skuList;
   }
 
   Future<List<Product>?> boostProductsByCategory({
@@ -692,15 +774,17 @@ class WooCommerceService extends BaseServices {
   @override
   Future<User> loginSMS({String? token}) async {
     try {
-      var endPoint =
-          '$domain/wp-json/api/flutter_user/firebase_sms_login/?phone=$token$isSecure';
+      var idToken = await Services().firebase.getIdToken();
+      var endPoint = '$domain/wp-json/api/flutter_user/firebase_sms';
       if (kAdvanceConfig.enableNewSMSLogin) {
-        endPoint =
-            // ignore: prefer_single_quotes
-            "$domain/wp-json/api/flutter_user/firebase_sms_login_v2?phone=$token$isSecure";
+        endPoint = '$domain/wp-json/api/flutter_user/firebase_sms_v2';
       }
 
-      var response = await httpGet(endPoint.toUri()!);
+      var response = await httpPost(endPoint.toUri()!,
+          body: convert.jsonEncode({
+            'id_token': idToken,
+          }),
+          headers: {'Content-Type': 'application/json'});
 
       var jsonDecode = convert.jsonDecode(response.body);
 
@@ -1173,7 +1257,6 @@ class WooCommerceService extends BaseServices {
   Future<PagingResponse<Product>> searchProducts({
     String? name,
     String? categoryId,
-    String? categoryName,
     String? tag,
     String attribute = '',
     String attributeId = '',
@@ -1211,11 +1294,14 @@ class WooCommerceService extends BaseServices {
         userId: userId,
         page: page,
         perPage: apiPageSize,
+        search: name,
       );
-      params += query.toParams();
+      params += query.toParams(apiVersion: 3);
       params = buildUrlToGetProducts(params);
-      var response =
-          await getWooProductsResponse(params: '$params&search=$name');
+      final response = await getWooProductsResponse(
+        params: params,
+        version: 3,
+      );
       if (response is Map && isNotBlank(response['message'])) {
         throw Exception(response['message']);
       } else {
@@ -1226,28 +1312,32 @@ class WooCommerceService extends BaseServices {
             continue;
           }
 
-          if (!kAdvanceConfig.hideOutOfStock || item['in_stock']) {
-            list.add(Product.jsonParser(item));
+          final product = Product.jsonParser(item);
+
+          if ((kAdvanceConfig.hideOutOfStock) &&
+              !product.inStock! &&
+              !product.backordersAllowed) {
+            continue;
           }
+
+          list.add(product);
         }
 
         /// Search by SKU.
-        if (kAdvanceConfig.enableSkuSearch) {
-          var skuList = <Product>[];
-          var response =
-              await getWooProductsResponse(params: '$params&sku=$name');
-          if (response is List) {
-            for (var item in response) {
-              if (!kAdvanceConfig.hideOutOfStock || item['in_stock']) {
-                skuList.add(Product.jsonParser(item));
-              }
-            }
+        if (kAdvanceConfig.enableSkuSearch && name != null && name.isNotEmpty) {
+          final skuList = await _searchBySku(
+            sku: name,
+            categoryId: categoryId,
+            tagId: tag,
+            attributes: {attribute: attributeId},
+            page: page,
+            userId: userId,
+          );
 
-            if (skuList.isNotEmpty) {
-              /// Merge results. Let SKU results on top.
-              skuList.addAll(list);
-              return PagingResponse(data: skuList);
-            }
+          if (skuList.isNotEmpty) {
+            /// Merge results. Let SKU results on top.
+            skuList.addAll(list);
+            return PagingResponse(data: skuList);
           }
         }
         return PagingResponse(data: list);
@@ -1329,16 +1419,11 @@ class WooCommerceService extends BaseServices {
       var endpoint =
           '$domain/wp-json/api/flutter_user/sign_up/?insecure=cool&$isSecure'
               .toUri()!;
-      if (kAdvanceConfig.enableNewSMSLogin) {
-        endpoint =
-            '$domain/wp-json/api/flutter_user/sign_up_2/?insecure=cool&$isSecure'
-                .toUri()!;
-      }
       final response = await httpPost(endpoint,
           body: convert.jsonEncode({
             'user_email': email ?? username,
-            'user_login': username,
-            'username': username,
+            'user_login': username ?? email,
+            'username': username ?? email,
             'user_pass': password,
             'email': email ?? username,
             'user_nicename': niceName,
@@ -1380,7 +1465,7 @@ class WooCommerceService extends BaseServices {
         throw (S.current.accountIsPendingApproval);
       } else if (body['code'] == 'too_many_retries') {
         // For plugin https://wordpress.org/plugins/limit-login-attempts-reloaded/
-        throw (S.current.tooManyFaildedLogin);
+        throw (S.current.tooManyFailedLogin);
       } else if (body['message'] != null) {
         throw body['message'];
       } else {
@@ -1480,8 +1565,11 @@ class WooCommerceService extends BaseServices {
   @override
   Future<Map<String, dynamic>?> getHomeCache(String? lang) async {
     try {
-      final data = await wcApi
-          .getAsync(buildUrlByLang('flutter/cache', isForceUseLang: true));
+      var endpoint = 'flutter/cache';
+      endpoint = buildUrlByLang(endpoint, isForceUseLang: true);
+      endpoint = buildUrlToGetProducts(endpoint);
+
+      final data = await wcApi.getAsync(endpoint);
       if (data == null || data is! Map) {
         throw Exception("Can't get home cache");
       }
@@ -1649,7 +1737,8 @@ class WooCommerceService extends BaseServices {
               Map<String, dynamic>.from(kPaymentConfig.checkoutPageSlug);
           String? slug = checkoutPageSlug[lang!];
           slug ??= checkoutPageSlug.values.toList().first;
-          slug = slug!.contains('?') ? '$slug&' : '$slug?';
+          slug ??= 'checkout';
+          slug = slug.contains('?') ? '$slug&' : '$slug?';
           endpoint = '$domain/${slug}code=$body&mobile=true';
         }
         if (UniversalPlatform.isWeb) {
@@ -1986,6 +2075,10 @@ class WooCommerceService extends BaseServices {
       {int? page, int? perPage}) async {
     try {
       var endPoint = '$domain/wp-json/api/flutter_multi_vendor/products/owner';
+
+      endPoint = endPoint
+          .addUrlQuery('is_all_data=${kAdvanceConfig.enableIsAllData == true}');
+
       endPoint = buildUrlToGetProducts(endPoint);
       final response = await httpPost(endPoint.toUri()!,
           body: convert.jsonEncode({'cookie': cookie, 'page': page}),
@@ -2135,7 +2228,7 @@ class WooCommerceService extends BaseServices {
     final urlAPI = wcApi.getOAuthURLExternal(
         '$domain/wp-json/api/flutter_booking/get_staffs?product_id=$idProduct');
 
-    final response = await httpCache(urlAPI.toUri()!);
+    final response = await httpCache(urlAPI.toUri()!, refreshCache: true);
 
     var body = convert.jsonDecode(response.body);
     if (response.statusCode == 200) {
@@ -2338,9 +2431,7 @@ class WooCommerceService extends BaseServices {
       if (username != null) {
         endpoint += '&username=$username';
       }
-      final response = await httpGet(
-        endpoint.toUri()!,
-      );
+      final response = await httpGet(endpoint.toUri()!, refreshCache: true);
       if (response.statusCode == 200) {
         /// Need to trim. It returns "									true" for some reason 😂.
         return response.body.trim() == 'true';
@@ -2459,8 +2550,8 @@ class WooCommerceService extends BaseServices {
       var url =
           'products/categories?parent=${parentId ?? _rootCategoryId}&per_page=$limit&page=$page&hide_empty=${kAdvanceConfig.hideEmptyCategories}';
 
-      if (kExcludedCategory?.isNotEmpty ?? false) {
-        url = url.addUrlQuery('exclude=$kExcludedCategory');
+      if (kExcludedCategoryIDs?.isNotEmpty ?? false) {
+        url = url.addUrlQuery('exclude=$kExcludedCategoryIDs');
       }
       url = buildUrlByLang(url);
       var response = await wcApi.getAsync(url);
@@ -2510,6 +2601,9 @@ class WooCommerceService extends BaseServices {
       var body = convert.jsonDecode(response.body);
       checkExpiredCookie(response);
       if (body is Map && body['message'] != null) {
+        if (body['code'] == 'invalid_account') {
+          throw Exception(S.current.cannotDeleteAccount);
+        }
         throw body['message'];
       }
       return true;

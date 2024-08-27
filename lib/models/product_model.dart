@@ -307,7 +307,6 @@ class ProductModel with ChangeNotifier {
   }
 
   /// Show the product list
-  // ignore: missing_return
   static Future showList({
     cateId,
     cateName,
@@ -317,7 +316,7 @@ class ProductModel with ChangeNotifier {
     bool showCountdown = false,
     Duration countdownDuration = Duration.zero,
     Brand? brandByParams,
-    BuildContext? context,
+    required BuildContext context,
   }) async {
     try {
       await FluxNavigate.pushNamed(

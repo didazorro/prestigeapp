@@ -37,6 +37,7 @@ class EmptyProductList extends StatelessWidget {
           showSeeAll: false,
           callback: () => ProductModel.showList(
             config: config.jsonData,
+            context: context,
           ),
         ),
         ConstrainedBox(
@@ -166,10 +167,12 @@ class EmptyProductGrid extends StatelessWidget {
           showSeeAll: false,
           callback: () => ProductModel.showList(
             config: config.jsonData,
+            context: context,
           ),
         ),
         Container(
-          padding: const EdgeInsets.only(left: padding, top: padding),
+          padding:
+              const EdgeInsetsDirectional.only(start: padding, top: padding),
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.surface,
             borderRadius: BorderRadius.circular(2),

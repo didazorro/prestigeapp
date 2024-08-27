@@ -8,10 +8,10 @@ part of 'shipping.dart';
 
 SerializerShipping _$SerializerShippingFromJson(Map<String, dynamic> json) =>
     SerializerShipping(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       title: json['title'] as String?,
       description: json['description'] as String?,
-      cost: json['cost'] as int?,
+      cost: (json['cost'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$SerializerShippingToJson(SerializerShipping instance) =>

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:photo_manager/photo_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -51,9 +52,11 @@ class _StateReviews extends BaseScreen<Reviews> {
 
   Future<void> _chooseImages() async {
     try {
-      _images = await ImagePicker.select(context, maxFiles: 5);
-      // _images = await MultiImagePicker.pickImages(
-      //     maxImages: 5, selectedAssets: _images);
+      _images = await ImagePicker.select(
+        context,
+        maxFiles: 5,
+        requestType: RequestType.image,
+      );
 
       setState(() {});
     } catch (e) {

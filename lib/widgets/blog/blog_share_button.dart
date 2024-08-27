@@ -1,11 +1,7 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 
-import '../../common/tools/flash.dart';
-import '../../generated/l10n.dart';
+import '../../common/extensions/buildcontext_ext.dart';
 import '../../models/entities/blog.dart';
-import '../../services/services.dart';
 
 class ShareButton extends StatelessWidget {
   final Blog blog;
@@ -15,27 +11,7 @@ class ShareButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        var url = blog.link;
-        if (url.isNotEmpty) {
-          unawaited(
-            FlashHelper.message(
-              context,
-              message: S.of(context).generatingLink,
-              duration: const Duration(seconds: 1),
-            ),
-          );
-          Services().firebase.shareDynamicLinkProduct(itemUrl: url);
-        } else {
-          unawaited(
-            FlashHelper.errorMessage(
-              context,
-              message: S.of(context).failedToGenerateLink,
-              duration: const Duration(seconds: 1),
-            ),
-          );
-        }
-      },
+      onTap: () => context.shareLink(blog.link),
       child: Container(
         margin: const EdgeInsets.all(8.0),
         padding: const EdgeInsets.all(8.0),

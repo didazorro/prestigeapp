@@ -28,111 +28,130 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m3(state) => "Bluetooth ადაპტერი არის ${state}";
 
-  static String m4(currency) => "ვალუტა შეიცვალა ${currency}-ით";
+  static String m4(author) => "ავტორი: ${author}";
 
-  static String m5(number) => " დარჩენილია${number} სიმბოლო";
+  static String m5(currency) => "ვალუტა შეიცვალა ${currency}-ით";
 
-  static String m6(priceRate, pointRate) => "${priceRate} = ${pointRate} ქულა";
+  static String m6(number) => " დარჩენილია${number} სიმბოლო";
 
-  static String m7(count) => "${count} ელემენტი";
+  static String m7(priceRate, pointRate) => "${priceRate} = ${pointRate} ქულა";
 
   static String m8(count) => "${count} ელემენტი";
 
-  static String m9(country) => "${country} ქვეყანა არ არის მხარდაჭერილი";
+  static String m9(count) => "${count} ელემენტი";
 
-  static String m10(currency) => "${currency} არ არის მხარდაჭერილი";
+  static String m10(count) => "${count} ელემენტი";
 
-  static String m11(day) => "${day} დღის წინ";
+  static String m11(count) => "${count} ელემენტი";
 
-  static String m12(total) => "~${total} კმ";
+  static String m12(country) => "${country} ქვეყანა არ არის მხარდაჭერილი";
 
-  static String m13(timeLeft) => "მთავრდება ${timeLeft}-ში";
+  static String m13(currency) => "${currency} არ არის მხარდაჭერილი";
 
-  static String m14(captcha) => "შეიყვანეთ ${captcha} დასადასტურებლად:";
+  static String m14(day) => "${day} დღის წინ";
 
-  static String m15(message) => "შეცდომა: ${message}";
+  static String m15(total) => "~${total} კმ";
 
-  static String m16(time) => "ვადა ეწურება ${time}-ში";
+  static String m16(timeLeft) => "მთავრდება ${timeLeft}-ში";
 
-  static String m17(total) => ">${total} კმ";
+  static String m17(captcha) => "შეიყვანეთ ${captcha} დასადასტურებლად:";
 
-  static String m18(hour) => "${hour} საათის წინ";
+  static String m18(message) => "შეცდომა: ${message}";
 
-  static String m19(count) =>
+  static String m19(message) => "შეცდომა: ${message}";
+
+  static String m20(time) => "ვადა ეწურება ${time}-ში";
+
+  static String m21(total) => ">${total} კმ";
+
+  static String m22(hour) => "${hour} საათის წინ";
+
+  static String m23(currentBalance) =>
+      "თქვენს საფულეში მხოლოდ ${currentBalance} გაქვთ დარჩენილი";
+
+  static String m24(count) =>
       "${Intl.plural(count, one: '${count} item', other: '${count} items')}";
 
-  static String m20(message) =>
+  static String m25(message) =>
       "მონაცემების მოთხოვნისას აპს შეექმნა პრობლემა, პრობლემების მოსაგვარებლად გთხოვთ, დაუკავშირდეთ ადმინისტრატორს: ${message}";
 
-  static String m21(currency, amount) =>
+  static String m26(currency, amount) =>
       "ამ გადახდის გამოყენების მაქსიმალური თანხაა ${currency} ${amount}";
 
-  static String m22(size) => "ფაილის მაქსიმალური ზომა: ${size} მბ";
+  static String m27(size) => "ფაილის მაქსიმალური ზომა: ${size} მბ";
 
-  static String m23(currency, amount) =>
+  static String m28(currency, amount) =>
       "ამ გადახდის გამოყენების მინიმალური თანხაა ${currency} ${amount}";
 
-  static String m24(minute) => "${minute} წუთის წინ";
+  static String m29(minute) => "${minute} წუთის წინ";
 
-  static String m25(month) => "${month} თვის წინ";
+  static String m30(month) => "${month} თვის წინ";
 
-  static String m26(store) => "მეტი ${store}-ისგან";
+  static String m31(store) => "მეტი ${store}-ისგან";
 
-  static String m27(number) => "უნდა იყიდოს ${number}ჯგუფებად";
+  static String m32(number) => "უნდა იყიდოს ${number}ჯგუფებად";
 
-  static String m28(itemCount) => "${itemCount} ელემენტი";
+  static String m33(itemCount) => "${itemCount} ელემენტი";
 
-  static String m29(price) => "ვარიანტების საერთო რაოდენობა: ${price}";
+  static String m34(price) => "ვარიანტების საერთო რაოდენობა: ${price}";
 
-  static String m30(amount) => "გადაიხადეთ ${amount}";
+  static String m35(amount) => "გადაიხადეთ ${amount}";
 
-  static String m31(name) => "${name} წარმატებით დაემატა კალათას";
+  static String m36(name) => "${name} წარმატებით დაემატა კალათას";
 
-  static String m32(total) => "რაოდენობა: ${total}";
+  static String m37(total) => "რაოდენობა: ${total}";
 
-  static String m33(percent) => "გაყიდვა ${percent}%";
+  static String m38(name) => "მიღებული ფული ${name}-ისგან ";
 
-  static String m34(keyword) => "ძიების შედეგები: \'${keyword}\'";
+  static String m39(percent) => "გაყიდვა ${percent}%";
 
-  static String m35(keyword, count) => "${keyword} (${count} ელემენტი)";
+  static String m40(keyword) => "ძიების შედეგები: \'${keyword}\'";
 
-  static String m36(keyword, count) => "${keyword} (${count} ელემენტი)";
+  static String m41(keyword, count) => "${keyword} (${count} ელემენტი)";
 
-  static String m37(second) => "${second} წამის წინ";
+  static String m42(keyword, count) => "${keyword} (${count} ელემენტი)";
 
-  static String m38(totalCartQuantity) =>
+  static String m43(second) => "${second} წამის წინ";
+
+  static String m44(totalCartQuantity) =>
       "საყიდლების კალათა, ${totalCartQuantity} ელემენტი";
 
-  static String m39(numberOfUnitsSold) => "გაიყიდა: ${numberOfUnitsSold}";
+  static String m45(numberOfUnitsSold) => "გაიყიდა: ${numberOfUnitsSold}";
 
-  static String m40(fieldName) => " ${fieldName} ველი სავალდებულოა";
+  static String m46(fieldName) => " ${fieldName} ველი სავალდებულოა";
 
-  static String m41(total) => "${total} პროდუქტი";
+  static String m47(total) => "${total} პროდუქტი";
 
-  static String m42(maxPointDiscount, maxPriceDiscount) =>
+  static String m48(name) => "თანხის გადარიცხვა ${name}-ზე ";
+
+  static String m49(maxPointDiscount, maxPriceDiscount) =>
       "გამოიყენეთ მაქსიმუმ ${maxPointDiscount} ქულა ამ შეკვეთაზე ${maxPriceDiscount} ფასდაკლებისთვის!";
 
-  static String m43(date) => "ძალაშია ${date}-მდე";
+  static String m50(date) => "ძალაშია ${date}-მდე";
 
-  static String m44(message) => "გაფრთხილება: ${message}";
+  static String m51(balance) => "Wallet ბალანსი: ${balance}";
 
-  static String m45(defaultCurrency) =>
+  static String m52(message) => "გაფრთხილება: ${message}";
+
+  static String m53(defaultCurrency) =>
       "ამჟამად არჩეული ვალუტა მიუწვდომელია Wallet ფუნქციისთვის, გთხოვთ შეცვალოთ ის ${defaultCurrency}-ზე";
 
-  static String m46(length) => "ჩვენ ვიპოვეთ ${length} პროდუქტი";
+  static String m54(length) => "ჩვენ ვიპოვეთ ${length} პროდუქტი";
 
-  static String m47(week) => "Week ${week}";
+  static String m55(week) => "Week ${week}";
 
-  static String m48(name) => "მოგესალმებით ${name}";
+  static String m56(name) => "მოგესალმებით ${name}";
 
-  static String m49(year) => "${year} წლის წინ";
+  static String m57(year) => "${year} წლის წინ";
 
-  static String m50(total) => "თქვენ დაავალეთ შეკვეთა #${total}";
+  static String m58(total) => "თქვენ დაავალეთ შეკვეთა #${total}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "aboutUs": MessageLookupByLibrary.simpleMessage("Ჩვენს შესახებ"),
         "account": MessageLookupByLibrary.simpleMessage("ანგარიში"),
+        "accountApprovalTitle":
+            MessageLookupByLibrary.simpleMessage("დამტკიცების ქვეშ"),
         "accountDeleteDescription": MessageLookupByLibrary.simpleMessage(
             "თქვენი ანგარიშის წაშლა წაშლის პერსონალურ ინფორმაციას ჩვენი მონაცემთა ბაზიდან."),
         "accountIsPendingApproval": MessageLookupByLibrary.simpleMessage(
@@ -166,7 +185,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addToCart": MessageLookupByLibrary.simpleMessage("Კალათაში დამატება"),
         "addToCartMaximum": MessageLookupByLibrary.simpleMessage(
             "მაქსიმალური რაოდენობა გადააჭარბა"),
-        "addToCartSucessfully":
+        "addToCartSuccessfully":
             MessageLookupByLibrary.simpleMessage("წარმატებით დაემატა კალათაში"),
         "addToOrder": MessageLookupByLibrary.simpleMessage("დაამატე შეკვეთაზე"),
         "addToQuoteRequest":
@@ -207,21 +226,28 @@ class MessageLookup extends MessageLookupByLibrary {
         "apply": MessageLookupByLibrary.simpleMessage("მიმართვა"),
         "approve": MessageLookupByLibrary.simpleMessage("ამტკიცებს"),
         "approved": MessageLookupByLibrary.simpleMessage("დამტკიცებულია"),
+        "approvedRequests":
+            MessageLookupByLibrary.simpleMessage("დამტკიცებული მოთხოვნები"),
         "arabic": MessageLookupByLibrary.simpleMessage("არაბული"),
         "areYouSure": MessageLookupByLibrary.simpleMessage("Დარწმუნებული ხარ?"),
         "areYouSureDeleteAccount": MessageLookupByLibrary.simpleMessage(
             "დარწმუნებული ხართ, რომ წაშალეთ თქვენი ანგარიში?"),
+        "areYouSureLogOut": MessageLookupByLibrary.simpleMessage(
+            "დარწმუნებული ხართ, რომ გსურთ გამოსვლა?"),
         "areYouWantToExit": MessageLookupByLibrary.simpleMessage(
             "დარწმუნებული ხართ, რომ გსურთ გასვლა?"),
         "assigned": MessageLookupByLibrary.simpleMessage("Დანიშნული"),
         "atLeastThreeCharacters":
             MessageLookupByLibrary.simpleMessage("მინიმუმ 3 სიმბოლო..."),
+        "attribute": MessageLookupByLibrary.simpleMessage("ატრიბუტი"),
         "attributeAlreadyExists":
             MessageLookupByLibrary.simpleMessage("ატრიბუტი უკვე არსებობს"),
         "attributes": MessageLookupByLibrary.simpleMessage("ატრიბუტები"),
         "audioDetected": MessageLookupByLibrary.simpleMessage(
             "აღმოჩენილია აუდიო ელემენტ(ებ)ი. გსურთ აუდიო პლეერში დამატება?"),
         "availability": MessageLookupByLibrary.simpleMessage("ხელმისაწვდომობა"),
+        "availabilityProduct":
+            MessageLookupByLibrary.simpleMessage("ხელმისაწვდომობა: "),
         "availablePoints": m2,
         "averageRating":
             MessageLookupByLibrary.simpleMessage("Საშუალო რეიტინგი"),
@@ -250,6 +276,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "bleHasNotBeenEnabled":
             MessageLookupByLibrary.simpleMessage("Bluetooth არ არის ჩართული"),
         "bleState": m3,
+        "block": MessageLookupByLibrary.simpleMessage("დაბლოკვა"),
+        "blockUser":
+            MessageLookupByLibrary.simpleMessage("მომხმარებლის დაბლოკვა"),
         "blog": MessageLookupByLibrary.simpleMessage("ბლოგი"),
         "booked": MessageLookupByLibrary.simpleMessage("უკვე დაჯავშნილი"),
         "booking": MessageLookupByLibrary.simpleMessage("დაჯავშნა"),
@@ -269,13 +298,18 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("დაჯავშნა მიუწვდომელია"),
         "bosnian": MessageLookupByLibrary.simpleMessage("ბოსნიური"),
         "branch": MessageLookupByLibrary.simpleMessage("ფილიალი"),
+        "branchChangeWarning": MessageLookupByLibrary.simpleMessage(
+            "უკაცრავად, კალათა დაიცლება რეგიონის ცვლილების გამო. მოხარული ვართ დაგიკავშირდეთ, თუ დახმარება გჭირდებათ."),
         "brand": MessageLookupByLibrary.simpleMessage("ბრენდი"),
+        "brands": MessageLookupByLibrary.simpleMessage("Ბრენდები"),
         "brazil": MessageLookupByLibrary.simpleMessage("პორტუგალიური"),
         "burmese": MessageLookupByLibrary.simpleMessage("ბირმული"),
         "buyNow": MessageLookupByLibrary.simpleMessage("Იყიდე ეხლა"),
         "by": MessageLookupByLibrary.simpleMessage("მიერ"),
         "byAppointmentOnly":
             MessageLookupByLibrary.simpleMessage("მხოლოდ დანიშვნით"),
+        "byAuthor": m4,
+        "byBrand": MessageLookupByLibrary.simpleMessage("ბრენდის მიხედვით"),
         "byCategory":
             MessageLookupByLibrary.simpleMessage("კატეგორიის მიხედვით"),
         "byPrice": MessageLookupByLibrary.simpleMessage("ფასის მიხედვით"),
@@ -307,6 +341,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "canNotUpdateInfo": MessageLookupByLibrary.simpleMessage(
             "მომხმარებლის ინფორმაციის განახლება შეუძლებელია."),
         "cancel": MessageLookupByLibrary.simpleMessage("გაუქმება"),
+        "cancelOrder": MessageLookupByLibrary.simpleMessage("გაუქმება"),
+        "cancelled": MessageLookupByLibrary.simpleMessage("გაუქმდა"),
+        "cancelledRequests":
+            MessageLookupByLibrary.simpleMessage("გაუქმებული მოთხოვნები"),
+        "cannotDeleteAccount": MessageLookupByLibrary.simpleMessage(
+            "ამ ანგარიშის წაშლა შეუძლებელია"),
+        "cannotSendMessage": MessageLookupByLibrary.simpleMessage(
+            "ამ მომხმარებლისთვის შეტყობინებების გაგზავნა შეუძლებელია"),
         "cantFindThisOrderId":
             MessageLookupByLibrary.simpleMessage("ამ შეკვეთის ID ვერ მოიძებნა"),
         "cantPickDateInThePast":
@@ -323,8 +365,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeLanguage": MessageLookupByLibrary.simpleMessage("Ენის შეცვლა"),
         "changePrinter":
             MessageLookupByLibrary.simpleMessage("პრინტერის შეცვლა"),
-        "changedCurrencyTo": m4,
-        "characterRemain": m5,
+        "changedCurrencyTo": m5,
+        "characterRemain": m6,
         "chat": MessageLookupByLibrary.simpleMessage("Სასაუბრო"),
         "chatGPT": MessageLookupByLibrary.simpleMessage("ჩატი GPT"),
         "chatListScreen": MessageLookupByLibrary.simpleMessage("შეტყობინებები"),
@@ -406,15 +448,19 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("განაგრძეთ მიწოდება"),
         "continues": MessageLookupByLibrary.simpleMessage("გაგრძელება"),
         "conversations": MessageLookupByLibrary.simpleMessage("საუბრები"),
-        "convertPoint": m6,
+        "convertPoint": m7,
         "copied": MessageLookupByLibrary.simpleMessage("კოპირებულია"),
         "copy": MessageLookupByLibrary.simpleMessage("კოპირება"),
         "copyright": MessageLookupByLibrary.simpleMessage(
             "© 2024 InspireUI ყველა უფლება დაცულია."),
-        "countItem": m7,
-        "countItems": m8,
+        "countItem": m8,
+        "countItems": m9,
+        "countProduct": m10,
+        "countProducts": m11,
         "country": MessageLookupByLibrary.simpleMessage("ქვეყანა"),
-        "countryIsNotSupported": m9,
+        "countryCodeIsRequired":
+            MessageLookupByLibrary.simpleMessage("ქვეყნის კოდი აუცილებელია"),
+        "countryIsNotSupported": m12,
         "countryIsRequired":
             MessageLookupByLibrary.simpleMessage("ქვეყნის ველი აუცილებელია"),
         "couponCode": MessageLookupByLibrary.simpleMessage("Კუპონის კოდი"),
@@ -439,7 +485,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("შექმენით ყველა ვარიანტი"),
         "createdOn": MessageLookupByLibrary.simpleMessage("Შექმნილია:"),
         "currencies": MessageLookupByLibrary.simpleMessage("ვალუტები"),
-        "currencyIsNotSupported": m10,
+        "currencyIsNotSupported": m13,
         "currentPassword":
             MessageLookupByLibrary.simpleMessage("მიმდინარე პაროლი"),
         "currentlyWeOnlyHave":
@@ -467,7 +513,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "dateTime": MessageLookupByLibrary.simpleMessage("თარიღის დრო"),
         "dateWiseClose":
             MessageLookupByLibrary.simpleMessage("თარიღის დახურვა"),
-        "daysAgo": m11,
+        "daysAgo": m14,
         "debit": MessageLookupByLibrary.simpleMessage("Სადებეტო"),
         "decline": MessageLookupByLibrary.simpleMessage("უარყოფა"),
         "delete": MessageLookupByLibrary.simpleMessage("წაშლა"),
@@ -478,8 +524,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteAccountSuccess": MessageLookupByLibrary.simpleMessage(
             "ანგარიში წარმატებით წაიშალა. თქვენი სესიის ვადა ამოიწურა."),
         "deleteAll": MessageLookupByLibrary.simpleMessage("წაშალე ყველა"),
+        "deleteConversation":
+            MessageLookupByLibrary.simpleMessage("წაშალეთ საუბარი"),
         "delivered": MessageLookupByLibrary.simpleMessage("მიწოდებული"),
         "deliveredTo": MessageLookupByLibrary.simpleMessage("Მიტანილია"),
+        "delivering": MessageLookupByLibrary.simpleMessage("მიწოდება"),
         "deliveryBoy": MessageLookupByLibrary.simpleMessage("Მიმტანი ბიჭი:"),
         "deliveryDate": MessageLookupByLibrary.simpleMessage("Მიღების თარიღი"),
         "deliveryDetails":
@@ -497,7 +546,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("შესყიდვის გამორთვა"),
         "discount": MessageLookupByLibrary.simpleMessage("ფასდაკლებით"),
         "displayName": MessageLookupByLibrary.simpleMessage("Ჩვენების სახელი"),
-        "distance": m12,
+        "distance": m15,
         "doNotAnyTransactions": MessageLookupByLibrary.simpleMessage(
             "ჯერ არ გაქვთ რაიმე ტრანზაქცია"),
         "doYouWantToExitApp":
@@ -506,6 +555,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "გსურთ დატოვოთ თქვენი მიმოხილვის გაგზავნის გარეშე?"),
         "doYouWantToLogout":
             MessageLookupByLibrary.simpleMessage("გსურთ გამოსვლა?"),
+        "doYouWantToUnblock": MessageLookupByLibrary.simpleMessage(
+            "გსურთ ამ მომხმარებლის განბლოკვა?"),
         "doesNotSupportApplePay": MessageLookupByLibrary.simpleMessage(
             "Apple Pay არ არის ხელმისაწვდომი ამ მოწყობილობაზე!"),
         "done": MessageLookupByLibrary.simpleMessage("შესრულებულია"),
@@ -525,6 +576,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "editWithoutColon": MessageLookupByLibrary.simpleMessage("რედაქტირება"),
         "egypt": MessageLookupByLibrary.simpleMessage("ეგვიპტე"),
         "email": MessageLookupByLibrary.simpleMessage("ელ.ფოსტა"),
+        "emailAddressInvalid": MessageLookupByLibrary.simpleMessage(
+            "ელფოსტის მისამართი არასწორია"),
+        "emailAlreadyInUse":
+            MessageLookupByLibrary.simpleMessage("ელფოსტა უკვე გამოიყენება!"),
         "emailDeleteDescription": MessageLookupByLibrary.simpleMessage(
             "თქვენი ანგარიშის წაშლით გააუქმებთ გამოწერას ყველა საფოსტო სიიდან."),
         "emailDoesNotExist": MessageLookupByLibrary.simpleMessage(
@@ -563,12 +618,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ჩართეთ შვებულების რეჟიმი"),
         "endDateCantBeAfterFirstDate": MessageLookupByLibrary.simpleMessage(
             "გთხოვთ, აირჩიოთ თარიღი პირველი შეხვედრის შემდეგ"),
-        "endsIn": m13,
+        "endsIn": m16,
         "english": MessageLookupByLibrary.simpleMessage("ინგლისური"),
-        "enterCaptcha": m14,
+        "enterAmount": MessageLookupByLibrary.simpleMessage("შეიყვანეთ თანხა"),
+        "enterCaptcha": m17,
         "enterEmailEachRecipient": MessageLookupByLibrary.simpleMessage(
             "შეიყვანეთ ელ.ფოსტის მისამართი თითოეული მიმღებისთვის"),
-        "enterSendedCode":
+        "enterSentCode":
             MessageLookupByLibrary.simpleMessage("შეიყვანეთ გაგზავნილი კოდი"),
         "enterVoucherCode":
             MessageLookupByLibrary.simpleMessage("შეიყვანეთ ვაუჩერის კოდი"),
@@ -588,13 +644,19 @@ class MessageLookup extends MessageLookupByLibrary {
             "დასაწყებად შეიყვანეთ თქვენი ტელეფონის ნომერი."),
         "enterYourPhoneNumber": MessageLookupByLibrary.simpleMessage(
             "Შეიყვანეთ თქვენი ტელეფონის ნომერი"),
-        "error": m15,
+        "enterYourUsername": MessageLookupByLibrary.simpleMessage(
+            "შეიყვანეთ თქვენი მომხმარებლის სახელი"),
+        "error": m18,
         "errorAmountTransfer": MessageLookupByLibrary.simpleMessage(
             "შეყვანილი თანხა აღემატება მიმდინარე საფულის თანხას. Გთხოვთ კიდევ სცადეთ!"),
         "errorEmailFormat": MessageLookupByLibrary.simpleMessage(
             "Გთხოვთ შეიყვანოთ სწორი ელ - ფოსტის მისამართი."),
+        "errorMsg": m19,
+        "errorOnGettingPost":
+            MessageLookupByLibrary.simpleMessage("შეცდომა პოსტის მიღებისას!"),
         "errorPasswordFormat": MessageLookupByLibrary.simpleMessage(
             "გთხოვთ, შეიყვანოთ პაროლი მინიმუმ 8 სიმბოლოსგან"),
+        "errorTitle": MessageLookupByLibrary.simpleMessage("შეცდომა"),
         "evening": MessageLookupByLibrary.simpleMessage("საღამო"),
         "events": MessageLookupByLibrary.simpleMessage("Ივენთი"),
         "expectedDeliveryDate":
@@ -603,7 +665,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "expiredDate":
             MessageLookupByLibrary.simpleMessage("ვადის გასვლის თარიღი"),
         "expiredDateHint": MessageLookupByLibrary.simpleMessage("MM/YY"),
-        "expiringInTime": m16,
+        "expiringInTime": m20,
         "exploreNow":
             MessageLookupByLibrary.simpleMessage("გამოიკვლიეთ ახლავე"),
         "external": MessageLookupByLibrary.simpleMessage("გარე"),
@@ -619,6 +681,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "სურათის ჩატვირთვა ვერ მოხერხდა"),
         "fair": MessageLookupByLibrary.simpleMessage("სამართლიანი"),
         "favorite": MessageLookupByLibrary.simpleMessage("საყვარელი"),
+        "fax": MessageLookupByLibrary.simpleMessage("ფაქსი"),
         "featureNotAvailable":
             MessageLookupByLibrary.simpleMessage("ფუნქცია მიუწვდომელია"),
         "featureProducts":
@@ -649,6 +712,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "ფიქსირებული პროდუქციის ფასდაკლება"),
         "forThisProduct":
             MessageLookupByLibrary.simpleMessage("ამ პროდუქტისთვის"),
+        "free": MessageLookupByLibrary.simpleMessage("უფასო"),
         "freeOfCharge": MessageLookupByLibrary.simpleMessage(
             "Გადასახადისგან გათავისუფლებული"),
         "french": MessageLookupByLibrary.simpleMessage("ფრანგული"),
@@ -678,7 +742,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "goBackToShipping":
             MessageLookupByLibrary.simpleMessage("დაუბრუნდით მიწოდებას"),
         "good": MessageLookupByLibrary.simpleMessage("კარგი"),
-        "greaterDistance": m17,
+        "greaterDistance": m21,
         "greek": MessageLookupByLibrary.simpleMessage("ბერძნული"),
         "grossSales": MessageLookupByLibrary.simpleMessage("მთლიანი გაყიდვები"),
         "grouped": MessageLookupByLibrary.simpleMessage("დაჯგუფებულია"),
@@ -697,7 +761,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "historyTransaction": MessageLookupByLibrary.simpleMessage("ისტორია"),
         "home": MessageLookupByLibrary.simpleMessage("მთავარი"),
         "hour": MessageLookupByLibrary.simpleMessage("საათი"),
-        "hoursAgo": m18,
+        "hoursAgo": m22,
         "hungarian": MessageLookupByLibrary.simpleMessage("უნგრული"),
         "hungary": MessageLookupByLibrary.simpleMessage("უნგრული"),
         "iAgree": MessageLookupByLibrary.simpleMessage("ვეთანხმები"),
@@ -717,8 +781,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "indonesian": MessageLookupByLibrary.simpleMessage("ინდონეზიური"),
         "informationTable":
             MessageLookupByLibrary.simpleMessage("საინფორმაციო ცხრილი"),
+        "installDigitsPlugin": MessageLookupByLibrary.simpleMessage(
+            "გთხოვთ დააინსტალიროთ DIGITS: Wordpress Mobile Number Signup and Login plugin"),
         "instantlyClose":
             MessageLookupByLibrary.simpleMessage("მყისიერად დახურეთ"),
+        "insufficientBalanceMessage": m23,
         "invalidPhoneNumber":
             MessageLookupByLibrary.simpleMessage("Არასწორი მობილურის ნომერი"),
         "invalidSMSCode": MessageLookupByLibrary.simpleMessage(
@@ -731,7 +798,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "isTyping": MessageLookupByLibrary.simpleMessage("ბეჭდავს..."),
         "italian": MessageLookupByLibrary.simpleMessage("იტალიური"),
         "item": MessageLookupByLibrary.simpleMessage("საქონელი"),
-        "itemQuantity": m19,
+        "itemQuantity": m24,
         "itemTotal": MessageLookupByLibrary.simpleMessage("საქონელი სულ:"),
         "items": MessageLookupByLibrary.simpleMessage("ITEMS"),
         "itsOrdered": MessageLookupByLibrary.simpleMessage("შეკვეთილია!"),
@@ -775,7 +842,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("Შესვლა"),
         "loginCanceled":
             MessageLookupByLibrary.simpleMessage("შესვლა გაუქმებულია"),
-        "loginErrorServiceProvider": m20,
+        "loginErrorServiceProvider": m25,
         "loginFailed": MessageLookupByLibrary.simpleMessage(
             "Სისტემაში შესვლა ვერ მოხერხდა!"),
         "loginInvalid": MessageLookupByLibrary.simpleMessage(
@@ -786,6 +853,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "გთხოვთ შეხვიდეთ კომენტარისთვის"),
         "loginToContinue": MessageLookupByLibrary.simpleMessage(
             "Გასაგრძელებლად გაიარეთ ავტორიზაცია"),
+        "loginToReview":
+            MessageLookupByLibrary.simpleMessage("გთხოვთ შეხვიდეთ გადასახედად"),
         "loginToYourAccount":
             MessageLookupByLibrary.simpleMessage("შედით თქვენს ანგარიშზე"),
         "logout": MessageLookupByLibrary.simpleMessage("გამოსვლა"),
@@ -803,8 +872,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("მონიშნე როგორც გაგზავნილი"),
         "markAsUnread":
             MessageLookupByLibrary.simpleMessage("წაუკითხავად მონიშვნა"),
-        "maxAmountForPayment": m21,
-        "maximumFileSizeMb": m22,
+        "maxAmountForPayment": m26,
+        "maximumFileSizeMb": m27,
         "maybeLater":
             MessageLookupByLibrary.simpleMessage("შეიძლება მოგვიანებით"),
         "menuOrder":
@@ -813,21 +882,26 @@ class MessageLookup extends MessageLookupByLibrary {
         "message": MessageLookupByLibrary.simpleMessage("შეტყობინება"),
         "messageTo":
             MessageLookupByLibrary.simpleMessage("შეტყობინების გაგზავნა"),
-        "minAmountForPayment": m23,
+        "minAmountForPayment": m28,
         "minimumQuantityIs":
             MessageLookupByLibrary.simpleMessage("მინიმალური რაოდენობა არის"),
-        "minutesAgo": m24,
+        "minutesAgo": m29,
+        "mobile": MessageLookupByLibrary.simpleMessage("მობილური"),
+        "mobileIsRequired":
+            MessageLookupByLibrary.simpleMessage("საჭიროა მობილური"),
+        "mobileNumberInUse": MessageLookupByLibrary.simpleMessage(
+            "მობილურის ნომერი უკვე გამოიყენება!"),
         "mobileVerification":
             MessageLookupByLibrary.simpleMessage("მობილური დადასტურება"),
         "momentAgo": MessageLookupByLibrary.simpleMessage("ცოტა ხნის წინ"),
         "monday": MessageLookupByLibrary.simpleMessage("ორშაბათს"),
-        "monthsAgo": m25,
+        "monthsAgo": m30,
         "more": MessageLookupByLibrary.simpleMessage("...მეტი"),
-        "moreFromStore": m26,
+        "moreFromStore": m31,
         "moreInformation":
             MessageLookupByLibrary.simpleMessage("Მეტი ინფორმაცია"),
         "morning": MessageLookupByLibrary.simpleMessage("დილა"),
-        "mustBeBoughtInGroupsOf": m27,
+        "mustBeBoughtInGroupsOf": m32,
         "mustSelectOneItem":
             MessageLookupByLibrary.simpleMessage("უნდა აირჩიოთ 1 ელემენტი"),
         "myCart": MessageLookupByLibrary.simpleMessage("ჩემი კალათა"),
@@ -839,11 +913,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "myWallet": MessageLookupByLibrary.simpleMessage("Ჩემი საფულე"),
         "myWishList":
             MessageLookupByLibrary.simpleMessage("ჩემი სურვილების სია"),
-        "nItems": m28,
+        "nItems": m33,
         "name": MessageLookupByLibrary.simpleMessage("სახელი"),
         "nameOnCard": MessageLookupByLibrary.simpleMessage("Სახელი ბარათზე"),
         "nearbyPlaces":
             MessageLookupByLibrary.simpleMessage("ახლომდებარე ადგილები"),
+        "needHelp":
+            MessageLookupByLibrary.simpleMessage("დახმარება გჭირდებათ?"),
         "needToLoginAgain": MessageLookupByLibrary.simpleMessage(
             "თქვენ კვლავ უნდა შეხვიდეთ სისტემაში, რათა განახლდეს"),
         "netherlands": MessageLookupByLibrary.simpleMessage("ჰოლანდიური"),
@@ -862,10 +938,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "ოჰ, ბლოგი, როგორც ჩანს, აღარ არსებობს"),
         "noCameraPermissionIsGranted": MessageLookupByLibrary.simpleMessage(
             "კამერის ნებართვა არ არის გაცემული. გთხოვთ, მიაწოდოთ ის თქვენი მოწყობილობის პარამეტრებში."),
+        "noComments":
+            MessageLookupByLibrary.simpleMessage("კომენტარები არ არის"),
         "noConversation":
             MessageLookupByLibrary.simpleMessage("საუბარი ჯერ არ არის"),
         "noConversationDescription": MessageLookupByLibrary.simpleMessage(
-            "ის გამოჩნდება მას შემდეგ, რაც თქვენი მომხმარებლები დაიწყებენ თქვენთან საუბარს"),
+            "ის გამოჩნდება, როდესაც ვინმე დაიწყებს თქვენთან საუბარს"),
         "noData": MessageLookupByLibrary.simpleMessage("აღარ დათა"),
         "noFavoritesYet":
             MessageLookupByLibrary.simpleMessage("ჯერ არ არის რჩეული."),
@@ -878,6 +956,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "noListingNearby":
             MessageLookupByLibrary.simpleMessage("სია ახლოს არ არის!"),
         "noOrders": MessageLookupByLibrary.simpleMessage("შეკვეთების გარეშე"),
+        "noPaymentMethodsAvailable": MessageLookupByLibrary.simpleMessage(
+            "გადახდის მეთოდები არ არის ხელმისაწვდომი."),
         "noPermissionForCurrentRole": MessageLookupByLibrary.simpleMessage(
             "უკაცრავად, ეს პროდუქტი მიუწვდომელია თქვენი ამჟამინდელი როლისთვის."),
         "noPermissionToViewProduct": MessageLookupByLibrary.simpleMessage(
@@ -897,7 +977,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("სლოტი არ არის ხელმისაწვდომი"),
         "noStoreNearby":
             MessageLookupByLibrary.simpleMessage("მაღაზია არ არის ახლოს!"),
+        "noSuggestionSearch":
+            MessageLookupByLibrary.simpleMessage("წინადადებები არ არის"),
         "noThanks": MessageLookupByLibrary.simpleMessage("Არა გმადლობთ"),
+        "noTransactionsMsg": MessageLookupByLibrary.simpleMessage(
+            "უკაცრავად, ტრანზაქცია არ მოიძებნა!"),
         "noVideoFound": MessageLookupByLibrary.simpleMessage(
             "უკაცრავად, ვიდეო ვერ მოიძებნა."),
         "none": MessageLookupByLibrary.simpleMessage("არცერთი"),
@@ -927,7 +1011,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "openingHours": MessageLookupByLibrary.simpleMessage("გახსნის საათები"),
         "optional": MessageLookupByLibrary.simpleMessage("სურვილისამებრ"),
         "options": MessageLookupByLibrary.simpleMessage("Პარამეტრები"),
-        "optionsTotal": m29,
+        "optionsTotal": m34,
         "or": MessageLookupByLibrary.simpleMessage("ან"),
         "orLoginWith":
             MessageLookupByLibrary.simpleMessage("ან შედით სისტემაში"),
@@ -1006,14 +1090,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "payByWallet":
             MessageLookupByLibrary.simpleMessage("გადაიხადე საფულით"),
         "payNow": MessageLookupByLibrary.simpleMessage("Გადაიხადე ახლა"),
-        "payWithAmount": m30,
+        "payWithAmount": m35,
         "payment": MessageLookupByLibrary.simpleMessage("გადახდა"),
+        "paymentDetailsChangedSuccessfully":
+            MessageLookupByLibrary.simpleMessage(
+                "გადახდის დეტალები წარმატებით შეიცვალა."),
         "paymentMethod":
             MessageLookupByLibrary.simpleMessage("Გადახდის საშუალება"),
         "paymentMethodIsNotSupported": MessageLookupByLibrary.simpleMessage(
             "გადახდის ეს მეთოდი არ არის მხარდაჭერილი"),
         "paymentMethods":
             MessageLookupByLibrary.simpleMessage("გადახდის მეთოდები"),
+        "paymentSettings":
+            MessageLookupByLibrary.simpleMessage("გადახდის პარამეტრები"),
         "paymentSuccessful":
             MessageLookupByLibrary.simpleMessage("გადახდა წარმატებით დასრულდა"),
         "pending": MessageLookupByLibrary.simpleMessage("ელოდება"),
@@ -1029,6 +1118,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "ტელეფონის ნომრის დადასტურება"),
         "pickADate":
             MessageLookupByLibrary.simpleMessage("აირჩიეთ თარიღი და დრო"),
+        "picking": MessageLookupByLibrary.simpleMessage("ელოდება მიწოდებას"),
         "placeMyOrder":
             MessageLookupByLibrary.simpleMessage("განათავსე ჩემი შეკვეთა"),
         "playAll": MessageLookupByLibrary.simpleMessage("ითამაშეთ ყველა"),
@@ -1048,6 +1138,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "გთხოვთ შეიყვანოთ პროდუქტის სახელი"),
         "pleaseFillCode":
             MessageLookupByLibrary.simpleMessage("გთხოვთ შეავსოთ თქვენი კოდი"),
+        "pleaseFillUpAllCellsProperly": MessageLookupByLibrary.simpleMessage(
+            "* გთხოვთ შეავსოთ ყველა უჯრედი სწორად"),
         "pleaseIncreaseOrDecreaseTheQuantity":
             MessageLookupByLibrary.simpleMessage(
                 "გასაგრძელებლად გთხოვთ გაზარდოთ ან შეამციროთ რაოდენობა."),
@@ -1069,8 +1161,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "გთხოვთ, აირჩიოთ საჭირო ვარიანტები!"),
         "pleaseSignInBeforeUploading": MessageLookupByLibrary.simpleMessage(
             "გთხოვთ შეხვიდეთ თქვენს ანგარიშში ნებისმიერი ფაილის ატვირთვამდე."),
-        "pleasefillUpAllCellsProperly": MessageLookupByLibrary.simpleMessage(
-            "* გთხოვთ შეავსოთ ყველა უჯრედი სწორად"),
         "point": MessageLookupByLibrary.simpleMessage("წერტილი"),
         "pointMsgConfigNotFound": MessageLookupByLibrary.simpleMessage(
             "სერვერზე ფასდაკლების წერტილის კონფიგურაცია არ არის ნაპოვნი"),
@@ -1132,8 +1222,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "privacyTerms": MessageLookupByLibrary.simpleMessage(
             "კონფიდენციალურობა და პირობები"),
         "private": MessageLookupByLibrary.simpleMessage("პირადი"),
+        "processing": MessageLookupByLibrary.simpleMessage("დამუშავება..."),
         "product": MessageLookupByLibrary.simpleMessage("პროდუქტი"),
-        "productAddToCart": m31,
+        "productAddToCart": m36,
         "productAdded":
             MessageLookupByLibrary.simpleMessage("პროდუქტი ემატება"),
         "productCreateReview": MessageLookupByLibrary.simpleMessage(
@@ -1169,10 +1260,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "qRCodeSaveFailure": MessageLookupByLibrary.simpleMessage(
             "QR კოდის შენახვა ვერ მოხერხდა"),
         "qty": MessageLookupByLibrary.simpleMessage("რაოდენობა"),
-        "qtyTotal": m32,
+        "qtyTotal": m37,
         "quantity": MessageLookupByLibrary.simpleMessage("რაოდენობა"),
         "quantityProductExceedInStock": MessageLookupByLibrary.simpleMessage(
             "მიმდინარე რაოდენობა აღემატება საწყობში არსებულ რაოდენობას"),
+        "random": MessageLookupByLibrary.simpleMessage("შემთხვევითი"),
         "rate": MessageLookupByLibrary.simpleMessage("შეფასება"),
         "rateProduct":
             MessageLookupByLibrary.simpleMessage("შეაფასეთ პროდუქტი"),
@@ -1187,14 +1279,17 @@ class MessageLookup extends MessageLookupByLibrary {
             "გთხოვთ შეაფასოთ სანამ თქვენს კომენტარს გამოაგზავნით"),
         "reOrder": MessageLookupByLibrary.simpleMessage("ხელახლა შეკვეთა"),
         "readReviews": MessageLookupByLibrary.simpleMessage("მიმოხილვები"),
+        "readyToPick":
+            MessageLookupByLibrary.simpleMessage("ელოდება მიწოდებას"),
         "receivedMoney": MessageLookupByLibrary.simpleMessage("ფული მიიღო"),
+        "receivedMoneyFrom": m38,
         "receiver": MessageLookupByLibrary.simpleMessage("მიმღები"),
+        "recent": MessageLookupByLibrary.simpleMessage("ᲑᲝᲚᲝ"),
         "recentSearches":
             MessageLookupByLibrary.simpleMessage("ბოლო ძიების შედეგები"),
         "recentView": MessageLookupByLibrary.simpleMessage("თქვენი ბოლო ხედი"),
         "recentlyViewed":
             MessageLookupByLibrary.simpleMessage("Ახლახანს ნანახი"),
-        "recents": MessageLookupByLibrary.simpleMessage("ᲑᲝᲚᲝ"),
         "recommended": MessageLookupByLibrary.simpleMessage("რეკომენდებულია"),
         "recurringTotals":
             MessageLookupByLibrary.simpleMessage("განმეორებადი ჯამები"),
@@ -1215,8 +1310,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("რეგისტრაცია როგორც"),
         "registerAsVendor": MessageLookupByLibrary.simpleMessage(
             "დარეგისტრირდით როგორც გამყიდველი"),
+        "registerErrorSyncAccount": MessageLookupByLibrary.simpleMessage(
+            "ანგარიშის სინქრონიზაცია შეუძლებელია. გთხოვთ შეხვიდეთ გასაგრძელებლად."),
         "registerFailed":
             MessageLookupByLibrary.simpleMessage("რეგისტრაცია ვერ მოხერხდა"),
+        "registerInvalid": MessageLookupByLibrary.simpleMessage(
+            "მოთხოვნა არასწორია ან ვადაგასულია. გთხოვთ, სცადოთ ხელახლა"),
         "registerSuccess":
             MessageLookupByLibrary.simpleMessage("წარმატებით დარეგისტრირდით"),
         "regularPrice": MessageLookupByLibrary.simpleMessage("Რეგულარული ფასი"),
@@ -1249,7 +1348,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reviews": MessageLookupByLibrary.simpleMessage("მიმოხილვები"),
         "romanian": MessageLookupByLibrary.simpleMessage("რუმინული"),
         "russian": MessageLookupByLibrary.simpleMessage("რუსული"),
-        "sale": m33,
+        "sale": m39,
         "salePrice": MessageLookupByLibrary.simpleMessage("Გასაყიდი ფასი"),
         "saturday": MessageLookupByLibrary.simpleMessage("შაბათი"),
         "save": MessageLookupByLibrary.simpleMessage("Შენახვა"),
@@ -1273,6 +1372,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "მოძებნეთ ქვეყნის სახელით ან აკრიფეთ კოდით"),
         "searchByName":
             MessageLookupByLibrary.simpleMessage("ძიება სახელით..."),
+        "searchEmptyDataMessage": MessageLookupByLibrary.simpleMessage(
+            "უი! როგორც ჩანს, არცერთი შედეგი არ შეესაბამება თქვენს ძიების კრიტერიუმებს"),
         "searchForItems":
             MessageLookupByLibrary.simpleMessage("მოძებნეთ ნივთები"),
         "searchInput": MessageLookupByLibrary.simpleMessage(
@@ -1280,12 +1381,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "searchOrderId":
             MessageLookupByLibrary.simpleMessage("ძიება შეკვეთის ID-ით..."),
         "searchPlace": MessageLookupByLibrary.simpleMessage("ადგილის ძებნა"),
-        "searchResultFor": m34,
-        "searchResultItem": m35,
-        "searchResultItems": m36,
+        "searchResultFor": m40,
+        "searchResultItem": m41,
+        "searchResultItems": m42,
         "searchingAddress":
             MessageLookupByLibrary.simpleMessage("მისამართის ძებნა"),
-        "secondsAgo": m37,
+        "secondsAgo": m43,
         "seeAll": MessageLookupByLibrary.simpleMessage("იხილეთ ყველა"),
         "seeNewAppConfig": MessageLookupByLibrary.simpleMessage(
             "განაგრძეთ თქვენი აპის ახალი შინაარსის ნახვა."),
@@ -1320,6 +1421,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "sendSMSCode": MessageLookupByLibrary.simpleMessage("Კოდის მიღება"),
         "sendSMStoVendor": MessageLookupByLibrary.simpleMessage(
             "გაუგზავნეთ SMS მაღაზიის მფლობელს"),
+        "sendTo": MessageLookupByLibrary.simpleMessage(
+            "ანგარიში, რომელზეც გსურთ გადარიცხვა (ელფოსტა)"),
         "separateMultipleEmailWithComma": MessageLookupByLibrary.simpleMessage(
             "გამოყავით მრავალი ელექტრონული ფოსტის მისამართი მძიმით."),
         "serbian": MessageLookupByLibrary.simpleMessage("სერბული"),
@@ -1334,6 +1437,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "shipping": MessageLookupByLibrary.simpleMessage("ტრანსპორტირება"),
         "shippingAddress":
             MessageLookupByLibrary.simpleMessage("მიწოდების მისამართი"),
+        "shippingFee":
+            MessageLookupByLibrary.simpleMessage("ტრანსპორტირების საფასური"),
         "shippingMethod":
             MessageLookupByLibrary.simpleMessage("ტრანსპორტირების მეთოდი"),
         "shop": MessageLookupByLibrary.simpleMessage("Მაღაზია"),
@@ -1343,7 +1448,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("მაღაზიის შეკვეთები"),
         "shopPhone": MessageLookupByLibrary.simpleMessage("ტელეფონის მაღაზია"),
         "shopSlug": MessageLookupByLibrary.simpleMessage("მაღაზია slug"),
-        "shoppingCartItems": m38,
+        "shoppingCartItems": m44,
         "shortDescription":
             MessageLookupByLibrary.simpleMessage("Მოკლე აღწერა"),
         "showAllMyOrdered":
@@ -1359,12 +1464,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "signup": MessageLookupByLibrary.simpleMessage("დარეგისტრირდით"),
         "simple": MessageLookupByLibrary.simpleMessage("მარტივი"),
         "size": MessageLookupByLibrary.simpleMessage("ზომა"),
+        "sizeGuide":
+            MessageLookupByLibrary.simpleMessage("ზომის სახელმძღვანელო"),
         "skip": MessageLookupByLibrary.simpleMessage("გამოტოვეთ"),
         "sku": MessageLookupByLibrary.simpleMessage("sku"),
         "slovak": MessageLookupByLibrary.simpleMessage("სლოვაკური"),
         "smsCodeExpired": MessageLookupByLibrary.simpleMessage(
             "SMS კოდს ვადა გაუვიდა. გთხოვთ, ხელახლა გაგზავნოთ დამადასტურებელი კოდი ხელახლა საცდელად."),
-        "sold": m39,
+        "sold": m45,
         "soldBy": MessageLookupByLibrary.simpleMessage("Გაყიდულია"),
         "somethingWrong": MessageLookupByLibrary.simpleMessage(
             "Რაღაც არასწორად წავიდა. Გთხოვთ სცადოთ მოგვიანებით."),
@@ -1402,6 +1509,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("მაღაზიის სიის ბანერი"),
         "storeLocation":
             MessageLookupByLibrary.simpleMessage("მაღაზიის ადგილმდებარეობა"),
+        "storeLocatorSearchPlaceholder": MessageLookupByLibrary.simpleMessage(
+            "შეიყვანეთ მისამართი / ქალაქი"),
         "storeLogo": MessageLookupByLibrary.simpleMessage("მაღაზიის ლოგო"),
         "storeMobileBanner":
             MessageLookupByLibrary.simpleMessage("მაღაზიის მობილური ბანერი"),
@@ -1421,6 +1530,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "streetName": MessageLookupByLibrary.simpleMessage("Ქუჩის სახელი"),
         "streetNameApartment": MessageLookupByLibrary.simpleMessage("ბინა"),
         "streetNameBlock": MessageLookupByLibrary.simpleMessage("ბლოკი"),
+        "subTitleOrderConfirmed": MessageLookupByLibrary.simpleMessage(
+            "მადლობა შეკვეთისთვის. ჩვენ სწრაფად ვმუშაობთ თქვენი შეკვეთის დასამუშავებლად. დაელოდეთ დადასტურების ელფოსტას მალე"),
         "submit": MessageLookupByLibrary.simpleMessage("წარუდგინოს"),
         "submitYourPost":
             MessageLookupByLibrary.simpleMessage("გაგზავნეთ თქვენი პოსტი"),
@@ -1429,6 +1540,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "support": MessageLookupByLibrary.simpleMessage("მხარდაჭერა"),
         "swahili": MessageLookupByLibrary.simpleMessage("სუაჰილი"),
         "swedish": MessageLookupByLibrary.simpleMessage("შვედური"),
+        "tag": MessageLookupByLibrary.simpleMessage("მონიშნეთ"),
         "tagNotExist":
             MessageLookupByLibrary.simpleMessage("ეს ტეგი არ არსებობს"),
         "tags": MessageLookupByLibrary.simpleMessage("ტეგები"),
@@ -1439,9 +1551,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "tapTheMicToTalk":
             MessageLookupByLibrary.simpleMessage("შეეხეთ მიკროფონს სასაუბროდ"),
         "tax": MessageLookupByLibrary.simpleMessage("გადასახადი"),
+        "teraWallet": MessageLookupByLibrary.simpleMessage("TeraWallet"),
         "terrible": MessageLookupByLibrary.simpleMessage("საშინელება"),
         "thailand": MessageLookupByLibrary.simpleMessage("ტაილანდური"),
-        "theFieldIsRequired": m40,
+        "theFieldIsRequired": m46,
         "thisDateIsNotAvailable":
             MessageLookupByLibrary.simpleMessage("ეს თარიღი მიუწვდომელია"),
         "thisFeatureDoesNotSupportTheCurrentLanguage":
@@ -1464,7 +1577,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "titleZToA":
             MessageLookupByLibrary.simpleMessage("სათაური: Z-დან A-მდე"),
         "to": MessageLookupByLibrary.simpleMessage("რომ"),
-        "tooManyFaildedLogin": MessageLookupByLibrary.simpleMessage(
+        "tooManyFailedLogin": MessageLookupByLibrary.simpleMessage(
             "ძალიან ბევრი წარუმატებელი შესვლის მცდელობა. Გთხოვთ სცადოთ მოგვიანებით."),
         "topUp": MessageLookupByLibrary.simpleMessage("შევსება"),
         "topUpProductNotFound": MessageLookupByLibrary.simpleMessage(
@@ -1473,7 +1586,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "totalCartValue": MessageLookupByLibrary.simpleMessage(
             "შეკვეთის მთლიანი ღირებულება უნდა იყოს მინიმუმ"),
         "totalPrice": MessageLookupByLibrary.simpleMessage("Ჯამური ღირებულება"),
-        "totalProducts": m41,
+        "totalProducts": m47,
         "totalTax": MessageLookupByLibrary.simpleMessage("მთლიანი გადასახადი"),
         "trackingNumberIs":
             MessageLookupByLibrary.simpleMessage("თვალთვალის ნომერი არის"),
@@ -1484,6 +1597,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "transactionDetail":
             MessageLookupByLibrary.simpleMessage("გარიგების დეტალი"),
         "transactionFailded":
+            MessageLookupByLibrary.simpleMessage("ტრანზაქცია ვერ მოხერხდა"),
+        "transactionFailed":
             MessageLookupByLibrary.simpleMessage("ტრანზაქცია ვერ მოხერხდა"),
         "transactionFee":
             MessageLookupByLibrary.simpleMessage("გარიგების საკომისიო"),
@@ -1496,6 +1611,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "თქვენ არ შეგიძლიათ ამ მომხმარებლისთვის გადაცემა"),
         "transferFailed":
             MessageLookupByLibrary.simpleMessage("გადაცემა ვერ მოხერხდა"),
+        "transferMoneyTo": m48,
         "transferSuccess":
             MessageLookupByLibrary.simpleMessage("ტრანსფერის წარმატება"),
         "tuesday": MessageLookupByLibrary.simpleMessage("სამშაბათს"),
@@ -1508,6 +1624,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "typing": MessageLookupByLibrary.simpleMessage("აკრეფა..."),
         "ukrainian": MessageLookupByLibrary.simpleMessage("უკრაინული"),
         "unavailable": MessageLookupByLibrary.simpleMessage("მიუწვდომელია"),
+        "unblock": MessageLookupByLibrary.simpleMessage("განბლოკვა"),
+        "unblockUser":
+            MessageLookupByLibrary.simpleMessage("მომხმარებლის განბლოკვა"),
         "undo": MessageLookupByLibrary.simpleMessage("გაუქმება"),
         "unpaid": MessageLookupByLibrary.simpleMessage("გადაუხდელი"),
         "update": MessageLookupByLibrary.simpleMessage("განახლება"),
@@ -1529,21 +1648,31 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ატვირთეთ პროდუქტი"),
         "uploading": MessageLookupByLibrary.simpleMessage("ატვირთვა"),
         "url": MessageLookupByLibrary.simpleMessage("URL"),
-        "useMaximumPointDiscount": m42,
+        "useMaximumPointDiscount": m49,
         "useNow": MessageLookupByLibrary.simpleMessage("გამოიყენეთ ახლა"),
         "useThisImage":
             MessageLookupByLibrary.simpleMessage("გამოიყენეთ ეს სურათი"),
         "userExists": MessageLookupByLibrary.simpleMessage(
             "ეს მომხმარებლის სახელი/ელფოსტა მიუწვდომელია."),
+        "userHasBeenBlocked":
+            MessageLookupByLibrary.simpleMessage("მომხმარებელი დაბლოკილია"),
         "userNameInCorrect": MessageLookupByLibrary.simpleMessage(
             "მომხმარებლის სახელი ან პაროლი არასწორია."),
+        "userNotFound":
+            MessageLookupByLibrary.simpleMessage("მომხმარებელი ვერ მოიძებნა"),
         "username": MessageLookupByLibrary.simpleMessage("სახელი"),
+        "usernameAlreadyInUse": MessageLookupByLibrary.simpleMessage(
+            "მომხმარებლის სახელი უკვე გამოიყენება!"),
         "usernameAndPasswordRequired": MessageLookupByLibrary.simpleMessage(
             "საჭიროა მომხმარებლის სახელი და პაროლი"),
+        "usernameInvalid": MessageLookupByLibrary.simpleMessage(
+            "მომხმარებლის სახელი არასწორია"),
+        "usernameIsRequired": MessageLookupByLibrary.simpleMessage(
+            "მომხმარებლის სახელი აუცილებელია"),
         "vacationMessage":
             MessageLookupByLibrary.simpleMessage("შვებულების შეტყობინება"),
         "vacationType": MessageLookupByLibrary.simpleMessage("შვებულების ტიპი"),
-        "validUntilDate": m43,
+        "validUntilDate": m50,
         "variable": MessageLookupByLibrary.simpleMessage("ცვლადი"),
         "variation": MessageLookupByLibrary.simpleMessage("Ვარიაცია"),
         "vendor": MessageLookupByLibrary.simpleMessage("Გამყიდველი"),
@@ -1576,12 +1705,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ველოდები დადასტურებას"),
         "walletBalance":
             MessageLookupByLibrary.simpleMessage("საფულის ბალანსი"),
+        "walletBalanceWithValue": m51,
         "walletName": MessageLookupByLibrary.simpleMessage("საფულის სახელი"),
-        "warning": m44,
-        "warningCurrencyMessageForWallet": m45,
+        "warning": m52,
+        "warningCurrencyMessageForWallet": m53,
         "weFoundBlogs":
             MessageLookupByLibrary.simpleMessage("ჩვენ ვიპოვეთ ბლოგი(ები)"),
-        "weFoundProducts": m46,
+        "weFoundProducts": m54,
         "weNeedCameraAccessTo": MessageLookupByLibrary.simpleMessage(
             "ჩვენ გვჭირდება კამერაზე წვდომა QR კოდის ან შტრიხ კოდის სკანირებისთვის."),
         "weSentAnOTPTo":
@@ -1589,33 +1719,46 @@ class MessageLookup extends MessageLookupByLibrary {
         "weWillSendYouNotification": MessageLookupByLibrary.simpleMessage(
             "ჩვენ გამოგიგზავნით შეტყობინებებს, როდესაც ხელმისაწვდომი იქნება ახალი პროდუქტები ან შეთავაზებები. თქვენ ყოველთვის შეგიძლიათ გამორთოთ ის პარამეტრებში."),
         "webView": MessageLookupByLibrary.simpleMessage("ვებ ხედი"),
+        "website": MessageLookupByLibrary.simpleMessage("საიტი"),
         "wednesday": MessageLookupByLibrary.simpleMessage("ოთხშაბათს"),
-        "week": m47,
+        "week": m55,
         "welcome": MessageLookupByLibrary.simpleMessage("მოგესალმებით"),
         "welcomeBack": MessageLookupByLibrary.simpleMessage(
             "Კეთილი იყოს თქვენი დაბრუნება"),
         "welcomeRegister": MessageLookupByLibrary.simpleMessage(
             "დაიწყეთ თქვენი სავაჭრო მოგზაურობა ჩვენთან ახლავე"),
-        "welcomeUser": m48,
+        "welcomeUser": m56,
         "whichLanguageDoYouPrefer": MessageLookupByLibrary.simpleMessage(
             "რომელ ენას ანიჭებთ უპირატესობას?"),
         "wholesaleRegisterMsg": MessageLookupByLibrary.simpleMessage(
             "გთხოვთ, დაუკავშირდეთ ადმინისტრატორს თქვენი რეგისტრაციის დასადასტურებლად."),
+        "willNotSendAndReceiveMessage": MessageLookupByLibrary.simpleMessage(
+            "თქვენ ვერ შეძლებთ ამ მომხმარებლისგან შეტყობინებების გაგზავნას და მიღებას."),
+        "withdrawAmount":
+            MessageLookupByLibrary.simpleMessage("თანხის ამოღება"),
+        "withdrawRequest":
+            MessageLookupByLibrary.simpleMessage("ამოღების მოთხოვნა"),
+        "withdrawal": MessageLookupByLibrary.simpleMessage("გატანა"),
         "womanCollections":
             MessageLookupByLibrary.simpleMessage("ქალის კოლექციები"),
         "writeComment":
             MessageLookupByLibrary.simpleMessage("დაწერეთ თქვენი კომენტარი"),
         "writeYourNote":
             MessageLookupByLibrary.simpleMessage("დაწერეთ თქვენი შენიშვნა"),
-        "yearsAgo": m49,
+        "yearsAgo": m57,
         "yes": MessageLookupByLibrary.simpleMessage("დიახ"),
         "youCanOnlyOrderSingleStore": MessageLookupByLibrary.simpleMessage(
             "შეძენა შეგიძლიათ მხოლოდ ერთი მაღაზიიდან."),
         "youCanOnlyPurchase":
             MessageLookupByLibrary.simpleMessage("შეგიძლიათ მხოლოდ შეძენა"),
-        "youHaveAssignedToOrder": m50,
+        "youDontHavePermissionToCreatePost":
+            MessageLookupByLibrary.simpleMessage(
+                "თქვენ არ გაქვთ პოსტის შექმნის უფლება"),
+        "youHaveAssignedToOrder": m58,
         "youHaveBeenSaveAddressYourLocal": MessageLookupByLibrary.simpleMessage(
             "თქვენ შეინახეთ მისამართი თქვენს ადგილობრივ ფაილში წარმატებით!"),
+        "youHaveNoPost":
+            MessageLookupByLibrary.simpleMessage("პოსტები არ გაქვს"),
         "youHavePoints":
             MessageLookupByLibrary.simpleMessage("თქვენ გაქვთ \$point ქულები"),
         "youMightAlsoLike": MessageLookupByLibrary.simpleMessage(

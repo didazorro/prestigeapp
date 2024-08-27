@@ -28,89 +28,89 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m3(state) => "L’adaptador Bluetooth està ${state}";
 
-  static String m4(currency) => "Moneda canviada a ${currency}";
+  static String m5(currency) => "Moneda canviada a ${currency}";
 
-  static String m6(priceRate, pointRate) => "${priceRate} = ${pointRate} Punts";
+  static String m7(priceRate, pointRate) => "${priceRate} = ${pointRate} Punts";
 
-  static String m9(country) => "El país ${country} no està suportat";
+  static String m12(country) => "El país ${country} no està suportat";
 
-  static String m10(currency) => "${currency} no està suportat";
+  static String m13(currency) => "${currency} no està suportat";
 
-  static String m11(day) => "fa ${day} dies";
+  static String m14(day) => "fa ${day} dies";
 
-  static String m12(total) => "~${total} km";
+  static String m15(total) => "~${total} km";
 
-  static String m13(timeLeft) => "Acaba dins de ${timeLeft}";
+  static String m16(timeLeft) => "Acaba dins de ${timeLeft}";
 
-  static String m14(captcha) => "Introdueix ${captcha} per confirmar:";
+  static String m17(captcha) => "Introdueix ${captcha} per confirmar:";
 
-  static String m15(message) => "Error: ${message}";
+  static String m18(message) => "Error: ${message}";
 
-  static String m16(time) => "Expira dins de ${time}";
+  static String m20(time) => "Expira dins de ${time}";
 
-  static String m17(total) => "> ${total} km";
+  static String m21(total) => "> ${total} km";
 
-  static String m18(hour) => "fa ${hour} hores";
+  static String m22(hour) => "fa ${hour} hores";
 
-  static String m20(message) =>
+  static String m25(message) =>
       "Hi ha un problema amb l’aplicació durant la sol·licitud de dades, si us plau, contacta amb l’administrador per solucionar els problemes: ${message}";
 
-  static String m21(currency, amount) =>
+  static String m26(currency, amount) =>
       "L’import màxim per utilitzar aquest pagament és ${currency} ${amount}";
 
-  static String m22(size) => "Mida màxima del fitxer: ${size} MB";
+  static String m27(size) => "Mida màxima del fitxer: ${size} MB";
 
-  static String m23(currency, amount) =>
+  static String m28(currency, amount) =>
       "L’import mínim per utilitzar aquest pagament és ${currency} ${amount}";
 
-  static String m24(minute) => "fa ${minute} minuts";
+  static String m29(minute) => "fa ${minute} minuts";
 
-  static String m25(month) => "fa ${month} mesos";
+  static String m30(month) => "fa ${month} mesos";
 
-  static String m26(store) => "Més de ${store}";
+  static String m31(store) => "Més de ${store}";
 
-  static String m27(number) => "s\'ha de comprar en grups de ${number}";
+  static String m32(number) => "s\'ha de comprar en grups de ${number}";
 
-  static String m28(itemCount) => "${itemCount} articles";
+  static String m33(itemCount) => "${itemCount} articles";
 
-  static String m29(price) => "Total d’opcions: ${price}";
+  static String m34(price) => "Total d’opcions: ${price}";
 
-  static String m30(amount) => "Pagar ${amount}";
+  static String m35(amount) => "Pagar ${amount}";
 
-  static String m32(total) => "Quantitat: ${total}";
+  static String m37(total) => "Quantitat: ${total}";
 
-  static String m33(percent) => "Descompte ${percent}%";
+  static String m39(percent) => "Descompte ${percent}%";
 
-  static String m37(second) => "fa ${second} segons";
+  static String m43(second) => "fa ${second} segons";
 
-  static String m38(totalCartQuantity) =>
+  static String m44(totalCartQuantity) =>
       "Cistella de compra, ${totalCartQuantity} articles";
 
-  static String m39(numberOfUnitsSold) => "Venuts: ${numberOfUnitsSold}";
+  static String m45(numberOfUnitsSold) => "Venuts: ${numberOfUnitsSold}";
 
-  static String m40(fieldName) => "El camp ${fieldName} és obligatori";
+  static String m46(fieldName) => "El camp ${fieldName} és obligatori";
 
-  static String m41(total) => "${total} productes";
+  static String m47(total) => "${total} productes";
 
-  static String m42(maxPointDiscount, maxPriceDiscount) =>
+  static String m49(maxPointDiscount, maxPriceDiscount) =>
       "Utilitza un màxim de ${maxPointDiscount} punts per obtenir un descompte de ${maxPriceDiscount} en aquesta comanda!";
 
-  static String m43(date) => "Vàlid fins al ${date}";
+  static String m50(date) => "Vàlid fins al ${date}";
 
-  static String m44(message) => "Advertència: ${message}";
+  static String m52(message) => "Advertència: ${message}";
 
-  static String m45(defaultCurrency) =>
+  static String m53(defaultCurrency) =>
       "La moneda seleccionada actualment no està disponible per a la funció de cartera, si us plau, canvia-la per ${defaultCurrency}";
 
-  static String m46(length) => "Hem trobat ${length} productes";
+  static String m54(length) => "Hem trobat ${length} productes";
 
-  static String m47(week) => "Setmana ${week}";
+  static String m55(week) => "Setmana ${week}";
 
-  static String m48(name) => "Benvingut/da ${name}";
+  static String m56(name) => "Benvingut/da ${name}";
 
-  static String m49(year) => "fa ${year} anys";
+  static String m57(year) => "fa ${year} anys";
 
-  static String m50(total) => "T’han assignat la comanda #${total}";
+  static String m58(total) => "T’han assignat la comanda #${total}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -291,7 +291,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Canviar idioma"),
         "changePrinter":
             MessageLookupByLibrary.simpleMessage("Canviar impressora"),
-        "changedCurrencyTo": m4,
+        "changedCurrencyTo": m5,
         "chat": MessageLookupByLibrary.simpleMessage("Xat"),
         "chatGPT": MessageLookupByLibrary.simpleMessage("Chat GPT"),
         "chatListScreen": MessageLookupByLibrary.simpleMessage("Missatges"),
@@ -363,11 +363,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Continuar a l’enviament"),
         "continues": MessageLookupByLibrary.simpleMessage("Continuar"),
         "conversations": MessageLookupByLibrary.simpleMessage("Converses"),
-        "convertPoint": m6,
+        "convertPoint": m7,
         "copied": MessageLookupByLibrary.simpleMessage("Copiat"),
         "copy": MessageLookupByLibrary.simpleMessage("Copiar"),
         "country": MessageLookupByLibrary.simpleMessage("País"),
-        "countryIsNotSupported": m9,
+        "countryIsNotSupported": m12,
         "countryIsRequired": MessageLookupByLibrary.simpleMessage(
             "El camp de país és obligatori"),
         "couponCode": MessageLookupByLibrary.simpleMessage("Codi de cupó"),
@@ -387,7 +387,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Crear totes les variants"),
         "createdOn": MessageLookupByLibrary.simpleMessage("Creat el: "),
         "currencies": MessageLookupByLibrary.simpleMessage("Monedes"),
-        "currencyIsNotSupported": m10,
+        "currencyIsNotSupported": m13,
         "currentPassword":
             MessageLookupByLibrary.simpleMessage("Contrasenya actual"),
         "currentlyWeOnlyHave":
@@ -413,7 +413,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "dateTime": MessageLookupByLibrary.simpleMessage("Data i hora"),
         "dateWiseClose":
             MessageLookupByLibrary.simpleMessage("Tancament per dates"),
-        "daysAgo": m11,
+        "daysAgo": m14,
         "debit": MessageLookupByLibrary.simpleMessage("Dèbit"),
         "decline": MessageLookupByLibrary.simpleMessage("Rebutjar"),
         "delete": MessageLookupByLibrary.simpleMessage("Esborrar"),
@@ -443,7 +443,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Desactivar compra"),
         "discount": MessageLookupByLibrary.simpleMessage("Descompte"),
         "displayName": MessageLookupByLibrary.simpleMessage("Nom mostrat"),
-        "distance": m12,
+        "distance": m15,
         "doNotAnyTransactions": MessageLookupByLibrary.simpleMessage(
             "Encara no tens cap transacció"),
         "doYouWantToExitApp":
@@ -500,10 +500,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Activar mode vacances"),
         "endDateCantBeAfterFirstDate": MessageLookupByLibrary.simpleMessage(
             "Si us plau, selecciona una data després de la primera data"),
-        "endsIn": m13,
+        "endsIn": m16,
         "english": MessageLookupByLibrary.simpleMessage("Anglès"),
-        "enterCaptcha": m14,
-        "enterSendedCode":
+        "enterCaptcha": m17,
+        "enterSentCode":
             MessageLookupByLibrary.simpleMessage("Introdueix el codi enviat a"),
         "enterYourEmail": MessageLookupByLibrary.simpleMessage(
             "Introdueix el teu correu electrònic"),
@@ -521,7 +521,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Introdueix el teu número de telèfon per començar."),
         "enterYourPhoneNumber": MessageLookupByLibrary.simpleMessage(
             "Introdueix el teu número de telèfon"),
-        "error": m15,
+        "error": m18,
         "errorAmountTransfer": MessageLookupByLibrary.simpleMessage(
             "La quantitat introduïda és més gran que l’actual saldo de la cartera. Si us plau, torna-ho a intentar!"),
         "errorEmailFormat": MessageLookupByLibrary.simpleMessage(
@@ -535,7 +535,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "expired": MessageLookupByLibrary.simpleMessage("Expirat"),
         "expiredDate": MessageLookupByLibrary.simpleMessage("Data d’expiració"),
         "expiredDateHint": MessageLookupByLibrary.simpleMessage("MM/AA"),
-        "expiringInTime": m16,
+        "expiringInTime": m20,
         "external": MessageLookupByLibrary.simpleMessage("Extern"),
         "extraServices":
             MessageLookupByLibrary.simpleMessage("Serveis addicionals"),
@@ -604,7 +604,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tornar a la revisió"),
         "goBackToShipping":
             MessageLookupByLibrary.simpleMessage("Tornar a l’enviament"),
-        "greaterDistance": m17,
+        "greaterDistance": m21,
         "greek": MessageLookupByLibrary.simpleMessage("Grec"),
         "grossSales": MessageLookupByLibrary.simpleMessage("Vendes brutes"),
         "grouped": MessageLookupByLibrary.simpleMessage("Agrupat"),
@@ -624,7 +624,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "historyTransaction": MessageLookupByLibrary.simpleMessage("Historial"),
         "home": MessageLookupByLibrary.simpleMessage("Inici"),
         "hour": MessageLookupByLibrary.simpleMessage("Hora"),
-        "hoursAgo": m18,
+        "hoursAgo": m22,
         "hungarian": MessageLookupByLibrary.simpleMessage("Hongarès"),
         "hungary": MessageLookupByLibrary.simpleMessage("Hongarès"),
         "iAgree": MessageLookupByLibrary.simpleMessage("Estic d’acord amb"),
@@ -697,7 +697,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("Iniciar sessió"),
         "loginCanceled": MessageLookupByLibrary.simpleMessage(
             "L’inici de sessió s’ha cancel·lat"),
-        "loginErrorServiceProvider": m20,
+        "loginErrorServiceProvider": m25,
         "loginFailed":
             MessageLookupByLibrary.simpleMessage("Error en iniciar sessió!"),
         "loginInvalid": MessageLookupByLibrary.simpleMessage(
@@ -725,26 +725,26 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Marcar com a enviat"),
         "markAsUnread":
             MessageLookupByLibrary.simpleMessage("Marcar com a no llegit"),
-        "maxAmountForPayment": m21,
-        "maximumFileSizeMb": m22,
+        "maxAmountForPayment": m26,
+        "maximumFileSizeMb": m27,
         "maybeLater": MessageLookupByLibrary.simpleMessage("Potser més tard"),
         "menuOrder": MessageLookupByLibrary.simpleMessage("Ordre del menú"),
         "message": MessageLookupByLibrary.simpleMessage("Missatge"),
         "messageTo": MessageLookupByLibrary.simpleMessage("Enviar missatge a"),
-        "minAmountForPayment": m23,
+        "minAmountForPayment": m28,
         "minimumQuantityIs":
             MessageLookupByLibrary.simpleMessage("La quantitat mínima és"),
-        "minutesAgo": m24,
+        "minutesAgo": m29,
         "mobileVerification":
             MessageLookupByLibrary.simpleMessage("Verificació mòbil"),
         "momentAgo": MessageLookupByLibrary.simpleMessage("fa un moment"),
-        "monthsAgo": m25,
+        "monthsAgo": m30,
         "more": MessageLookupByLibrary.simpleMessage("...més"),
-        "moreFromStore": m26,
+        "moreFromStore": m31,
         "moreInformation":
             MessageLookupByLibrary.simpleMessage("Més informació"),
         "morning": MessageLookupByLibrary.simpleMessage("Matí"),
-        "mustBeBoughtInGroupsOf": m27,
+        "mustBeBoughtInGroupsOf": m32,
         "mustSelectOneItem": MessageLookupByLibrary.simpleMessage(
             "Has de seleccionar 1 element"),
         "myCart": MessageLookupByLibrary.simpleMessage("La meva cistella"),
@@ -756,7 +756,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "myWallet": MessageLookupByLibrary.simpleMessage("La meva cartera"),
         "myWishList":
             MessageLookupByLibrary.simpleMessage("La meva llista de desitjos"),
-        "nItems": m28,
+        "nItems": m33,
         "name": MessageLookupByLibrary.simpleMessage("Nom"),
         "nameOnCard": MessageLookupByLibrary.simpleMessage("Nom a la targeta"),
         "nearbyPlaces": MessageLookupByLibrary.simpleMessage("Llocs propers"),
@@ -778,8 +778,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "No s\'ha concedit permís per a la càmera. Si us plau, concedeix-ho a la configuració del teu dispositiu."),
         "noConversation":
             MessageLookupByLibrary.simpleMessage("Encara no hi ha converses"),
-        "noConversationDescription": MessageLookupByLibrary.simpleMessage(
-            "Apareixerà un cop els teus clients comencin a xatejar amb tu"),
         "noData": MessageLookupByLibrary.simpleMessage("No hi ha més dades"),
         "noFavoritesYet":
             MessageLookupByLibrary.simpleMessage("Encara no hi ha preferits."),
@@ -832,7 +830,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "openMap": MessageLookupByLibrary.simpleMessage("Mapa"),
         "openNow": MessageLookupByLibrary.simpleMessage("Obert ara"),
         "options": MessageLookupByLibrary.simpleMessage("Opcions"),
-        "optionsTotal": m29,
+        "optionsTotal": m34,
         "or": MessageLookupByLibrary.simpleMessage("O"),
         "orLoginWith":
             MessageLookupByLibrary.simpleMessage("o inicia sessió amb"),
@@ -907,7 +905,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "payByWallet":
             MessageLookupByLibrary.simpleMessage("Pagar amb la cartera"),
         "payNow": MessageLookupByLibrary.simpleMessage("Pagar ara"),
-        "payWithAmount": m30,
+        "payWithAmount": m35,
         "payment": MessageLookupByLibrary.simpleMessage("Pagament"),
         "paymentMethod":
             MessageLookupByLibrary.simpleMessage("Mètode de pagament"),
@@ -949,6 +947,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Si us plau, introdueix el nom del producte"),
         "pleaseFillCode": MessageLookupByLibrary.simpleMessage(
             "Si us plau, introdueix el teu codi"),
+        "pleaseFillUpAllCellsProperly": MessageLookupByLibrary.simpleMessage(
+            "*Si us plau, omple tots els camps correctament"),
         "pleaseIncreaseOrDecreaseTheQuantity":
             MessageLookupByLibrary.simpleMessage(
                 "Si us plau, augmenta o disminueix la quantitat per continuar."),
@@ -970,8 +970,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Si us plau, selecciona les opcions requerides!"),
         "pleaseSignInBeforeUploading": MessageLookupByLibrary.simpleMessage(
             "Si us plau, inicia sessió al teu compte abans de pujar cap fitxer."),
-        "pleasefillUpAllCellsProperly": MessageLookupByLibrary.simpleMessage(
-            "*Si us plau, omple tots els camps correctament"),
         "point": MessageLookupByLibrary.simpleMessage("Punt"),
         "pointMsgConfigNotFound": MessageLookupByLibrary.simpleMessage(
             "No s’ha trobat cap configuració de punt de descompte al servidor"),
@@ -1063,7 +1061,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "qRCodeSaveFailure":
             MessageLookupByLibrary.simpleMessage("Error en guardar el codi QR"),
         "qty": MessageLookupByLibrary.simpleMessage("qtat"),
-        "qtyTotal": m32,
+        "qtyTotal": m37,
         "quantityProductExceedInStock": MessageLookupByLibrary.simpleMessage(
             "La quantitat actual és més gran que la quantitat en estoc"),
         "rate": MessageLookupByLibrary.simpleMessage("Valorar"),
@@ -1080,13 +1078,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "readReviews": MessageLookupByLibrary.simpleMessage("Opinions"),
         "receivedMoney": MessageLookupByLibrary.simpleMessage("Diners rebuts"),
         "receiver": MessageLookupByLibrary.simpleMessage("Receptor"),
+        "recent": MessageLookupByLibrary.simpleMessage("Recent"),
         "recentSearches":
             MessageLookupByLibrary.simpleMessage("Cerques recents"),
         "recentView":
             MessageLookupByLibrary.simpleMessage("La teva vista recent"),
         "recentlyViewed":
             MessageLookupByLibrary.simpleMessage("Vist recentment"),
-        "recents": MessageLookupByLibrary.simpleMessage("Recents"),
         "recommended": MessageLookupByLibrary.simpleMessage("Recomanat"),
         "recurringTotals":
             MessageLookupByLibrary.simpleMessage("Totals recurrents"),
@@ -1139,7 +1137,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reviews": MessageLookupByLibrary.simpleMessage("Comentaris"),
         "romanian": MessageLookupByLibrary.simpleMessage("Romanès"),
         "russian": MessageLookupByLibrary.simpleMessage("Rus"),
-        "sale": m33,
+        "sale": m39,
         "salePrice": MessageLookupByLibrary.simpleMessage("Preu de venda"),
         "save": MessageLookupByLibrary.simpleMessage("Guardar"),
         "saveAddress": MessageLookupByLibrary.simpleMessage("Desar adreça"),
@@ -1170,7 +1168,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "searchPlace": MessageLookupByLibrary.simpleMessage("Cercar lloc"),
         "searchingAddress":
             MessageLookupByLibrary.simpleMessage("Cercant adreça"),
-        "secondsAgo": m37,
+        "secondsAgo": m43,
         "seeAll": MessageLookupByLibrary.simpleMessage("Veure-ho tot"),
         "seeNewAppConfig": MessageLookupByLibrary.simpleMessage(
             "Continua per veure el nou contingut a la teva aplicació."),
@@ -1231,7 +1229,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shopPhone":
             MessageLookupByLibrary.simpleMessage("Telèfon de la botiga"),
         "shopSlug": MessageLookupByLibrary.simpleMessage("Slug de la botiga"),
-        "shoppingCartItems": m38,
+        "shoppingCartItems": m44,
         "shortDescription":
             MessageLookupByLibrary.simpleMessage("Descripció curta"),
         "showAllMyOrdered": MessageLookupByLibrary.simpleMessage(
@@ -1252,7 +1250,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "slovak": MessageLookupByLibrary.simpleMessage("Eslovac"),
         "smsCodeExpired": MessageLookupByLibrary.simpleMessage(
             "El codi SMS ha caducat. Si us plau, torna a enviar el codi de verificació i torna-ho a provar."),
-        "sold": m39,
+        "sold": m45,
         "soldBy": MessageLookupByLibrary.simpleMessage("Venut per"),
         "somethingWrong": MessageLookupByLibrary.simpleMessage(
             "Hi ha hagut un problema. Si us plau, torna-ho a intentar més tard."),
@@ -1331,7 +1329,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Toca el micròfon per parlar"),
         "tax": MessageLookupByLibrary.simpleMessage("Impost"),
         "thailand": MessageLookupByLibrary.simpleMessage("Tailandès"),
-        "theFieldIsRequired": m40,
+        "theFieldIsRequired": m46,
         "thisDateIsNotAvailable": MessageLookupByLibrary.simpleMessage(
             "Aquesta data no està disponible"),
         "thisFeatureDoesNotSupportTheCurrentLanguage":
@@ -1350,7 +1348,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "title": MessageLookupByLibrary.simpleMessage("Títol"),
         "titleAToZ": MessageLookupByLibrary.simpleMessage("Títol: A a Z"),
         "titleZToA": MessageLookupByLibrary.simpleMessage("Títol: Z a A"),
-        "tooManyFaildedLogin": MessageLookupByLibrary.simpleMessage(
+        "tooManyFailedLogin": MessageLookupByLibrary.simpleMessage(
             "Massa intents d’inici de sessió fallits. Si us plau, torna-ho a intentar més tard."),
         "topUp": MessageLookupByLibrary.simpleMessage("Recarregar"),
         "topUpProductNotFound": MessageLookupByLibrary.simpleMessage(
@@ -1358,7 +1356,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "total": MessageLookupByLibrary.simpleMessage("Total"),
         "totalCartValue": MessageLookupByLibrary.simpleMessage(
             "El valor total de la comanda ha de ser com a mínim de"),
-        "totalProducts": m41,
+        "totalProducts": m47,
         "totalTax": MessageLookupByLibrary.simpleMessage("Impost total"),
         "trackingNumberIs":
             MessageLookupByLibrary.simpleMessage("El número de seguiment és"),
@@ -1368,7 +1366,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Transacció cancel·lada"),
         "transactionDetail":
             MessageLookupByLibrary.simpleMessage("Detall de la transacció"),
-        "transactionFailded":
+        "transactionFailed":
             MessageLookupByLibrary.simpleMessage("La transacció ha fallat"),
         "transactionFee":
             MessageLookupByLibrary.simpleMessage("Comissió de transacció"),
@@ -1411,7 +1409,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "uploadProduct": MessageLookupByLibrary.simpleMessage("Pujar producte"),
         "uploading": MessageLookupByLibrary.simpleMessage("Pujant"),
         "url": MessageLookupByLibrary.simpleMessage("URL"),
-        "useMaximumPointDiscount": m42,
+        "useMaximumPointDiscount": m49,
         "useNow": MessageLookupByLibrary.simpleMessage("Utilitza ara"),
         "useThisImage":
             MessageLookupByLibrary.simpleMessage("Utilitza aquesta imatge"),
@@ -1426,7 +1424,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Missatge de vacances"),
         "vacationType":
             MessageLookupByLibrary.simpleMessage("Tipus de vacances"),
-        "validUntilDate": m43,
+        "validUntilDate": m50,
         "variable": MessageLookupByLibrary.simpleMessage("Variable"),
         "variation": MessageLookupByLibrary.simpleMessage("Variació"),
         "vendor": MessageLookupByLibrary.simpleMessage("Venedor"),
@@ -1455,11 +1453,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "walletBalance":
             MessageLookupByLibrary.simpleMessage("Saldo de la cartera"),
         "walletName": MessageLookupByLibrary.simpleMessage("Nom de la cartera"),
-        "warning": m44,
-        "warningCurrencyMessageForWallet": m45,
+        "warning": m52,
+        "warningCurrencyMessageForWallet": m53,
         "weFoundBlogs":
             MessageLookupByLibrary.simpleMessage("Hem trobat bloc(s)"),
-        "weFoundProducts": m46,
+        "weFoundProducts": m54,
         "weNeedCameraAccessTo": MessageLookupByLibrary.simpleMessage(
             "Necessitem accés a la càmera per escanejar el codi QR o el codi de barres."),
         "weSentAnOTPTo": MessageLookupByLibrary.simpleMessage(
@@ -1467,9 +1465,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "weWillSendYouNotification": MessageLookupByLibrary.simpleMessage(
             "T’enviarem notificacions quan hi hagi nous productes disponibles o ofertes. Sempre pots desactivar-ho a la configuració."),
         "webView": MessageLookupByLibrary.simpleMessage("Vista web"),
-        "week": m47,
+        "week": m55,
         "welcome": MessageLookupByLibrary.simpleMessage("Benvingut/a"),
-        "welcomeUser": m48,
+        "welcomeUser": m56,
         "whichLanguageDoYouPrefer":
             MessageLookupByLibrary.simpleMessage("Quin idioma prefereixes?"),
         "wholesaleRegisterMsg": MessageLookupByLibrary.simpleMessage(
@@ -1480,13 +1478,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Escriu el teu comentari"),
         "writeYourNote":
             MessageLookupByLibrary.simpleMessage("Escriu la teva nota"),
-        "yearsAgo": m49,
+        "yearsAgo": m57,
         "yes": MessageLookupByLibrary.simpleMessage("Sí"),
         "youCanOnlyOrderSingleStore": MessageLookupByLibrary.simpleMessage(
             "Només pots comprar d’una única botiga."),
         "youCanOnlyPurchase":
             MessageLookupByLibrary.simpleMessage("Només pots comprar"),
-        "youHaveAssignedToOrder": m50,
+        "youHaveAssignedToOrder": m58,
         "youHaveBeenSaveAddressYourLocal": MessageLookupByLibrary.simpleMessage(
             "Has guardat l’adreça al teu fitxer local amb èxit!"),
         "youHavePoints":

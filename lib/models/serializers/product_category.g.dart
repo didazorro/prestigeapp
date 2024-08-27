@@ -9,7 +9,7 @@ part of 'product_category.dart';
 SerializerProductCategory _$SerializerProductCategoryFromJson(
         Map<String, dynamic> json) =>
     SerializerProductCategory(
-      json['id'] as int?,
+      (json['id'] as num?)?.toInt(),
       json['name'] as String?,
       json['description'] as String?,
       json['feature_image'] == null

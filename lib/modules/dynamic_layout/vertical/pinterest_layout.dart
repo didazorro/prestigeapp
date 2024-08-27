@@ -91,7 +91,13 @@ class _PinterestLayoutState extends State<PinterestLayout> with PagingMixin {
   Future<void> getData() => _loadProduct();
 
   @override
-  ScrollController get scrollController => PrimaryScrollController.of(context);
+  late ScrollController scrollController;
+
+  @override
+  void didChangeDependencies() {
+    scrollController = PrimaryScrollController.of(context);
+    super.didChangeDependencies();
+  }
 
   @override
   void dispose() {
@@ -124,6 +130,7 @@ class _PinterestLayoutState extends State<PinterestLayout> with PagingMixin {
                       widget.config.showSeeAll && !ServerConfig().isListingType,
                   callback: () => ProductModel.showList(
                     config: widget.config.jsonData,
+                    context: context,
                   ),
                 ),
               ),

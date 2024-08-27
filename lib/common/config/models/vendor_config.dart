@@ -46,11 +46,11 @@ class VendorConfig {
       showAllVendorMarkers: json['ShowAllVendorMarkers'] != false,
       disableNativeStoreManagement:
           json['DisableNativeStoreManagement'] != false,
-      dokan: '${json['dokan']}',
-      wcfm: '${json['wcfm']}',
+      dokan: json['dokan']?.toString() ?? '',
+      wcfm: json['wcfm']?.toString() ?? '',
       disableMultiVendorCheckout: json['DisableMultiVendorCheckout'] == true,
       disablePendingProduct: json['DisablePendingProduct'] == true,
-      newProductStatus: '${json['NewProductStatus'] ?? 'draft'}',
+      newProductStatus: json['NewProductStatus']?.toString() ?? 'draft',
       defaultStoreImage: json['DefaultStoreImage'],
       enableAutoApplicationApproval:
           json['EnableAutoApplicationApproval'] == true,

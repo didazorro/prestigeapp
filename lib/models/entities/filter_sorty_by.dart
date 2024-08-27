@@ -30,6 +30,7 @@ enum OrderByType {
   modified,
   // ignore: constant_identifier_names
   menu_order,
+  rand,
 }
 
 class FilterSortBy {
@@ -221,6 +222,8 @@ class FilterSortBy {
         return S.current.onSale;
       case OrderByType.featured:
         return S.current.featured;
+      case OrderByType.rand:
+        return S.current.random;
       default:
         return null;
     }

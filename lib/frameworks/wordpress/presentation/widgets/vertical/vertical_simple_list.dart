@@ -25,7 +25,11 @@ class SimpleListView extends StatelessWidget with BlogActionButtonMixin {
     var imageHeight = 60;
     void onTapProduct() {
       if (item.imageFeature == '') return;
-      onTapBlog(blog: item, blogs: listBlog);
+      onTapBlog(
+        blog: item,
+        blogs: listBlog,
+        context: context,
+      );
     }
 
     return Padding(

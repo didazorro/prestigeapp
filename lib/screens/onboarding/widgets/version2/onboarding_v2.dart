@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../../common/config/models/onboarding_config.dart';
+import '../../../../common/tools/image_tools.dart';
 import '../../../home/change_language_mixin.dart';
 import '../../onboarding_mixin.dart';
 import 'render_slider_widget.dart';
@@ -20,6 +21,13 @@ class OnBoardingV2 extends StatefulWidget {
 class _OnBoardingV2State extends State<OnBoardingV2>
     with OnBoardingMixin, ChangeLanguage {
   final controller = PageController(initialPage: 0);
+
+  @override
+  void initState() {
+    super.initState();
+    ImageTools.preLoadingListImagesInitState(
+        widget.config.items.map((e) => e.image).toList(), context);
+  }
 
   @override
   void dispose() {

@@ -29,7 +29,7 @@ abstract class GeneralWidget extends StatelessWidget {
   });
 
   void onTapNavigateOptions({
-    BuildContext? context,
+    required BuildContext context,
     required Map config,
     List<Product>? products,
   }) {
@@ -41,9 +41,15 @@ abstract class GeneralWidget extends StatelessWidget {
     );
   }
 
-  void onPushScreen(Widget screen) {
+  void onPushScreen(
+    Widget screen, {
+    required BuildContext context,
+  }) {
     onNavigator?.call();
-    FluxNavigate.push(MaterialPageRoute(builder: (context) => screen));
+    FluxNavigate.push(
+      MaterialPageRoute(builder: (context) => screen),
+      context: context,
+    );
   }
 
   void onLaunch(String? webUrl) {

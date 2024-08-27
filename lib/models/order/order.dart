@@ -42,6 +42,9 @@ enum OrderStatus {
   driverAssigned,
   outForDelivery,
   orderReturned,
+  readytopick,
+  picking,
+  delivering,
 }
 
 class Order {
@@ -104,6 +107,8 @@ class Order {
         return Order._fromNotionJson(parsedJson!);
       case ConfigType.bigCommerce:
         return Order._fromBigCommerceJson(parsedJson!);
+      case ConfigType.haravan:
+        return Order._fromHaravan(parsedJson!);
       default:
         return Order._fromWooJson(parsedJson!);
     }
@@ -120,6 +125,10 @@ class Order {
       case 'complete':
       case 'paid':
         return OrderStatus.completed;
+      case 'picking':
+        return OrderStatus.picking;
+      case 'readytopick':
+        return OrderStatus.readytopick;
       case 'driver-assigned':
         return OrderStatus.driverAssigned;
       case 'out-for-delivery':
@@ -134,8 +143,15 @@ class Order {
         return OrderStatus.pending;
       case 'refunded':
         return OrderStatus.refunded;
+      case 'confirmed':
+        return OrderStatus.processing;
       case 'void':
         return OrderStatus.voided;
+      case 'cancel':
+        return OrderStatus.canceled;
+      case 'delivering':
+        return OrderStatus.delivering;
+
       default:
         return OrderStatus.values.firstWhere(
           (element) => element.name == newStatus,
@@ -686,7 +702,8 @@ class Order {
           //save options to addons to show on the webview
           final fieldName = 'addon-${option.fieldName}';
           var fieldLabel = (option.label ?? '').toLowerCase();
-          if (option.type == 'multiple_choice' && option.display == 'select') {
+          if (option.type?.name == 'multiple_choice' &&
+              option.display == 'select') {
             fieldLabel += '-${(option.index ?? '1')}';
           }
           if (addons[fieldName] == null) {
@@ -961,6 +978,79 @@ class Order {
       total = parsedJson['total_inc_tax'] != null
           ? double.parse(parsedJson['total_inc_tax'])
           : 0.0;
+    } catch (e, trace) {
+      printLog(e.toString());
+      printLog(trace.toString());
+    }
+  }
+
+  Order._fromHaravan(Map parsedJson) {
+    try {
+      id = parsedJson['id'].toString();
+      customerNote = parsedJson['note'];
+      number = parsedJson['number']?.toString();
+      currencyCode = parsedJson['currency'];
+      createdAt = parsedJson['created_at'] != null
+          ? DateTime.parse(parsedJson['created_at'])
+          : DateTime.now();
+      dateModified = parsedJson['updated_at'] != null
+          ? DateTime.parse(parsedJson['updated_at'])
+          : DateTime.now();
+
+      total = parsedJson['total_price'] != null
+          ? num.tryParse(parsedJson['total_price']?.toString() ?? '')
+              ?.toDouble()
+          : 0.0;
+      totalTax = parsedJson['total_tax'] != null
+          ? num.tryParse(parsedJson['total_tax']?.toString() ?? '')?.toDouble()
+          : 0.0;
+
+      final shippingLines = parsedJson['shipping_lines'];
+      var shippingPrice = 0.0;
+      if (shippingLines is List &&
+          shippingLines.isNotEmpty &&
+          totalShipping != null) {
+        for (var element in shippingLines) {
+          shippingPrice +=
+              num.tryParse(element['price'] ?? '0')?.toDouble() ?? 0.0;
+        }
+      }
+      totalShipping = shippingPrice;
+      final transactions = parsedJson['transactions'];
+      if (transactions != null &&
+          transactions is List &&
+          transactions.isNotEmpty) {
+        final transaction = transactions.first;
+        paymentMethodTitle = transaction['gateway'];
+        paymentMethod = transaction['gateway'];
+      }
+
+      parsedJson['line_items']?.forEach((item) {
+        lineItems.add(ProductItem.fromHaravan(item));
+        quantity += num.tryParse("${item["quantity"]}")?.toInt() ?? 0;
+      });
+
+      billing = Address.fromHaravanJson(parsedJson['billing_address']);
+      shipping = Address.fromHaravanJson(parsedJson['shipping_address']);
+
+      shippingMethodTitle = parsedJson['shipping_lines'] != null &&
+              parsedJson['shipping_lines'].length > 0
+          ? parsedJson['shipping_lines'][0]['title']
+          : null;
+
+      final fulfillments = parsedJson['fulfillments'];
+      if (fulfillments != null &&
+          fulfillments is List &&
+          fulfillments.isNotEmpty) {
+        deliveryStatus =
+            parseDeliveryStatus(fulfillments[0]['carrier_status_code']);
+
+        status = parseOrderStatus(fulfillments[0]['carrier_status_code']);
+      } else {
+        status = parseOrderStatus(parsedJson['order_processing_status']);
+      }
+
+      customerId = parsedJson['customer']['id'].toString();
     } catch (e, trace) {
       printLog(e.toString());
       printLog(trace.toString());

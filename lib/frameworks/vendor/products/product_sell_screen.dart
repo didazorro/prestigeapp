@@ -69,7 +69,10 @@ class _StateProductSell extends State<ProductSellScreen> {
 
   Future createProduct() async {
     final userModel = Provider.of<UserModel>(context, listen: false);
-    await FluxNavigate.pushNamed(RouteList.createProduct);
+    await FluxNavigate.pushNamed(
+      RouteList.createProduct,
+      context: context,
+    );
     setState(() {
       isLoading = true;
     });

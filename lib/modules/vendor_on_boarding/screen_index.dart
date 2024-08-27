@@ -4,8 +4,10 @@ import 'package:intro_slider/intro_slider.dart';
 
 import '../../common/config.dart';
 import '../../common/constants.dart';
+import '../../common/tools/image_tools.dart';
 import '../../generated/l10n.dart';
 import '../../models/entities/user.dart';
+import '../../widgets/common/flux_image.dart';
 import 'vendor_information/vendor_information_index.dart';
 
 class VendorOnBoarding extends StatefulWidget {
@@ -20,6 +22,16 @@ class VendorOnBoarding extends StatefulWidget {
 }
 
 class _VendorOnBoardingState extends State<VendorOnBoarding> {
+  @override
+  void initState() {
+    super.initState();
+    var images = <String>[];
+    for (var i = 0; i < vendorOnBoarding.length; i++) {
+      images.add(vendorOnBoarding[i]['image']);
+    }
+    ImageTools.preLoadingListImagesInitState(images, context);
+  }
+
   var _hasClickedDone = false;
 
   List<ContentConfig> getSlides(List<dynamic> data) {
@@ -27,26 +39,30 @@ class _VendorOnBoardingState extends State<VendorOnBoarding> {
 
     for (var i = 0; i < data.length; i++) {
       var slide = ContentConfig(
-          title: data[i]['title'],
-          description: data[i]['desc'],
-          marginTitle: const EdgeInsets.only(
-            top: 125.0,
-            bottom: 50.0,
-          ),
-          maxLineTextDescription: 2,
-          styleTitle: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 25.0,
-            color: kGrey900,
-          ),
-          backgroundColor: Colors.white,
-          marginDescription: const EdgeInsets.fromLTRB(20.0, 75.0, 20.0, 0),
-          styleDescription: const TextStyle(
-            fontSize: 15.0,
-            color: kGrey600,
-          ),
-          foregroundImageFit: BoxFit.fitWidth,
-          pathImage: data[i]['image']);
+        title: data[i]['title'],
+        description: data[i]['desc'],
+        marginTitle: const EdgeInsets.only(
+          top: 125.0,
+          bottom: 50.0,
+        ),
+        maxLineTextDescription: 2,
+        styleTitle: const TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 25.0,
+          color: kGrey900,
+        ),
+        backgroundColor: Colors.white,
+        marginDescription: const EdgeInsets.fromLTRB(20.0, 75.0, 20.0, 0),
+        styleDescription: const TextStyle(
+          fontSize: 15.0,
+          color: kGrey600,
+        ),
+        foregroundImageFit: BoxFit.fitWidth,
+        centerWidget: FluxImage(
+          imageUrl: data[i]['image'],
+          fit: BoxFit.fitWidth,
+        ),
+      );
       slides.add(slide);
     }
     return slides;

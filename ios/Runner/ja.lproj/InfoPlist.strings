@@ -1,7 +1,7 @@
 NSCameraUsageDescription = "このアプリは、検索バーからアクセスできるQRコードまたはバーコードスキャナー機能のためにカメラへのアクセスを必要とします";
-NSLocationAlwaysAndWhenInUseUsageDescription = "配達のために現在の場所を取得する";
-NSLocationAlwaysUsageDescription = "現在地へのアクセスが必要です";
-NSLocationWhenInUseUsageDescription = "配達のために現在の場所を取得する";
+NSLocationAlwaysAndWhenInUseUsageDescription = "このアプリは地図画面に表示し、位置情報に基づくサービスを提供するために、あなたの位置情報へのアクセスが必要です";
+NSLocationAlwaysUsageDescription = "このアプリは地図画面に表示し、位置情報に基づくサービスを提供するために、あなたの位置情報へのアクセスが必要です";
+NSLocationWhenInUseUsageDescription = "このアプリは地図画面に表示し、位置情報に基づくサービスを提供するために、あなたの位置情報へのアクセスが必要です";
 NSMicrophoneUsageDescription = "音声メッセージを録音できるように、マイクへのアクセスを希望します";
 NSPhotoLibraryAddUsageDescription = "フォトライブラリに画像/動画を保存するためのアクセスをお願いします";
 NSPhotoLibraryUsageDescription = "このアプリは、チャット機能のチャット画像として使用されるプロフィール写真を選択するために、写真ライブラリにアクセスする必要があります。";

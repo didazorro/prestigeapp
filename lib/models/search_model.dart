@@ -218,7 +218,6 @@ class SearchModel extends ChangeNotifier with LanguageMixin {
       final pagingResponse = await Services().api.searchProducts(
             name: name,
             categoryId: category,
-            categoryName: categoryName,
             tag: tag,
             attribute: attribute,
             attributeId: attributeTerm,

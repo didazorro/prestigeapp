@@ -27,7 +27,7 @@ import '../routes/route.dart';
 import '../screens/index.dart' show NotificationScreen;
 import '../screens/settings/rate_myapp_mixin.dart';
 import '../screens/users/age_restriction_screen.dart';
-import '../services/services.dart';
+import '../services/index.dart';
 import '../widgets/overlay/custom_overlay_state.dart';
 import 'maintab_delegate.dart';
 import 'side_menu.dart';
@@ -127,6 +127,7 @@ class MainTabsState extends CustomOverlayState<MainTabs>
             fullscreenDialog: true,
           ),
           forceRootNavigator: true,
+          context: context,
         );
       });
     }
@@ -139,7 +140,7 @@ class MainTabsState extends CustomOverlayState<MainTabs>
     showRatingOnOpen();
 
     if (!kIsWeb) {
-      Services().firebase.initDynamicLinkService(context);
+      Services().dynamicLinkService.initialize();
     }
   }
 
@@ -271,7 +272,6 @@ class MainTabsState extends CustomOverlayState<MainTabs>
         color: Colors.white,
       );
     }
-
     final size = MediaQuery.sizeOf(context);
     final tabBarConfig = appSetting.tabBarConfig;
     final showMinimizeTabBar = tabBarConfig.showMinimize;
@@ -391,11 +391,18 @@ extension TabBarMenuExtention on MainTabsState {
       _emitChildTabName();
     } else if (allowPush) {
       if (nameTab.toString() == RouteList.profile) {
-        FluxNavigate.pushNamed(nameTab.toString(),
-            forceRootNavigator: true,
-            arguments: TabBarMenuConfig(jsonData: {}));
+        FluxNavigate.pushNamed(
+          nameTab.toString(),
+          forceRootNavigator: true,
+          arguments: TabBarMenuConfig(jsonData: {}),
+          context: context,
+        );
       } else {
-        FluxNavigate.pushNamed(nameTab.toString(), forceRootNavigator: true);
+        FluxNavigate.pushNamed(
+          nameTab.toString(),
+          forceRootNavigator: true,
+          context: context,
+        );
       }
     }
   }
@@ -599,6 +606,7 @@ extension TabBarMenuExtention on MainTabsState {
         tabData.layout.toString(),
         arguments: routeData,
         forceRootNavigator: true,
+        context: context,
       );
 
       if (tabController.indexIsChanging) {
@@ -671,7 +679,7 @@ extension TabBarMenuExtention on MainTabsState {
       builder: (context, totalCart, child) {
         return IconFloatingAction(
           config: appSetting.tabBarConfig.tabBarFloating,
-          item: tabData[itemIndex].jsonData,
+          item: tabData[itemIndex],
           onTap: () {
             tabController.animateTo(itemIndex);
             _onTapTabBar(itemIndex);

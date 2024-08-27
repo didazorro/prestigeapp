@@ -1,3 +1,5 @@
+import '../../config.dart';
+
 class PaymentConfig {
   String? defaultCountryISOCode;
   String? defaultStateISOCode;
@@ -10,7 +12,7 @@ class PaymentConfig {
   bool enableReview = false;
   bool allowSearchingAddress = false;
   String googleApiKey = '';
-  bool guestCheckout = false;
+  bool _guestCheckout = false;
   bool enableOnePageCheckout = false;
   bool showWebviewCheckoutSuccessScreen =
       true; // Will work with `enableOnePageCheckout`
@@ -27,6 +29,9 @@ class PaymentConfig {
   bool showTransactionDetails = true;
   List<String> paymentListAllowsCancelAndRefund = <String>[];
 
+  ///Require enable guestCheckout option when disable login
+  bool get guestCheckout => kLoginSetting.enable ? _guestCheckout : true;
+
   PaymentConfig.fromJson(dynamic json) {
     defaultCountryISOCode = json['DefaultCountryISOCode'];
     defaultStateISOCode = json['DefaultStateISOCode'];
@@ -39,12 +44,15 @@ class PaymentConfig {
     enableReview = json['EnableReview'] ?? false;
     allowSearchingAddress = json['allowSearchingAddress'] ?? false;
     googleApiKey = json['GoogleApiKey'] ?? '';
-    guestCheckout = json['GuestCheckout'] ?? false;
+    _guestCheckout = json['GuestCheckout'] ?? false;
     enableOnePageCheckout = json['EnableOnePageCheckout'] ?? false;
     showWebviewCheckoutSuccessScreen =
         json['ShowWebviewCheckoutSuccessScreen'] ?? true;
     nativeOnePageCheckout = json['NativeOnePageCheckout'] ?? false;
-    checkoutPageSlug = json['CheckoutPageSlug'] ?? {'en': 'checkout'};
+    checkoutPageSlug =
+        (json['CheckoutPageSlug'] is Map && json['CheckoutPageSlug'].isNotEmpty)
+            ? json['CheckoutPageSlug']
+            : {'en': 'checkout'};
     enableCreditCard = json['EnableCreditCard'] ?? false;
     updateOrderStatus = json['UpdateOrderStatus'] ?? false;
     showOrderNotes = json['ShowOrderNotes'] ?? false;

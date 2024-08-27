@@ -5,10 +5,12 @@ import 'package:provider/provider.dart';
 import '../../../common/config.dart';
 import '../../../common/config/configuration_utils.dart';
 import '../../../common/constants.dart';
+import '../../../common/extensions/translate_ext.dart';
 import '../../../common/tools/biometrics_tools.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/index.dart';
 import '../../../routes/flux_navigate.dart';
+import '../../../services/outside/index.dart';
 import '../../../services/service_config.dart';
 import '../../../widgets/general/index.dart';
 import '../../users/user_point_screen.dart';
@@ -103,7 +105,10 @@ class _DynamicSettingItemWidgetState extends State<DynamicSettingItemWidget>
           }
           title = S.of(context).myProducts;
           icon = CupertinoIcons.cube_box;
-          onTap = () => FluxNavigate.pushNamed(RouteList.productSell);
+          onTap = () => FluxNavigate.pushNamed(
+                RouteList.productSell,
+                context: context,
+              );
           break;
         }
 
@@ -117,10 +122,11 @@ class _DynamicSettingItemWidgetState extends State<DynamicSettingItemWidget>
           title = S.of(context).conversations;
           icon = CupertinoIcons.chat_bubble_2;
           onTap = () {
-            Navigator.pushNamed(
-              context,
+            FluxNavigate.pushNamed(
               RouteList.listChat,
               arguments: isMultiVendor && widget.user?.isVender == true,
+              forceRootNavigator: true,
+              context: context,
             );
           };
           break;
@@ -149,6 +155,7 @@ class _DynamicSettingItemWidgetState extends State<DynamicSettingItemWidget>
             await FluxNavigate.pushNamed(
               RouteList.myWallet,
               forceRootNavigator: true,
+              context: context,
             );
           };
           break;
@@ -162,7 +169,7 @@ class _DynamicSettingItemWidgetState extends State<DynamicSettingItemWidget>
                 builder: (context, model, child) {
                   if (model.products.isNotEmpty) {
                     return Text(
-                      '${model.products.length} ${S.of(context).items}',
+                      context.transCountProduct(model.products.length),
                       style: TextStyle(
                           fontSize: 14, color: Theme.of(context).primaryColor),
                     );
@@ -322,7 +329,7 @@ class _DynamicSettingItemWidgetState extends State<DynamicSettingItemWidget>
       case 'privacy':
         {
           icon = CupertinoIcons.doc_text;
-          title = S.of(context).agreeWithPrivacy;
+          title = S.of(context).privacyAndTerm;
           onTap = () => onTapOpenPrivacy(context, privacy: item);
           break;
         }
@@ -391,6 +398,13 @@ class _DynamicSettingItemWidgetState extends State<DynamicSettingItemWidget>
         }
       default:
         {
+          final outsideWidget = OutsideService.settingItemWidget(
+            widget.type,
+            cardStyle: widget.cardStyle,
+          );
+          if (outsideWidget != null) {
+            return outsideWidget;
+          }
           trailing =
               const Icon(Icons.arrow_forward_ios, size: 18, color: kGrey600);
           icon = Icons.error;

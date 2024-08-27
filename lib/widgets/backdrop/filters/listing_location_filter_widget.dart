@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 
 import '../../../generated/l10n.dart';
 import '../../../models/entities/listing_location.dart';
-import '../../../models/index.dart' show ProductModel;
 import '../../../models/listing/listing_location_model.dart';
 import '../../common/tree_view.dart';
 import 'widgets/location_item.dart';
@@ -31,8 +30,6 @@ class ListingLocationFilterWidget extends StatefulWidget {
 }
 
 class _LocationTreeState extends State<ListingLocationFilterWidget> {
-  List<String>? get categoryIds => context.read<ProductModel>().categoryIds;
-
   List<String> _locationIds = [];
 
   // Store location id from parent to children
@@ -46,10 +43,10 @@ class _LocationTreeState extends State<ListingLocationFilterWidget> {
     }
   }
 
-  bool hasChildren(categories, id) {
-    if (categories == null) return false;
+  bool hasChildren(locations, id) {
+    if (locations == null) return false;
 
-    return categories.where((o) => o.parent == id).isNotEmpty;
+    return locations.where((o) => o.parent == id).isNotEmpty;
   }
 
   List<ListingLocation> getSubLocations(List<ListingLocation>? locations, id) {
@@ -80,7 +77,7 @@ class _LocationTreeState extends State<ListingLocationFilterWidget> {
 
     setState(() {
       EasyDebounce.debounce(
-        'debounceFilterCategory',
+        'debounceFilterLocation',
         const Duration(milliseconds: 1000),
         () {
           widget.onFilter(_locationIds.isNotEmpty ? _locationIds.first : null);
@@ -143,7 +140,7 @@ class _LocationTreeState extends State<ListingLocationFilterWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final menuCategory = Selector<ListingLocationModel, List<ListingLocation>>(
+    final menuLocation = Selector<ListingLocationModel, List<ListingLocation>>(
       builder: (context, locations, child) => getTreeView(
         locations: locations,
       ),
@@ -153,7 +150,7 @@ class _LocationTreeState extends State<ListingLocationFilterWidget> {
     return MenuTitleWidget(
       title: S.of(context).location,
       useExpansionStyle: widget.useExpansionStyle,
-      child: menuCategory,
+      child: menuLocation,
     );
   }
 }

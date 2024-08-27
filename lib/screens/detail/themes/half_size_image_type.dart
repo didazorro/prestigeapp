@@ -282,6 +282,7 @@ class _HalfSizeLayoutState extends State<HalfSizeLayout>
                   : VendorChat(
                       user: userModel.user,
                       store: widget.product?.store,
+                      product: widget.product,
                     ),
           body: Stack(
             children: [

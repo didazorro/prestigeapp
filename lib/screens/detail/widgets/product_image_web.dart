@@ -117,12 +117,7 @@ class _ProductImageWebState extends State<ProductImageWeb> {
         afterFirstLayout(context);
       }
     });
-
-    final url = widget.product.videoUrl;
-    if (url != null && url.isNotEmpty) {
-      _videoUrl = url.replaceAll('http://', 'https://');
-      hasVideo = true;
-    }
+    hasVideo = widget.product.hasVideo && kProductDetail.showVideo;
 
     _images.addAll(widget.product.images);
 

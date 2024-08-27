@@ -19,18 +19,22 @@ mixin RegistrationMixin<T extends StatefulWidget> on State<T> {
   final bool requirePhoneNumberWhenRegister =
       kLoginSetting.requirePhoneNumberWhenRegister;
 
+  final bool requireUsernameWhenRegister =
+      kLoginSetting.requireUsernameWhenRegister;
   bool isChecked = true;
 
   Future<void> submitRegister({
     String? firstName,
     String? lastName,
     String? phoneNumber,
+    String? username,
     String? emailAddress,
     String? password,
     bool? isVendor,
   }) async {
     if (firstName == null ||
         lastName == null ||
+        (requireUsernameWhenRegister && username == null) ||
         emailAddress == null ||
         password == null ||
         (showPhoneNumberWhenRegister &&
@@ -51,7 +55,8 @@ mixin RegistrationMixin<T extends StatefulWidget> on State<T> {
       }
 
       await Provider.of<UserModel>(context, listen: false).createUser(
-        username: emailAddress,
+        username: username,
+        email: emailAddress,
         password: password,
         firstName: firstName,
         lastName: lastName,

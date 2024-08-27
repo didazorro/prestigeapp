@@ -5,8 +5,7 @@ import 'package:provider/provider.dart';
 import '../../common/tools/flash.dart';
 import '../../generated/l10n.dart';
 import '../../models/product_model.dart';
-import '../../services/firebase_service.dart';
-import '../../services/services.dart';
+import '../../services/index.dart';
 
 mixin ProductsMixin {
   Future<void> shareProductsLink(context) async {
@@ -22,17 +21,18 @@ mixin ProductsMixin {
     var currentTagId = productModel.tagIds;
     var url;
     if (currentCategoryId?.length == 1) {
-      url = await FirebaseServices()
-          .dynamicLinks
-          ?.generateProductCategoryUrl(currentCategoryId?.first);
+      url = await Services()
+          .linkService
+          .generateProductCategoryUrl(currentCategoryId?.first);
     } else if (currentTagId?.length == 1) {
-      url = await FirebaseServices()
-          .dynamicLinks
-          ?.generateProductTagUrl(currentTagId?.first);
+      url = await Services()
+          .linkService
+          .generateProductTagUrl(currentTagId?.first);
     }
 
-    if (url?.isNotEmpty ?? false) {
-      Services().firebase.shareDynamicLinkProduct(itemUrl: url);
+    if (url != null && url.isNotEmpty) {
+      unawaited(
+          Services().dynamicLinkService.createDynamicLink(productUrl: url));
     } else {
       unawaited(
         FlashHelper.errorMessage(

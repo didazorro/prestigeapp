@@ -25,6 +25,10 @@ class CommonScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textStyle = Theme.of(context)
+        .textTheme
+        .headlineMedium!
+        .copyWith(color: Theme.of(context).colorScheme.secondary);
     if (navigationBar != null) {
       return Material(
         child: CupertinoPageScaffold(
@@ -50,8 +54,7 @@ class CommonScaffold extends StatelessWidget {
                 largeTitle: title != null
                     ? Text(
                         title,
-                        style: TextStyle(
-                            color: Theme.of(context).colorScheme.secondary),
+                        style: textStyle,
                       )
                     : const SizedBox(),
                 leading: leading,
@@ -83,8 +86,7 @@ class CommonScaffold extends StatelessWidget {
                 largeTitle: title != null
                     ? Text(
                         title,
-                        style: TextStyle(
-                            color: Theme.of(context).colorScheme.secondary),
+                        style: textStyle,
                       )
                     : const SizedBox(),
                 leading: leading,

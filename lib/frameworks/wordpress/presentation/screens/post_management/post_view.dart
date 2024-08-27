@@ -11,7 +11,6 @@ class PostView extends StatelessWidget with BlogActionButtonMixin {
   final double? width;
   final String? type;
   final double? imageBorder;
-  final String? locale;
 
   const PostView({
     this.blogs,
@@ -19,7 +18,6 @@ class PostView extends StatelessWidget with BlogActionButtonMixin {
     this.width,
     this.type,
     this.imageBorder = 4,
-    this.locale = 'en',
   });
 
   @override
@@ -30,7 +28,11 @@ class PostView extends StatelessWidget with BlogActionButtonMixin {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 5.0),
       child: GestureDetector(
-        onTap: () => onTapBlog(blog: blogs?[index ?? 0], blogs: blogs),
+        onTap: () => onTapBlog(
+          blog: blogs?[index ?? 0],
+          blogs: blogs,
+          context: context,
+        ),
         child: SizedBox(
           width: MediaQuery.of(context).size.width,
           child: Row(

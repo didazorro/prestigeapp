@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../common/config.dart';
+import '../../../../common/constants.dart';
 import '../../../../widgets/common/flux_image.dart';
 import 'store_grid_style_layout.dart';
 
@@ -20,6 +21,8 @@ class GridStores extends StatelessWidget {
       childAspectRatio: 1,
       searchName: searchName ?? '',
       itemBuilder: (store, index) {
+        final bannerUrl = store.banner ?? kDefaultStoreImage;
+
         return LayoutBuilder(
           builder: (context, constraints) {
             return Center(
@@ -30,7 +33,7 @@ class GridStores extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     FluxImage(
-                        imageUrl: store.banner ?? '',
+                        imageUrl: bannerUrl,
                         width: 50,
                         height: 50,
                         fit: BoxFit.cover),

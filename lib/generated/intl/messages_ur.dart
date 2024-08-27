@@ -28,108 +28,108 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m3(state) => "بلوٹوتھ اڈاپٹر ہے ${state}";
 
-  static String m4(currency) => "کرنسی کو ${currency}میں تبدیل کر دیا گیا";
+  static String m5(currency) => "کرنسی کو ${currency}میں تبدیل کر دیا گیا";
 
-  static String m5(number) => "${number} حروف باقی ہیں۔";
+  static String m6(number) => "${number} حروف باقی ہیں۔";
 
-  static String m6(priceRate, pointRate) =>
+  static String m7(priceRate, pointRate) =>
       "${priceRate} = ${pointRate} پوائنٹس";
 
-  static String m7(count) => "${count} آئٹم";
+  static String m8(count) => "${count} آئٹم";
 
-  static String m8(count) => "${count} آئٹمز";
+  static String m9(count) => "${count} آئٹمز";
 
-  static String m9(country) => "${country} ملک تعاون یافتہ نہیں ہے۔";
+  static String m12(country) => "${country} ملک تعاون یافتہ نہیں ہے۔";
 
-  static String m10(currency) => "${currency} تعاون یافتہ نہیں ہے۔";
+  static String m13(currency) => "${currency} تعاون یافتہ نہیں ہے۔";
 
-  static String m11(day) => "${day} دن پہلے";
+  static String m14(day) => "${day} دن پہلے";
 
-  static String m12(total) => "~${total} کلومیٹر";
+  static String m15(total) => "~${total} کلومیٹر";
 
-  static String m13(timeLeft) => " ${timeLeft}میں ختم ہوتا ہے";
+  static String m16(timeLeft) => " ${timeLeft}میں ختم ہوتا ہے";
 
-  static String m14(captcha) => "تصدیق کرنے کے لیے ${captcha} درج کریں:";
+  static String m17(captcha) => "تصدیق کرنے کے لیے ${captcha} درج کریں:";
 
-  static String m15(message) => "خرابی: ${message}";
+  static String m18(message) => "خرابی: ${message}";
 
-  static String m16(time) => " ${time}میں میعاد ختم ہو رہی ہے";
+  static String m20(time) => " ${time}میں میعاد ختم ہو رہی ہے";
 
-  static String m17(total) => ">${total} کلومیٹر";
+  static String m21(total) => ">${total} کلومیٹر";
 
-  static String m18(hour) => "${hour} گھنٹے پہلے";
+  static String m22(hour) => "${hour} گھنٹے پہلے";
 
-  static String m19(count) =>
+  static String m24(count) =>
       " ${Intl.plural(count, one: '${count} item', other: '${count} items')}";
 
-  static String m20(message) =>
+  static String m25(message) =>
       "ڈیٹا کی درخواست کے دوران ایپ میں ایک مسئلہ ہے، براہ کرم مسائل کو حل کرنے کے لیے منتظم سے رابطہ کریں: ${message}";
 
-  static String m21(currency, amount) =>
+  static String m26(currency, amount) =>
       "اس ادائیگی کو استعمال کرنے کی زیادہ سے زیادہ رقم ${currency} ${amount}ہے";
 
-  static String m22(size) => "فائل کا زیادہ سے زیادہ سائز: ${size} MB";
+  static String m27(size) => "فائل کا زیادہ سے زیادہ سائز: ${size} MB";
 
-  static String m23(currency, amount) =>
+  static String m28(currency, amount) =>
       "اس ادائیگی کو استعمال کرنے کی کم از کم رقم ${currency} ${amount}ہے";
 
-  static String m24(minute) => "${minute} منٹ پہلے";
+  static String m29(minute) => "${minute} منٹ پہلے";
 
-  static String m25(month) => "${month} مہینے پہلے";
+  static String m30(month) => "${month} مہینے پہلے";
 
-  static String m26(store) => " ${store}سے مزید";
+  static String m31(store) => " ${store}سے مزید";
 
-  static String m27(number) => " ${number}کے گروپوں میں خریدنا ضروری ہے";
+  static String m32(number) => " ${number}کے گروپوں میں خریدنا ضروری ہے";
 
-  static String m28(itemCount) => "${itemCount} آئٹمز";
+  static String m33(itemCount) => "${itemCount} آئٹمز";
 
-  static String m29(price) => "کل اختیارات: ${price}";
+  static String m34(price) => "کل اختیارات: ${price}";
 
-  static String m30(amount) => "ادائیگی کریں ${amount}";
+  static String m35(amount) => "ادائیگی کریں ${amount}";
 
-  static String m31(name) =>
+  static String m36(name) =>
       "${name} کو کارٹ میں کامیابی کے ساتھ شامل کر دیا گیا ہے۔";
 
-  static String m32(total) => "مقدار: ${total}";
+  static String m37(total) => "مقدار: ${total}";
 
-  static String m33(percent) => "فروخت ${percent}%";
+  static String m39(percent) => "فروخت ${percent}%";
 
-  static String m34(keyword) => "تلاش کے نتائج برائے: \'${keyword}\'";
+  static String m40(keyword) => "تلاش کے نتائج برائے: \'${keyword}\'";
 
-  static String m35(keyword, count) => "${keyword} (${count} آئٹم)";
+  static String m41(keyword, count) => "${keyword} (${count} آئٹم)";
 
-  static String m36(keyword, count) => "${keyword} (${count} آئٹمز)";
+  static String m42(keyword, count) => "${keyword} (${count} آئٹمز)";
 
-  static String m37(second) => "${second} سیکنڈ پہلے";
+  static String m43(second) => "${second} سیکنڈ پہلے";
 
-  static String m38(totalCartQuantity) =>
+  static String m44(totalCartQuantity) =>
       "شاپنگ کارٹ، ${totalCartQuantity} آئٹمز";
 
-  static String m39(numberOfUnitsSold) => "فروخت کیا گیا: ${numberOfUnitsSold}";
+  static String m45(numberOfUnitsSold) => "فروخت کیا گیا: ${numberOfUnitsSold}";
 
-  static String m40(fieldName) => " ${fieldName} فیلڈ درکار ہے۔";
+  static String m46(fieldName) => " ${fieldName} فیلڈ درکار ہے۔";
 
-  static String m41(total) => "${total} مصنوعات";
+  static String m47(total) => "${total} مصنوعات";
 
-  static String m42(maxPointDiscount, maxPriceDiscount) =>
+  static String m49(maxPointDiscount, maxPriceDiscount) =>
       "اس آرڈر پر ${maxPriceDiscount} ڈسکاؤنٹ کے لیے زیادہ سے زیادہ ${maxPointDiscount} پوائنٹس کا استعمال کریں!";
 
-  static String m43(date) => " ${date}تک درست";
+  static String m50(date) => " ${date}تک درست";
 
-  static String m44(message) => "انتباہ: ${message}";
+  static String m52(message) => "انتباہ: ${message}";
 
-  static String m45(defaultCurrency) =>
+  static String m53(defaultCurrency) =>
       "فی الحال منتخب کردہ کرنسی Wallet کی خصوصیت کے لیے دستیاب نہیں ہے، براہ کرم اسے ${defaultCurrency}میں تبدیل کریں";
 
-  static String m46(length) => "ہمیں ${length} پروڈکٹس ملے";
+  static String m54(length) => "ہمیں ${length} پروڈکٹس ملے";
 
-  static String m47(week) => "ہفتہ ${week}";
+  static String m55(week) => "ہفتہ ${week}";
 
-  static String m48(name) => "خوش آمدید ${name}";
+  static String m56(name) => "خوش آمدید ${name}";
 
-  static String m49(year) => "${year} سال پہلے";
+  static String m57(year) => "${year} سال پہلے";
 
-  static String m50(total) => "آپ نے آرڈر #${total}کو تفویض کیا ہے";
+  static String m58(total) => "آپ نے آرڈر #${total}کو تفویض کیا ہے";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -165,7 +165,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ٹوکری میں شامل کریں"),
         "addToCartMaximum": MessageLookupByLibrary.simpleMessage(
             "زیادہ سے زیادہ مقدار سے تجاوز کر گیا ہے۔"),
-        "addToCartSucessfully": MessageLookupByLibrary.simpleMessage(
+        "addToCartSuccessfully": MessageLookupByLibrary.simpleMessage(
             "کارٹ میں کامیابی کے ساتھ شامل کر دیا گیا۔"),
         "addToOrder":
             MessageLookupByLibrary.simpleMessage("آرڈر میں شامل کریں۔"),
@@ -316,8 +316,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("زبان تبدیل کریں"),
         "changePrinter":
             MessageLookupByLibrary.simpleMessage("پرنٹر تبدیل کریں۔"),
-        "changedCurrencyTo": m4,
-        "characterRemain": m5,
+        "changedCurrencyTo": m5,
+        "characterRemain": m6,
         "chat": MessageLookupByLibrary.simpleMessage("چیٹ"),
         "chatGPT": MessageLookupByLibrary.simpleMessage("GPT چیٹ کریں۔"),
         "chatListScreen": MessageLookupByLibrary.simpleMessage("پیغامات"),
@@ -401,15 +401,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("شپنگ جاری رکھیں"),
         "continues": MessageLookupByLibrary.simpleMessage("جاری رہے"),
         "conversations": MessageLookupByLibrary.simpleMessage("بات چیت"),
-        "convertPoint": m6,
+        "convertPoint": m7,
         "copied": MessageLookupByLibrary.simpleMessage("کاپی"),
         "copy": MessageLookupByLibrary.simpleMessage("کاپی"),
         "copyright": MessageLookupByLibrary.simpleMessage(
             "© 2024 InspireUI تمام حقوق محفوظ ہیں۔"),
-        "countItem": m7,
-        "countItems": m8,
+        "countItem": m8,
+        "countItems": m9,
         "country": MessageLookupByLibrary.simpleMessage("ملک"),
-        "countryIsNotSupported": m9,
+        "countryIsNotSupported": m12,
         "countryIsRequired":
             MessageLookupByLibrary.simpleMessage("ملکی میدان درکار ہے۔"),
         "couponCode": MessageLookupByLibrary.simpleMessage("کوپن کوڈ"),
@@ -432,7 +432,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("تمام قسمیں بنائیں"),
         "createdOn": MessageLookupByLibrary.simpleMessage("پر بنایا:"),
         "currencies": MessageLookupByLibrary.simpleMessage("کرنسیوں"),
-        "currencyIsNotSupported": m10,
+        "currencyIsNotSupported": m13,
         "currentPassword":
             MessageLookupByLibrary.simpleMessage("موجودہ خفیہ لفظ"),
         "currentlyWeOnlyHave":
@@ -457,7 +457,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "dateTime": MessageLookupByLibrary.simpleMessage("تاریخ وقت"),
         "dateWiseClose":
             MessageLookupByLibrary.simpleMessage("تاریخ کے لحاظ سے قریب"),
-        "daysAgo": m11,
+        "daysAgo": m14,
         "debit": MessageLookupByLibrary.simpleMessage("ڈیبٹ"),
         "decline": MessageLookupByLibrary.simpleMessage("رد"),
         "delete": MessageLookupByLibrary.simpleMessage("حذف کریں"),
@@ -486,7 +486,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("خریداری کو غیر فعال کریں۔"),
         "discount": MessageLookupByLibrary.simpleMessage("چھوٹ"),
         "displayName": MessageLookupByLibrary.simpleMessage("نام دکھائیں"),
-        "distance": m12,
+        "distance": m15,
         "doNotAnyTransactions": MessageLookupByLibrary.simpleMessage(
             "آپ کے پاس ابھی تک کوئی لین دین نہیں ہے۔"),
         "doYouWantToExitApp": MessageLookupByLibrary.simpleMessage(
@@ -553,12 +553,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("تعطیل موڈ کو فعال کریں۔"),
         "endDateCantBeAfterFirstDate": MessageLookupByLibrary.simpleMessage(
             "براہ کرم پہلی تاریخ کے بعد ایک تاریخ منتخب کریں۔"),
-        "endsIn": m13,
+        "endsIn": m16,
         "english": MessageLookupByLibrary.simpleMessage("انگریزی"),
-        "enterCaptcha": m14,
+        "enterCaptcha": m17,
         "enterEmailEachRecipient": MessageLookupByLibrary.simpleMessage(
             "ہر وصول کنندہ کے لیے ایک ای میل ایڈریس درج کریں۔"),
-        "enterSendedCode":
+        "enterSentCode":
             MessageLookupByLibrary.simpleMessage("بھیجے گئے کوڈ کو درج کریں۔"),
         "enterVoucherCode":
             MessageLookupByLibrary.simpleMessage("واؤچر کوڈ درج کریں۔"),
@@ -578,7 +578,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "شروع کرنے کے لیے اپنا فون نمبر درج کریں۔"),
         "enterYourPhoneNumber":
             MessageLookupByLibrary.simpleMessage("اپنا فون نمبر درج کریں"),
-        "error": m15,
+        "error": m18,
         "errorAmountTransfer": MessageLookupByLibrary.simpleMessage(
             "درج کردہ رقم موجودہ بٹوے کی رقم سے زیادہ ہے۔ دوبارہ کوشش کریں!"),
         "errorEmailFormat": MessageLookupByLibrary.simpleMessage(
@@ -592,7 +592,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "expired": MessageLookupByLibrary.simpleMessage("میعاد ختم ہوگئی"),
         "expiredDate": MessageLookupByLibrary.simpleMessage("ختم تاریخ"),
         "expiredDateHint": MessageLookupByLibrary.simpleMessage("MM/YY"),
-        "expiringInTime": m16,
+        "expiringInTime": m20,
         "exploreNow": MessageLookupByLibrary.simpleMessage("ابھی دریافت کریں۔"),
         "external": MessageLookupByLibrary.simpleMessage("بیرونی"),
         "extraServices": MessageLookupByLibrary.simpleMessage("اضافی خدمات"),
@@ -661,7 +661,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "goBackToShipping":
             MessageLookupByLibrary.simpleMessage("شپنگ پر واپس جائیں۔"),
         "good": MessageLookupByLibrary.simpleMessage("اچھی"),
-        "greaterDistance": m17,
+        "greaterDistance": m21,
         "greek": MessageLookupByLibrary.simpleMessage("یونانی"),
         "grossSales": MessageLookupByLibrary.simpleMessage("مجموعی فروخت"),
         "grouped": MessageLookupByLibrary.simpleMessage("گروپ بندی"),
@@ -681,7 +681,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "historyTransaction": MessageLookupByLibrary.simpleMessage("تاریخ"),
         "home": MessageLookupByLibrary.simpleMessage("گھر"),
         "hour": MessageLookupByLibrary.simpleMessage("قیامت"),
-        "hoursAgo": m18,
+        "hoursAgo": m22,
         "hungarian": MessageLookupByLibrary.simpleMessage("ہنگری"),
         "hungary": MessageLookupByLibrary.simpleMessage("ہنگری"),
         "iAgree": MessageLookupByLibrary.simpleMessage("مجھے اس سے اتفاق ہے"),
@@ -711,7 +711,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "isTyping": MessageLookupByLibrary.simpleMessage("ٹائپ کر رہا ہے..."),
         "italian": MessageLookupByLibrary.simpleMessage("اطالوی"),
         "item": MessageLookupByLibrary.simpleMessage("آئٹم"),
-        "itemQuantity": m19,
+        "itemQuantity": m24,
         "itemTotal": MessageLookupByLibrary.simpleMessage("کل آئٹم:"),
         "items": MessageLookupByLibrary.simpleMessage("اشیاء"),
         "itsOrdered": MessageLookupByLibrary.simpleMessage("یہ حکم دیا ہے!"),
@@ -754,7 +754,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("میں لاگ ان کریں"),
         "loginCanceled":
             MessageLookupByLibrary.simpleMessage("لاگ ان منسوخ ہے۔"),
-        "loginErrorServiceProvider": m20,
+        "loginErrorServiceProvider": m25,
         "loginFailed":
             MessageLookupByLibrary.simpleMessage("لاگ ان ناکام رہے!"),
         "loginInvalid": MessageLookupByLibrary.simpleMessage(
@@ -782,27 +782,27 @@ class MessageLookup extends MessageLookupByLibrary {
             "بھیجے گئے کے بطور نشان زد کریں۔"),
         "markAsUnread": MessageLookupByLibrary.simpleMessage(
             "اس کے اوپرنشان لگایں کہ پڑھا نیں ہوا"),
-        "maxAmountForPayment": m21,
-        "maximumFileSizeMb": m22,
+        "maxAmountForPayment": m26,
+        "maximumFileSizeMb": m27,
         "maybeLater": MessageLookupByLibrary.simpleMessage("شاید بعد میں"),
         "menuOrder": MessageLookupByLibrary.simpleMessage("مینو آرڈر"),
         "menus": MessageLookupByLibrary.simpleMessage("مینو"),
         "message": MessageLookupByLibrary.simpleMessage("پیغام"),
         "messageTo": MessageLookupByLibrary.simpleMessage("کو پیغام بھیجیں۔"),
-        "minAmountForPayment": m23,
+        "minAmountForPayment": m28,
         "minimumQuantityIs":
             MessageLookupByLibrary.simpleMessage("کم از کم مقدار ہے۔"),
-        "minutesAgo": m24,
+        "minutesAgo": m29,
         "mobileVerification":
             MessageLookupByLibrary.simpleMessage("موبائل کی تصدیق"),
         "momentAgo": MessageLookupByLibrary.simpleMessage("ایک لمحہ پہلے"),
         "monday": MessageLookupByLibrary.simpleMessage("پیر"),
-        "monthsAgo": m25,
+        "monthsAgo": m30,
         "more": MessageLookupByLibrary.simpleMessage("...مزید"),
-        "moreFromStore": m26,
+        "moreFromStore": m31,
         "moreInformation": MessageLookupByLibrary.simpleMessage("مزید معلومات"),
         "morning": MessageLookupByLibrary.simpleMessage("صبح"),
-        "mustBeBoughtInGroupsOf": m27,
+        "mustBeBoughtInGroupsOf": m32,
         "mustSelectOneItem":
             MessageLookupByLibrary.simpleMessage("1 آئٹم منتخب کرنا ضروری ہے۔"),
         "myCart": MessageLookupByLibrary.simpleMessage("میری ٹوکری"),
@@ -814,7 +814,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "myWallet": MessageLookupByLibrary.simpleMessage("میرا بٹوہ"),
         "myWishList":
             MessageLookupByLibrary.simpleMessage("میری خواہشات کی فہرست"),
-        "nItems": m28,
+        "nItems": m33,
         "name": MessageLookupByLibrary.simpleMessage("نام"),
         "nameOnCard": MessageLookupByLibrary.simpleMessage("کارڈ پہ درج نام"),
         "nearbyPlaces": MessageLookupByLibrary.simpleMessage("قریبی مقامات"),
@@ -838,8 +838,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "کیمرے کی اجازت نہیں ہے۔ براہ کرم اسے اپنے آلے کی ترتیبات میں دیں۔"),
         "noConversation": MessageLookupByLibrary.simpleMessage(
             "ابھی تک کوئی بات چیت نہیں ہوئی۔"),
-        "noConversationDescription": MessageLookupByLibrary.simpleMessage(
-            "جب آپ کے گاہک آپ کے ساتھ چیٹنگ شروع کریں گے تو یہ ظاہر ہوگا۔"),
         "noData": MessageLookupByLibrary.simpleMessage("مزید کوئی ڈیٹا نہیں۔"),
         "noFavoritesYet": MessageLookupByLibrary.simpleMessage(
             "ابھی تک کوئی پسندیدہ نہیں ہے۔"),
@@ -899,7 +897,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "openingHours": MessageLookupByLibrary.simpleMessage("ابتدائی گھنٹے"),
         "optional": MessageLookupByLibrary.simpleMessage("اختیاری"),
         "options": MessageLookupByLibrary.simpleMessage("اختیارات"),
-        "optionsTotal": m29,
+        "optionsTotal": m34,
         "or": MessageLookupByLibrary.simpleMessage("یا"),
         "orLoginWith": MessageLookupByLibrary.simpleMessage("یا لاگ ان کریں۔"),
         "orderConfirmation":
@@ -970,7 +968,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "payByWallet":
             MessageLookupByLibrary.simpleMessage("بٹوے کے ذریعے ادائیگی کریں۔"),
         "payNow": MessageLookupByLibrary.simpleMessage("اب ادا"),
-        "payWithAmount": m30,
+        "payWithAmount": m35,
         "payment": MessageLookupByLibrary.simpleMessage("ادائیگی"),
         "paymentMethod":
             MessageLookupByLibrary.simpleMessage("ادائیگی کا طریقہ"),
@@ -1011,6 +1009,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "براہ کرم پروڈکٹ کا نام درج کریں۔"),
         "pleaseFillCode":
             MessageLookupByLibrary.simpleMessage("براہ کرم اپنا کوڈ بھریں۔"),
+        "pleaseFillUpAllCellsProperly": MessageLookupByLibrary.simpleMessage(
+            "*براہ کرم تمام خلیات کو صحیح طریقے سے بھریں۔"),
         "pleaseIncreaseOrDecreaseTheQuantity":
             MessageLookupByLibrary.simpleMessage(
                 "جاری رکھنے کے لیے براہ کرم مقدار میں اضافہ یا کمی کریں۔"),
@@ -1032,8 +1032,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "براہ کرم مطلوبہ اختیارات منتخب کریں!"),
         "pleaseSignInBeforeUploading": MessageLookupByLibrary.simpleMessage(
             "براہ کرم کسی بھی فائل کو اپ لوڈ کرنے سے پہلے اپنے اکاؤنٹ میں سائن ان کریں۔"),
-        "pleasefillUpAllCellsProperly": MessageLookupByLibrary.simpleMessage(
-            "*براہ کرم تمام خلیات کو صحیح طریقے سے بھریں۔"),
         "point": MessageLookupByLibrary.simpleMessage("پوائنٹ"),
         "pointMsgConfigNotFound": MessageLookupByLibrary.simpleMessage(
             "سرور میں کوئی ڈسکاؤنٹ پوائنٹ کنفیگریشن نہیں ملی ہے۔"),
@@ -1094,7 +1092,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("رازداری اور شرائط"),
         "private": MessageLookupByLibrary.simpleMessage("نجی"),
         "product": MessageLookupByLibrary.simpleMessage("پروڈکٹ"),
-        "productAddToCart": m31,
+        "productAddToCart": m36,
         "productAdded": MessageLookupByLibrary.simpleMessage(
             "مصنوعات کو شامل کیا جاتا ہے۔"),
         "productCreateReview": MessageLookupByLibrary.simpleMessage(
@@ -1131,7 +1129,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "qRCodeSaveFailure":
             MessageLookupByLibrary.simpleMessage("QR کوڈ محفوظ کرنے میں ناکام"),
         "qty": MessageLookupByLibrary.simpleMessage("مقدار"),
-        "qtyTotal": m32,
+        "qtyTotal": m37,
         "quantity": MessageLookupByLibrary.simpleMessage("مقدار"),
         "quantityProductExceedInStock": MessageLookupByLibrary.simpleMessage(
             "موجودہ مقدار اسٹاک میں موجود مقدار سے زیادہ ہے۔"),
@@ -1151,11 +1149,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "readReviews": MessageLookupByLibrary.simpleMessage("جائزہ"),
         "receivedMoney": MessageLookupByLibrary.simpleMessage("رقم وصول کی۔"),
         "receiver": MessageLookupByLibrary.simpleMessage("وصول کنندہ"),
+        "recent": MessageLookupByLibrary.simpleMessage("حالیہ"),
         "recentSearches": MessageLookupByLibrary.simpleMessage("تاریخ"),
         "recentView": MessageLookupByLibrary.simpleMessage("آپ کا حالیہ منظر"),
         "recentlyViewed":
             MessageLookupByLibrary.simpleMessage("حال ہی میں دیکھا"),
-        "recents": MessageLookupByLibrary.simpleMessage("حالیہ"),
         "recommended": MessageLookupByLibrary.simpleMessage("تجویز کردہ"),
         "recurringTotals": MessageLookupByLibrary.simpleMessage("اعادی کل"),
         "refresh": MessageLookupByLibrary.simpleMessage("ریفریش"),
@@ -1208,7 +1206,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reviews": MessageLookupByLibrary.simpleMessage("جائزہ"),
         "romanian": MessageLookupByLibrary.simpleMessage("رومانیہ"),
         "russian": MessageLookupByLibrary.simpleMessage("روسی"),
-        "sale": m33,
+        "sale": m39,
         "salePrice": MessageLookupByLibrary.simpleMessage("قیمت فروخت"),
         "saturday": MessageLookupByLibrary.simpleMessage("ہفتہ"),
         "save": MessageLookupByLibrary.simpleMessage("محفوظ کریں"),
@@ -1240,12 +1238,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "searchOrderId": MessageLookupByLibrary.simpleMessage(
             "آرڈر ID کے ساتھ تلاش کریں..."),
         "searchPlace": MessageLookupByLibrary.simpleMessage("جگہ تلاش کریں۔"),
-        "searchResultFor": m34,
-        "searchResultItem": m35,
-        "searchResultItems": m36,
+        "searchResultFor": m40,
+        "searchResultItem": m41,
+        "searchResultItems": m42,
         "searchingAddress":
             MessageLookupByLibrary.simpleMessage("پتہ تلاش کر رہے ہیں۔"),
-        "secondsAgo": m37,
+        "secondsAgo": m43,
         "seeAll": MessageLookupByLibrary.simpleMessage("تمام دیکھیں"),
         "seeNewAppConfig": MessageLookupByLibrary.simpleMessage(
             "اپنی ایپ پر نیا مواد دیکھنا جاری رکھیں۔"),
@@ -1305,7 +1303,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shopOrders": MessageLookupByLibrary.simpleMessage("شاپ آرڈرز"),
         "shopPhone": MessageLookupByLibrary.simpleMessage("فون خریدیں۔"),
         "shopSlug": MessageLookupByLibrary.simpleMessage("شاپ سلگ"),
-        "shoppingCartItems": m38,
+        "shoppingCartItems": m44,
         "shortDescription": MessageLookupByLibrary.simpleMessage("مختصر کوائف"),
         "showAllMyOrdered":
             MessageLookupByLibrary.simpleMessage("میرے تمام آرڈر دکھائیں۔"),
@@ -1325,7 +1323,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "slovak": MessageLookupByLibrary.simpleMessage("سلوواک"),
         "smsCodeExpired": MessageLookupByLibrary.simpleMessage(
             "ایس ایم ایس کوڈ کی میعاد ختم ہو گئی ہے۔ دوبارہ کوشش کرنے کے لیے براہ کرم تصدیقی کوڈ دوبارہ بھیجیں۔"),
-        "sold": m39,
+        "sold": m45,
         "soldBy": MessageLookupByLibrary.simpleMessage("کی طرف سے فروخت"),
         "somethingWrong": MessageLookupByLibrary.simpleMessage(
             "کچھ غلط ہو گیا. براہ کرم کچھ دیر بعد کوشش کریں."),
@@ -1395,7 +1393,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "tax": MessageLookupByLibrary.simpleMessage("ٹیکس"),
         "terrible": MessageLookupByLibrary.simpleMessage("خوفناک"),
         "thailand": MessageLookupByLibrary.simpleMessage("تھائی"),
-        "theFieldIsRequired": m40,
+        "theFieldIsRequired": m46,
         "thisDateIsNotAvailable":
             MessageLookupByLibrary.simpleMessage("یہ تاریخ دستیاب نہیں ہے۔"),
         "thisFeatureDoesNotSupportTheCurrentLanguage":
@@ -1416,7 +1414,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "titleAToZ": MessageLookupByLibrary.simpleMessage("عنوان: اے سے زیڈ"),
         "titleZToA": MessageLookupByLibrary.simpleMessage("عنوان: Z سے A"),
         "to": MessageLookupByLibrary.simpleMessage("کرنا"),
-        "tooManyFaildedLogin": MessageLookupByLibrary.simpleMessage(
+        "tooManyFailedLogin": MessageLookupByLibrary.simpleMessage(
             "لاگ ان کی بہت ساری ناکام کوششیں براہ کرم کچھ دیر بعد کوشش کریں."),
         "topUp": MessageLookupByLibrary.simpleMessage("ٹاپ اپ"),
         "topUpProductNotFound":
@@ -1425,7 +1423,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "totalCartValue": MessageLookupByLibrary.simpleMessage(
             "کل آرڈر کی قدر کم از کم ہونی چاہیے۔"),
         "totalPrice": MessageLookupByLibrary.simpleMessage("کل قیمت"),
-        "totalProducts": m41,
+        "totalProducts": m47,
         "totalTax": MessageLookupByLibrary.simpleMessage("کل ٹیکس"),
         "trackingNumberIs":
             MessageLookupByLibrary.simpleMessage("ٹریکنگ نمبر ہے۔"),
@@ -1434,7 +1432,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("لین دین منسوخ ہوگیا"),
         "transactionDetail":
             MessageLookupByLibrary.simpleMessage("لین دین کی تفصیل"),
-        "transactionFailded":
+        "transactionFailed":
             MessageLookupByLibrary.simpleMessage("ٹرانزیکشن ناکام"),
         "transactionFee": MessageLookupByLibrary.simpleMessage("ٹرانزیکشن فیس"),
         "transactionResult":
@@ -1477,7 +1475,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("پروڈکٹ اپ لوڈ کریں۔"),
         "uploading": MessageLookupByLibrary.simpleMessage("اپ لوڈ ہو رہا ہے"),
         "url": MessageLookupByLibrary.simpleMessage("یو آر ایل"),
-        "useMaximumPointDiscount": m42,
+        "useMaximumPointDiscount": m49,
         "useNow": MessageLookupByLibrary.simpleMessage("ابھی استعمال کریں۔"),
         "useThisImage":
             MessageLookupByLibrary.simpleMessage("اس تصویر کو استعمال کریں۔"),
@@ -1491,7 +1489,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "vacationMessage":
             MessageLookupByLibrary.simpleMessage("تعطیل کا پیغام"),
         "vacationType": MessageLookupByLibrary.simpleMessage("چھٹی کی قسم"),
-        "validUntilDate": m43,
+        "validUntilDate": m50,
         "variable": MessageLookupByLibrary.simpleMessage("متغیر"),
         "variation": MessageLookupByLibrary.simpleMessage("تغیر"),
         "vendor": MessageLookupByLibrary.simpleMessage("فروش"),
@@ -1522,10 +1520,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("تصدیق کا انتظار ہے"),
         "walletBalance": MessageLookupByLibrary.simpleMessage("والیٹ بیلنس"),
         "walletName": MessageLookupByLibrary.simpleMessage("بٹوے کا نام"),
-        "warning": m44,
-        "warningCurrencyMessageForWallet": m45,
+        "warning": m52,
+        "warningCurrencyMessageForWallet": m53,
         "weFoundBlogs": MessageLookupByLibrary.simpleMessage("ہمیں بلاگ ملا"),
-        "weFoundProducts": m46,
+        "weFoundProducts": m54,
         "weNeedCameraAccessTo": MessageLookupByLibrary.simpleMessage(
             "ہمیں کیو آر کوڈ یا بار کوڈ اسکین کرنے کے لیے کیمرے تک رسائی درکار ہے۔"),
         "weSentAnOTPTo": MessageLookupByLibrary.simpleMessage(
@@ -1534,12 +1532,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "جب نئی مصنوعات دستیاب ہوں گی یا پیشکشیں دستیاب ہوں گی تو ہم آپ کو اطلاعات بھیجیں گے۔ آپ اسے ہمیشہ ترتیبات میں بند کر سکتے ہیں۔"),
         "webView": MessageLookupByLibrary.simpleMessage("ویب ویو"),
         "wednesday": MessageLookupByLibrary.simpleMessage("بدھ"),
-        "week": m47,
+        "week": m55,
         "welcome": MessageLookupByLibrary.simpleMessage("خوش آمدید"),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("خوش آمدید"),
         "welcomeRegister": MessageLookupByLibrary.simpleMessage(
             "ابھی ہمارے ساتھ اپنی خریداری کا سفر شروع کریں۔"),
-        "welcomeUser": m48,
+        "welcomeUser": m56,
         "whichLanguageDoYouPrefer":
             MessageLookupByLibrary.simpleMessage("آپ کونسی زبان پسند ہے؟"),
         "wholesaleRegisterMsg": MessageLookupByLibrary.simpleMessage(
@@ -1550,13 +1548,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("اپنا تبصرہ لکھیں۔"),
         "writeYourNote":
             MessageLookupByLibrary.simpleMessage("اپنا نوٹ لکھیں۔"),
-        "yearsAgo": m49,
+        "yearsAgo": m57,
         "yes": MessageLookupByLibrary.simpleMessage("جی ہاں"),
         "youCanOnlyOrderSingleStore": MessageLookupByLibrary.simpleMessage(
             "آپ صرف ایک اسٹور سے خرید سکتے ہیں۔"),
         "youCanOnlyPurchase":
             MessageLookupByLibrary.simpleMessage("آپ صرف خرید سکتے ہیں۔"),
-        "youHaveAssignedToOrder": m50,
+        "youHaveAssignedToOrder": m58,
         "youHaveBeenSaveAddressYourLocal": MessageLookupByLibrary.simpleMessage(
             "آپ نے اپنی مقامی فائل میں ایڈریس محفوظ کر لیا ہے کامیاب!"),
         "youHavePoints": MessageLookupByLibrary.simpleMessage(

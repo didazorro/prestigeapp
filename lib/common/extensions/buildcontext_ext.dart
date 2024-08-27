@@ -1,13 +1,18 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:inspireui/icons/constants.dart';
 import 'package:provider/provider.dart';
+import 'package:share/share.dart';
 
+import '../../generated/l10n.dart';
 import '../../models/app_model.dart';
 import '../../modules/dynamic_layout/helper/helper.dart';
+import '../../services/services.dart';
 import '../theme/colors.dart';
 import '../tools.dart';
+import '../tools/flash.dart';
 
 extension MainBuildContextExt on BuildContext {
   (int, double) mathSizeLayoutProductList({double? width, String? layout}) {
@@ -45,10 +50,32 @@ extension MainBuildContextExt on BuildContext {
 
   Map get colorAppMap => {
         ...kNameToHex,
-        ...(Provider.of<AppModel>(this, listen: false)
-                .appConfig
-                ?.settings
-                .productColors ??
-            {})
+        ...(read<AppModel>().appConfig?.settings.productColors ?? {})
       };
+}
+
+extension ShareLinkBuildContextExt on BuildContext {
+  Future<void> shareLink(String? url) async {
+    if (url != null && url.isNotEmpty) {
+      unawaited(
+        FlashHelper.message(
+          this,
+          message: S.of(this).generatingLink,
+          duration: const Duration(seconds: 1),
+        ),
+      );
+      final dynamicLink = await Services()
+          .dynamicLinkService
+          .createDynamicLink(productUrl: url);
+      if (dynamicLink != null) {
+        return Share.share(dynamicLink);
+      }
+    }
+
+    return FlashHelper.errorMessage(
+      this,
+      message: S.of(this).failedToGenerateLink,
+      duration: const Duration(seconds: 1),
+    );
+  }
 }

@@ -450,6 +450,16 @@ class S {
     );
   }
 
+  /// `Shipping Fee`
+  String get shippingFee {
+    return Intl.message(
+      'Shipping Fee',
+      name: 'shippingFee',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `preview`
   String get preview {
     return Intl.message(
@@ -971,10 +981,10 @@ class S {
   }
 
   /// `Recent`
-  String get recents {
+  String get recent {
     return Intl.message(
       'Recent',
-      name: 'recents',
+      name: 'recent',
       desc: '',
       args: [],
     );
@@ -1390,6 +1400,16 @@ class S {
     );
   }
 
+  /// `Availability: `
+  String get availabilityProduct {
+    return Intl.message(
+      'Availability: ',
+      name: 'availabilityProduct',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Tracking page`
   String get trackingPage {
     return Intl.message(
@@ -1495,6 +1515,16 @@ class S {
     return Intl.message(
       'Loading...',
       name: 'loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Processing...`
+  String get processing {
+    return Intl.message(
+      'Processing...',
+      name: 'processing',
       desc: '',
       args: [],
     );
@@ -2241,10 +2271,10 @@ class S {
   }
 
   /// `Added to cart successfully`
-  String get addToCartSucessfully {
+  String get addToCartSuccessfully {
     return Intl.message(
       'Added to cart successfully',
-      name: 'addToCartSucessfully',
+      name: 'addToCartSuccessfully',
       desc: '',
       args: [],
     );
@@ -2811,10 +2841,10 @@ class S {
   }
 
   /// `Error: {message}`
-  String error(Object message) {
+  String errorMsg(Object message) {
     return Intl.message(
       'Error: $message',
-      name: 'error',
+      name: 'errorMsg',
       desc: '',
       args: [message],
     );
@@ -2991,20 +3021,20 @@ class S {
   }
 
   /// `Enter the code sent to`
-  String get enterSendedCode {
+  String get enterSentCode {
     return Intl.message(
       'Enter the code sent to',
-      name: 'enterSendedCode',
+      name: 'enterSentCode',
       desc: '',
       args: [],
     );
   }
 
   /// `*Please fill up all the cells properly`
-  String get pleasefillUpAllCellsProperly {
+  String get pleaseFillUpAllCellsProperly {
     return Intl.message(
       '*Please fill up all the cells properly',
-      name: 'pleasefillUpAllCellsProperly',
+      name: 'pleaseFillUpAllCellsProperly',
       desc: '',
       args: [],
     );
@@ -3020,10 +3050,10 @@ class S {
     );
   }
 
-  /// ` RESEND`
+  /// `resend`
   String get resend {
     return Intl.message(
-      ' RESEND',
+      'resend',
       name: 'resend',
       desc: '',
       args: [],
@@ -5530,11 +5560,71 @@ class S {
     );
   }
 
+  /// `Cancel`
+  String get cancelOrder {
+    return Intl.message(
+      'Cancel',
+      name: 'cancelOrder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Waiting for delivery`
+  String get readyToPick {
+    return Intl.message(
+      'Waiting for delivery',
+      name: 'readyToPick',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Waiting for delivery`
+  String get picking {
+    return Intl.message(
+      'Waiting for delivery',
+      name: 'picking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delivering`
+  String get delivering {
+    return Intl.message(
+      'Delivering',
+      name: 'delivering',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Incorrect password`
   String get incorrectPassword {
     return Intl.message(
       'Incorrect password',
       name: 'incorrectPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The request is invalid or expired. Please try again`
+  String get registerInvalid {
+    return Intl.message(
+      'The request is invalid or expired. Please try again',
+      name: 'registerInvalid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unable to sync account. Please log in to continue.`
+  String get registerErrorSyncAccount {
+    return Intl.message(
+      'Unable to sync account. Please log in to continue.',
+      name: 'registerErrorSyncAccount',
       desc: '',
       args: [],
     );
@@ -5650,10 +5740,10 @@ class S {
     );
   }
 
-  /// `Your post has been created succesfully`
+  /// `Your post has been created successfully`
   String get postSuccessfully {
     return Intl.message(
-      'Your post has been created succesfully',
+      'Your post has been created successfully',
       name: 'postSuccessfully',
       desc: '',
       args: [],
@@ -6700,10 +6790,10 @@ class S {
     );
   }
 
-  /// `Transfer failed`
+  /// `Transfer failed!`
   String get transferFailed {
     return Intl.message(
-      'Transfer failed',
+      'Transfer failed!',
       name: 'transferFailed',
       desc: '',
       args: [],
@@ -7620,6 +7710,16 @@ class S {
     );
   }
 
+  /// `Wallet balance: {balance}`
+  String walletBalanceWithValue(Object balance) {
+    return Intl.message(
+      'Wallet balance: $balance',
+      name: 'walletBalanceWithValue',
+      desc: '',
+      args: [balance],
+    );
+  }
+
   /// `More information`
   String get moreInformation {
     return Intl.message(
@@ -7785,6 +7885,26 @@ class S {
     return Intl.message(
       '$count items',
       name: 'countItems',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `{count} item`
+  String countProduct(Object count) {
+    return Intl.message(
+      '$count item',
+      name: 'countProduct',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `{count} items`
+  String countProducts(Object count) {
+    return Intl.message(
+      '$count items',
+      name: 'countProducts',
       desc: '',
       args: [count],
     );
@@ -8610,6 +8730,16 @@ class S {
     );
   }
 
+  /// `Under Approval`
+  String get accountApprovalTitle {
+    return Intl.message(
+      'Under Approval',
+      name: 'accountApprovalTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `The username or password is incorrect.`
   String get userNameInCorrect {
     return Intl.message(
@@ -8721,10 +8851,10 @@ class S {
   }
 
   /// `Too many failed login attempts. Please try again later.`
-  String get tooManyFaildedLogin {
+  String get tooManyFailedLogin {
     return Intl.message(
       'Too many failed login attempts. Please try again later.',
-      name: 'tooManyFaildedLogin',
+      name: 'tooManyFailedLogin',
       desc: '',
       args: [],
     );
@@ -8840,10 +8970,10 @@ class S {
     );
   }
 
-  /// `It will appear once your customers start chatting with you`
+  /// `It will appear when someone starts chatting with you`
   String get noConversationDescription {
     return Intl.message(
-      'It will appear once your customers start chatting with you',
+      'It will appear when someone starts chatting with you',
       name: 'noConversationDescription',
       desc: '',
       args: [],
@@ -8861,10 +8991,10 @@ class S {
   }
 
   /// `Transaction failed`
-  String get transactionFailded {
+  String get transactionFailed {
     return Intl.message(
       'Transaction failed',
-      name: 'transactionFailded',
+      name: 'transactionFailed',
       desc: '',
       args: [],
     );
@@ -9528,6 +9658,16 @@ class S {
       name: 'by',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `Author: {author}`
+  String byAuthor(Object author) {
+    return Intl.message(
+      'Author: $author',
+      name: 'byAuthor',
+      desc: '',
+      args: [author],
     );
   }
 
@@ -10378,6 +10518,386 @@ class S {
     return Intl.message(
       'Size Guide',
       name: 'sizeGuide',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mobile Number already in use!`
+  String get mobileNumberInUse {
+    return Intl.message(
+      'Mobile Number already in use!',
+      name: 'mobileNumberInUse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please install the DIGITS: Wordpress Mobile Number Signup and Login plugin`
+  String get installDigitsPlugin {
+    return Intl.message(
+      'Please install the DIGITS: Wordpress Mobile Number Signup and Login plugin',
+      name: 'installDigitsPlugin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email already in use!`
+  String get emailAlreadyInUse {
+    return Intl.message(
+      'Email already in use!',
+      name: 'emailAlreadyInUse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Username is required`
+  String get usernameIsRequired {
+    return Intl.message(
+      'Username is required',
+      name: 'usernameIsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Country code is required`
+  String get countryCodeIsRequired {
+    return Intl.message(
+      'Country code is required',
+      name: 'countryCodeIsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mobile is required`
+  String get mobileIsRequired {
+    return Intl.message(
+      'Mobile is required',
+      name: 'mobileIsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Username already in use!`
+  String get usernameAlreadyInUse {
+    return Intl.message(
+      'Username already in use!',
+      name: 'usernameAlreadyInUse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This account can't delete`
+  String get cannotDeleteAccount {
+    return Intl.message(
+      'This account can\'t delete',
+      name: 'cannotDeleteAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The account you want to transfer to (email)`
+  String get sendTo {
+    return Intl.message(
+      'The account you want to transfer to (email)',
+      name: 'sendTo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter amount`
+  String get enterAmount {
+    return Intl.message(
+      'Enter amount',
+      name: 'enterAmount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Received money from {name}`
+  String receivedMoneyFrom(Object name) {
+    return Intl.message(
+      'Received money from $name',
+      name: 'receivedMoneyFrom',
+      desc: '',
+      args: [name],
+    );
+  }
+
+  /// `You only have {currentBalance} left in your wallet`
+  String insufficientBalanceMessage(Object currentBalance) {
+    return Intl.message(
+      'You only have $currentBalance left in your wallet',
+      name: 'insufficientBalanceMessage',
+      desc: '',
+      args: [currentBalance],
+    );
+  }
+
+  /// `Transfer money to {name}`
+  String transferMoneyTo(Object name) {
+    return Intl.message(
+      'Transfer money to $name',
+      name: 'transferMoneyTo',
+      desc: '',
+      args: [name],
+    );
+  }
+
+  /// `Error`
+  String get errorTitle {
+    return Intl.message(
+      'Error',
+      name: 'errorTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `TeraWallet`
+  String get teraWallet {
+    return Intl.message(
+      'TeraWallet',
+      name: 'teraWallet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error on getting post!`
+  String get errorOnGettingPost {
+    return Intl.message(
+      'Error on getting post!',
+      name: 'errorOnGettingPost',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You have no posts`
+  String get youHaveNoPost {
+    return Intl.message(
+      'You have no posts',
+      name: 'youHaveNoPost',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You don't have permission to create Post`
+  String get youDontHavePermissionToCreatePost {
+    return Intl.message(
+      'You don\'t have permission to create Post',
+      name: 'youDontHavePermissionToCreatePost',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The user is not found`
+  String get userNotFound {
+    return Intl.message(
+      'The user is not found',
+      name: 'userNotFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Random`
+  String get random {
+    return Intl.message(
+      'Random',
+      name: 'random',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your username`
+  String get enterYourUsername {
+    return Intl.message(
+      'Enter your username',
+      name: 'enterYourUsername',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Username is invalid`
+  String get usernameInvalid {
+    return Intl.message(
+      'Username is invalid',
+      name: 'usernameInvalid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `E-mail address is invalid`
+  String get emailAddressInvalid {
+    return Intl.message(
+      'E-mail address is invalid',
+      name: 'emailAddressInvalid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No payment methods are available.`
+  String get noPaymentMethodsAvailable {
+    return Intl.message(
+      'No payment methods are available.',
+      name: 'noPaymentMethodsAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No Comments`
+  String get noComments {
+    return Intl.message(
+      'No Comments',
+      name: 'noComments',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Free`
+  String get free {
+    return Intl.message(
+      'Free',
+      name: 'free',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete conversation`
+  String get deleteConversation {
+    return Intl.message(
+      'Delete conversation',
+      name: 'deleteConversation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Need help?`
+  String get needHelp {
+    return Intl.message(
+      'Need help?',
+      name: 'needHelp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Block user`
+  String get blockUser {
+    return Intl.message(
+      'Block user',
+      name: 'blockUser',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unblock user`
+  String get unblockUser {
+    return Intl.message(
+      'Unblock user',
+      name: 'unblockUser',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User has been blocked`
+  String get userHasBeenBlocked {
+    return Intl.message(
+      'User has been blocked',
+      name: 'userHasBeenBlocked',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You can't send messages to this user`
+  String get cannotSendMessage {
+    return Intl.message(
+      'You can\'t send messages to this user',
+      name: 'cannotSendMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You won't be able to send and receive messages from this user.`
+  String get willNotSendAndReceiveMessage {
+    return Intl.message(
+      'You won\'t be able to send and receive messages from this user.',
+      name: 'willNotSendAndReceiveMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you want to unblock this user?`
+  String get doYouWantToUnblock {
+    return Intl.message(
+      'Do you want to unblock this user?',
+      name: 'doYouWantToUnblock',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Block`
+  String get block {
+    return Intl.message(
+      'Block',
+      name: 'block',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unblock`
+  String get unblock {
+    return Intl.message(
+      'Unblock',
+      name: 'unblock',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error: {message}`
+  String error(Object message) {
+    return Intl.message(
+      'Error: $message',
+      name: 'error',
+      desc: '',
+      args: [message],
+    );
+  }
+
+  /// `Transaction failed`
+  String get transactionFailded {
+    return Intl.message(
+      'Transaction failed',
+      name: 'transactionFailded',
       desc: '',
       args: [],
     );

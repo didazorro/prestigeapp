@@ -25,7 +25,7 @@ class BottomSheetSmartChat extends StatefulWidget {
 
 class _BottomSheetSmartChatState extends State<BottomSheetSmartChat>
     with ChatMixin, ScaleAnimationMixin, SingleTickerProviderStateMixin {
-  List<Map> get optionData => widget.options ?? config.smartChat;
+  List<Map> get optionData => widget.options ?? config.kListSmartChat;
 
   @override
   void initState() {
@@ -57,7 +57,7 @@ class _BottomSheetSmartChatState extends State<BottomSheetSmartChat>
     return GestureDetector(
       child: icon,
       onTap: () async {
-        if (config.kConfigChat.useRealtimeChat &&
+        if (config.kConfigChat.realtimeChatConfig.enable &&
                 Services().firebase.isEnabled ||
             ServerConfig().isBuilder) {
           final userModel = Provider.of<UserModel>(context, listen: false);
@@ -74,15 +74,12 @@ class _BottomSheetSmartChatState extends State<BottomSheetSmartChat>
           return;
         }
 
-        if (Services()
-            .chatServices
-            .supportChatProviders
-            .keys
-            .map((e) => e.toString())
-            .contains(appUrl)) {
+        final isExist =
+            supportChatProviders.keys.map((e) => e.toString()).contains(appUrl);
+        if (isExist) {
           await Services()
               .chatServices
-              .showChatScreen(appUrl.toChatProviders());
+              .showChatScreen(context, appUrl.toChatProvider());
           return;
         }
 
@@ -118,18 +115,13 @@ class _BottomSheetSmartChatState extends State<BottomSheetSmartChat>
   List<Map> getSmartChatOptions() {
     final result = [];
     for (var i = 0; i < optionData.length; i++) {
-      if (Services()
-          .chatServices
-          .supportChatProviders
-          .keys
-          .map((e) => e.toString())
-          .contains(optionData[i]['app'])) {
-        if (Services()
-                .chatServices
-                .supportChatProviders[
-                    '${optionData[i]['app']}'.toChatProviders()]
-                ?.enable ??
-            false) {
+      final app = optionData[i]['app']?.toString();
+      final isExist =
+          supportChatProviders.keys.map((e) => e.toString()).contains(app);
+      if (isExist) {
+        final chatProvider = '$app'.toChatProvider();
+        final isEnabled = supportChatProviders[chatProvider]?.enable ?? false;
+        if (isEnabled) {
           result.add({
             'app': optionData[i]['app'],
             'description': optionData[i]['description'] ?? '',

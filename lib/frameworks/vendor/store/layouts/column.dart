@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../../common/config.dart';
+import '../../../../common/constants.dart';
+import '../../../../common/tools/image_tools.dart';
 import '../../../../widgets/common/flux_image.dart';
 import 'store_grid_style_layout.dart';
 
@@ -21,13 +23,18 @@ class ColumnStores extends StatelessWidget {
       childAspectRatio: 0.75,
       searchName: searchName ?? '',
       itemBuilder: (store, index) {
+        final bannerUrl = store.banner ?? kDefaultStoreImage;
+
         return Stack(
           fit: StackFit.expand,
           children: <Widget>[
             LayoutBuilder(builder: (context, constraints) {
               return FluxImage(
-                imageUrl: store.banner ?? '',
-                fit: BoxFit.cover,
+                imageUrl: bannerUrl,
+                fit: ImageTools.boxFit(
+                  kVendorConfig.bannerFit,
+                  defaultValue: BoxFit.cover,
+                ),
                 width: constraints.maxWidth,
               );
             }),

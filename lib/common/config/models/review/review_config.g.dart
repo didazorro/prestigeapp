@@ -13,7 +13,7 @@ _$ReviewConfigImpl _$$ReviewConfigImplFromJson(Map<String, dynamic> json) =>
               ReviewServiceType.native,
       enableReview: json['enableReview'] as bool? ?? false,
       enableReviewImage: json['enableReviewImage'] as bool? ?? false,
-      maxImage: json['maxImage'] as int? ?? 2,
+      maxImage: (json['maxImage'] as num?)?.toInt() ?? 2,
       judgeConfig: json['judgeConfig'] == null
           ? const JudgeServiceConfig()
           : JudgeServiceConfig.fromJson(

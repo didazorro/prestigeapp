@@ -27,7 +27,7 @@ class FabCircleSmartChat extends StatefulWidget {
 class _FabCircleSmartChatState extends State<FabCircleSmartChat>
     with ChatMixin {
   @override
-  List<Map> get options => widget.options ?? config.smartChat;
+  List<Map> get options => widget.options ?? config.kListSmartChat;
 
   IconButton getIconButton(
     IconData? iconData,
@@ -47,7 +47,7 @@ class _FabCircleSmartChatState extends State<FabCircleSmartChat>
                 )
               : const SizedBox(),
       onPressed: () async {
-        if (config.kConfigChat.useRealtimeChat &&
+        if (config.kConfigChat.realtimeChatConfig.enable &&
                 Services().firebase.isEnabled ||
             ServerConfig().isBuilder) {
           final userModel = Provider.of<UserModel>(context, listen: false);
@@ -72,7 +72,7 @@ class _FabCircleSmartChatState extends State<FabCircleSmartChat>
             .contains(appUrl)) {
           await Services()
               .chatServices
-              .showChatScreen(appUrl.toChatProviders());
+              .showChatScreen(context, appUrl.toChatProvider());
           return;
         }
 

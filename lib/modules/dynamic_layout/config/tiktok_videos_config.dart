@@ -37,7 +37,7 @@ class TikTokVideosConfig {
   });
 
   TikTokVideosConfig.fromJson(dynamic json) {
-    username = json['username'];
+    username = json['username'] ?? '';
     uid = json['uid'] ?? '';
     secUid = json['secUid'] ?? '';
     avatarUrl = json['avatarUrl'] ?? '';

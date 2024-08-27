@@ -1,7 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:fstore/common/tools/gravatar.dart';
+import 'package:fstore/common/tools/tools.dart';
 import 'package:fstore/models/index.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -126,11 +128,10 @@ class ChatMessageBubble extends StatelessWidget {
                                   .withOpacity(0.12),
                           borderRadius: _getBorderRadius(isMe),
                         ),
-                        child: Text(
-                          chatMessage.text,
-                          style: const TextStyle(
-                            fontSize: 16.0,
-                          ),
+                        child: SelectableLinkify(
+                          onOpen: (link) => Tools.launchURL(link.url),
+                          text: chatMessage.text,
+                          options: const LinkifyOptions(humanize: false),
                         ),
                       ),
                     ),

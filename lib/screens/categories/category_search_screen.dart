@@ -158,6 +158,7 @@ class _SearchCategoryItem extends StatelessWidget {
           cateId: category.id,
           cateName: category.name,
         ),
+        context: context,
       ),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),

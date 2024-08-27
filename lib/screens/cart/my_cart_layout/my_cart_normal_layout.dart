@@ -258,7 +258,11 @@ class _MyCartNormalLayoutState extends State<MyCartNormalLayout>
                                             context,
                                             widget.enabledTextBoxQuantity),
                                       ),
-                                    const ShoppingCartSummary(),
+                                    const Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 16, vertical: 8),
+                                      child: ShoppingCartSummary(),
+                                    ),
                                     if (totalCartQuantity == 0)
                                       const EmptyCart(),
                                     if (errMsg.isNotEmpty)

@@ -56,13 +56,13 @@ envPropsFile = rootProject.file('../configs/env.props')
 envPropertiesFile = rootProject.file('../configs/env.properties')
 
 if (envPropsFile.exists()) {
-    println "🔧 Loading configs from configs/env.props..."
+    println "🔧 Loading configs from configs/env.props...\n"
     envPropsFile.withReader('UTF-8') { reader ->
         envProperties.load(reader)
     }
 } else {
     if (envPropertiesFile.exists()) {
-        println "🔧 Loading configs from configs/env.properties..."
+        println "🔧 Loading configs from configs/env.properties...\n"
         envPropertiesFile.withReader('UTF-8') { reader ->
             envProperties.load(reader)
         }
@@ -89,12 +89,12 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    tasks.withType(JavaCompile) {
+    tasks.withType(JavaCompile).configureEach {
         options.warnings = false
     }
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId envProperties['androidPackageName']
+        applicationId envProperties.getProperty('androidPackageName', '')
         minSdkVersion 23
         targetSdkVersion 34
 
@@ -109,33 +109,47 @@ android {
         // Un-comment to reduce build size.
         resConfigs "en"
 
-        // // Zoho SalesIQ Mobilisten
-        // Comment `resConfigs "en"` to fix Zoho SaleIQ not support
-        // multi-language on Android.
-        // Un-comment to reduce build size.
-        resConfigs "en"
-
+        // Using `manifestPlaceholders` will replace the param on
+        // `AndroidManifest.xml` file with the correct value.
+        // For example: <meta-data android:name="default-url"
+        // android:value="${websiteUrl}" />
+        // will be <meta-data android:name="default-url" android:value="inspireui.com" />
         manifestPlaceholders += [
-            envatoPurchaseCode: envProperties['envatoPurchaseCode'],
-            websiteUrl: envProperties['websiteUrl'],
-            websiteDomain: envProperties['websiteDomain'],
-            customScheme: envProperties['customScheme'],
-            googleApiKeyAndroid: envProperties['googleApiKeyAndroid'],
-            adMobAppIdAndroid: envProperties['adMobAppIdAndroid'],
-            facebookClientToken: envProperties['facebookClientToken'],
-            facebookLoginProtocolScheme: envProperties['facebookLoginProtocolScheme']
+                envatoPurchaseCode           : envProperties.getProperty('envatoPurchaseCode', ''),
+                websiteUrl                   : envProperties.getProperty('websiteUrl', ''),
+                websiteDomain                : envProperties.getProperty('websiteDomain', ''),
+                customScheme                 : envProperties.getProperty('customScheme', ''),
+                googleApiKeyAndroid          : envProperties.getProperty('googleApiKeyAndroid', ''),
+                adMobAppIdAndroid            : envProperties.getProperty('adMobAppIdAndroid', ''),
+                facebookClientToken          : envProperties.getProperty('facebookClientToken', ''),
+                facebookLoginProtocolScheme  : envProperties.getProperty('facebookLoginProtocolScheme', ''),
+                branchKeyLive                : envProperties.getProperty('branchKeyLive', ''),
+                branchKeyTest                : envProperties.getProperty('branchKeyTest', ''),
+                branchLiveLinkDomain         : envProperties.getProperty('branchLiveLinkDomain', ''),
+                branchLiveAlternateLinkDomain: envProperties.getProperty('branchLiveAlternateLinkDomain', ''),
+                branchTestLinkDomain         : envProperties.getProperty('branchTestLinkDomain', ''),
+                branchTestAlternateLinkDomain: envProperties.getProperty('branchTestAlternateLinkDomain', '')
         ]
 
-        resValue 'string', 'facebookAppId', envProperties['facebookAppId']
-        resValue 'string', 'app_name', envProperties['appName']
+        // If you use `resValue`, it will generate a resource of the type you
+        // specify into your app's res directory.
+        resValue 'string', 'facebookAppId', envProperties.getProperty('facebookAppId', '')
+
+        // Not sure why we need to use `appName` as resValue.
+        resValue 'string', 'app_name', envProperties.getProperty('appName', '')
+        // Notification color for Firebase
+        resValue 'color', 'notification_color', '#' + envProperties.getProperty('notificationColor', 'FF2EB0FE')
+
+        // Notification color for OneSignal
+        resValue 'string', 'onesignal_notification_accent_color', envProperties.getProperty('notificationColor', 'FF2EB0FE')
     }
 
     signingConfigs {
         release {
-            keyAlias envProperties['keyAlias']
-            keyPassword envProperties['keyPassword']
-            storeFile rootProject.file('../configs/' + envProperties['storeFile'])
-            storePassword envProperties['storePassword']
+            keyAlias envProperties.getProperty('keyAlias', '')
+            keyPassword envProperties.getProperty('keyPassword', '')
+            storeFile rootProject.file('../configs/' + envProperties.getProperty('storeFile', ''))
+            storePassword envProperties.getProperty('storePassword', '')
         }
     }
 
@@ -171,24 +185,45 @@ dependencies {
 
 googleServices { disableVersionCheck = true }
 
-task copyGoogleServices(type: Copy) {
+tasks.register('copyGoogleServices', Copy) {
     from '../../configs'
     include 'google-services.json'
     into '.'
 }
 
-task copyConfigFiles(type: Copy) {
+def notificationIcon = envProperties.getProperty('notificationIcon', '')
+tasks.register('copyNotificationIcon', Copy) {
+    from '../../configs/'
+    include notificationIcon
+    into './src/main/res/drawable/'
+    rename { String fileName ->
+        fileName.replace(notificationIcon, 'ic_stat_onesignal_default.png')
+    }
+    doLast {
+        def originalFile = rootProject.file('./src/main/res/drawable/' + notificationIcon)
+        if (originalFile.exists()) {
+            originalFile.delete()
+        }
+    }
+}
+
+tasks.register('copyConfigFiles', Copy) {
     from '../../configs/customized/'
     include '**'
     into '../../'
 }
 
+def notificationIconFile = rootProject.file('../configs/' + notificationIcon)
+if (notificationIcon && notificationIconFile.exists()) {
+    println "🔧 Copying configs/" + notificationIcon + " to android/app/src/main/res/drawable/ic_stat_onesignal_default.png"
+    preBuild.dependsOn(copyNotificationIcon)
+}
 
 println "🔧 Copying configs/google-services.json to android/app/google-services.json"
 preBuild.dependsOn(copyGoogleServices)
 
 println "🔧 Copying configs/customized to project..."
+preBuild.dependsOn(copyConfigFiles)
 
 println "\n🪄  Building " + envProperties['appName'] + "... 🪄\n"
 println "\n🔑 Signing with keystore " + envProperties['storeFile'] + "... 🔑\n"
-preBuild.dependsOn(copyConfigFiles)

@@ -81,6 +81,11 @@ class _VendorBasicInformationState extends State<VendorBasicInformation> {
 
   void _showModalBottomSheet({isLogo = false}) {
     final model = Provider.of<VendorOnBoardingModel>(context, listen: false);
+    final textStyle = Theme.of(context)
+        .textTheme
+        .bodySmall!
+        .copyWith(color: Theme.of(context).colorScheme.secondary);
+
     showModalBottomSheet(
         context: context,
         backgroundColor: Colors.transparent,
@@ -99,7 +104,7 @@ class _VendorBasicInformationState extends State<VendorBasicInformation> {
                         setState(() {});
                       }
                     },
-                    child: Text(S.of(context).takePicture)),
+                    child: Text(S.of(context).takePicture, style: textStyle)),
                 CupertinoActionSheetAction(
                     onPressed: () async {
                       Navigator.pop(context);
@@ -112,12 +117,16 @@ class _VendorBasicInformationState extends State<VendorBasicInformation> {
                         setState(() {});
                       }
                     },
-                    child: Text(S.of(context).chooseFromGallery)),
+                    child: Text(S.of(context).chooseFromGallery,
+                        style: textStyle)),
               ],
               cancelButton: CupertinoActionSheetAction(
                 onPressed: () => Navigator.of(context).pop(),
                 isDefaultAction: true,
-                child: Text(S.of(context).cancel),
+                child: Text(
+                  S.of(context).cancel,
+                  style: textStyle.apply(color: Colors.red),
+                ),
               ),
             ));
   }

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../common/config.dart';
@@ -209,8 +210,8 @@ class ProductVariation {
     attributes = list;
   }
 
-  ProductVariation.fromMagentoJson(
-      Map<String, dynamic> parsedJson, Product product) {
+  ProductVariation.fromMagentoJson(Map<String, dynamic> parsedJson,
+      Product product, Map<String, ProductAttribute>? allAttributesMap) {
     String? getCustomAttribute(customAttributes, attribute) {
       String? value;
       if (customAttributes != null && customAttributes.length > 0) {
@@ -280,8 +281,14 @@ class ProductVariation {
     for (var element in attributesConfig) {
       final item = getCustomAttribute(parsedJson['custom_attributes'], element);
       if (item != null) {
-        final attribute = Attribute.fromMagentoJson(
-            {'value': item, 'attribute_code': element});
+        var productAttribute = allAttributesMap?[element];
+        var productAttributeOption = productAttribute?.options
+            ?.firstWhereOrNull((e) => e['value'] == item);
+        final attribute = Attribute.fromMagentoJson({
+          'value': item,
+          'attribute_code': element,
+          'option_label': productAttributeOption?['label']
+        });
         attributeList.add(attribute);
         attributeMap[attribute.keyAtrr] = attribute;
       }
@@ -414,6 +421,73 @@ class ProductVariation {
     }
   }
 
+  ProductVariation.fromHaravanJson(Map json, Map product) {
+    id = json['id'].toString();
+    final regularPriceItem =
+        (double.parse((json['compare_at_price'] ?? 0.0).toString()));
+    regularPrice = regularPriceItem.toStringAsFixed(2);
+
+    final priceItem = double.parse((json['price'] ?? 0.0).toString());
+    salePrice = priceItem.toStringAsFixed(2);
+    price = priceItem.toStringAsFixed(2);
+
+    if (priceItem > 0 &&
+        regularPriceItem > 0 &&
+        priceItem != regularPriceItem) {
+      onSale = true;
+    } else {
+      onSale = false;
+    }
+
+    var inventoryQuantity = json['inventory_quantity'];
+    if (json['inventory_management'] == null) {
+      inStock = true;
+    } else if (inventoryQuantity is int) {
+      stockQuantity = inventoryQuantity;
+      inStock = (stockQuantity ?? 0) > 0;
+    }
+
+    /// Options
+    var attributeList = <Attribute>[];
+    var options = product['options'];
+    if (options != null && options is List) {
+      for (var i = 0; i < options.length; i++) {
+        final option = options[i];
+        final keyName = 'option${i + 1}';
+        final value = json[keyName];
+        final attr = Attribute.fromJson(
+          {
+            'id': option['id'],
+            'name': option['name'],
+            'option': value,
+          },
+        );
+
+        attributeList.add(attr);
+        attributeMap[option['name']] = attr;
+      }
+    }
+    attributes = attributeList;
+
+    /// Images
+    final imgId = json['image_id'];
+    if (imgId != null) {
+      var images = product['images'];
+      if (images != null && images is List) {
+        final img =
+            images.firstWhereOrNull((element) => element['id'] == imgId);
+        if (img != null) {
+          imageFeature = img['src'];
+        }
+      }
+    }
+
+    // if (images is List && images.isNotEmpty) {
+    //   imageFeature = apiLink(
+    //       'images/products/${json['id_product']}/${images.first['id']}');
+    // }
+  }
+
   /// Get product ID from mix String productID-ProductVariantID
   static String? cleanProductVariantID(productString) {
     return productString.contains('-') ? productString.split('-')[1] : null;
@@ -457,5 +531,16 @@ class ProductVariation {
   @override
   String toString() {
     return 'ProductVariation {id: $id, price: $price}';
+  }
+
+  String getNameAttribute(String key) {
+    if (ServerConfig().isWooType) {
+      return attributes
+              .firstWhereOrNull((element) => element.keyAtrr == key)
+              ?.name ??
+          key;
+    }
+
+    return key;
   }
 }

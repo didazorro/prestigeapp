@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:collection/collection.dart';
 import 'package:html_unescape/html_unescape.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
@@ -94,10 +95,10 @@ class Blog {
 
   Blog.fromShopifyJson(Map json)
       : id = json['id'],
-        author = json['authorV2']['name'],
+        author = json['authorV2']?['name'],
         title = json['title'],
         content = json['contentHtml'],
-        imageFeature = json['image']['url'],
+        imageFeature = json['image']?['url'],
         date = DateFormat.yMMMMd()
             .add_Hm()
             .format(DateTime.parse(json['publishedAt']).toLocal()),
@@ -145,25 +146,25 @@ class Blog {
       var imgMedia = json['_embedded']?['wp:featuredmedia'];
       if (imgMedia is List && imgMedia.isNotEmpty) {
         imageFeature =
-            imgMedia[0]['media_details']?['sizes']?['large']?['source_url'];
-        imageFeature ??= imgMedia[0]['source_url'];
+            imgMedia[0]?['media_details']?['sizes']?['large']?['source_url'];
+        imageFeature ??= imgMedia[0]?['source_url'];
       } else {
         imageFeature ??= (json['image'] ?? json['image_feature']);
       }
     }
 
     final author =
-        json['_embedded']?['author']?[0]['name'] ?? json['author_name'] ?? '';
+        json['_embedded']?['author']?[0]?['name'] ?? json['author_name'] ?? '';
     final date = Tools.formatDate(json['date']);
     final id = json['id'];
-    final title = HtmlUnescape().convert(json['title']['rendered']);
-    final subTitle = HtmlUnescape().convert(json['excerpt']['rendered']);
-    final content = json['content']['rendered'];
+    final title = HtmlUnescape().convert(json['title']?['rendered']);
+    final subTitle = HtmlUnescape().convert(json['excerpt']?['rendered']);
+    final content = json['content']?['rendered'];
     final categories = List.from(json['categories'] ?? []);
     final categoryId = categories.isNotEmpty ? categories.first : null;
-    final excerpt = HtmlUnescape().convert(json['excerpt']['rendered']);
+    final excerpt = HtmlUnescape().convert(json['excerpt']?['rendered']);
     final slug = json['slug'];
-    final authorImage = json['_embedded']?['author']?[0]['avatar_urls']
+    final authorImage = json['_embedded']?['author']?[0]?['avatar_urls']
             ?['48'] ??
         json['post_author_avatar_urls']?['48'];
     final link = json['link'];
@@ -204,19 +205,19 @@ class Blog {
   }
 
   factory Blog.fromNotionJson(Map json) {
-    var img = NotionDataTools.fromFile(json['properties']['Image']);
+    var img = NotionDataTools.fromFile(json['properties']?['Image']);
 
     try {
       var id = json['id'];
-      var title = HtmlUnescape()
-          .convert(NotionDataTools.fromTitle(json['properties']['Name']) ?? '');
+      var title = HtmlUnescape().convert(
+          NotionDataTools.fromTitle(json['properties']?['Name']) ?? '');
       var subTitle = json['subTitle'] ?? '';
       var date =
-          Tools.formatDate(json['properties']['Created']['created_time']);
+          Tools.formatDate(json['properties']?['Created']?['created_time']);
       var content = json['content'] ?? '';
-      var author = json['properties']['Author']?['created_by']['name'];
+      var author = json['properties']?['Author']?['created_by']?['name'];
       var authorImage =
-          json['properties']['Author']?['created_by']['avatar_url'];
+          json['properties']?['Author']?['created_by']?['avatar_url'];
 
       var imageFeature = (img?.isNotEmpty ?? false) ? img!.first : '';
       var categoryId = 0;
@@ -255,7 +256,7 @@ class Blog {
       var id = json['id'];
       var title = HtmlUnescape().convert(json['title'] ?? '');
       var subTitle = json['subTitle'] ?? '';
-      var date = Tools.formatDateToLocal(json['published_date']['date']);
+      var date = Tools.formatDateToLocal(json['published_date']?['date']);
       var content = json['body'] ?? '';
       var author = json['author'];
 
@@ -436,5 +437,39 @@ class Blog {
     /// Remove redundant URLs
     final audioList = matchesGroup.toSet().toList()..remove('');
     return audioList;
+  }
+
+  static List<Blog> parseBlogList(List response, [Map? config]) {
+    final list = <Blog>[];
+
+    final blogs = <Blog>[];
+    for (var item in response) {
+      blogs.add(Blog.fromJson(item));
+    }
+
+    /// sort include blog
+    final include = config?['include'];
+    final sortId = <String>[];
+    if (include != null) {
+      if (include is List && include.isNotEmpty) {
+        sortId.addAll(include.map((e) => e.toString()).toList());
+      } else if (include is String && include.isNotEmpty) {
+        sortId.addAll(include.split(','));
+      }
+    }
+
+    if (sortId.isNotEmpty) {
+      for (var id in sortId) {
+        final blog =
+            blogs.firstWhereOrNull((element) => element.id.toString() == id);
+        if (blog != null) {
+          list.add(blog);
+        }
+      }
+    } else {
+      list.addAll(blogs);
+    }
+
+    return list;
   }
 }

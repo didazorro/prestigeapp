@@ -178,7 +178,7 @@ class ProductSimpleView extends StatelessWidget with ActionButtonMixin {
                             const Spacer(),
                             if (productConfig.showQuantity)
                               SizedBox(
-                                width: 140,
+                                width: productConfig.showCartIcon ? 200 : 140,
                                 child: CartQuantity(
                                   product: item!,
                                   config: productConfig,

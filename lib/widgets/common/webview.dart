@@ -431,11 +431,12 @@ class _WebViewState extends State<WebView> with WebviewMixin, AppBarMixin {
           enableBackward: widget.enableBackward,
           enableClose: widget.enableClose,
           onClosed: widget.onClosed,
-          onUrlChanged: (String? url) {
+          onUrlChanged: (String? url, String? html, webViewController) {
             widget.onPageFinished?.call(url ?? '');
           },
           appBar: widget.appBar,
           showLoading: widget.showLoading,
+          showAppBar: widget.showAppBar,
         ),
       );
     }

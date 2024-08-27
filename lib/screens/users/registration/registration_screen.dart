@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -47,7 +49,7 @@ class _RegistrationScreenMobileState extends State<RegistrationScreenMobile> {
       GlobalKey<ScaffoldMessengerState>();
   final TextEditingController _emailController = TextEditingController();
 
-  String? firstName, lastName, emailAddress, phoneNumber, password;
+  String? firstName, lastName, emailAddress, username, phoneNumber, password;
   RegisterType? _registerType = RegisterType.customer;
   bool isChecked = true;
 
@@ -55,12 +57,31 @@ class _RegistrationScreenMobileState extends State<RegistrationScreenMobile> {
       kLoginSetting.showPhoneNumberWhenRegister;
   final bool requirePhoneNumberWhenRegister =
       kLoginSetting.requirePhoneNumberWhenRegister;
+  final bool requireUsernameWhenRegister =
+      kLoginSetting.requireUsernameWhenRegister;
+  bool isPlatformSupported = ![
+    ConfigType.bigCommerce,
+    ConfigType.notion,
+    ConfigType.shopify,
+    ConfigType.presta,
+    ConfigType.opencart,
+    ConfigType.magento,
+  ].contains(ServerConfig().type);
 
   final firstNameNode = FocusNode();
   final lastNameNode = FocusNode();
   final phoneNumberNode = FocusNode();
   final emailNode = FocusNode();
   final passwordNode = FocusNode();
+  final usernameNode = FocusNode();
+
+  Future<bool> _showDialogUnderApproval() {
+    return context.showFluxDialogText(
+      title: S.of(context).accountApprovalTitle,
+      body: S.of(context).accountIsPendingApproval,
+      primaryAction: S.of(context).ok,
+    );
+  }
 
   void _welcomeDiaLog(User user) {
     Provider.of<CartModel>(context, listen: false).setUser(user);
@@ -126,6 +147,13 @@ class _RegistrationScreenMobileState extends State<RegistrationScreenMobile> {
     }
   }
 
+  Future<void> _onRegisterSuccess(User user) async {
+    if (!user.isVender && _registerType == RegisterType.vendor) {
+      await _showDialogUnderApproval();
+    }
+    _welcomeDiaLog(user);
+  }
+
   @override
   void dispose() {
     _emailController.dispose();
@@ -134,6 +162,7 @@ class _RegistrationScreenMobileState extends State<RegistrationScreenMobile> {
     emailNode.dispose();
     passwordNode.dispose();
     phoneNumberNode.dispose();
+    usernameNode.dispose();
     super.dispose();
   }
 
@@ -156,16 +185,26 @@ class _RegistrationScreenMobileState extends State<RegistrationScreenMobile> {
     String? lastName,
     String? phoneNumber,
     String? emailAddress,
+    String? username,
     String? password,
     bool? isVendor,
   }) async {
-    if (firstName == null ||
-        lastName == null ||
-        emailAddress == null ||
-        password == null ||
-        (showPhoneNumberWhenRegister &&
-            requirePhoneNumberWhenRegister &&
-            phoneNumber == null)) {
+    final invalidFirstName = firstName?.trim().isEmpty ?? true;
+    final invalidLastName = lastName?.trim().isEmpty ?? true;
+    final invalidUsername = (requireUsernameWhenRegister &&
+        (username?.trim().isEmpty ?? true && isPlatformSupported));
+    final invalidEmail = emailAddress?.trim().isEmpty ?? true;
+    final invalidPassword = password?.isEmpty ?? true;
+    final invalidPhoneNumber = (showPhoneNumberWhenRegister &&
+        requirePhoneNumberWhenRegister &&
+        (phoneNumber?.trim().isEmpty ?? true));
+
+    if (invalidFirstName ||
+        invalidLastName ||
+        invalidUsername ||
+        invalidEmail ||
+        invalidPassword ||
+        invalidPhoneNumber) {
       _showMessage(S.of(context).pleaseInputFillAllFields);
     } else if (isChecked == false) {
       _showMessage(S.of(context).pleaseAgreeTerms);
@@ -175,18 +214,19 @@ class _RegistrationScreenMobileState extends State<RegistrationScreenMobile> {
         return;
       }
 
-      if (password.length < 8) {
+      if (password == null || password.length < 8) {
         _showMessage(S.of(context).errorPasswordFormat);
         return;
       }
 
       await Provider.of<UserModel>(context, listen: false).createUser(
-        username: emailAddress,
+        username: username,
+        email: emailAddress,
         password: password,
         firstName: firstName,
         lastName: lastName,
         phoneNumber: phoneNumber,
-        success: _welcomeDiaLog,
+        success: _onRegisterSuccess,
         fail: _showMessage,
         isVendor: isVendor,
       );
@@ -254,7 +294,9 @@ class _RegistrationScreenMobileState extends State<RegistrationScreenMobile> {
                               focusNode: lastNameNode,
                               nextNode: showPhoneNumberWhenRegister
                                   ? phoneNumberNode
-                                  : emailNode,
+                                  : requireUsernameWhenRegister
+                                      ? usernameNode
+                                      : emailNode,
                               showCancelIcon: true,
                               textCapitalization: TextCapitalization.words,
                               onChanged: (value) => lastName = value,
@@ -263,16 +305,17 @@ class _RegistrationScreenMobileState extends State<RegistrationScreenMobile> {
                                 hintText: S.of(context).enterYourLastName,
                               ),
                             ),
-                            if (showPhoneNumberWhenRegister)
+                            if (showPhoneNumberWhenRegister) ...[
                               const SizedBox(height: 20.0),
-                            if (showPhoneNumberWhenRegister)
                               CustomTextField(
                                 key: const Key('registerPhoneField'),
                                 focusNode: phoneNumberNode,
                                 autofillHints: const [
                                   AutofillHints.telephoneNumber
                                 ],
-                                nextNode: emailNode,
+                                nextNode: requireUsernameWhenRegister
+                                    ? usernameNode
+                                    : emailNode,
                                 showCancelIcon: true,
                                 onChanged: (value) => phoneNumber = value,
                                 decoration: InputDecoration(
@@ -281,6 +324,23 @@ class _RegistrationScreenMobileState extends State<RegistrationScreenMobile> {
                                 ),
                                 keyboardType: TextInputType.phone,
                               ),
+                            ],
+                            if (requireUsernameWhenRegister &&
+                                isPlatformSupported) ...[
+                              const SizedBox(height: 20.0),
+                              CustomTextField(
+                                key: const Key('registerUsernameField'),
+                                focusNode: usernameNode,
+                                autofillHints: const [AutofillHints.username],
+                                nextNode: emailNode,
+                                onChanged: (value) => username = value,
+                                keyboardType: TextInputType.emailAddress,
+                                decoration: InputDecoration(
+                                  labelText: S.of(context).username,
+                                  hintText: S.of(context).enterYourUsername,
+                                ),
+                              ),
+                            ],
                             const SizedBox(height: 20.0),
                             CustomTextField(
                               key: const Key('registerEmailField'),
@@ -291,8 +351,9 @@ class _RegistrationScreenMobileState extends State<RegistrationScreenMobile> {
                               onChanged: (value) => emailAddress = value,
                               keyboardType: TextInputType.emailAddress,
                               decoration: InputDecoration(
-                                  labelText: S.of(context).enterYourEmail),
-                              hintText: S.of(context).enterYourEmail,
+                                labelText: S.of(context).email,
+                                hintText: S.of(context).enterYourEmail,
+                              ),
                             ),
                             const SizedBox(height: 20.0),
                             CustomTextField(
@@ -303,7 +364,7 @@ class _RegistrationScreenMobileState extends State<RegistrationScreenMobile> {
                               obscureText: true,
                               onChanged: (value) => password = value,
                               decoration: InputDecoration(
-                                labelText: S.of(context).enterYourPassword,
+                                labelText: S.of(context).password,
                                 hintText: S.of(context).enterYourPassword,
                               ),
                             ),
@@ -387,6 +448,7 @@ class _RegistrationScreenMobileState extends State<RegistrationScreenMobile> {
                                               ),
                                             ),
                                             forceRootNavigator: true,
+                                            context: context,
                                           ),
                                   ),
                                 ],
@@ -410,6 +472,7 @@ class _RegistrationScreenMobileState extends State<RegistrationScreenMobile> {
                                             firstName: firstName,
                                             lastName: lastName,
                                             phoneNumber: phoneNumber,
+                                            username: username,
                                             emailAddress: emailAddress,
                                             password: password,
                                             isVendor: _registerType ==

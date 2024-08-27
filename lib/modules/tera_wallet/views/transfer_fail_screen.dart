@@ -60,7 +60,7 @@ class TransferFailScreen extends StatelessWidget {
                             const SizedBox(height: 24),
                             Center(
                                 child: Text(
-                              '${S.of(context).transferFailed}!',
+                              S.of(context).transferFailed,
                               style: Theme.of(context).textTheme.titleMedium,
                             )),
                             const SizedBox(height: 8),

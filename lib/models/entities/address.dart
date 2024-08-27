@@ -10,6 +10,8 @@ class Address {
   String? apartment;
   String? block;
   String? city;
+  String? district;
+  String? ward;
   String? state;
   String? country;
   String? countryId;
@@ -28,6 +30,8 @@ class Address {
     this.apartment,
     this.block,
     this.city,
+    this.district,
+    this.ward,
     this.state,
     this.country,
     this.phoneNumber,
@@ -131,6 +135,27 @@ class Address {
       address['wcfmmp_user_location_lng'] = longitude;
     }
     return address;
+  }
+
+  Address.fromHaravanJson(Map parsedJson) {
+    firstName = parsedJson['first_name'] ?? '';
+    lastName = parsedJson['last_name'] ?? '';
+    apartment = parsedJson['company'] ?? '';
+    street = parsedJson['address1'] ?? '';
+    block = parsedJson['address2'] ?? '';
+    city = parsedJson['city'] ?? '';
+    state = parsedJson['province'] ?? '';
+    district = parsedJson['district'] ?? '';
+    ward = parsedJson['ward'] ?? '';
+    country = parsedJson['country'] ?? '';
+    email = parsedJson['email'] ?? '';
+    isShow = parsedJson['isShow'] is bool ? parsedJson['isShow'] : true;
+    // final alphanumeric = RegExp(r'^[a-zA-Z0-9]+$');
+    // if (alphanumeric.hasMatch(firstName!)) {
+    //   phoneNumber = firstName;
+    // }
+    phoneNumber = parsedJson['phone'] ?? '';
+    zipCode = parsedJson['zip'] ?? '';
   }
 
   Address.fromLocalJson(Map json) {
@@ -334,6 +359,8 @@ class Address {
         block ?? '',
         city ?? '',
         state ?? '',
+        district ?? '',
+        ward ?? '',
         zipCode ?? '',
         country ?? '',
       ].join(' ').trim();
@@ -352,8 +379,20 @@ class Address {
       info.add(apartment);
     }
 
+    if (ward?.isNotEmpty ?? false) {
+      info.add(ward);
+    }
+
+    if (district?.isNotEmpty ?? false) {
+      info.add(district);
+    }
+
     if (city?.isNotEmpty ?? false) {
       info.add(city);
+    }
+
+    if (state?.isNotEmpty ?? false) {
+      info.add(state);
     }
 
     if (country?.isNotEmpty ?? false) {
@@ -393,5 +432,19 @@ class Address {
             firstName != address.firstName ||
             lastName != address.lastName) ==
         false;
+  }
+
+  String toOrderHistoryAddress() {
+    final address = [
+      if (city?.isNotEmpty ?? false) city,
+      if (country?.isNotEmpty ?? false) country,
+    ];
+
+    var fullInfo = [
+      if (firstName?.isNotEmpty ?? false) firstName,
+      if (address.isNotEmpty) address.join(', ')
+    ];
+
+    return fullInfo.isNotEmpty ? fullInfo.join(' | ') : '';
   }
 }

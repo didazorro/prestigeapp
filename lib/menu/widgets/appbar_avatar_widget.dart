@@ -47,7 +47,7 @@ class AvatarWidget extends StatelessWidget {
           imageUrl: avatar,
           width: width ?? 50,
           height: height ?? 50,
-          fit: BoxFit.cover,
+          fit: fit,
           color: imageUrl.isNotEmpty ? null : imageColor,
         ),
       );

@@ -3,10 +3,13 @@ import 'package:flutter/services.dart';
 
 import 'colors.dart';
 import 'fonts.dart';
+import 'theme_helper.dart';
 
 ThemeData buildDarkTheme(String? language,
     [fontFamily, fontHeader, bool? useMaterial3]) {
   final base = ThemeData.dark(useMaterial3: useMaterial3);
+  final themeFont = ThemeHelper.getFont(fontFamily);
+
   return base.copyWith(
     snackBarTheme: SnackBarThemeData(
       backgroundColor: Colors.black,
@@ -14,7 +17,7 @@ ThemeData buildDarkTheme(String? language,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
-      contentTextStyle: const TextStyle(color: Colors.white),
+      contentTextStyle: themeFont,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
@@ -22,7 +25,7 @@ ThemeData buildDarkTheme(String? language,
         minimumSize: const Size(120, 36),
         padding: EdgeInsets.zero,
         elevation: 1,
-        textStyle: const TextStyle(
+        textStyle: themeFont.copyWith(
           fontSize: 16,
           fontWeight: FontWeight.w400,
         ),
@@ -35,7 +38,7 @@ ThemeData buildDarkTheme(String? language,
       style: OutlinedButton.styleFrom(
         minimumSize: const Size(64, 36),
         padding: EdgeInsets.zero,
-        textStyle: const TextStyle(
+        textStyle: themeFont.copyWith(
           fontSize: 16,
           fontWeight: FontWeight.w400,
         ),
@@ -61,14 +64,14 @@ ThemeData buildDarkTheme(String? language,
     primaryColor: kDarkBG,
     primaryColorLight: kDarkBgLight,
     scaffoldBackgroundColor: kDarkBG,
-    appBarTheme: const AppBarTheme(
+    appBarTheme: AppBarTheme(
       elevation: 0,
-      titleTextStyle: TextStyle(
+      titleTextStyle: themeFont.copyWith(
         color: kLightBG,
         fontSize: 18.0,
         fontWeight: FontWeight.w800,
       ),
-      iconTheme: IconThemeData(
+      iconTheme: const IconThemeData(
         color: kDarkAccent,
       ),
       systemOverlayStyle: SystemUiOverlayStyle.light,
@@ -79,12 +82,12 @@ ThemeData buildDarkTheme(String? language,
       TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
       TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
     }),
-    tabBarTheme: const TabBarTheme(
+    tabBarTheme: TabBarTheme(
       labelColor: Colors.white,
       unselectedLabelColor: Colors.white,
       labelPadding: EdgeInsets.zero,
-      labelStyle: TextStyle(fontSize: 13),
-      unselectedLabelStyle: TextStyle(fontSize: 13),
+      labelStyle: themeFont.copyWith(fontSize: 13),
+      unselectedLabelStyle: themeFont.copyWith(fontSize: 13),
     ),
     dialogBackgroundColor: kDarkBG,
     colorScheme: kDarkColorScheme

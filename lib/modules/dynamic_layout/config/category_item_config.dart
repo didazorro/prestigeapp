@@ -95,6 +95,8 @@ class CategoryItemConfig {
     map['order'] = order;
     map['onSale'] = onSale;
     map['featured'] = isFeatured;
+    map['showText'] = showText;
+    map['description'] = description;
     return map;
   }
 

@@ -113,6 +113,7 @@ class _ScannerIndexState extends State<ScannerIndex> {
       await FluxNavigate.pushNamed(
         route,
         arguments: arg,
+        context: context,
       );
     }
     _isScanning = false;

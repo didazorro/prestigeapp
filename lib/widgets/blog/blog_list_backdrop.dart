@@ -199,7 +199,11 @@ class _BlogListBackdropState extends State<BlogListBackdrop>
           item: blogsList[i],
           width: widthContent,
           margin: 8.0,
-          onTap: () => onTapBlog(blog: blogsList[i], blogs: blogsList),
+          onTap: () => onTapBlog(
+            blog: blogsList[i],
+            blogs: blogsList,
+            context: context,
+          ),
         );
       },
     );
@@ -214,7 +218,11 @@ class _BlogListBackdropState extends State<BlogListBackdrop>
       itemBuilder: (_, index) => BlogCard(
         item: blogs[index],
         width: widthContent,
-        onTap: () => onTapBlog(blog: blogs[index], blogs: blogs),
+        onTap: () => onTapBlog(
+          blog: blogs[index],
+          blogs: blogs,
+          context: context,
+        ),
       ),
     );
   }
@@ -238,7 +246,11 @@ class _BlogListBackdropState extends State<BlogListBackdrop>
       itemBuilder: (context, index) => BlogCard(
         item: blogs[index],
         width: MediaQuery.of(context).size.width / 2,
-        onTap: () => onTapBlog(blog: blogs[index], blogs: blogs),
+        onTap: () => onTapBlog(
+          blog: blogs[index],
+          blogs: blogs,
+          context: context,
+        ),
       ),
       // staggeredTileBuilder: (index) => const StaggeredTile.fit(2),
     );

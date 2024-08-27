@@ -180,7 +180,7 @@ class BannerConfig {
     map['padding'] = padding;
     map['text'] = text;
     map['title'] = title?.toJson();
-    map['enableParallax'] = enableParallax;
+    map['parallax'] = enableParallax;
     map['parallaxImageRatio'] = parallaxImageRatio;
     map['isHorizontal'] = isHorizontal;
     map['boxShadow'] = boxShadow?.toJson();
@@ -271,9 +271,7 @@ class BannerItemConfig {
     bannerWithProduct = json['bannerWithProduct'] ?? false;
     defaultShowProduct = json['defaultShowProduct'] ?? false;
     products = List<String>.from(json['products'] ?? []);
-    productLength = products.isNotEmpty
-        ? products.length
-        : (int.tryParse(json['productLength'].toString()) ?? 3);
+    productLength = int.tryParse(json['productLength'].toString()) ?? 3;
     showSubcategory = json['showSubcategory'] ?? false;
     video = json['video'] ?? '';
     // ignore: prefer_initializing_formals
@@ -297,9 +295,7 @@ class BannerItemConfig {
     map['showSubcategory'] = showSubcategory;
     map['video'] = video;
     map['products'] = List<String>.from(products);
-    if (products.isNotEmpty) {
-      map['productLength'] = products.length;
-    }
+    map['productLength'] = productLength;
     map.removeWhere((key, value) => value == null);
     return map;
   }

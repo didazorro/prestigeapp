@@ -1,5 +1,6 @@
 import '../../common/constants.dart';
 import '../../common/tools.dart';
+import '../../services/service_config.dart';
 
 class ProductAttribute {
   String? id;
@@ -18,11 +19,11 @@ class ProductAttribute {
   /// For BigCommerce.
   String? type;
 
-  // TODO: Currently this value is used in many places for many different
-  // purposes, but has not completely resolved the problem.
-  // So temporarily return to the old value. Will fix in the next version
-  // Code: String? get keyAtrr => ServerConfig().isWooType ? '[${id ?? name}]' : name;
-  String? get keyAtrr => name;
+  String? get keyAtrr => ServerConfig().isWooType
+      ? (['null', '0'].contains(id.toString())
+          ? label?.toLowerCase()
+          : '[${id!}]')
+      : name;
 
   ProductAttribute({
     this.id,
@@ -176,7 +177,7 @@ class Attribute {
   String? name;
   String? option;
 
-  /// For BigCommerce.
+  /// For BigCommerce & Magento.
   String? optionLabel;
 
   Attribute({
@@ -186,11 +187,11 @@ class Attribute {
     this.optionLabel,
   });
 
-  // TODO: Currently this value is used in many places for many different
-  // purposes, but has not completely resolved the problem.
-  // So temporarily return to the old value. Will fix in the next version
-  // Code: String? get keyAtrr => ServerConfig().isWooType ? '[${id ?? name}]' : name;
-  String? get keyAtrr => name;
+  String? get keyAtrr => ServerConfig().isWooType
+      ? (['null', '0'].contains(id.toString())
+          ? name?.toLowerCase()
+          : '[${id!}]')
+      : name;
 
   Attribute.fromJson(Map parsedJson) {
     id = parsedJson['id'];
@@ -202,12 +203,14 @@ class Attribute {
     id = int.parse(parsedJson['value']);
     name = parsedJson['attribute_code'];
     option = parsedJson['value'];
+    optionLabel = parsedJson['option_label'];
   }
 
   Attribute.fromLocalJson(Map parsedJson) {
     id = parsedJson['id'];
     name = parsedJson['name'];
     option = parsedJson['option'];
+    optionLabel = parsedJson['option_label'];
   }
 
   Attribute.fromShopifyJson(Map parsedJson) {
@@ -230,7 +233,12 @@ class Attribute {
   }
 
   Map<String, dynamic> toJson() {
-    return {'id': id, 'name': name, 'option': option};
+    return {
+      'id': id,
+      'name': name,
+      'option': option,
+      'option_label': optionLabel
+    };
   }
 
   @override

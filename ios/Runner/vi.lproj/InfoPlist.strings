@@ -1,7 +1,7 @@
 NSCameraUsageDescription = "Ứng dụng cần quyền truy cập máy ảnh để quét mã QR hoặc mã vạch";
-NSLocationAlwaysUsageDescription = "Cần quyền truy cập vị trí";
-NSLocationWhenInUseUsageDescription = "Cần quyền truy cập vị trí để giao hàng";
-NSLocationAlwaysAndWhenInUseUsageDescription = "Cần quyền truy cập vị trí để giao hàng";
+NSLocationAlwaysAndWhenInUseUsageDescription = "Ứng dụng này cần truy cập vào vị trí của bạn để hiển thị trên màn hình bản đồ và cung cấp dịch vụ dựa trên vị trí";
+NSLocationAlwaysUsageDescription = "Ứng dụng này cần truy cập vào vị trí của bạn để hiển thị trên màn hình bản đồ và cung cấp dịch vụ dựa trên vị trí";
+NSLocationWhenInUseUsageDescription = "Ứng dụng này cần truy cập vào vị trí của bạn để hiển thị trên màn hình bản đồ và cung cấp dịch vụ dựa trên vị trí";
 NSMicrophoneUsageDescription = "Cần quyền truy cập mic để ghi âm tin nhắn thoại";
 NSPhotoLibraryAddUsageDescription = "Cần quyền truy cập thư viện để lưu lại hình ảnh";
 NSPhotoLibraryUsageDescription = "Ứng dụng cần truy cập vào thư viện ảnh để chọn ảnh đại diện cho tính năng chat.";

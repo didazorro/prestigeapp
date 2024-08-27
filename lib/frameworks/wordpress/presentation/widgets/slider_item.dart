@@ -73,6 +73,7 @@ class _SliderItemState extends State<SliderItem> with BlogActionButtonMixin {
                       config: configJson,
                       data: null,
                     ),
+                    context: context,
                   ),
                 ),
                 const _SliderItemSkeleton(),
@@ -89,7 +90,11 @@ class _SliderItemState extends State<SliderItem> with BlogActionButtonMixin {
                 index: index,
                 imageBorder: config.imageBorder,
                 context: context,
-                onTap: () => onTapBlog(blog: value[index], blogs: value),
+                onTap: () => onTapBlog(
+                  blog: value[index],
+                  blogs: value,
+                  context: context,
+                ),
               );
             },
           );
@@ -105,6 +110,7 @@ class _SliderItemState extends State<SliderItem> with BlogActionButtonMixin {
                     config: configJson,
                     data: null,
                   ),
+                  context: context,
                 ),
               ),
               value.isEmpty

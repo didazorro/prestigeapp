@@ -213,6 +213,7 @@ class _StateGridSubCategory extends State<GridSubCategory> {
                         cateId: categories[i].id,
                         cateName: categories[i].name,
                       ),
+                      context: context,
                     ),
                     child: Container(
                       width: gridSize,
@@ -329,6 +330,7 @@ class _StateGridSubCategory extends State<GridSubCategory> {
         cateId: widget.parentCategory!.id,
         cateName: widget.parentCategory!.name,
       ),
+      context: context,
     );
   }
 }

@@ -4,10 +4,12 @@ import 'dart:io' as file;
 import 'dart:typed_data';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:get_thumbnail_video/index.dart';
+import 'package:get_thumbnail_video/video_thumbnail.dart';
+import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
@@ -237,6 +239,77 @@ class ImageTools {
     }
     return base64.toString();
   }
+
+  static Future<Uint8List?> getThumbnailFromVideo(
+    String videoPath, {
+    double? maxWidth,
+    double? maxHeight,
+    int quality = 75,
+  }) async {
+    try {
+      final thumbnailPath = await VideoThumbnail.thumbnailData(
+        video: videoPath,
+        imageFormat: ImageFormat.WEBP,
+        maxWidth: maxWidth?.round() ?? 64,
+        maxHeight: maxHeight?.round() ?? 64,
+        quality: quality,
+      );
+      return thumbnailPath;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  static Future<bool> checkImageLive(String imageUrl) async {
+    final response = await http.get(Uri.parse(imageUrl));
+    if (response.statusCode == 200) {
+      try {
+        final contentType = response.headers['content-type'];
+        final isImage = contentType != null && contentType.startsWith('image/');
+
+        return isImage && response.bodyBytes.isNotEmpty;
+      } catch (e) {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  static Future<void> preLoadingImage(String imageUrl, BuildContext context,
+      [bool useExtendedImage = true]) async {
+    final isUrl = imageUrl.contains('http');
+    final imageProvider;
+
+    if (isUrl) {
+      if (useExtendedImage) {
+        imageProvider = ExtendedNetworkImageProvider(imageUrl, cache: true);
+      } else {
+        imageProvider = NetworkImage(imageUrl);
+      }
+    } else {
+      imageProvider = AssetImage(imageUrl);
+    }
+    await precacheImage(imageProvider, context);
+  }
+
+  static Future<void> preLoadingListImages(
+      List<String> url, BuildContext context,
+      [bool useExtendedImage = true]) async {
+    var futures = <Future>[];
+    for (var e in url) {
+      futures.add(ImageTools.preLoadingImage(e, context, useExtendedImage));
+    }
+    await Future.wait<void>(futures);
+  }
+
+  static void preLoadingListImagesInitState(
+      List<String> url, BuildContext context,
+      [bool useExtendedImage = true]) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ImageTools.preLoadingListImages(url, context);
+    });
+  }
 }
 
 class CustomAssetPickerTextDelegate extends EnglishAssetPickerTextDelegate {
@@ -282,17 +355,12 @@ class ImagePicker {
     BuildContext context, {
     int maxFiles = 1,
     List<AssetEntity>? selectedAssets,
+    RequestType requestType = RequestType.common,
   }) async {
     // final isGranted = await checkGrantedPermission();
 
     final currentLocale =
         Localizations.maybeLocaleOf(context)?.languageCode.toLowerCase();
-
-    // remove due to reject issue from Apple - https://support.inspireui.com/mailbox/tickets/24339
-    // if (!isGranted) {
-    //   showDialogRequestPermission(context);
-    //   return [];
-    // }
 
     final result = await AssetPicker.pickAssets(
       context,
@@ -301,6 +369,7 @@ class ImagePicker {
         pickerTheme: Theme.of(context),
         specialPickerType: SpecialPickerType.noPreview,
         selectedAssets: selectedAssets,
+        requestType: requestType,
         textDelegate: supportDefaultLocales.contains(currentLocale)
             ? null
             : CustomAssetPickerTextDelegate(context: context),
@@ -334,37 +403,6 @@ class ImagePicker {
   }
 
   static bool isAsset(dynamic image) => image is AssetEntity;
-
-  static void showDialogRequestPermission(BuildContext context) {
-    showCupertinoDialog(
-      context: context,
-      builder: (ctx) {
-        return CupertinoAlertDialog(
-          title: Text(S.of(context).notice),
-          content: Text(S.of(context).pleaseAllowAccessCameraGallery),
-          actions: <Widget>[
-            CupertinoDialogAction(
-              isDefaultAction: true,
-              onPressed: () async {
-                Navigator.of(ctx).pop();
-                Future.delayed(
-                  const Duration(milliseconds: 200),
-                  PhotoManager.openSetting,
-                );
-              },
-              child: Text(S.of(context).ok),
-            ),
-            CupertinoDialogAction(
-              child: Text(S.of(context).cancel),
-              onPressed: () {
-                Navigator.of(ctx).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
 }
 
 extension PermissionStateExt on PermissionState {

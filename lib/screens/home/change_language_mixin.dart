@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../common/config.dart';
 import '../../generated/l10n.dart';
 import '../../models/index.dart';
+import '../../services/service_config.dart';
 import '../../widgets/common/flux_image.dart';
 
 mixin ChangeLanguage<T extends StatefulWidget> on State<T> {
@@ -128,6 +129,10 @@ mixin ChangeLanguage<T extends StatefulWidget> on State<T> {
   }
 
   Widget iconLanguage({Color? backgroundColor}) {
+    if (!ServerConfig().isSupportChangeLanguageOnboarding) {
+      return const SizedBox();
+    }
+
     return Align(
       alignment: Alignment.topRight,
       child: SafeArea(

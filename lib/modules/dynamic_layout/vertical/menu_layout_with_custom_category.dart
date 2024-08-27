@@ -54,10 +54,23 @@ class _StateMenuLayout extends State<MenuLayoutWithCustomCategory> {
     List<Category>? categories,
     List<CategoryItemConfig> items,
   ) {
-    var values = categories ?? [];
-    return values.where((item) {
+    final values = categories ?? [];
+    final categoryItems = values.where((item) {
       return items.indexWhere((e) => item.id == e.category) != -1;
     }).toList();
+
+    final results = <Category>[];
+
+    // Sort the results by the order of the items
+    for (var item in items) {
+      final category = categoryItems.firstWhereOrNull(
+        (element) => element.id == item.category,
+      );
+      if (category != null) {
+        results.add(category);
+      }
+    }
+    return results;
   }
 
   void onTapSeeAll(List<Category> categories) {
@@ -68,6 +81,7 @@ class _StateMenuLayout extends State<MenuLayoutWithCustomCategory> {
     ProductModel.showList(
       config: widget.config.jsonData,
       cateId: item.id,
+      context: context,
     );
   }
 

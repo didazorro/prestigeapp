@@ -76,9 +76,9 @@ class OrderItem extends StatelessWidget {
               Navigator.of(context).pushNamed(
                 RouteList.orderDetail,
                 arguments: OrderDetailArguments(
-                    model: orderDetailModel,
-                    enableReorder: false,
-                    disableReview: true),
+                  model: orderDetailModel,
+                  disableReview: true,
+                ),
               );
             },
             child: Container(

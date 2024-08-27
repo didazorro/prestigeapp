@@ -14,7 +14,6 @@ import '../../services/service_config.dart';
 import '../../services/services.dart';
 import '../cart/cart_screen.dart';
 import 'products_mixin.dart';
-import 'products_searchview.dart';
 
 enum MenuType { cart, wishlist, share, login }
 
@@ -25,7 +24,6 @@ class ProductFlatView extends StatefulWidget {
   final Function? onSort;
   final Function onFilter;
   final Function onSearch;
-  final bool enableSearchHistory;
   final bool autoFocusSearch;
   final bool hasAppBar;
   final TextEditingController searchFieldController;
@@ -37,7 +35,6 @@ class ProductFlatView extends StatefulWidget {
     this.titleFilter,
     this.onSort,
     required this.onFilter,
-    this.enableSearchHistory = false,
     this.autoFocusSearch = true,
     this.hasAppBar = false,
     super.key,
@@ -119,7 +116,7 @@ class _ProductFlatViewState extends State<ProductFlatView> with ProductsMixin {
         'title': S.of(context).myWishList,
         'icon': CupertinoIcons.heart,
       },
-      if (firebaseDynamicLinkConfig['isEnabled'] &&
+      if (dynamicLinkConfig.enable &&
           (ServerConfig().isWooType || ServerConfig().isShopify) &&
           !ServerConfig().isListingType)
         {
@@ -127,7 +124,7 @@ class _ProductFlatViewState extends State<ProductFlatView> with ProductsMixin {
           'title': S.of(context).share,
           'icon': CupertinoIcons.share,
         },
-      if (!loggedIn)
+      if (!loggedIn && kLoginSetting.enable)
         {
           'type': MenuType.login.name,
           'title': S.of(context).login,
@@ -187,21 +184,6 @@ class _ProductFlatViewState extends State<ProductFlatView> with ProductsMixin {
 
   @override
   Widget build(BuildContext context) {
-    /// using for the Search Screen UX
-    if (widget.enableSearchHistory) {
-      return ProductSearchView(
-        hasAppBar: widget.hasAppBar,
-        builder: widget.builder,
-        onSearch: widget.onSearch,
-        bottomSheet: widget.bottomSheet,
-        titleFilter: widget.titleFilter,
-        onSort: widget.onSort,
-        onFilter: widget.onFilter,
-        autoFocusSearch: widget.autoFocusSearch,
-        searchFieldController: widget.searchFieldController,
-      );
-    }
-
     return Container(
       color: Theme.of(context).colorScheme.surface,
       child: Column(

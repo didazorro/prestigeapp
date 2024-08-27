@@ -57,7 +57,10 @@ class MenuBarState extends State<SideBarMenu> {
       return;
     }
     if (screen != null) {
-      FluxNavigate.push(MaterialPageRoute(builder: (_) => screen));
+      FluxNavigate.push(
+        MaterialPageRoute(builder: (_) => screen),
+        context: context,
+      );
     }
   }
 
@@ -243,6 +246,9 @@ class MenuBarState extends State<SideBarMenu> {
         }
       case 'login':
         {
+          if (!kLoginSetting.enable) {
+            return const SizedBox();
+          }
           return ListenableProvider.value(
             value: Provider.of<UserModel>(context, listen: false),
             child: Consumer<UserModel>(builder: (context, userModel, _) {
@@ -379,7 +385,7 @@ class MenuBarState extends State<SideBarMenu> {
         var widgets = <Widget>[];
 
         if (categories != null) {
-          var list = categories.where((item) => item.isRoot).toList();
+          final list = categories.where((item) => item.isRoot).toList();
           for (var i = 0; i < list.length; i++) {
             final currentCategory = list[i];
             final childCategories = categories
@@ -546,6 +552,7 @@ class MenuBarState extends State<SideBarMenu> {
         cateId: category.id,
         cateName: category.name,
       ),
+      context: context,
     );
   }
 }

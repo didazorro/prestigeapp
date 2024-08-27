@@ -56,3 +56,10 @@ storePassword=123456
 keyPassword=123456
 keyAlias=key
 storeFile=key.jks
+
+# Notification icon (Android only). Applies to both Firebase and Onesignal notifications.
+# Icon name will be replaced with `ic_stat_onesignal_default` and placed in
+# `android/app/src/main/res/drawable` folder if present.
+# Color cannot be empty and format is ARGB.
+notificationIcon=ic_stat_onesignal_default.png
+notificationColor=FF2EB0FE

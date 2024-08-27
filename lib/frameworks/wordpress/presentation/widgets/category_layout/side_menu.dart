@@ -96,7 +96,11 @@ class SideMenuCategoriesState extends State<SideMenuCategories>
                         width: constraints.maxWidth,
                         onTap: () {
                           var value = snapshot.data ?? [];
-                          onTapBlog(blog: value[index], blogs: value);
+                          onTapBlog(
+                            blog: value[index],
+                            blogs: value,
+                            context: context,
+                          );
                         },
                       ),
                     );

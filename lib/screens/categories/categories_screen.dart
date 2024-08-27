@@ -128,6 +128,9 @@ class HeaderCategory extends StatelessWidget {
   const HeaderCategory({super.key, required this.showSearch});
   final bool showSearch;
 
+  ServerConfig get _serverConfig => ServerConfig();
+  bool get _supportSearch => !(_serverConfig.isHaravan);
+
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
@@ -160,7 +163,7 @@ class HeaderCategory extends StatelessWidget {
                   .copyWith(fontWeight: FontWeight.w700),
             ),
           ),
-          if (showSearch)
+          if (showSearch && _supportSearch)
             IconButton(
               icon: Icon(
                 CupertinoIcons.search,

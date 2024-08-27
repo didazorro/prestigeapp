@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../common/constants.dart';
 import '../../common/theme/colors.dart';
 import '../../generated/l10n.dart';
-
-/// Define a constant for the primary text style used in the alert dialog.
-const _primaryTextStyle = TextStyle(
-  fontSize: 14,
-  fontWeight: FontWeight.w600,
-);
 
 /// [FluxAlert] is a custom alert dialog widget built with Flutter's [StatelessWidget].
 /// It is designed to be flexible and easy to use, allowing for a variety of alert styles.
@@ -50,6 +45,11 @@ class FluxAlert extends StatelessWidget {
         assert(
           secondaryAction != null || primaryAction != null,
           'Primary or secondary action must not be null',
+        ),
+        assert(
+          directionButton == null ||
+              (primaryAction != null && secondaryAction != null),
+          'The direction button can only be set when both [primaryAction] and [secondaryAction] are not null.',
         ),
         directionButton = directionButton ?? Axis.horizontal;
 
@@ -155,7 +155,10 @@ class FluxAlert extends StatelessWidget {
             data: ElevatedButtonThemeData(
               style: theme.elevatedButtonTheme.style?.copyWith(
                 minimumSize: buttonSize,
-                textStyle: const WidgetStatePropertyAll(_primaryTextStyle),
+                textStyle: WidgetStatePropertyAll(
+                  theme.textTheme.bodyMedium
+                      ?.copyWith(fontWeight: FontWeight.w600),
+                ),
               ),
             ),
             child: OutlinedButtonTheme(
@@ -250,10 +253,13 @@ class _PrimaryButton extends StatelessWidget {
       onPressed: () => Navigator.of(context).pop(true),
       style: ElevatedButton.styleFrom(
         backgroundColor: primaryAsDestructiveAction ? kColorRed : null,
+        textStyle: Theme.of(context)
+            .textTheme
+            .bodyMedium
+            ?.copyWith(fontWeight: FontWeight.w600),
       ),
       child: Text(
         text,
-        style: _primaryTextStyle,
       ),
     );
   }

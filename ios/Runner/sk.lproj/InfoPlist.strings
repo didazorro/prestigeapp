@@ -1,7 +1,7 @@
 NSCameraUsageDescription = "Táto aplikácia vyžaduje prístup k fotoaparátu pre funkciu skenovania QR kódu alebo čiarového kódu, ku ktorej je možné pristupovať z vyhľadávacieho panela";
-NSLocationAlwaysAndWhenInUseUsageDescription = "Získajte svoju aktuálnu polohu pre doručenie";
-NSLocationAlwaysUsageDescription = "Potrebujem prístup k aktuálnej polohe";
-NSLocationWhenInUseUsageDescription = "Získajte svoju aktuálnu polohu pre doručenie";
+NSLocationAlwaysAndWhenInUseUsageDescription = "Táto aplikácia potrebuje prístup k vašej polohe, aby ju zobrazila na obrazovke mapy a poskytla služby založené na polohe";
+NSLocationAlwaysUsageDescription = "Táto aplikácia potrebuje prístup k vašej polohe, aby ju zobrazila na obrazovke mapy a poskytla služby založené na polohe";
+NSLocationWhenInUseUsageDescription = "Táto aplikácia potrebuje prístup k vašej polohe, aby ju zobrazila na obrazovke mapy a poskytla služby založené na polohe";
 NSMicrophoneUsageDescription = "Chceli by sme mať prístup k mikrofónu, aby sme mohli nahrávať hlasové správy";
 NSPhotoLibraryAddUsageDescription = "Chceli by sme mať prístup k ukladaniu obrázkov/videí vo vašej knižnici fotografií";
 NSPhotoLibraryUsageDescription = "Táto aplikácia vyžaduje prístup do knižnice fotografií, aby si mohla vybrať profilovú fotografiu, ktorá sa použije ako obrázok rozhovoru pre funkciu rozhovoru.";

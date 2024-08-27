@@ -24,6 +24,7 @@ mixin WebLayoutMixin {
             WebView(url: urlWeb, title: S.of(context).support),
       ),
       forceRootNavigator: true,
+      context: context,
     );
   }
 }

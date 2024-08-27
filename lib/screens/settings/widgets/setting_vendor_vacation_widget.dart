@@ -40,6 +40,7 @@ class SettingVendorVacationWidget extends StatelessWidget {
                   isFromMV: true,
                 ),
           ),
+          context: context,
         );
       },
       icon: Icons.house,

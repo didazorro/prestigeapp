@@ -84,7 +84,12 @@ class ProductQuery {
   }
 
   ProductQuery.fromJson(dynamic json) {
-    category = json['category'] != null ? '${json['category']}' : null;
+    final category = json['category'];
+    if (category is List) {
+      this.category = category.join(',');
+    } else if (category != null) {
+      this.category = '${json['category']}';
+    }
     tag = json['tag'] != null ? '${json['tag']}' : null;
     featured = bool.tryParse('${json['featured']}');
     onSale = bool.tryParse('${json['onSale']}');
@@ -94,7 +99,11 @@ class ProductQuery {
     order = json['order'] is String ? json['order'] : null;
     perPage = int.tryParse('${json['limit']}');
     page = int.tryParse('${json['page']}');
-    include = json['include'] is String ? json['include'] : null;
+    include = json['include'] is String
+        ? json['include']
+        : json['include'] is List
+            ? json['include'].join(',')
+            : null;
     search = json['search'] is String ? json['search'] : null;
     sku = json['sku'] is String ? json['sku'] : null;
     advancedParams =
@@ -110,7 +119,7 @@ class ProductQuery {
             : null;
   }
 
-  String toParams({bool hideOutOfStock = true}) {
+  String toParams({bool hideOutOfStock = true, int apiVersion = 2}) {
     var params = '';
     if (advancedParams?.isNotEmpty ?? false) {
       advancedParams?.forEach((key, value) {
@@ -205,8 +214,22 @@ class ProductQuery {
     if (search?.isNotEmpty ?? false) {
       params += '&search=$search';
     }
+
+    // The `sku` parameter will limit result set to products with a specific
+    // SKU. Does not work properly if used with the `search` parameter.
+    //
+    // In the new version of WooCommerce API V3, they have provided the param
+    // `search_sku`. Do a partial match for a sku. Supercedes sku parameter that
+    // does exact matching.
     if (sku?.isNotEmpty ?? false) {
+      // TODO: Remove function [_searchBySku] on the class [WooCommerceService] if apply
       params += '&sku=$sku';
+
+      // if (apiVersion < 3) {
+      //   params += '&sku=$sku';
+      // } else {
+      //   params += '&search_sku=$sku';
+      // }
     }
 
     // If add this param to API, the result will not contain backorder products
@@ -214,6 +237,9 @@ class ProductQuery {
       params += '&stock_status=instock';
     }
 
+    if (kExcludedProductIDs?.isNotEmpty ?? false) {
+      params += '&exclude=$kExcludedProductIDs';
+    }
     return params;
   }
 }

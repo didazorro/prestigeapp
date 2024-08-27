@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:fstore/data/boxes.dart';
+
 import '../constants/keys.dart';
 import '../models/entities/chat_message.dart';
 import '../models/entities/chat_room.dart';
@@ -21,7 +21,7 @@ class FirestoreChat {
           ),
           toFirestore: (item, _) => item.toJson(),
         )
-        .orderBy(kFirestoreFieldCreatedAt, descending: true)
+        .orderBy(kFirestoreOldFieldUpdatedAtForChatRooms, descending: true)
         .snapshots();
   }
 
@@ -67,7 +67,6 @@ class FirestoreChat {
     FirebaseFirestore instance,
     String chatId,
     String sender,
-    String receiver,
     String image,
     String message,
   ) async {
@@ -87,7 +86,6 @@ class FirestoreChat {
             sender: sender,
             image: image,
             text: message,
-            receiver: receiver,
           ),
         );
   }
@@ -96,32 +94,19 @@ class FirestoreChat {
     FirebaseFirestore instance,
     String chatId, {
     bool? isTyping = false,
-    bool? isAdmin = false,
     String? senderEmail,
-    List<ChatUser>? users,
     String? pushToken,
   }) async {
     return updateChatRoom(
       instance,
       chatId,
-      isAdminTyping: isAdmin == true ? isTyping : null,
-      isUserTyping: isAdmin == false ? isTyping : null,
-      isSeenByAdmin: isAdmin == true ? true : null,
+      isTyping: isTyping,
       senderEmail: senderEmail,
-      users: users?.map(
-        (user) {
-          if (user.email == senderEmail) {
-            return user.copyWith(
-              lastActive: DateTime.now(),
-            );
-          }
-          return user;
-        },
-      ).toList(),
+      pushToken: pushToken,
     );
   }
 
-  static Future initChatRoom(
+  static Future<ChatRoom> initChatRoom(
     FirebaseFirestore instance,
     String chatId, {
     String? senderEmail,
@@ -132,79 +117,90 @@ class FirestoreChat {
       chatId,
     );
     final snapshot = await ref.get();
-    final shouldUpdateUsers = (snapshot.data()?.users.isEmpty ?? true) ||
-        (snapshot.data()?.users.length ?? 0) < 2;
-    if (!snapshot.exists || shouldUpdateUsers) {
-      await ref.set(
+    final data = snapshot.data();
+    final chatRoom = data ??
         ChatRoom(
           chatId,
-          createdAt: snapshot.data()?.createdAt ?? DateTime.now(),
-          users:
-              shouldUpdateUsers && senderEmail != null && receiverEmail != null
-                  ? <ChatUser>[
-                      ChatUser(
-                        email: senderEmail,
-                        lastActive: DateTime(0),
-                      ),
-                      ChatUser(
-                        email: receiverEmail,
-                        lastActive: DateTime(0),
-                      ),
-                    ]
-                  : <ChatUser>[],
+          updatedAt: data?.updatedAt ?? DateTime.now(),
+        );
+    final users = List<ChatUser>.from(chatRoom.users);
+    var shouldUpdateUsers = users.isEmpty;
+
+    if (senderEmail != null && users.every((e) => e.email != senderEmail)) {
+      users.add(
+        ChatUser(
+          email: senderEmail,
+          lastActive: DateTime(0),
         ),
       );
+
+      shouldUpdateUsers = true;
     }
+
+    if (receiverEmail != null && users.every((e) => e.email != receiverEmail)) {
+      users.add(
+        ChatUser(
+          email: receiverEmail,
+          lastActive: DateTime(0),
+        ),
+      );
+
+      shouldUpdateUsers = true;
+    }
+
+    if (!snapshot.exists || shouldUpdateUsers) {
+      final newChatRoom = chatRoom.copyWith(users: users);
+      await ref.set(newChatRoom);
+      return newChatRoom;
+    }
+
+    return chatRoom;
   }
 
-  /// TODO: create chat room.
   static Future updateChatRoom(
     FirebaseFirestore instance,
     String chatId, {
-    bool? isAdminTyping,
-    bool? isUserTyping,
     String? latestMessage,
-    bool? isSeenByAdmin,
     int? receiverUnreadCountPlus,
+    bool? isTyping,
+    List<String>? blackList,
     String? senderName,
     String? senderEmail,
-    String? receiver,
-    List<ChatUser>? users,
     String? pushToken,
   }) async {
-    await initChatRoom(instance, chatId);
     final newLangCode = SettingsBox().languageCode;
+    var chatRoom =
+        await initChatRoom(instance, chatId, senderEmail: senderEmail);
+
+    final currentUsers = chatRoom.users.map((e) {
+      if (e.email == senderEmail) {
+        return e.copyWith(
+          lastActive: DateTime.now(),
+          unread: 0,
+          languageCode: newLangCode,
+          isTyping: isTyping,
+          blackList: blackList,
+          pushToken: pushToken != null &&
+                  pushToken.isNotEmpty &&
+                  e.pushToken != pushToken
+              ? pushToken
+              : null,
+        );
+      } else {
+        return e.copyWith(
+          unread: e.unread + (receiverUnreadCountPlus ?? 0),
+        );
+      }
+    }).toList();
+
+    chatRoom = chatRoom.copyWith(
+        latestMessage: latestMessage,
+        updatedAt: latestMessage != null ? DateTime.now() : null,
+        users: currentUsers);
     return instance
         .collection(kFirestoreCollectionChatRooms)
         .doc(chatId)
-        .update({
-      if (isAdminTyping != null) kFirestoreFieldAdminTyping: isAdminTyping,
-      if (latestMessage != null) kFirestoreFieldLatestMessage: latestMessage,
-      if (isSeenByAdmin != null) kFirestoreFieldIsSeenByAdmin: isSeenByAdmin,
-      kFirestoreFieldCreatedAt: DateTime.now().toUtc().toIso8601String(),
-      if (users != null)
-        kFirestoreFieldUsers: users.map((e) {
-          if (e.email == senderEmail) {
-            return e
-                .copyWith(
-                  lastActive: DateTime.now(),
-                  unread: 0,
-                  languageCode:
-                      e.languageCode != newLangCode ? newLangCode : null,
-                  pushToken: pushToken != null && e.pushToken != pushToken
-                      ? pushToken
-                      : null,
-                )
-                .toJson();
-          } else {
-            return e
-                .copyWith(
-                  unread: e.unread + (receiverUnreadCountPlus ?? 0),
-                )
-                .toJson();
-          }
-        }).toList(),
-    });
+        .update(chatRoom.toJson());
   }
 
   static Future<void> deleteChatRoom(
@@ -269,5 +265,21 @@ class FirestoreChat {
           },
           toFirestore: (item, _) => item.toJson(),
         );
+  }
+
+  static Future<void> updateBlackList(
+    FirebaseFirestore instance,
+    String chatId, {
+    List<String>? blackList,
+    String? senderEmail,
+    String? pushToken,
+  }) async {
+    return updateChatRoom(
+      instance,
+      chatId,
+      senderEmail: senderEmail,
+      pushToken: pushToken,
+      blackList: blackList,
+    );
   }
 }

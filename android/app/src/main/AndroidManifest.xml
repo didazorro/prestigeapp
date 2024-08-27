@@ -1,7 +1,8 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.inspireui.fluxstore">
 
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -11,10 +12,10 @@
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
 
-    <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
 
     <!-- Use for showing notification -->
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
 
     <!-- Use for take photo and photo gallery feature -->
@@ -22,8 +23,8 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <!-- Use for printer POS feature -->
-<!--    <uses-permission android:name="android.permission.BLUETOOTH" />-->
-<!--    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />-->
+    <!--    <uses-permission android:name="android.permission.BLUETOOTH" />-->
+    <!--    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />-->
 
     <!-- Use for SmartChat feature -->
     <queries>
@@ -78,15 +79,15 @@
     <!-- `android:extractNativeLibs` property is reset to `false` if it is NOT configured in AndroidManifest.xml and minSdkVersion >= 23. -->
     <application
         android:name="${applicationName}"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:extractNativeLibs="true"
+        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/launcher_icon"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
         android:requestLegacyExternalStorage="true"
-        android:fullBackupContent="@xml/backup_rules"
-        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
-        android:allowBackup="true"
-        android:extractNativeLibs="true"
         tools:replace="android:usesCleartextTraffic,android:allowBackup">
 
 
@@ -142,7 +143,49 @@
                     android:host="${websiteDomain}"
                     android:scheme="${customScheme}" />
             </intent-filter>
+
+            <!-- Branch App Links - Live App -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- REPLACE `android:host` with your `app.link` domain -->
+                <data
+                    android:host="${branchLiveLinkDomain}"
+                    android:scheme="https" />
+                <!-- REPLACE `android:host` with your `-alternate` domain (required for proper functioning of App Links and Deepviews) -->
+                <data
+                    android:host="${branchLiveAlternateLinkDomain}"
+                    android:scheme="https" />
+            </intent-filter>
+
+            <!-- Branch App Links - Test App -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="${branchTestLinkDomain}"
+                    android:scheme="https" />
+                <!-- REPLACE `android:host` with your `-alternate` domain (required for proper functioning of App Links and Deepviews) -->
+                <data
+                    android:host="${branchTestAlternateLinkDomain}"
+                    android:scheme="https" />
+            </intent-filter>
         </activity>
+
+        <!-- Branch init -->
+        <!-- REPLACE `BranchKey` with the value from your Branch Dashboard -->
+        <meta-data
+            android:name="io.branch.sdk.BranchKey"
+            android:value="${branchKeyLive}" />
+        <!-- REPLACE `BranchKey.test` with the value from your Branch Dashboard -->
+        <meta-data
+            android:name="io.branch.sdk.BranchKey.test"
+            android:value="${branchKeyTest}" />
 
         <meta-data
             android:name="com.google.android.gms.wallet.api.enabled"
@@ -152,14 +195,18 @@
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
 
+        <!-- Set the default notification icon of Firebase to
+        `ic_stat_onesignal_default` to use the same icon with OneSignal. -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/logo" />
+            android:resource="@drawable/ic_stat_onesignal_default" />
+            
         <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
             notification message. See README(https://goo.gl/6BKBk7) for more. -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/notiColor" />
+            android:resource="@color/notification_color" />
+
         <!-- Google map and Admod setup -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -178,25 +225,25 @@
             android:value="${facebookClientToken}" />
 
         <meta-data
-                android:name="com.inspireui.ENVATO_PURCHASE_CODE"
-                android:value="${envatoPurchaseCode}" />
+            android:name="com.inspireui.ENVATO_PURCHASE_CODE"
+            android:value="${envatoPurchaseCode}" />
 
-<!--        Enable to support Audio Feature-->
-<!--        <service-->
-<!--            android:name="com.ryanheise.audioservice.AudioService"-->
-<!--            android:exported="true">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.media.browse.MediaBrowserService" />-->
-<!--            </intent-filter>-->
-<!--        </service>-->
+        <!--        Enable to support Audio Feature-->
+        <!--        <service-->
+        <!--            android:name="com.ryanheise.audioservice.AudioService"-->
+        <!--            android:exported="true">-->
+        <!--            <intent-filter>-->
+        <!--                <action android:name="android.media.browse.MediaBrowserService" />-->
+        <!--            </intent-filter>-->
+        <!--        </service>-->
 
-<!--        <receiver-->
-<!--            android:name="com.ryanheise.audioservice.MediaButtonReceiver"-->
-<!--            android:exported="true">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MEDIA_BUTTON" />-->
-<!--            </intent-filter>-->
-<!--        </receiver>-->
+        <!--        <receiver-->
+        <!--            android:name="com.ryanheise.audioservice.MediaButtonReceiver"-->
+        <!--            android:exported="true">-->
+        <!--            <intent-filter>-->
+        <!--                <action android:name="android.intent.action.MEDIA_BUTTON" />-->
+        <!--            </intent-filter>-->
+        <!--        </receiver>-->
 
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->

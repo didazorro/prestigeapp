@@ -29,6 +29,7 @@ class CartItemStyle01Widget extends StatelessWidget {
       if (stateUI.cartItemMetaData?.variation != null)
         Services().widget.renderVariantCartItem(
               context,
+              stateUI.product,
               stateUI.cartItemMetaData!.variation!,
               stateUI.cartItemMetaData?.options,
               style: AttributeProductCartStyle.short,
@@ -125,7 +126,7 @@ class CartItemStyle01Widget extends StatelessWidget {
                   margin: const EdgeInsets.only(left: 16, right: 16),
                   decoration: BoxDecoration(
                     color: Theme.of(context).cardColor,
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(16),
                   ),
                   constraints: const BoxConstraints(
                     minHeight: _kMinHeightCard,

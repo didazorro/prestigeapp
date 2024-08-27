@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../common/constants.dart';
+import '../../../../generated/l10n.dart';
 import '../../../../models/entities/tera_wallet/transaction.dart';
 import '../../../../models/user_model.dart';
 import '../../helpers/wallet_helpers.dart';
@@ -35,7 +36,7 @@ class TransactionItem extends StatelessWidget {
         userCreate?.id != currentUser.id &&
         userCreate != null) {
       title =
-          'Received money from ${transaction.userCreate?.fullName.toUpperCase()}';
+          S.of(context).receivedMoneyFrom(userCreate.fullName.toUpperCase());
     }
     return ListTile(
       contentPadding: EdgeInsets.zero,
@@ -61,8 +62,8 @@ class TransactionItem extends StatelessWidget {
                 ?.copyWith(color: Theme.of(context).disabledColor),
           ),
           const SizedBox(height: 4),
-          Text(
-              'Wallet balance ${WalletHelpers.parseNumberToCurrencyText(transaction.balance)}'),
+          Text(S.of(context).walletBalanceWithValue(
+              WalletHelpers.parseNumberToCurrencyText(transaction.balance))),
         ],
       ),
       trailing: Padding(

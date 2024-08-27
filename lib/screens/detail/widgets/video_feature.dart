@@ -14,6 +14,7 @@ import '../../../generated/l10n.dart';
 import '../../../routes/flux_navigate.dart';
 import '../../../screens/detail/widgets/video_placeholder.dart';
 import '../../../services/index.dart';
+import '../../../widgets/common/flux_image.dart';
 
 class FeatureVideoPlayer extends StatefulWidget {
   final String url;
@@ -277,6 +278,7 @@ class _FeatureVideoPlayerState extends State<FeatureVideoPlayer>
           tapToPlayPause: widget.tapToPlayPause,
         ),
       ),
+      context: context,
     );
     if (previousStatus != null) {
       setIsPlaying(previousStatus[0] ?? false);
@@ -305,128 +307,162 @@ class _FeatureVideoPlayerState extends State<FeatureVideoPlayer>
 
     if (!isYoutube) {
       if (initialized && _controller != null) {
-        return WillPopScopeWidget(
-          onWillPop: () async {
-            Theme.of(context).brightness == Brightness.dark
-                ? SystemChrome.setSystemUIOverlayStyle(
-                    SystemUiOverlayStyle.light)
-                : SystemChrome.setSystemUIOverlayStyle(
-                    SystemUiOverlayStyle.dark);
-            return true;
+        final body = VisibilityDetector(
+          onVisibilityChanged: (VisibilityInfo info) {
+            if (info.visibleFraction == 0) {
+              _controller?.pause();
+            }
           },
-          child: VisibilityDetector(
-            onVisibilityChanged: (VisibilityInfo info) {
-              if (info.visibleFraction == 0) {
-                _controller?.pause();
-              }
-            },
-            key: ValueKey('mp4_player_iframe-${widget.url}'),
-            child: Container(
-              color: widget.isFullScreen ? Colors.black : Colors.transparent,
-              child: Center(
-                child: AspectRatio(
-                  aspectRatio: aspectRatio ?? _controller!.value.aspectRatio,
-                  child: Listener(
-                    onPointerDown: (_) {
-                      if (widget.holdToPlayPause) {
-                        _startTimer();
-                      }
-                    },
-                    onPointerUp: (_) {
-                      var now = DateTime.now().millisecondsSinceEpoch;
-                      if (widget.doubleTapToFullScreen) {
-                        // https://api.flutter.dev/flutter/gestures/kDoubleTapTimeout-constant.html
-                        if (now - lastTap < 300) {
-                          _cancelTimer();
-                          lastTap = now;
-                          if (!widget.isFullScreen) {
-                            onTapFullScreen();
-                          } else {
-                            onTapExitFullScreen();
-                          }
-                          return;
-                        }
-                      }
-                      if (widget.holdToPlayPause) {
+          key: ValueKey('mp4_player_iframe-${widget.url}'),
+          child: Container(
+            color: widget.isFullScreen ? Colors.black : Colors.transparent,
+            child: Center(
+              child: AspectRatio(
+                aspectRatio: aspectRatio ?? _controller!.value.aspectRatio,
+                child: Listener(
+                  onPointerDown: (_) {
+                    if (widget.holdToPlayPause) {
+                      _startTimer();
+                    }
+                  },
+                  onPointerUp: (_) {
+                    var now = DateTime.now().millisecondsSinceEpoch;
+                    if (widget.doubleTapToFullScreen) {
+                      // https://api.flutter.dev/flutter/gestures/kDoubleTapTimeout-constant.html
+                      if (now - lastTap < 300) {
                         _cancelTimer();
+                        lastTap = now;
+                        if (!widget.isFullScreen) {
+                          onTapFullScreen();
+                        } else {
+                          onTapExitFullScreen();
+                        }
+                        return;
+                      }
+                    }
+                    if (widget.holdToPlayPause) {
+                      _cancelTimer();
+                      _controller!.play();
+                    }
+                    if (widget.tapToPlayPause) {
+                      if (_controller!.value.isPlaying) {
+                        _controller!.pause();
+                      } else {
                         _controller!.play();
                       }
-                      if (widget.tapToPlayPause) {
-                        if (_controller!.value.isPlaying) {
-                          _controller!.pause();
-                        } else {
-                          _controller!.play();
-                        }
-                      }
-                      lastTap = now;
-                    },
-                    child: Stack(
-                      children: [
-                        Hero(
-                          tag: 'video',
-                          transitionOnUserGestures: true,
-                          child: VideoPlayer(_controller!),
+                    }
+                    lastTap = now;
+                  },
+                  child: Stack(
+                    children: [
+                      Hero(
+                        tag: 'video',
+                        transitionOnUserGestures: true,
+                        child: VideoPlayer(_controller!),
+                      ),
+                      if (widget.tapToPlayPause)
+                        AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 50),
+                          reverseDuration: const Duration(milliseconds: 200),
+                          child: playPauseButton(_controller!.value.isPlaying),
                         ),
-                        if (widget.tapToPlayPause)
-                          AnimatedSwitcher(
-                            duration: const Duration(milliseconds: 50),
-                            reverseDuration: const Duration(milliseconds: 200),
-                            child:
-                                playPauseButton(_controller!.value.isPlaying),
-                          ),
-                        if (widget.enableTimeIndicator)
-                          Align(
-                            alignment: Alignment.bottomCenter,
-                            child: VideoProgressIndicator(_controller!,
-                                allowScrubbing: true),
-                          ),
-                        Positioned(
-                          bottom: 0,
-                          right: 0,
-                          child: Row(
-                            children: [
-                              widget.showVolumeButton
-                                  ? GestureDetector(
-                                      behavior: HitTestBehavior.translucent,
-                                      onTap: onTapVolume,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(12.0),
-                                        child: Icon(
-                                          isSoundOn
-                                              ? Icons.volume_up
-                                              : Icons.volume_off,
-                                          color: Colors.white,
-                                          size: 25.0,
-                                        ),
+                      if (widget.enableTimeIndicator)
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: VideoProgressIndicator(_controller!,
+                              allowScrubbing: true),
+                        ),
+                      Positioned(
+                        bottom: 0,
+                        right: 0,
+                        child: Row(
+                          children: [
+                            widget.showVolumeButton
+                                ? GestureDetector(
+                                    behavior: HitTestBehavior.translucent,
+                                    onTap: onTapVolume,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(12.0),
+                                      child: Icon(
+                                        isSoundOn
+                                            ? Icons.volume_up
+                                            : Icons.volume_off,
+                                        color: Colors.white,
+                                        size: 25.0,
                                       ),
-                                    )
-                                  : const SizedBox(),
-                              widget.showFullScreenButton
-                                  ? GestureDetector(
-                                      behavior: HitTestBehavior.translucent,
-                                      onTap: widget.isFullScreen
-                                          ? onTapExitFullScreen
-                                          : onTapFullScreen,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(12.0),
-                                        child: Icon(
-                                          widget.isFullScreen
-                                              ? Icons.fullscreen_exit
-                                              : Icons.fullscreen,
-                                          color: Colors.white,
-                                          size: 25.0,
-                                        ),
+                                    ),
+                                  )
+                                : const SizedBox(),
+                            widget.showFullScreenButton
+                                ? GestureDetector(
+                                    behavior: HitTestBehavior.translucent,
+                                    onTap: widget.isFullScreen
+                                        ? onTapExitFullScreen
+                                        : onTapFullScreen,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(12.0),
+                                      child: Icon(
+                                        widget.isFullScreen
+                                            ? Icons.fullscreen_exit
+                                            : Icons.fullscreen,
+                                        color: Colors.white,
+                                        size: 25.0,
                                       ),
-                                    )
-                                  : const SizedBox(),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
+                                    ),
+                                  )
+                                : const SizedBox(),
+                          ],
+                        ),
+                      )
+                    ],
                   ),
                 ),
               ),
+            ),
+          ),
+        );
+
+        if (widget.isFullScreen) {
+          return WillPopScopeWidget(
+            allowExitApp: false,
+            onWillPop: () async {
+              Theme.of(context).brightness == Brightness.dark
+                  ? SystemChrome.setSystemUIOverlayStyle(
+                      SystemUiOverlayStyle.light)
+                  : SystemChrome.setSystemUIOverlayStyle(
+                      SystemUiOverlayStyle.dark);
+              return true;
+            },
+            child: body,
+          );
+        }
+
+        return body;
+      }
+
+      if (_controller?.value.hasError ?? false) {
+        return Container(
+          height: MediaQuery.of(context).size.width * 0.8,
+          width: MediaQuery.of(context).size.width,
+          decoration: const BoxDecoration(color: Colors.black),
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const FluxImage(
+                  imageUrl: 'assets/images/exclamation_mark.png',
+                  color: Colors.white,
+                  height: 50,
+                  width: 50,
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  S.of(context).canNotPlayVideo,
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
+                )
+              ],
             ),
           ),
         );

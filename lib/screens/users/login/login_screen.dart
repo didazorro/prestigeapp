@@ -259,31 +259,32 @@ class _LoginPageState extends BaseScreen<LoginScreenMobile>
                                     onSmsPressed: () => loginWithSMS(context),
                                   ),
                                   const SizedBox(height: 30.0),
-                                  Column(
-                                    children: <Widget>[
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: <Widget>[
-                                          Text(S.of(context).dontHaveAccount),
-                                          GestureDetector(
-                                            onTap: () {
-                                              NavigateTools.navigateRegister(
-                                                  context);
-                                            },
-                                            child: Text(
-                                              ' ${S.of(context).signup}',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: Theme.of(context)
-                                                    .primaryColor,
+                                  if (kLoginSetting.enableRegister)
+                                    Column(
+                                      children: <Widget>[
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: <Widget>[
+                                            Text(S.of(context).dontHaveAccount),
+                                            GestureDetector(
+                                              onTap: () {
+                                                NavigateTools.navigateRegister(
+                                                    context);
+                                              },
+                                              child: Text(
+                                                ' ${S.of(context).signup}',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Theme.of(context)
+                                                      .primaryColor,
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   const SizedBox(height: 30.0),
                                 ],
                               ),

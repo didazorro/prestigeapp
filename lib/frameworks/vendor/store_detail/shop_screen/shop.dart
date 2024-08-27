@@ -121,7 +121,7 @@ class ShopList extends StatelessWidget {
             final itemWidth = (constraint.maxWidth / 2) - 10;
             final isLoading = model.state == ShopModelState.loading;
 
-            var itemHeight = 160.0;
+            var itemHeight = 210.0;
             itemHeight += kProductDetail.productListItemHeight;
             if (kProductDetail.showQuantityInList) {
               itemHeight += 30;

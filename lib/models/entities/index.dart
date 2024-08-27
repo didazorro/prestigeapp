@@ -16,6 +16,7 @@ export 'fstore_notification.dart';
 export 'fstore_notification_item.dart';
 export 'listing_booking.dart';
 export 'listing_slots.dart';
+export 'listing_type.dart';
 export 'order_note.dart';
 export 'payment_method.dart';
 export 'payment_settings.dart';

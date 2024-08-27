@@ -21,18 +21,18 @@ extension AppBarItemConfigExt on AppBarItemConfig {
         NavigateTools.onTapOpenDrawerMenu(context);
         break;
       case 'search':
-        FluxNavigate.pushNamed(RouteList.homeSearch);
+        FluxNavigate.pushNamed(RouteList.homeSearch, context: context);
         break;
       case 'cart':
-        FluxNavigate.pushNamed(RouteList.cart);
+        FluxNavigate.pushNamed(RouteList.cart, context: context);
         break;
       case 'location':
         return _onTapAddress(context);
       case 'wishlist':
-        FluxNavigate.pushNamed(RouteList.wishlist);
+        FluxNavigate.pushNamed(RouteList.wishlist, context: context);
         break;
       case 'notification':
-        FluxNavigate.pushNamed(RouteList.notify);
+        FluxNavigate.pushNamed(RouteList.notify, context: context);
         break;
       case 'product':
       case 'category':

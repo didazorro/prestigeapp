@@ -162,9 +162,6 @@ class _StateProductOrderItem extends BaseScreen<ProductOrderItemNew>
     final subtitle = Theme.of(context).textTheme.bodySmall!.copyWith(
         fontSize: 12.0,
         color: Theme.of(context).colorScheme.secondary.withOpacity(0.8));
-    final styleOutlinedButton = OutlinedButton.styleFrom(
-      textStyle: const TextStyle(fontSize: 14),
-    );
 
     return GestureDetector(
       onTap: navigateToProductDetail,
@@ -303,7 +300,6 @@ class _StateProductOrderItem extends BaseScreen<ProductOrderItemNew>
                             children: [
                               Expanded(
                                 child: OutlinedButton(
-                                  style: styleOutlinedButton,
                                   onPressed: _isGetInfoProduct
                                       ? () {}
                                       : navigateToProductDetail,
@@ -328,7 +324,6 @@ class _StateProductOrderItem extends BaseScreen<ProductOrderItemNew>
                                 const SizedBox(width: 16),
                                 Expanded(
                                   child: OutlinedButton(
-                                    style: styleOutlinedButton,
                                     onPressed: () {
                                       Navigator.of(context).pushNamed(
                                           RouteList.createReview,

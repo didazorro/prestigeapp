@@ -31,6 +31,7 @@ class PathHeaderWidget extends StatelessWidget {
           onTap: () => FluxNavigate.pushNamedAndRemoveUntil(
             RouteList.home,
             (route) => false,
+            context: context,
           ),
         ),
       ...items

@@ -117,7 +117,10 @@ class _AppBarItemWidgetState extends State<AppBarItemWidget> {
                 (UserModel? userModel) => userModel?.user?.picture ?? ''),
             width: Helper.formatDouble(item.width),
             height: Helper.formatDouble(item.height),
-            fit: BoxFit.cover,
+            fit: ImageTools.boxFit(
+              item.imageBoxFit,
+              defaultValue: BoxFit.cover,
+            ),
             imageColor:
                 item.imageColor != null ? HexColor(item.imageColor) : null,
             iconColor: item.iconColor != null ? HexColor(item.iconColor) : null,
@@ -392,6 +395,7 @@ class _AppBarItemWidgetState extends State<AppBarItemWidget> {
         );
         break;
       case 'image':
+        final image = item.image;
         widget = Padding(
           padding: EdgeInsets.only(
             left: item.paddingLeft.toDouble(),
@@ -401,13 +405,20 @@ class _AppBarItemWidgetState extends State<AppBarItemWidget> {
           ),
           child: InkWell(
             onTap: () => _onTapItem(item),
-            child: FluxImage(
-              imageUrl: item.image!,
-              width: item.width?.toDouble(),
-              height: item.height?.toDouble(),
-              fit: ImageTools.boxFit(item.imageBoxFit),
-              color: item.imageColor != null ? HexColor(item.imageColor) : null,
-            ),
+            child: image == null
+                ? SizedBox(
+                    width: item.width?.toDouble(),
+                    height: item.height?.toDouble(),
+                  )
+                : FluxImage(
+                    imageUrl: item.image!,
+                    width: item.width?.toDouble(),
+                    height: item.height?.toDouble(),
+                    fit: ImageTools.boxFit(item.imageBoxFit),
+                    color: item.imageColor != null
+                        ? HexColor(item.imageColor)
+                        : null,
+                  ),
           ),
         );
         break;

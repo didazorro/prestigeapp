@@ -25,7 +25,8 @@ enum ConfigType {
   notion,
   bigCommerce,
   gpt,
-  webview
+  webview,
+  haravan,
 }
 
 class ServerConfig {
@@ -123,10 +124,27 @@ class ServerConfig {
 
   bool get isMagento => typeName == 'magento';
 
+  bool get isHaravan => typeName == 'haravan';
+
+  bool get isSupportHideAuthenticate => [
+        ConfigType.woo,
+        ConfigType.opencart,
+        ConfigType.magento,
+        ConfigType.wcfm,
+        ConfigType.dokan,
+        ConfigType.shopify,
+        ConfigType.presta,
+        ConfigType.wordpress
+      ].contains(type);
+
   /// Another framework use the UI of Wordpress blog
   bool get isUseWordPressBlog {
     return typeName != 'wordpress' && typeName != 'gpt' && blog != null;
   }
+
+  bool get isSupportChangeLanguageOnboarding => !(isHaravan || isNotion);
+
+  bool get isNotSuppportCommentBlog => isHaravan;
 
   bool get isPayPluginSupported {
     return [
@@ -157,7 +175,9 @@ class ServerConfig {
 
   bool get isNeedToGenerateTokenForGuestCheckout => isOpencart || isShopify;
 
-  bool get isSupportCouponList => !(isShopify || isMagento);
+  bool get isSupportCouponList => !(isShopify || isMagento || isHaravan);
+
+  bool get isSupportCoupon => !(isHaravan);
 
   bool get allowMultipleCategory => isWooPluginSupported || isWordPress;
 
@@ -171,7 +191,13 @@ class ServerConfig {
     ].contains(type);
   }
 
-  bool get isSupportReorder => !isShopify;
+  bool get isSupportReorder => !(isShopify || isHaravan);
+
+  bool get isSupportEditProfile => !isHaravan;
+
+  bool get isSupportAuthWebView => isHaravan;
+
+  bool get isSupportOnlyCheckoutWebView => isHaravan;
 
   /// Only for FluxGPT
   Map openAIConfig() {
@@ -241,6 +267,8 @@ mixin ConfigMixin {
 
   void configPrestashop(appConfig) {}
 
+  void configHaravan(appConfig) {}
+
   void configTrapi(appConfig) {}
 
   void configDokan(appConfig) {}
@@ -286,6 +314,9 @@ mixin ConfigMixin {
         break;
       case 'presta':
         configPrestashop(appConfig);
+        break;
+      case 'haravan':
+        configHaravan(appConfig);
         break;
       case 'strapi':
         configTrapi(appConfig);
@@ -466,6 +497,7 @@ class RawFramework extends BaseFrameworks {
     required String currentPassword,
     required String userDisplayName,
     String? userEmail,
+    String? username,
     String? userNiceName,
     String? userUrl,
     String? userPassword,

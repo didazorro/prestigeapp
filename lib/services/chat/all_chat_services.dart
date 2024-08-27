@@ -1,6 +1,6 @@
 import 'dart:async';
 
-// import 'package:flux_extended/index.dart';
+import 'package:flux_extended/index.dart';
 
 import 'chat_service.dart';
 import 'constants/enums.dart';
@@ -10,7 +10,7 @@ class ChatServices {
   final Map<ChatProviders, ChatService> supportChatProviders = {
     // // Zoho SalesIQ Mobilisten
     // ChatProviders.zohoSalesiq: SalesiqService(),
-    // ChatProviders.chatGPT: ChatGPTService(),
+    ChatProviders.chatGPT: ChatGPTService(),
   };
 
   Future<void> init() async {
@@ -25,12 +25,12 @@ class ChatServices {
     }
   }
 
-  Future<void> showChatScreen(ChatProviders? provider) async {
+  Future<void> showChatScreen(context, ChatProviders? provider) async {
     if (provider == null) {
       return;
     }
 
-    await supportChatProviders[provider]?.showChatScreen();
+    await supportChatProviders[provider]?.showChatScreen(context);
   }
 
   void changeLanguage(String? langCode) {

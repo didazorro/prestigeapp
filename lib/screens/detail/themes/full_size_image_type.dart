@@ -241,6 +241,7 @@ class _FullSizeLayoutState extends State<FullSizeLayout>
                   : VendorChat(
                       user: userModel.user,
                       store: widget.product?.store,
+                      product: widget.product,
                     ),
           body: Stack(
             children: [

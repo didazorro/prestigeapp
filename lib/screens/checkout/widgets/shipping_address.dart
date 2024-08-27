@@ -17,10 +17,10 @@ import '../../../models/index.dart'
     show Address, AppModel, CartModel, City, Country, CountryState, UserModel;
 import '../../../modules/dynamic_layout/helper/helper.dart';
 import '../../../services/index.dart';
-import '../../../widgets/common/common_safe_area.dart';
 import '../../../widgets/common/flux_image.dart';
 import '../../../widgets/common/place_picker.dart';
 import '../choose_address_screen.dart';
+import 'checkout_action.dart';
 
 part 'shipping_address_extension.dart';
 
@@ -583,6 +583,7 @@ class _ShippingAddressState extends State<ShippingAddress> {
           locale: langCode,
           searchBoxDecoration: InputDecoration(
               labelText: S.of(context).searchByCountryNameOrDialCode),
+          errorMessage: S.of(context).invalidPhoneNumber,
         );
       }
 

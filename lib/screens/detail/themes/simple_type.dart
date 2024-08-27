@@ -106,6 +106,7 @@ class _SimpleLayoutState extends State<SimpleLayout>
                                   : VendorChat(
                                       user: userModel.user,
                                       store: product.store,
+                                      product: product,
                                     ),
                           backgroundColor:
                               Theme.of(context).colorScheme.surface,
@@ -168,16 +169,11 @@ class _SimpleLayoutState extends State<SimpleLayout>
                                   ),
                                 ],
                                 flexibleSpace: Builder(builder: (context) {
-                                  var item = Product.cloneFrom(product);
-                                  if (!kProductDetail.showVideo &&
-                                      item.videoUrl != null) {
-                                    item.videoUrl = null;
-                                  }
                                   return kIsWeb
                                       ? const SizedBox()
                                       : kProductDetail.productImageLayout.isList
                                           ? ProductImageList(
-                                              product: item,
+                                              product: product,
                                               onChange: (index) {
                                                 _selectIndexNotifier.value =
                                                     index;
@@ -187,7 +183,7 @@ class _SimpleLayoutState extends State<SimpleLayout>
                                                   0.8,
                                             )
                                           : ProductImageSlider(
-                                              product: item,
+                                              product: product,
                                               onChange: (index) {
                                                 _selectIndexNotifier.value =
                                                     index;

@@ -7,12 +7,15 @@ import '../../common/tools.dart';
 import '../../generated/l10n.dart';
 import '../../models/entities/store_arguments.dart';
 import '../../models/vendor/store_model.dart';
+import '../common/flux_image.dart';
 import '../common/star_rating.dart';
 
 class StoreItem extends StatelessWidget {
   final Store? store;
 
   const StoreItem({this.store});
+
+  String get bannerUrl => store?.banner ?? kDefaultStoreImage;
 
   @override
   Widget build(BuildContext context) {
@@ -36,24 +39,21 @@ class StoreItem extends StatelessWidget {
             ]),
         child: Column(
           children: [
-            if (isNotBlank(store!.banner))
-              ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(6.0),
-                  topRight: Radius.circular(6.0),
-                ),
-                child: ImageResize(
-                  url: store!.banner,
-                  size: kSize.medium,
-                  isResize: false,
-                  fit: ImageTools.boxFit(
-                    kVendorConfig.bannerFit,
-                    defaultValue: BoxFit.cover,
-                  ),
-                  height: 120,
-                  width: MediaQuery.of(context).size.width,
-                ),
+            ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(6.0),
+                topRight: Radius.circular(6.0),
               ),
+              child: FluxImage(
+                imageUrl: bannerUrl,
+                fit: ImageTools.boxFit(
+                  kVendorConfig.bannerFit,
+                  defaultValue: BoxFit.cover,
+                ),
+                height: 120,
+                width: MediaQuery.sizeOf(context).width,
+              ),
+            ),
             Container(
               padding: const EdgeInsets.all(15),
               decoration: BoxDecoration(

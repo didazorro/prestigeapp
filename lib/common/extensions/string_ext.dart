@@ -61,6 +61,10 @@ extension StringExtension on String {
         .replaceAll('<a>', '')
         .replaceAll('</a>', '');
   }
+
+  bool isYoutubeLink() {
+    return contains('youtu.be') || contains('youtube');
+  }
 }
 
 extension NullStringExtension on String? {
@@ -82,5 +86,19 @@ extension NullStringExtension on String? {
     }
 
     return newText;
+  }
+}
+
+extension ServerConfigExt on String {
+  bool get isTheSameServer {
+    final serverConfigUri = Uri.tryParse(Configurations.serverConfig['url']);
+    if (serverConfigUri == null) return false;
+
+    final uri = Uri.tryParse(this);
+    if (uri == null) return false;
+
+    if (uri.host != serverConfigUri.host) return false;
+
+    return true;
   }
 }

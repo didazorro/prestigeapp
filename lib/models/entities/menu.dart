@@ -5,12 +5,16 @@ class Menu {
   String? price;
   String? description;
   bool? bookable;
+  String? image;
+  String? thumb;
 
   Menu.fromJson(Map json) {
     name = json['name'];
     price = isNotBlank(json['price']) ? json['price'] : '0';
     bookable = json['bookable'] == 'on';
     description = json['description'];
+    image = json['image'];
+    thumb = json['thumb'];
   }
 
   Map<String, dynamic> toJson() {
@@ -19,6 +23,8 @@ class Menu {
       'price': price,
       'bookable': bookable,
       'description': description,
+      'image': image,
+      'thumb': thumb,
     };
   }
 }

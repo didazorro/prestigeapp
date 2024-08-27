@@ -64,7 +64,7 @@ class PaypalPaymentState extends State<PaypalPayment> {
         }
       } catch (e) {
         final snackBar = SnackBar(
-          content: Text(e.toString()),
+          content: Text(e.toString().clearExceptionKey()),
           duration: const Duration(seconds: 10),
           action: SnackBarAction(
             label: S.of(context).close,

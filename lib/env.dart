@@ -6,7 +6,7 @@ Map<String, dynamic> environment = {
 
     /// 🌍 The register URL domain that matches with Envato Purchase Code
     /// 🔑 Also, make sure to update the envatoPurchaseCode from configs/env.properties
-    'url': 'https://prestigeksa.net/',
+    'url': 'https://wclovers.mstore.io',
 
     'consumerKey': 'ck_cf6b2a2966f2d908cc08ebaef1336b15f9a6697c',
     'consumerSecret': 'cs_9756800a6b17a6c76bcde454de61fd30ce389fad',
@@ -263,7 +263,7 @@ Map<String, dynamic> environment = {
     "EnableDeliveryDateOnCheckout": false,
 
     /// Enable new SMS Login
-    "EnableNewSMSLogin": false,
+    "EnableNewSMSLogin": true,
 
     /// Enable bottom add to cart from product card view
     "EnableBottomAddToCart": true,
@@ -354,6 +354,9 @@ Map<String, dynamic> environment = {
 
     /// TeraWallet Withdrawal (https://standalonetech.com/product/wallet-withdrawal/)
     "EnableTeraWalletWithdrawal": false,
+
+    //set param is_all_data=true to get full product data for WooCommerce
+    "EnableIsAllData": false,
   },
   "defaultDrawer": {
     "logo": "assets/images/logo.png",
@@ -385,6 +388,11 @@ Map<String, dynamic> environment = {
     "about",
   ],
   "loginSetting": {
+    /// Set to false to disable both login and registration options
+    "enable": true,
+
+    /// Set to false to disable only registration option
+    "enableRegister": true,
     "IsRequiredLogin": false,
     "showAppleLogin": true,
     "showFacebook": false,
@@ -392,6 +400,9 @@ Map<String, dynamic> environment = {
     "showGoogleLogin": true,
     "showPhoneNumberWhenRegister": false,
     "requirePhoneNumberWhenRegister": false,
+
+    /// Lets users freely input a Username instead of the default from email
+    "requireUsernameWhenRegister": false,
     "isResetPasswordSupported": true,
 
     /// Set true value to show only the SMS Login screen, and set the false
@@ -536,6 +547,14 @@ Map<String, dynamic> environment = {
     "iOSBundleId": "com.inspireui.mstore.flutter",
     "iOSAppMinimumVersion": "1.0.1",
     "iOSAppStoreId": "1469772800"
+  },
+
+  "dynamicLinkConfig": {
+    "enable": true,
+    "type": "branchIO",
+    "branchIO": {
+      "liveMode": false,
+    }
   },
 
   /// ➡️ lib/common/languages.dart
@@ -1240,9 +1259,11 @@ Map<String, dynamic> environment = {
     'production': false,
     'enabled': true
   },
+
+  /// Ref: https://support.inspireui.com/help-center/articles/35/37/120/multi-shipping-countries-and-states
   "defaultCountryShipping": [],
 
-  /// config for after shipping
+  /// Ref: https://support.inspireui.com/help-center/articles/35/37/169/aftership
   "afterShip": {
     "api": "e2e9bae8-ee39-46a9-a084-781d0139274f",
     "tracking_url": "https://fluxstore.aftership.com"
@@ -1431,8 +1452,13 @@ Map<String, dynamic> environment = {
     }
   },
 
-  /// Exclude these categories from the list, for example "311,23,208"
-  "excludedCategory": "311",
+  /// Exclude these category IDs from the list (e.g., "311,23,208").
+  /// Note: Products in these categories will still appear. To hide specific products, use "excludedProductIDs".
+  "excludedCategoryIDs": "",
+
+  /// Exclude these product IDs from the list, e.g., "36920,35508,31893"
+  "excludedProductIDs": "",
+
   "saleOffProduct": {
     /// Show Count Down for product type SaleOff
     "ShowCountDown": true,
@@ -1448,10 +1474,17 @@ Map<String, dynamic> environment = {
   "configChat": {
     "EnableSmartChat": true,
     "enableVendorChat": true,
-    "UseRealtimeChat": false,
     "showOnScreens": ["profile"],
     "hideOnScreens": [],
     "version": "2",
+    "realtimeChatConfig": {
+      "enable": true,
+      "adminEmail": "admininspireui@gmail.com",
+      "adminName": "InspireUI",
+      "userCanDeleteChat": false,
+      "userCanBlockAnotherUser": false,
+      "adminCanAccessAllChatRooms": false,
+    },
   },
   "openAIConfig": {
     'enableChat': true,
@@ -1510,8 +1543,6 @@ Map<String, dynamic> environment = {
       "description": "Twitter Chat"
     }
   ],
-  "adminEmail": "admininspireui@gmail.com",
-  "adminName": "InspireUI",
 
   /// ➡️ lib/common/vendor.dart
   "vendorConfig": {

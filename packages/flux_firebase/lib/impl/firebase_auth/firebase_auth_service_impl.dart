@@ -48,6 +48,8 @@ class FirebaseAuthServiceImpl extends FirebaseAuthService {
     } catch (err) {
       /// In case this user was registered on web
       /// so Firebase user was not created.
+      /// TODO: Update solution if user enable this option
+      /// https://stackoverflow.com/a/77744190/19622959
       if (err is FirebaseAuthException && err.code == 'user-not-found') {
         /// Create Firebase user automatically.
         /// createUserWithEmailAndPassword will auto sign in after success.
@@ -122,5 +124,10 @@ class FirebaseAuthServiceImpl extends FirebaseAuthService {
   @override
   void signOut() {
     _auth.signOut();
+  }
+
+  @override
+  Future<String?>? getIdToken() {
+    return _auth.currentUser?.getIdToken();
   }
 }

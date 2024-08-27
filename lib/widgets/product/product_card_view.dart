@@ -5,6 +5,7 @@ import '../../common/tools.dart';
 import '../../models/index.dart' show CartModel, Product;
 import '../../modules/dynamic_layout/config/product_config.dart';
 import '../../modules/dynamic_layout/helper/helper.dart';
+import '../../services/outside/index.dart';
 import '../../services/services.dart';
 import 'action_button_mixin.dart';
 import 'index.dart'
@@ -149,6 +150,8 @@ class _ProductCardState extends State<ProductCard> with ActionButtonMixin {
             quantity: _quantity,
           ),
         ],
+        OutsideService.subProductCardInfoWidget(widget.item) ??
+            const SizedBox(),
       ],
     );
 

@@ -92,7 +92,11 @@ class _HorizontalSliderListState extends State<HorizontalSliderList>
                           blog: blog,
                           type: config.type,
                           imageBorder: config.imageBorder,
-                          onTap: () => onTapBlog(blog: blog, blogs: value),
+                          onTap: () => onTapBlog(
+                            blog: blog,
+                            blogs: value,
+                            context: context,
+                          ),
                         ),
                       ),
                   ],
@@ -114,6 +118,7 @@ class _HorizontalSliderListState extends State<HorizontalSliderList>
                       config: configJson,
                       data: null,
                     ),
+                    context: context,
                   ),
                 ),
                 ...List.filled(
@@ -136,6 +141,7 @@ class _HorizontalSliderListState extends State<HorizontalSliderList>
                     config: configJson,
                     data: value,
                   ),
+                  context: context,
                 ),
               ),
               value.isEmpty

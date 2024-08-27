@@ -3,6 +3,7 @@ class StaffBookingModel {
   String? displayName;
   String? email;
   String? username;
+  // double? cost;
 
   StaffBookingModel({
     this.id,
@@ -16,6 +17,7 @@ class StaffBookingModel {
     displayName = json['displayname'] ?? '';
     email = json['email'] ?? '';
     username = json['username'] ?? '';
+    // cost = double.tryParse('${json['cost']}');
   }
 
   Map<String, dynamic> toJson() {
@@ -23,23 +25,8 @@ class StaffBookingModel {
       'id': id,
       'displayName': displayName,
       'email': email,
-      'username': username
+      'username': username,
+      // 'cost': cost,
     };
-  }
-}
-
-class ProductBooking {
-  int? id;
-  String? name;
-  String? staffCost;
-  String? staffQty;
-  String? price;
-
-  ProductBooking.fromJson(Map json) {
-    id = json['id'];
-    name = json['name'];
-    staffCost = json['staff_cost'];
-    staffQty = json['staff_qty'];
-    price = json['price'];
   }
 }

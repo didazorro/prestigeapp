@@ -11,7 +11,7 @@ class ListingBooking {
   String? orderId;
   String? orderStatus;
   Map<String, String?> adults = {};
-  List<String?> services = [];
+  List<Map<String, String>> services = [];
   ListingBooking(
       this.title,
       this.featuredImage,
@@ -47,7 +47,10 @@ class ListingBooking {
       return;
     }
     for (var item in commentJson['service']) {
-      services.add(item['service']['name']);
+      services.add({
+        'name': item['service']['name'],
+        'price': item['service']['price'],
+      });
     }
   }
 }

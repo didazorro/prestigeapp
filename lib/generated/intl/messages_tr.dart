@@ -28,111 +28,130 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m3(state) => "Bluetooth Adaptörü: ${state}";
 
-  static String m4(currency) => "Para birimi ${currency}olarak değiştirildi";
+  static String m4(author) => "Yazar: ${author}";
 
-  static String m5(number) => "${number} karakter kaldı";
+  static String m5(currency) => "Para birimi ${currency}olarak değiştirildi";
 
-  static String m6(priceRate, pointRate) => "${priceRate} = ${pointRate} Puan";
+  static String m6(number) => "${number} karakter kaldı";
 
-  static String m7(count) => "${count} öğe";
+  static String m7(priceRate, pointRate) => "${priceRate} = ${pointRate} Puan";
 
   static String m8(count) => "${count} öğe";
 
-  static String m9(country) => "${country} ülke desteklenmiyor";
+  static String m9(count) => "${count} öğe";
 
-  static String m10(currency) => "${currency} desteklenmiyor";
+  static String m10(count) => "${count} öğe";
 
-  static String m11(day) => "${day} Gün önce";
+  static String m11(count) => "${count} ürün";
 
-  static String m12(total) => "~${total} km";
+  static String m12(country) => "${country} ülke desteklenmiyor";
 
-  static String m13(timeLeft) => "Ends in ${timeLeft}";
+  static String m13(currency) => "${currency} desteklenmiyor";
 
-  static String m14(captcha) => "Onaylamak için ${captcha} girin:";
+  static String m14(day) => "${day} Gün önce";
 
-  static String m15(message) => "Hata: ${message}";
+  static String m15(total) => "~${total} km";
 
-  static String m16(time) => " ${time}içinde süresi doluyor";
+  static String m16(timeLeft) => "Ends in ${timeLeft}";
 
-  static String m17(total) => ">${total} km";
+  static String m17(captcha) => "Onaylamak için ${captcha} girin:";
 
-  static String m18(hour) => "${hour} Saat önce";
+  static String m18(message) => "Hata: ${message}";
 
-  static String m19(count) =>
+  static String m19(message) => "Hata: ${message}";
+
+  static String m20(time) => " ${time}içinde süresi doluyor";
+
+  static String m21(total) => ">${total} km";
+
+  static String m22(hour) => "${hour} Saat önce";
+
+  static String m23(currentBalance) =>
+      "Cüzdanınızda yalnızca ${currentBalance} kaldı";
+
+  static String m24(count) =>
       " ${Intl.plural(count, one: '${count} item', other: '${count} items')}";
 
-  static String m20(message) =>
+  static String m25(message) =>
       "There is an issue with the app during request the data, please contact admin for fixing the issues: ${message}";
 
-  static String m21(currency, amount) =>
+  static String m26(currency, amount) =>
       "Bu ödemeyi kullanmak için maksimum tutar ${currency} ${amount}";
 
-  static String m22(size) => "Maksimum dosya boyutu: ${size} MB";
+  static String m27(size) => "Maksimum dosya boyutu: ${size} MB";
 
-  static String m23(currency, amount) =>
+  static String m28(currency, amount) =>
       "Bu ödemeyi kullanmak için minimum tutar ${currency} ${amount}";
 
-  static String m24(minute) => "${minute} Dakika önce";
+  static String m29(minute) => "${minute} Dakika önce";
 
-  static String m25(month) => "${month} ay önce";
+  static String m30(month) => "${month} ay önce";
 
-  static String m26(store) => " ${store}\'dan daha fazlası";
+  static String m31(store) => " ${store}\'dan daha fazlası";
 
-  static String m27(number) =>
+  static String m32(number) =>
       " ${number}kişilik gruplar halinde satın alınmalıdır";
 
-  static String m28(itemCount) => "${itemCount} ürün";
+  static String m33(itemCount) => "${itemCount} ürün";
 
-  static String m29(price) => "Toplam seçenek: ${price}";
+  static String m34(price) => "Toplam seçenek: ${price}";
 
-  static String m30(amount) => " ${amount}öde";
+  static String m35(amount) => " ${amount}öde";
 
-  static String m31(name) => "${name} başarıyla sepete eklendi";
+  static String m36(name) => "${name} başarıyla sepete eklendi";
 
-  static String m32(total) => "Adet: ${total}";
+  static String m37(total) => "Adet: ${total}";
 
-  static String m33(percent) => "% ${percent} İndirim ";
+  static String m38(name) => " ${name}\'dan para alındı";
 
-  static String m34(keyword) => "Şunun için arama sonuçları: \'${keyword}\'";
+  static String m39(percent) => "% ${percent} İndirim ";
 
-  static String m35(keyword, count) => "${keyword} (${count} öğe)";
+  static String m40(keyword) => "Şunun için arama sonuçları: \'${keyword}\'";
 
-  static String m36(keyword, count) => "${keyword} (${count} öğe)";
+  static String m41(keyword, count) => "${keyword} (${count} öğe)";
 
-  static String m37(second) => "${second} Saniye önce";
+  static String m42(keyword, count) => "${keyword} (${count} öğe)";
 
-  static String m38(totalCartQuantity) => "${totalCartQuantity} ürün, Sepette";
+  static String m43(second) => "${second} Saniye önce";
 
-  static String m39(numberOfUnitsSold) => "Sold: ${numberOfUnitsSold}";
+  static String m44(totalCartQuantity) => "${totalCartQuantity} ürün, Sepette";
 
-  static String m40(fieldName) => " ${fieldName} alanı zorunludur";
+  static String m45(numberOfUnitsSold) => "Sold: ${numberOfUnitsSold}";
 
-  static String m41(total) => "${total} ürün";
+  static String m46(fieldName) => " ${fieldName} alanı zorunludur";
 
-  static String m42(maxPointDiscount, maxPriceDiscount) =>
+  static String m47(total) => "${total} ürün";
+
+  static String m48(name) => " ${name}\'a para transferi yapın";
+
+  static String m49(maxPointDiscount, maxPriceDiscount) =>
       "Bu siparişte ${maxPriceDiscount} indirim için maksimum ${maxPointDiscount} Puan kullanın!";
 
-  static String m43(date) => " ${date}tarihine kadar geçerlidir";
+  static String m50(date) => " ${date}tarihine kadar geçerlidir";
 
-  static String m44(message) => "Hata: ${message}";
+  static String m51(balance) => "Cüzdan bakiyesi: ${balance}";
 
-  static String m45(defaultCurrency) =>
+  static String m52(message) => "Hata: ${message}";
+
+  static String m53(defaultCurrency) =>
       "Şu anda seçili para birimi Cüzdan özelliği için kullanılamıyor, lütfen bunu ${defaultCurrency}olarak değiştirin";
 
-  static String m46(length) => " \$${length} Ürün Bulundu";
+  static String m54(length) => " \$${length} Ürün Bulundu";
 
-  static String m47(week) => " ${week}haftası";
+  static String m55(week) => " ${week}haftası";
 
-  static String m48(name) => "Hoş geldiniz ${name}";
+  static String m56(name) => "Hoş geldiniz ${name}";
 
-  static String m49(year) => "${year} yıl önce";
+  static String m57(year) => "${year} yıl önce";
 
-  static String m50(total) => "#${total}numaralı siparişe atadınız";
+  static String m58(total) => "#${total}numaralı siparişe atadınız";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "aboutUs": MessageLookupByLibrary.simpleMessage("Hakkımızda"),
         "account": MessageLookupByLibrary.simpleMessage("hesap"),
+        "accountApprovalTitle":
+            MessageLookupByLibrary.simpleMessage("Onay Altında"),
         "accountDeleteDescription": MessageLookupByLibrary.simpleMessage(
             "Hesabınızı silmek, kişisel bilgileri veritabanımızdan kaldırır. E-postanız kalıcı olarak rezerve edilir ve aynı e-posta yeni bir hesap açmak için yeniden kullanılamaz."),
         "accountIsPendingApproval":
@@ -161,7 +180,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addToCart": MessageLookupByLibrary.simpleMessage("Sepete ekle"),
         "addToCartMaximum":
             MessageLookupByLibrary.simpleMessage("Maksimum miktar aşıldı"),
-        "addToCartSucessfully":
+        "addToCartSuccessfully":
             MessageLookupByLibrary.simpleMessage("Sepete başarıyla eklendi"),
         "addToOrder": MessageLookupByLibrary.simpleMessage("Siparişe ekle"),
         "addToQuoteRequest":
@@ -222,6 +241,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "audioDetected": MessageLookupByLibrary.simpleMessage(
             "Ses öğeleri algılandı. Audio Player\'a eklemek istiyor musunuz?"),
         "availability": MessageLookupByLibrary.simpleMessage("Stok Durumu"),
+        "availabilityProduct":
+            MessageLookupByLibrary.simpleMessage("Mevcutluk:"),
         "availablePoints": m2,
         "averageRating": MessageLookupByLibrary.simpleMessage("Ortalama puanı"),
         "back": MessageLookupByLibrary.simpleMessage("Geri"),
@@ -246,6 +267,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "bleHasNotBeenEnabled":
             MessageLookupByLibrary.simpleMessage("Bluetooth etkinleştirilmedi"),
         "bleState": m3,
+        "block": MessageLookupByLibrary.simpleMessage("Engellemek"),
+        "blockUser":
+            MessageLookupByLibrary.simpleMessage("Kullanıcıyı engelle"),
         "blog": MessageLookupByLibrary.simpleMessage("Blog"),
         "booked":
             MessageLookupByLibrary.simpleMessage("Önceden rezerve edilmiş"),
@@ -276,6 +300,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "by": MessageLookupByLibrary.simpleMessage("Tarafından"),
         "byAppointmentOnly":
             MessageLookupByLibrary.simpleMessage("Sadece randevuyla"),
+        "byAuthor": m4,
         "byBrand": MessageLookupByLibrary.simpleMessage("Markaya göre"),
         "byCategory": MessageLookupByLibrary.simpleMessage("Kategoriye Göre"),
         "byPrice": MessageLookupByLibrary.simpleMessage("Fiyata Göre"),
@@ -306,9 +331,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "canNotUpdateInfo": MessageLookupByLibrary.simpleMessage(
             "Kullanıcı bilgileri güncellenemiyor."),
         "cancel": MessageLookupByLibrary.simpleMessage("İptal"),
+        "cancelOrder": MessageLookupByLibrary.simpleMessage("İptal etmek"),
         "cancelled": MessageLookupByLibrary.simpleMessage("İptal Edildi"),
         "cancelledRequests":
             MessageLookupByLibrary.simpleMessage("İptal Edilen İstekler"),
+        "cannotDeleteAccount":
+            MessageLookupByLibrary.simpleMessage("Bu hesap silinemez"),
+        "cannotSendMessage": MessageLookupByLibrary.simpleMessage(
+            "Bu kullanıcıya mesaj gönderemezsiniz"),
         "cantFindThisOrderId": MessageLookupByLibrary.simpleMessage(
             "Bu sipariş kimliğini bulamıyorum"),
         "cantPickDateInThePast": MessageLookupByLibrary.simpleMessage(
@@ -324,8 +354,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeLanguage": MessageLookupByLibrary.simpleMessage("Dili Değiştir"),
         "changePrinter":
             MessageLookupByLibrary.simpleMessage("Yazıcıyı Değiştir"),
-        "changedCurrencyTo": m4,
-        "characterRemain": m5,
+        "changedCurrencyTo": m5,
+        "characterRemain": m6,
         "chat": MessageLookupByLibrary.simpleMessage("Sohbet"),
         "chatGPT": MessageLookupByLibrary.simpleMessage("Sohbet GPT\'si"),
         "chatListScreen":
@@ -406,15 +436,19 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Gönderime Devam Et"),
         "continues": MessageLookupByLibrary.simpleMessage("Devam et"),
         "conversations": MessageLookupByLibrary.simpleMessage("Konuşmalar"),
-        "convertPoint": m6,
+        "convertPoint": m7,
         "copied": MessageLookupByLibrary.simpleMessage("kopyalanan"),
         "copy": MessageLookupByLibrary.simpleMessage("kopya"),
         "copyright": MessageLookupByLibrary.simpleMessage(
             "© 2024 InspireUI Tüm hakları saklıdır."),
-        "countItem": m7,
-        "countItems": m8,
+        "countItem": m8,
+        "countItems": m9,
+        "countProduct": m10,
+        "countProducts": m11,
         "country": MessageLookupByLibrary.simpleMessage("Ülke"),
-        "countryIsNotSupported": m9,
+        "countryCodeIsRequired":
+            MessageLookupByLibrary.simpleMessage("Ülke kodu gereklidir"),
+        "countryIsNotSupported": m12,
         "countryIsRequired":
             MessageLookupByLibrary.simpleMessage("Ülke alanı zorunludur"),
         "couponCode": MessageLookupByLibrary.simpleMessage("Kupon Kodu"),
@@ -439,7 +473,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "createdOn":
             MessageLookupByLibrary.simpleMessage("Oluşturulma tarihi:"),
         "currencies": MessageLookupByLibrary.simpleMessage("Para Birimleri"),
-        "currencyIsNotSupported": m10,
+        "currencyIsNotSupported": m13,
         "currentPassword": MessageLookupByLibrary.simpleMessage("Mevcut Şifre"),
         "currentlyWeOnlyHave":
             MessageLookupByLibrary.simpleMessage("Currently we only have"),
@@ -464,7 +498,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "dateTime": MessageLookupByLibrary.simpleMessage("Tarih Saat"),
         "dateWiseClose":
             MessageLookupByLibrary.simpleMessage("Tarih akıllıca yakın"),
-        "daysAgo": m11,
+        "daysAgo": m14,
         "debit": MessageLookupByLibrary.simpleMessage("Borç"),
         "decline": MessageLookupByLibrary.simpleMessage("düşüş"),
         "delete": MessageLookupByLibrary.simpleMessage("silmek"),
@@ -474,8 +508,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteAccountSuccess": MessageLookupByLibrary.simpleMessage(
             "Hesap başarıyla silindi. Oturumunuz sona erdi."),
         "deleteAll": MessageLookupByLibrary.simpleMessage("Hepsini sil"),
+        "deleteConversation":
+            MessageLookupByLibrary.simpleMessage("Konuşmayı sil"),
         "delivered": MessageLookupByLibrary.simpleMessage("teslim"),
         "deliveredTo": MessageLookupByLibrary.simpleMessage("Teslim edildi"),
+        "delivering": MessageLookupByLibrary.simpleMessage("Teslim etmek"),
         "deliveryBoy": MessageLookupByLibrary.simpleMessage("Kurye:"),
         "deliveryDate": MessageLookupByLibrary.simpleMessage("Teslim tarihi"),
         "deliveryDetails":
@@ -493,7 +530,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Satın almayı devre dışı bırak"),
         "discount": MessageLookupByLibrary.simpleMessage("İndirim"),
         "displayName": MessageLookupByLibrary.simpleMessage("İsim - Soyisim"),
-        "distance": m12,
+        "distance": m15,
         "doNotAnyTransactions":
             MessageLookupByLibrary.simpleMessage("Henüz bir işleminiz yok"),
         "doYouWantToExitApp": MessageLookupByLibrary.simpleMessage(
@@ -502,6 +539,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Yorumunuzu göndermeden ayrılmak mı istiyorsunuz?"),
         "doYouWantToLogout": MessageLookupByLibrary.simpleMessage(
             "Oturumu kapatmak istiyor musunuz?"),
+        "doYouWantToUnblock": MessageLookupByLibrary.simpleMessage(
+            "Bu kullanıcının engellemesini kaldırmak istiyor musunuz?"),
         "doesNotSupportApplePay": MessageLookupByLibrary.simpleMessage(
             "ApplePay desteklenmiyor. Lütfen cüzdanınızı ve kartınızı kontrol edin"),
         "done": MessageLookupByLibrary.simpleMessage("Tamam"),
@@ -520,6 +559,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "editWithoutColon": MessageLookupByLibrary.simpleMessage("Düzenle"),
         "egypt": MessageLookupByLibrary.simpleMessage("Mısır"),
         "email": MessageLookupByLibrary.simpleMessage("E-Posta"),
+        "emailAddressInvalid":
+            MessageLookupByLibrary.simpleMessage("E-posta adresi geçersiz"),
+        "emailAlreadyInUse":
+            MessageLookupByLibrary.simpleMessage("E-posta zaten kullanımda!"),
         "emailDeleteDescription": MessageLookupByLibrary.simpleMessage(
             "Hesabınızı silmek, tüm posta listelerinden çıkmanıza neden olacaktır."),
         "emailDoesNotExist": MessageLookupByLibrary.simpleMessage(
@@ -559,12 +602,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tatil modunu etkinleştir"),
         "endDateCantBeAfterFirstDate": MessageLookupByLibrary.simpleMessage(
             "Lütfen ilk tarihten sonra bir tarih seçin"),
-        "endsIn": m13,
+        "endsIn": m16,
         "english": MessageLookupByLibrary.simpleMessage("İngilizce"),
-        "enterCaptcha": m14,
+        "enterAmount": MessageLookupByLibrary.simpleMessage("Miktarı girin"),
+        "enterCaptcha": m17,
         "enterEmailEachRecipient": MessageLookupByLibrary.simpleMessage(
             "Her alıcı için bir e-posta adresi girin"),
-        "enterSendedCode": MessageLookupByLibrary.simpleMessage(
+        "enterSentCode": MessageLookupByLibrary.simpleMessage(
             "Size gönderilen kodu giriniz."),
         "enterVoucherCode":
             MessageLookupByLibrary.simpleMessage("Kupon kodunu girin"),
@@ -583,13 +627,19 @@ class MessageLookup extends MessageLookupByLibrary {
             "Başlamak için telefon numaranızı girin."),
         "enterYourPhoneNumber":
             MessageLookupByLibrary.simpleMessage("Telefon numaranızı girin"),
-        "error": m15,
+        "enterYourUsername":
+            MessageLookupByLibrary.simpleMessage("Kullanıcı adınızı girin"),
+        "error": m18,
         "errorAmountTransfer": MessageLookupByLibrary.simpleMessage(
             "Girilen miktar, mevcut cüzdan miktarından fazla. Lütfen tekrar deneyin!"),
         "errorEmailFormat":
             MessageLookupByLibrary.simpleMessage("Geçerli bir e."),
+        "errorMsg": m19,
+        "errorOnGettingPost": MessageLookupByLibrary.simpleMessage(
+            "Gönderi alınırken hata oluştu!"),
         "errorPasswordFormat": MessageLookupByLibrary.simpleMessage(
             "Lütfen en az 8 karakterden oluşan bir şifre girin"),
+        "errorTitle": MessageLookupByLibrary.simpleMessage("Hata"),
         "evening": MessageLookupByLibrary.simpleMessage("akşam"),
         "events": MessageLookupByLibrary.simpleMessage("Etkinlikler"),
         "expectedDeliveryDate":
@@ -598,7 +648,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "expiredDate":
             MessageLookupByLibrary.simpleMessage("Son kullanma tarihi geçmiş"),
         "expiredDateHint": MessageLookupByLibrary.simpleMessage("AA / YY"),
-        "expiringInTime": m16,
+        "expiringInTime": m20,
         "exploreNow": MessageLookupByLibrary.simpleMessage("Şimdi keşfet"),
         "external": MessageLookupByLibrary.simpleMessage("dış"),
         "extraServices":
@@ -642,6 +692,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sabit Ürün İndirimi"),
         "forThisProduct":
             MessageLookupByLibrary.simpleMessage("for this product"),
+        "free": MessageLookupByLibrary.simpleMessage("Özgür"),
         "freeOfCharge": MessageLookupByLibrary.simpleMessage("ücretsiz"),
         "french": MessageLookupByLibrary.simpleMessage("French"),
         "friday": MessageLookupByLibrary.simpleMessage("Cuma"),
@@ -668,7 +719,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "goBackToShipping":
             MessageLookupByLibrary.simpleMessage("Gönderime Geri Dön"),
         "good": MessageLookupByLibrary.simpleMessage("İyi"),
-        "greaterDistance": m17,
+        "greaterDistance": m21,
         "greek": MessageLookupByLibrary.simpleMessage("Yunan"),
         "grossSales": MessageLookupByLibrary.simpleMessage("Brüt satış"),
         "grouped": MessageLookupByLibrary.simpleMessage("gruplanmış"),
@@ -686,7 +737,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "historyTransaction": MessageLookupByLibrary.simpleMessage("Tarihçe"),
         "home": MessageLookupByLibrary.simpleMessage("Ev"),
         "hour": MessageLookupByLibrary.simpleMessage("Saat"),
-        "hoursAgo": m18,
+        "hoursAgo": m22,
         "hungarian": MessageLookupByLibrary.simpleMessage("Macarca"),
         "hungary": MessageLookupByLibrary.simpleMessage("Hungary"),
         "iAgree": MessageLookupByLibrary.simpleMessage("Onaylıyorum"),
@@ -704,7 +755,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "indonesian": MessageLookupByLibrary.simpleMessage("Endonezce"),
         "informationTable":
             MessageLookupByLibrary.simpleMessage("Bilgi Tablosu"),
+        "installDigitsPlugin": MessageLookupByLibrary.simpleMessage(
+            "Lütfen DIGITS: Wordpress Mobil Numara Kayıt ve Giriş eklentisini kurun"),
         "instantlyClose": MessageLookupByLibrary.simpleMessage("anında kapat"),
+        "insufficientBalanceMessage": m23,
         "invalidPhoneNumber":
             MessageLookupByLibrary.simpleMessage("Geçersiz telefon numarası"),
         "invalidSMSCode":
@@ -717,7 +771,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "isTyping": MessageLookupByLibrary.simpleMessage("yazıyor..."),
         "italian": MessageLookupByLibrary.simpleMessage("İtalyan"),
         "item": MessageLookupByLibrary.simpleMessage("madde"),
-        "itemQuantity": m19,
+        "itemQuantity": m24,
         "itemTotal": MessageLookupByLibrary.simpleMessage("Öğe toplamı:"),
         "items": MessageLookupByLibrary.simpleMessage("Ürünler"),
         "itsOrdered":
@@ -761,7 +815,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("Giriş Yap"),
         "loginCanceled":
             MessageLookupByLibrary.simpleMessage("The login was canceled"),
-        "loginErrorServiceProvider": m20,
+        "loginErrorServiceProvider": m25,
         "loginFailed": MessageLookupByLibrary.simpleMessage("Giriş başarısız!"),
         "loginInvalid": MessageLookupByLibrary.simpleMessage(
             "Bu uygulamayı kullanma izniniz yok."),
@@ -789,29 +843,33 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Gönderildi olarak işaretle"),
         "markAsUnread":
             MessageLookupByLibrary.simpleMessage("Okunmamış olarak işaretle"),
-        "maxAmountForPayment": m21,
-        "maximumFileSizeMb": m22,
+        "maxAmountForPayment": m26,
+        "maximumFileSizeMb": m27,
         "maybeLater": MessageLookupByLibrary.simpleMessage("Belki daha sonra"),
         "menuOrder": MessageLookupByLibrary.simpleMessage("Menü sırası"),
         "menus": MessageLookupByLibrary.simpleMessage("Menüler"),
         "message": MessageLookupByLibrary.simpleMessage("Mesaj"),
         "messageTo": MessageLookupByLibrary.simpleMessage("Mesajı gönder"),
-        "minAmountForPayment": m23,
+        "minAmountForPayment": m28,
         "minimumQuantityIs":
             MessageLookupByLibrary.simpleMessage("Minimum quantity is"),
-        "minutesAgo": m24,
+        "minutesAgo": m29,
         "mobile": MessageLookupByLibrary.simpleMessage("Mobil"),
+        "mobileIsRequired":
+            MessageLookupByLibrary.simpleMessage("Mobil gerekli"),
+        "mobileNumberInUse": MessageLookupByLibrary.simpleMessage(
+            "Cep Telefonu Numarası Zaten Kullanımda!"),
         "mobileVerification":
             MessageLookupByLibrary.simpleMessage("Mobil Doğrulama"),
         "momentAgo": MessageLookupByLibrary.simpleMessage("az önce"),
         "monday": MessageLookupByLibrary.simpleMessage("Pazartesi"),
-        "monthsAgo": m25,
+        "monthsAgo": m30,
         "more": MessageLookupByLibrary.simpleMessage("...Daha"),
-        "moreFromStore": m26,
+        "moreFromStore": m31,
         "moreInformation":
             MessageLookupByLibrary.simpleMessage("daha fazla bilgi"),
         "morning": MessageLookupByLibrary.simpleMessage("sabah"),
-        "mustBeBoughtInGroupsOf": m27,
+        "mustBeBoughtInGroupsOf": m32,
         "mustSelectOneItem":
             MessageLookupByLibrary.simpleMessage("1 öğe seçilmeli"),
         "myCart": MessageLookupByLibrary.simpleMessage("Sepetim"),
@@ -822,10 +880,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ürününüz yok. Bir tane oluşturmaya çalışın!"),
         "myWallet": MessageLookupByLibrary.simpleMessage("Cüzdanım"),
         "myWishList": MessageLookupByLibrary.simpleMessage("İstek Listem"),
-        "nItems": m28,
+        "nItems": m33,
         "name": MessageLookupByLibrary.simpleMessage("isim"),
         "nameOnCard": MessageLookupByLibrary.simpleMessage("Karttaki İsim"),
         "nearbyPlaces": MessageLookupByLibrary.simpleMessage("Yakın adresler"),
+        "needHelp": MessageLookupByLibrary.simpleMessage(
+            "Yardıma mı ihtiyacınız var? "),
         "needToLoginAgain": MessageLookupByLibrary.simpleMessage(
             "Güncellemeyi gerçekleştirmek için tekrar giriş yapmanız gerekiyor"),
         "netherlands": MessageLookupByLibrary.simpleMessage("Hollanda"),
@@ -844,10 +904,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Opps, makale bulunamadı.."),
         "noCameraPermissionIsGranted": MessageLookupByLibrary.simpleMessage(
             "Kamera izni verilmez. Lütfen cihazınızın Ayarlarında verin."),
+        "noComments": MessageLookupByLibrary.simpleMessage("Yorum yok"),
         "noConversation":
             MessageLookupByLibrary.simpleMessage("Henüz konuşma yok"),
         "noConversationDescription": MessageLookupByLibrary.simpleMessage(
-            "Müşterileriniz sizinle sohbet etmeye başladığında görünecektir."),
+            "Birisi sizinle sohbet etmeye başladığında görünecektir"),
         "noData": MessageLookupByLibrary.simpleMessage("Veri Yok"),
         "noFavoritesYet":
             MessageLookupByLibrary.simpleMessage("Henüz favoriniz yok."),
@@ -860,6 +921,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "noListingNearby":
             MessageLookupByLibrary.simpleMessage("Yakınlarda kayıt yok!"),
         "noOrders": MessageLookupByLibrary.simpleMessage("Sipariş Yok"),
+        "noPaymentMethodsAvailable":
+            MessageLookupByLibrary.simpleMessage("Ödeme yöntemi mevcut değil."),
         "noPermissionForCurrentRole": MessageLookupByLibrary.simpleMessage(
             "Üzgünüz, bu ürüne mevcut rolünüz için erişilemiyor."),
         "noPermissionToViewProduct": MessageLookupByLibrary.simpleMessage(
@@ -912,7 +975,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "openingHours": MessageLookupByLibrary.simpleMessage("Açılış saatleri"),
         "optional": MessageLookupByLibrary.simpleMessage("İsteğe bağlı"),
         "options": MessageLookupByLibrary.simpleMessage("Seçenekler"),
-        "optionsTotal": m29,
+        "optionsTotal": m34,
         "or": MessageLookupByLibrary.simpleMessage("Veya"),
         "orLoginWith":
             MessageLookupByLibrary.simpleMessage("veya ile giriş yapın"),
@@ -985,7 +1048,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Resim URL\'nizi yapıştırın"),
         "payByWallet": MessageLookupByLibrary.simpleMessage("Cüzdanla öde"),
         "payNow": MessageLookupByLibrary.simpleMessage("Şimdi öde"),
-        "payWithAmount": m30,
+        "payWithAmount": m35,
         "payment": MessageLookupByLibrary.simpleMessage("Ödeme"),
         "paymentDetailsChangedSuccessfully":
             MessageLookupByLibrary.simpleMessage(
@@ -1011,6 +1074,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Telefon numarası doğrulama"),
         "pickADate":
             MessageLookupByLibrary.simpleMessage("Tarih ve saat seçin"),
+        "picking": MessageLookupByLibrary.simpleMessage("Teslimat bekleniyor"),
         "placeMyOrder": MessageLookupByLibrary.simpleMessage("Sipariş Ver"),
         "playAll": MessageLookupByLibrary.simpleMessage("Hepsini Oynat"),
         "pleaseAddPrice":
@@ -1029,6 +1093,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Lütfen ürün adını girin"),
         "pleaseFillCode":
             MessageLookupByLibrary.simpleMessage("Lütfen bir kod giriniz."),
+        "pleaseFillUpAllCellsProperly": MessageLookupByLibrary.simpleMessage(
+            "*Lütfen tüm alanları geçerli şekilde doldurun."),
         "pleaseIncreaseOrDecreaseTheQuantity":
             MessageLookupByLibrary.simpleMessage(
                 "Devam etmek için lütfen miktarı artırın veya azaltın."),
@@ -1050,8 +1116,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Lütfen gerekli seçenekleri seçin!"),
         "pleaseSignInBeforeUploading": MessageLookupByLibrary.simpleMessage(
             "Lütfen herhangi bir dosya yüklemeden önce hesabınızda oturum açın."),
-        "pleasefillUpAllCellsProperly": MessageLookupByLibrary.simpleMessage(
-            "*Lütfen tüm alanları geçerli şekilde doldurun."),
         "point": MessageLookupByLibrary.simpleMessage("Puan"),
         "pointMsgConfigNotFound": MessageLookupByLibrary.simpleMessage(
             "Sunucuda indirim noktası yapılandırması bulunamadı"),
@@ -1111,8 +1175,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "privacyTerms":
             MessageLookupByLibrary.simpleMessage("Gizlilik ve Şartlar"),
         "private": MessageLookupByLibrary.simpleMessage("Özel"),
+        "processing": MessageLookupByLibrary.simpleMessage("İşleme..."),
         "product": MessageLookupByLibrary.simpleMessage("Ürün"),
-        "productAddToCart": m31,
+        "productAddToCart": m36,
         "productAdded": MessageLookupByLibrary.simpleMessage("Ürün eklendi"),
         "productCreateReview": MessageLookupByLibrary.simpleMessage(
             "Ürününüz incelendikten sonra görünecektir."),
@@ -1148,10 +1213,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "qRCodeSaveFailure":
             MessageLookupByLibrary.simpleMessage("QR Kodu Kaydedilemedi"),
         "qty": MessageLookupByLibrary.simpleMessage("Adet"),
-        "qtyTotal": m32,
+        "qtyTotal": m37,
         "quantity": MessageLookupByLibrary.simpleMessage("Miktar"),
         "quantityProductExceedInStock": MessageLookupByLibrary.simpleMessage(
             "Mevcut miktar, stoktaki miktardan fazla"),
+        "random": MessageLookupByLibrary.simpleMessage("Rastgele"),
         "rate": MessageLookupByLibrary.simpleMessage("Oyla"),
         "rateProduct":
             MessageLookupByLibrary.simpleMessage("Ürünü Değerlendirin"),
@@ -1164,14 +1230,17 @@ class MessageLookup extends MessageLookupByLibrary {
             "Yorumunuzu göndermeden önce lütfen puan verin"),
         "reOrder": MessageLookupByLibrary.simpleMessage("Yeniden Sipariş Ver"),
         "readReviews": MessageLookupByLibrary.simpleMessage("Yorumlar"),
+        "readyToPick":
+            MessageLookupByLibrary.simpleMessage("Teslimat bekleniyor"),
         "receivedMoney": MessageLookupByLibrary.simpleMessage("alınan para"),
+        "receivedMoneyFrom": m38,
         "receiver": MessageLookupByLibrary.simpleMessage("alıcı"),
+        "recent": MessageLookupByLibrary.simpleMessage("Güncel"),
         "recentSearches": MessageLookupByLibrary.simpleMessage("Arama Geçmişi"),
         "recentView":
             MessageLookupByLibrary.simpleMessage("Son Görüntüledikleriniz"),
         "recentlyViewed":
             MessageLookupByLibrary.simpleMessage("Son görüntülenen"),
-        "recents": MessageLookupByLibrary.simpleMessage("Güncel"),
         "recommended": MessageLookupByLibrary.simpleMessage("Tavsiye edilen"),
         "recurringTotals":
             MessageLookupByLibrary.simpleMessage("Yinelenen Toplamlar"),
@@ -1190,8 +1259,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "registerAs": MessageLookupByLibrary.simpleMessage("olarak kayıt ol"),
         "registerAsVendor":
             MessageLookupByLibrary.simpleMessage("Register as Vendor user"),
+        "registerErrorSyncAccount": MessageLookupByLibrary.simpleMessage(
+            "Hesap senkronize edilemiyor. Devam etmek için lütfen giriş yapın."),
         "registerFailed":
             MessageLookupByLibrary.simpleMessage("Kayıt başarısız"),
+        "registerInvalid": MessageLookupByLibrary.simpleMessage(
+            "İstek geçersiz veya süresi dolmuş. Lütfen tekrar deneyin"),
         "registerSuccess":
             MessageLookupByLibrary.simpleMessage("Başarıyla kaydolun"),
         "regularPrice": MessageLookupByLibrary.simpleMessage("Normal fiyat"),
@@ -1223,7 +1296,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reviews": MessageLookupByLibrary.simpleMessage("yorumlar"),
         "romanian": MessageLookupByLibrary.simpleMessage("Romen"),
         "russian": MessageLookupByLibrary.simpleMessage("Russian"),
-        "sale": m33,
+        "sale": m39,
         "salePrice": MessageLookupByLibrary.simpleMessage("Satış ücreti"),
         "saturday": MessageLookupByLibrary.simpleMessage("Cumartesi"),
         "save": MessageLookupByLibrary.simpleMessage("Kayıt etmek"),
@@ -1252,11 +1325,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "searchOrderId":
             MessageLookupByLibrary.simpleMessage("Sipariş Kimliği Ara ..."),
         "searchPlace": MessageLookupByLibrary.simpleMessage("Adres ara"),
-        "searchResultFor": m34,
-        "searchResultItem": m35,
-        "searchResultItems": m36,
+        "searchResultFor": m40,
+        "searchResultItem": m41,
+        "searchResultItems": m42,
         "searchingAddress": MessageLookupByLibrary.simpleMessage("Adres Arama"),
-        "secondsAgo": m37,
+        "secondsAgo": m43,
         "seeAll": MessageLookupByLibrary.simpleMessage("Tümünü Gör"),
         "seeNewAppConfig": MessageLookupByLibrary.simpleMessage(
             "Uygulamanızda yeni içerik görmeye devam edin."),
@@ -1287,6 +1360,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "sendSMSCode": MessageLookupByLibrary.simpleMessage("Kodu al"),
         "sendSMStoVendor":
             MessageLookupByLibrary.simpleMessage("Mağaza Sahibine SMS Gönder"),
+        "sendTo": MessageLookupByLibrary.simpleMessage(
+            "Transfer etmek istediğiniz hesap (e-posta)"),
         "separateMultipleEmailWithComma": MessageLookupByLibrary.simpleMessage(
             "Birden fazla e-posta adresini virgülle ayırın."),
         "serbian": MessageLookupByLibrary.simpleMessage("Sırpça"),
@@ -1301,6 +1376,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shipping": MessageLookupByLibrary.simpleMessage("Gönderim"),
         "shippingAddress":
             MessageLookupByLibrary.simpleMessage("Gönderim Adresi"),
+        "shippingFee": MessageLookupByLibrary.simpleMessage("Kargo Ücreti"),
         "shippingMethod":
             MessageLookupByLibrary.simpleMessage("Gönderim Şekli"),
         "shop": MessageLookupByLibrary.simpleMessage("Mağaza"),
@@ -1310,7 +1386,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Mağaza Siparişleri"),
         "shopPhone": MessageLookupByLibrary.simpleMessage("Telefon satın al"),
         "shopSlug": MessageLookupByLibrary.simpleMessage("Dükkan kısa adı"),
-        "shoppingCartItems": m38,
+        "shoppingCartItems": m44,
         "shortDescription":
             MessageLookupByLibrary.simpleMessage("Kısa Açıklama"),
         "showAllMyOrdered":
@@ -1332,7 +1408,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "slovak": MessageLookupByLibrary.simpleMessage("Slovak"),
         "smsCodeExpired": MessageLookupByLibrary.simpleMessage(
             "SMS kodunun süresi dolmuştur. Tekrar denemek için lütfen doğrulama kodunu tekrar gönderin."),
-        "sold": m39,
+        "sold": m45,
         "soldBy": MessageLookupByLibrary.simpleMessage("Sold by"),
         "somethingWrong": MessageLookupByLibrary.simpleMessage(
             "Bir şeyler yanlış gitti. Lütfen daha sonra tekrar deneyiniz."),
@@ -1408,9 +1484,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "tapTheMicToTalk": MessageLookupByLibrary.simpleMessage(
             "Konuşmak için mikrofona dokunun"),
         "tax": MessageLookupByLibrary.simpleMessage("Vergi"),
+        "teraWallet": MessageLookupByLibrary.simpleMessage("TeraCüzdan"),
         "terrible": MessageLookupByLibrary.simpleMessage("Korkunç"),
         "thailand": MessageLookupByLibrary.simpleMessage("Thai"),
-        "theFieldIsRequired": m40,
+        "theFieldIsRequired": m46,
         "thisDateIsNotAvailable":
             MessageLookupByLibrary.simpleMessage("Bu tarih mevcut değil"),
         "thisFeatureDoesNotSupportTheCurrentLanguage":
@@ -1433,7 +1510,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "titleZToA":
             MessageLookupByLibrary.simpleMessage("Başlık: Z\'den A\'ya"),
         "to": MessageLookupByLibrary.simpleMessage("için"),
-        "tooManyFaildedLogin": MessageLookupByLibrary.simpleMessage(
+        "tooManyFailedLogin": MessageLookupByLibrary.simpleMessage(
             "Çok fazla başarısız oturum açma girişimi. Lütfen daha sonra tekrar deneyiniz."),
         "topUp": MessageLookupByLibrary.simpleMessage("Tamamla"),
         "topUpProductNotFound":
@@ -1442,7 +1519,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "totalCartValue": MessageLookupByLibrary.simpleMessage(
             "Total order\'s value must be at least"),
         "totalPrice": MessageLookupByLibrary.simpleMessage("Toplam fiyat"),
-        "totalProducts": m41,
+        "totalProducts": m47,
         "totalTax": MessageLookupByLibrary.simpleMessage("Vergi"),
         "trackingNumberIs":
             MessageLookupByLibrary.simpleMessage("Takip Numarası"),
@@ -1452,6 +1529,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "transactionDetail":
             MessageLookupByLibrary.simpleMessage("İşlem Ayrıntısı"),
         "transactionFailded":
+            MessageLookupByLibrary.simpleMessage("İşlem başarısız oldu"),
+        "transactionFailed":
             MessageLookupByLibrary.simpleMessage("İşlem başarısız"),
         "transactionFee": MessageLookupByLibrary.simpleMessage("İşlem ücreti"),
         "transactionResult":
@@ -1463,6 +1542,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Bu kullanıcıya aktarım yapamazsınız"),
         "transferFailed":
             MessageLookupByLibrary.simpleMessage("Aktarım başarısız"),
+        "transferMoneyTo": m48,
         "transferSuccess":
             MessageLookupByLibrary.simpleMessage("Transfer başarısı"),
         "tuesday": MessageLookupByLibrary.simpleMessage("Salı"),
@@ -1475,6 +1555,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "typing": MessageLookupByLibrary.simpleMessage("yazıyor..."),
         "ukrainian": MessageLookupByLibrary.simpleMessage("Ukrayna"),
         "unavailable": MessageLookupByLibrary.simpleMessage("Yok"),
+        "unblock": MessageLookupByLibrary.simpleMessage("Engellemeyi kaldır"),
+        "unblockUser": MessageLookupByLibrary.simpleMessage(
+            "Kullanıcının engellemesini kaldır"),
         "undo": MessageLookupByLibrary.simpleMessage("Geri"),
         "unpaid": MessageLookupByLibrary.simpleMessage("ödenmemiş"),
         "update": MessageLookupByLibrary.simpleMessage("Güncelle"),
@@ -1496,19 +1579,29 @@ class MessageLookup extends MessageLookupByLibrary {
         "uploadProduct": MessageLookupByLibrary.simpleMessage("Ürün Yükle"),
         "uploading": MessageLookupByLibrary.simpleMessage("Yükleme"),
         "url": MessageLookupByLibrary.simpleMessage("URL"),
-        "useMaximumPointDiscount": m42,
+        "useMaximumPointDiscount": m49,
         "useNow": MessageLookupByLibrary.simpleMessage("Şimdi kullan"),
         "useThisImage": MessageLookupByLibrary.simpleMessage("Bu Resmi Kullan"),
         "userExists": MessageLookupByLibrary.simpleMessage(
             "Bu kullanıcı adı/e-posta mevcut değil."),
+        "userHasBeenBlocked":
+            MessageLookupByLibrary.simpleMessage("Kullanıcı engellendi"),
         "userNameInCorrect": MessageLookupByLibrary.simpleMessage(
             "Kullanıcı adı veya şifre yanlış."),
+        "userNotFound":
+            MessageLookupByLibrary.simpleMessage("Kullanıcı bulunamadı"),
         "username": MessageLookupByLibrary.simpleMessage("E-Posta"),
+        "usernameAlreadyInUse": MessageLookupByLibrary.simpleMessage(
+            "Kullanıcı adı zaten kullanımda!"),
         "usernameAndPasswordRequired": MessageLookupByLibrary.simpleMessage(
             "Kullanıcı adı ve şifre gerekli"),
+        "usernameInvalid":
+            MessageLookupByLibrary.simpleMessage("Kullanıcı adı geçersiz"),
+        "usernameIsRequired":
+            MessageLookupByLibrary.simpleMessage("Kullanıcı adı gerekli"),
         "vacationMessage": MessageLookupByLibrary.simpleMessage("tatil mesajı"),
         "vacationType": MessageLookupByLibrary.simpleMessage("tatil türü"),
-        "validUntilDate": m43,
+        "validUntilDate": m50,
         "variable": MessageLookupByLibrary.simpleMessage("değişken"),
         "variation": MessageLookupByLibrary.simpleMessage("varyasyon"),
         "vendor": MessageLookupByLibrary.simpleMessage("satıcı"),
@@ -1541,12 +1634,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Onay Bekliyor"),
         "walletBalance":
             MessageLookupByLibrary.simpleMessage("Cüzdan Bakiyesi"),
+        "walletBalanceWithValue": m51,
         "walletName": MessageLookupByLibrary.simpleMessage("Cüzdan adı"),
-        "warning": m44,
-        "warningCurrencyMessageForWallet": m45,
+        "warning": m52,
+        "warningCurrencyMessageForWallet": m53,
         "weFoundBlogs":
             MessageLookupByLibrary.simpleMessage("Blog(lar) Bulduk"),
-        "weFoundProducts": m46,
+        "weFoundProducts": m54,
         "weNeedCameraAccessTo": MessageLookupByLibrary.simpleMessage(
             "QR kodunu veya Barkodu taramak için kamera erişimine ihtiyacımız var."),
         "weSentAnOTPTo": MessageLookupByLibrary.simpleMessage(
@@ -1556,17 +1650,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "webView": MessageLookupByLibrary.simpleMessage("Web Görünümü"),
         "website": MessageLookupByLibrary.simpleMessage("İnternet sitesi"),
         "wednesday": MessageLookupByLibrary.simpleMessage("Çarşamba"),
-        "week": m47,
+        "week": m55,
         "welcome": MessageLookupByLibrary.simpleMessage("Hoşgeldiniz"),
         "welcomeBack":
             MessageLookupByLibrary.simpleMessage("Tekrar hoşgeldiniz"),
         "welcomeRegister": MessageLookupByLibrary.simpleMessage(
             "Alışveriş yolculuğunuza şimdi bizimle başlayın"),
-        "welcomeUser": m48,
+        "welcomeUser": m56,
         "whichLanguageDoYouPrefer":
             MessageLookupByLibrary.simpleMessage("Hangi dili tercih edersin?"),
         "wholesaleRegisterMsg": MessageLookupByLibrary.simpleMessage(
             "Kaydınızı onaylamak için lütfen yöneticiye ulaşın."),
+        "willNotSendAndReceiveMessage": MessageLookupByLibrary.simpleMessage(
+            "Bu kullanıcıdan mesaj gönderip alamayacaksınız."),
         "withdrawAmount":
             MessageLookupByLibrary.simpleMessage("Para çekme tutarı"),
         "withdrawRequest":
@@ -1577,15 +1673,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "writeComment":
             MessageLookupByLibrary.simpleMessage("Yorumunuzu yazın"),
         "writeYourNote": MessageLookupByLibrary.simpleMessage("Notunuzu yazın"),
-        "yearsAgo": m49,
+        "yearsAgo": m57,
         "yes": MessageLookupByLibrary.simpleMessage("Evet"),
         "youCanOnlyOrderSingleStore": MessageLookupByLibrary.simpleMessage(
             "Sadece tek bir mağazadan satın alabilirsiniz."),
         "youCanOnlyPurchase":
             MessageLookupByLibrary.simpleMessage("Sadece satın alabilirsin"),
-        "youHaveAssignedToOrder": m50,
+        "youDontHavePermissionToCreatePost":
+            MessageLookupByLibrary.simpleMessage(
+                "Gönderi oluşturma izniniz yok"),
+        "youHaveAssignedToOrder": m58,
         "youHaveBeenSaveAddressYourLocal":
             MessageLookupByLibrary.simpleMessage("Adres cihazına kaydedildi"),
+        "youHaveNoPost":
+            MessageLookupByLibrary.simpleMessage("Hiç gönderiniz yok"),
         "youHavePoints":
             MessageLookupByLibrary.simpleMessage("\$point Puanınız Var"),
         "youMightAlsoLike":
