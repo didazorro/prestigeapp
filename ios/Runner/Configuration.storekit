@@ -15,7 +15,7 @@
           "locale" : "en_US"
         }
       ],
-      "productID" : "com.inspireui.fluxstore.test",
+      "productID" : "com.prestige.prestige.test",
       "referenceName" : "Test",
       "type" : "Consumable"
     }

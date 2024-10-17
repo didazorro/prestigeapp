@@ -1,4 +1,4 @@
-package com.inspireui.fluxstore
+package com.prestige.prestige
 
 import android.app.NotificationManager
 import android.content.Context

@@ -15,7 +15,7 @@
           "locale" : "en_GB"
         }
       ],
-      "productID" : "com.inspireui.fluxstore.test",
+      "productID" : "com.prestige.prestige.test",
       "referenceName" : "In App Purchase Test",
       "type" : "Consumable"
     },
@@ -63,7 +63,7 @@
           "localizations" : [
 
           ],
-          "productID" : "com.inspireui.fluxstore.subscription.test",
+          "productID" : "com.prestige.prestige.subscription.test",
           "recurringSubscriptionPeriod" : "P1M",
           "referenceName" : "Subscription Test",
           "subscriptionGroupID" : "21093766",

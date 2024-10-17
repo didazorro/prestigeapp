@@ -86,3 +86,9 @@ android/fastlane/metadata
 ios/vendor
 ios/.bundle
 test_driver/fluxstore/screenshots
+
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build

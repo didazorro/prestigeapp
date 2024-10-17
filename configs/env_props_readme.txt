@@ -25,7 +25,7 @@ iosBundleId=com.inspireui.mstore.flutter
 iosBundleIdOneSignal=com.inspireui.mstore.flutter.onesignal
 iosAppGroups=group.com.inspireui.mstore.flutter.onesignal
 iosMerchantId=merchant.com.inspireui.mstore.flutter
-androidPackageName=com.inspireui.fluxstore
+androidPackageName=com.prestige.prestige
 
 # For some native payments, push notification and Dynamic Links features (optional).
 websiteUrl=https://inspireui.com
