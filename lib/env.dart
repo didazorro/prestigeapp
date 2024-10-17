@@ -313,7 +313,7 @@ Map<String, dynamic> environment = {
     "GoogleApiKey": "",
     "RefundPeriod": 7,
     "EnableAddress": true,
-    "GuestCheckout": true,
+    "GuestCheckout": false,
     "webPaymentIds": [],
     "EnableShipping": false,
     "ShowOrderNotes": true,
